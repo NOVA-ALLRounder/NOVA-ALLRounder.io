@@ -9,18 +9,19 @@ import StepCard from '../components/ui/StepCard.astro';
 import Table from '../components/ui/Table.astro';
 ---
 
-<BaseLayout title="Product - NOVA" description="See how NOVA works end-to-end with architecture placeholders, feature deep-dives, and specs preview.">
+<BaseLayout title="Product — NOVA Local OS Agent" description="Rust 네이티브 행동 분석 에이전트의 아키텍처, 핵심 기능, 기술 스펙을 확인하세요.">
   <Header slot="header" />
 
   <Section padding="large">
     <Container>
       <div class="text-center max-w-4xl mx-auto animate-on-scroll">
         <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Product</p>
-        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">Automate complexity without hiding control</h1>
+        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">사용자 행동 기반 자동화 에이전트</h1>
         <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto mb-10">
-          NOVA pairs a clear interaction layer with a robust orchestration engine so teams can move faster without losing visibility.
+          컴퓨터 사용 패턴을 분석하여 자동화를 추천하고 실행합니다.
+          Rust 네이티브 코어, LLM 분석 엔진, n8n 워크플로우 오케스트레이션.
         </p>
-        <Button variant="primary" size="lg" href="/docs/getting-started">Get Started</Button>
+        <Button variant="primary" size="lg" href="/docs/getting-started">시작하기</Button>
       </div>
     </Container>
   </Section>
@@ -29,12 +30,12 @@ import Table from '../components/ui/Table.astro';
     <Container>
       <div class="text-center mb-16 animate-on-scroll">
         <h2 class="text-h2 text-neutral-100 mb-4">How It Works</h2>
-        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">A three-step model built for repeatability and speed.</p>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">OS 센서 → 패턴 분석 → 자동 실행의 세 단계로 동작합니다.</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-12 animate-on-scroll">
-        <StepCard step={1} title="Ingest" description="Capture signals from APIs, files, and operational events." />
-        <StepCard step={2} title="Decide" description="Apply business logic and model-driven routing rules." />
-        <StepCard step={3} title="Deliver" description="Push outcomes to systems, teams, and dashboards." />
+        <StepCard step={1} title="Monitor" description="OS 센서(src/sensors/)가 앱 전환, 키 입력, 시스템 이벤트를 실시간으로 수집합니다." />
+        <StepCard step={2} title="Analyze" description="analyzer.rs + LLM이 행동 패턴을 분석하여 routine과 recommend 결과를 생성합니다." />
+        <StepCard step={3} title="Execute" description="control, exec, build_workflow 명령어로 앱 제어, 셸 실행, 워크플로우 생성을 자동화합니다." />
       </div>
     </Container>
   </Section>
@@ -43,25 +44,34 @@ import Table from '../components/ui/Table.astro';
     <Container>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center animate-on-scroll">
         <div>
-          <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">Feature Deep-Dive 01</p>
-          <h2 class="text-h2 text-neutral-100 mb-4">Problem: Fragmented operations</h2>
+          <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">Core Feature 01</p>
+          <h2 class="text-h2 text-neutral-100 mb-4">반복 작업 자동 감지</h2>
           <div class="space-y-6 text-body text-neutral-300">
             <div>
               <h3 class="text-h4 text-neutral-100 mb-2">Problem</h3>
-              <p>Teams lose time reconciling data across disconnected systems and inconsistent workflows.</p>
+              <p>매일 반복하는 앱 전환, 명령어 실행, 파일 정리를 수동으로 처리하느라 시간을 낭비합니다.</p>
             </div>
             <div>
               <h3 class="text-h4 text-neutral-100 mb-2">Solution</h3>
-              <p>NOVA unifies event ingestion and maps actions through a single policy-aware flow engine.</p>
+              <p><code class="text-accent-300">routine</code> 명령어가 OS 센서 데이터를 분석하여 반복 패턴을 식별하고, <code class="text-accent-300">recommend</code>가 자동화를 추천합니다.</p>
             </div>
             <div>
               <h3 class="text-h4 text-neutral-100 mb-2">Effect</h3>
-              <p>Lower coordination overhead, faster execution, and more predictable output quality.</p>
+              <p>사용자가 인식하지 못한 반복 패턴을 자동 발견하여, 수작업 시간을 대폭 줄입니다.</p>
             </div>
           </div>
         </div>
-        <div class="bg-[#14161b] rounded-lg aspect-[4/3] border border-white/10 flex items-center justify-center">
-          <span class="text-neutral-400 text-sm">Image Placeholder</span>
+        <div class="bg-[#14161b] rounded-lg border border-white/10 p-6 font-mono text-sm text-neutral-400">
+          <p class="text-neutral-500 mb-2">$ core routine</p>
+          <p class="text-neutral-300">🔍 분석된 반복 패턴 (최근 7일):</p>
+          <p class="ml-4">1. VS Code → Terminal → git commit (3회/일)</p>
+          <p class="ml-4">2. Slack → Chrome → Google Docs (5회/일)</p>
+          <p class="ml-4">3. Finder → Terminal → npm run dev (4회/일)</p>
+          <p class="text-neutral-500 mt-4 mb-2">$ core recommend</p>
+          <p class="text-[#8fd5a6]">💡 추천 자동화 3건:</p>
+          <p class="text-neutral-300 ml-4">→ git auto-commit 워크플로우</p>
+          <p class="text-neutral-300 ml-4">→ 문서 리뷰 알림</p>
+          <p class="text-neutral-300 ml-4">→ dev server 원클릭 실행</p>
         </div>
       </div>
     </Container>
@@ -70,24 +80,31 @@ import Table from '../components/ui/Table.astro';
   <Section background="light">
     <Container>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center animate-on-scroll">
-        <div class="order-2 lg:order-1 bg-[#14161b] rounded-lg aspect-[4/3] border border-white/10 flex items-center justify-center">
-          <span class="text-neutral-400 text-sm">Image Placeholder</span>
+        <div class="order-2 lg:order-1 bg-[#14161b] rounded-lg border border-white/10 p-6 font-mono text-sm text-neutral-400">
+          <p class="text-neutral-500 mb-2">$ core control Safari open</p>
+          <p class="text-neutral-300">✅ Safari 실행 완료 (applescript.rs)</p>
+          <p class="text-neutral-500 mt-3 mb-2">$ core build_workflow "매일 9시 슬랙 알림"</p>
+          <p class="text-neutral-300">🔧 LLM 분석 중... (llm_gateway.rs)</p>
+          <p class="text-neutral-300">📦 n8n 워크플로우 생성 (n8n_api.rs)</p>
+          <p class="text-[#8fd5a6]">✅ workflow_2026-02-12.json 저장</p>
+          <p class="text-neutral-500 mt-3 mb-2">$ core exec "rm -rf /"</p>
+          <p class="text-red-400">🚫 policy.rs: 위험 명령어 차단</p>
         </div>
         <div class="order-1 lg:order-2">
-          <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">Feature Deep-Dive 02</p>
-          <h2 class="text-h2 text-neutral-100 mb-4">Problem: Static rules break at scale</h2>
+          <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">Core Feature 02</p>
+          <h2 class="text-h2 text-neutral-100 mb-4">앱 제어 + 보안 정책</h2>
           <div class="space-y-6 text-body text-neutral-300">
             <div>
               <h3 class="text-h4 text-neutral-100 mb-2">Problem</h3>
-              <p>Rigid if-else automation degrades as process variants and exceptions grow over time.</p>
+              <p>앱 전환, 명령어 실행을 수동으로 하며, 위험한 자동화가 실수로 실행될 수 있습니다.</p>
             </div>
             <div>
               <h3 class="text-h4 text-neutral-100 mb-2">Solution</h3>
-              <p>Combine deterministic policy checks with adaptive model outputs for smarter routing.</p>
+              <p><code class="text-accent-300">control &lt;app&gt; &lt;cmd&gt;</code>로 앱을 제어하고, <code class="text-accent-300">build_workflow</code>로 자연어 워크플로우를 생성합니다. policy.rs가 위험한 명령을 차단합니다.</p>
             </div>
             <div>
               <h3 class="text-h4 text-neutral-100 mb-2">Effect</h3>
-              <p>Better precision and fewer manual retries across evolving, high-volume operations.</p>
+              <p>안전하게 자동화를 실행하고, 보안 정책으로 실수를 사전에 방지합니다.</p>
             </div>
           </div>
         </div>
@@ -99,25 +116,27 @@ import Table from '../components/ui/Table.astro';
     <Container>
       <div class="animate-on-scroll">
         <div class="text-center mb-12">
-          <h2 class="text-h2 text-neutral-100 mb-4">Specs Preview</h2>
-          <p class="text-body-lg text-neutral-400">Technical placeholders for launch-stage architecture and operational policy.</p>
+          <h2 class="text-h2 text-neutral-100 mb-4">기술 스펙</h2>
+          <p class="text-body-lg text-neutral-400">Rust 네이티브 에이전트의 실제 아키텍처 구성요소.</p>
         </div>
         <Table>
           <thead>
             <tr>
-              <th>Item</th>
-              <th>Placeholder Spec</th>
+              <th>구분</th>
+              <th>스펙</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>Processing Model</td><td>Event-driven async pipeline with queue-backed execution</td></tr>
-            <tr><td>Integration Surface</td><td>REST API, webhook, and connector abstraction layer</td></tr>
-            <tr><td>Identity & Access</td><td>SSO, RBAC placeholders, and policy guardrails</td></tr>
-            <tr><td>Data Handling</td><td>Encryption in transit/at rest placeholders</td></tr>
-            <tr><td>Observability</td><td>Run timeline, status logs, and dashboard widgets</td></tr>
-            <tr><td>Deployment</td><td>SaaS baseline with enterprise deployment options (planned)</td></tr>
-            <tr><td>SLA</td><td>Tier-based service placeholder: 99.9% / 99.99%</td></tr>
-            <tr><td>SDK</td><td>Node, Python, and CLI scaffolding placeholders</td></tr>
+            <tr><td>Core Runtime</td><td>Rust native binary (<code>cargo build --release</code>)</td></tr>
+            <tr><td>LLM Engine</td><td>OpenAI API (llm_gateway.rs) — 행동 패턴 분석 및 워크플로우 생성</td></tr>
+            <tr><td>Storage</td><td>SQLite (steer.db) — 이벤트, 집약, 일일 요약 저장</td></tr>
+            <tr><td>Workflow</td><td>n8n (Docker/NPX) — REST API 기반 워크플로우 오케스트레이션</td></tr>
+            <tr><td>Desktop</td><td>Tauri — macOS .app / Windows .exe 번들 생성</td></tr>
+            <tr><td>Security</td><td>policy.rs — 위험 키워드 차단, Write Lock, RBAC 정책 엔진</td></tr>
+            <tr><td>Monitoring</td><td>Rust Collector — 5분 집약, 일일 요약, retention cleanup</td></tr>
+            <tr><td>Self-Healing</td><td>steer-guardian.sh — 크래시 시 자동 재시작 supervisor</td></tr>
+            <tr><td>OS Support</td><td>macOS 12+ (primary), Windows (run_core.ps1)</td></tr>
+            <tr><td>Requirements</td><td>Rust 1.70+, OpenAI API Key, Accessibility 권한 (macOS)</td></tr>
           </tbody>
         </Table>
       </div>
@@ -127,13 +146,13 @@ import Table from '../components/ui/Table.astro';
   <Section background="dark">
     <Container>
       <div class="text-center animate-on-scroll">
-        <h2 class="text-h2 text-white mb-4">See it in motion</h2>
+        <h2 class="text-h2 text-white mb-4">직접 실행해보세요</h2>
         <p class="text-body-lg text-neutral-400 max-w-xl mx-auto mb-10">
-          Start with a guided path in docs or request a B2B walkthrough for your team.
+          Getting Started 가이드를 따라 5분 안에 첫 번째 자동화를 실행하세요.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button variant="primary" size="lg" href="/docs/getting-started">Start Setup</Button>
-          <Button variant="ghost" size="lg" href="/solutions">Request Demo</Button>
+          <Button variant="primary" size="lg" href="/docs/getting-started">시작하기</Button>
+          <Button variant="ghost" size="lg" href="/solutions">Solutions 보기</Button>
         </div>
       </div>
     </Container>
@@ -141,5 +160,3 @@ import Table from '../components/ui/Table.astro';
 
   <Footer slot="footer" />
 </BaseLayout>
-
-

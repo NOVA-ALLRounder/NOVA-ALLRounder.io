@@ -8,18 +8,18 @@ import Button from '../components/ui/Button.astro';
 import Card from '../components/ui/Card.astro';
 ---
 
-<BaseLayout title="Solutions - NOVA" description="B2B use cases, rollout process, and trust/security placeholders for enterprise-facing buyers.">
+<BaseLayout title="Solutions — NOVA Local OS Agent" description="패턴 기반 자동화, OS 통합, 워크플로우 오케스트레이션의 실제 활용 사례와 보안 정책.">
   <Header slot="header" />
 
   <Section padding="large">
     <Container>
       <div class="text-center max-w-4xl mx-auto animate-on-scroll">
-        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Solutions for Teams</p>
-        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">Designed for operational teams that cannot fail quietly</h1>
+        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Solutions</p>
+        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">행동 분석부터 자동화 실행까지, 한 흐름으로</h1>
         <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto mb-10">
-          From pilot to production, NOVA provides a repeatable path for B2B adoption with governance-ready structure.
+          OS 수준 센서 데이터, LLM 패턴 분석, n8n 워크플로우를 결합하여 개인과 팀 모두를 위한 자동화를 제공합니다.
         </p>
-        <Button variant="primary" size="lg" href="#contact-sales">Request Demo</Button>
+        <Button variant="primary" size="lg" href="/docs/getting-started">시작하기</Button>
       </div>
     </Container>
   </Section>
@@ -27,36 +27,36 @@ import Card from '../components/ui/Card.astro';
   <Section background="light">
     <Container>
       <div class="text-center mb-16 animate-on-scroll">
-        <h2 class="text-h2 text-neutral-100 mb-4">Use Cases</h2>
-        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">Three launch-ready scenarios for enterprise storytelling.</p>
+        <h2 class="text-h2 text-neutral-100 mb-4">핵심 솔루션</h2>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">세 가지 핵심 영역에서 자동화를 제공합니다.</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 animate-on-scroll">
         {[
           {
-            icon: '◌',
-            title: 'Financial Operations',
-            desc: 'Flag anomalies, route exceptions, and publish weekly decision snapshots with policy placeholders.',
-            metric: '78% faster triage (placeholder)',
+            icon: '🔍',
+            title: '패턴 기반 자동화',
+            desc: 'routine/recommend 명령어로 반복 행동 패턴을 분석하고, LLM이 자동화를 추천합니다. 세션/루틴/핸드오프 배치로 데이터를 정제합니다.',
+            metric: 'build_sessions → build_routines → build_handoff',
           },
           {
-            icon: '◇',
-            title: 'People Operations',
-            desc: 'Standardize onboarding and recurring requests while reducing manual coordination across teams.',
-            metric: '65% admin reduction (placeholder)',
+            icon: '🖥️',
+            title: 'OS 수준 통합',
+            desc: 'applescript.rs로 macOS 앱을 직접 제어하고, visual_driver.rs로 UI 자동화를 수행합니다. OS 센서(src/sensors/)가 시스템 이벤트를 실시간 수집합니다.',
+            metric: 'control <app> <cmd> — 앱 제어 CLI',
           },
           {
-            icon: '△',
-            title: 'Commerce Support',
-            desc: 'Classify requests, prioritize incidents, and keep customer communication flows consistent at scale.',
-            metric: '< 3m first response (placeholder)',
+            icon: '⚡',
+            title: '워크플로우 오케스트레이션',
+            desc: 'build_workflow로 자연어 기반 n8n 워크플로우를 자동 생성합니다. Docker/NPX 모드 지원, REST API 기반 실행.',
+            metric: 'n8n API + LLM Gateway 연동',
           },
         ].map((useCase) => (
           <Card hoverable={false}>
             <div class="p-8">
-              <span class="text-3xl mb-4 block text-neutral-300">{useCase.icon}</span>
+              <span class="text-3xl mb-4 block">{useCase.icon}</span>
               <h3 class="text-h3 text-neutral-100 mb-3">{useCase.title}</h3>
               <p class="text-body text-neutral-400 mb-4">{useCase.desc}</p>
-              <p class="text-caption text-accent-300 font-medium">{useCase.metric}</p>
+              <p class="text-caption text-accent-300 font-medium font-mono">{useCase.metric}</p>
             </div>
           </Card>
         ))}
@@ -67,8 +67,8 @@ import Card from '../components/ui/Card.astro';
   <Section>
     <Container>
       <div class="text-center mb-16 animate-on-scroll">
-        <h2 class="text-h2 text-neutral-100 mb-4">Adoption Process</h2>
-        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">A four-step enterprise rollout flow: PoC, security review, deployment, operations.</p>
+        <h2 class="text-h2 text-neutral-100 mb-4">Setup Process</h2>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">Clone부터 운영까지 네 단계 배포 과정.</p>
       </div>
 
       <div class="relative animate-on-scroll">
@@ -77,27 +77,27 @@ import Card from '../components/ui/Card.astro';
           {[
             {
               step: '01',
-              title: 'PoC',
-              desc: 'Scope a focused workflow and validate value in a controlled pilot.',
-              duration: '2 weeks',
+              title: 'Clone & Build',
+              desc: 'git clone → cp .env.example .env → cargo build --release로 코어 바이너리를 빌드합니다.',
+              duration: '5분',
             },
             {
               step: '02',
-              title: 'Security Review',
-              desc: 'Review access, logging, and data handling placeholders with internal stakeholders.',
-              duration: '1-2 weeks',
+              title: 'Configure',
+              desc: 'OPENAI_API_KEY 설정, Accessibility 권한 부여, n8n 런타임 모드(Docker/NPX) 선택.',
+              duration: '10분',
             },
             {
               step: '03',
-              title: 'Deployment',
-              desc: 'Integrate with target systems and expand enablement by team.',
-              duration: '2-4 weeks',
+              title: 'Deploy',
+              desc: './scripts/build_release.sh로 Tauri 데스크톱 번들(.app/.exe)을 생성합니다.',
+              duration: '15분',
             },
             {
               step: '04',
-              title: 'Operations',
-              desc: 'Track outcomes, tune policies, and scale usage with a shared operating rhythm.',
-              duration: 'ongoing',
+              title: 'Monitor & Scale',
+              desc: 'Rust Collector로 데이터 수집, steer-guardian.sh로 Self-Healing, 배치 파이프라인으로 패턴 분석.',
+              duration: '지속',
             },
           ].map((phase) => (
             <div class="relative text-center md:text-left">
@@ -117,26 +117,26 @@ import Card from '../components/ui/Card.astro';
   <Section background="light">
     <Container>
       <div class="text-center mb-16 animate-on-scroll">
-        <h2 class="text-h2 text-neutral-100 mb-4">Trust & Security</h2>
-        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">Launch-safe security and governance placeholders for B2B buyers.</p>
+        <h2 class="text-h2 text-neutral-100 mb-4">보안 & 안정성</h2>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">policy.rs 기반 보안 정책과 Self-Healing으로 안전하고 안정적인 운영.</p>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 animate-on-scroll">
         {[
           {
-            title: 'RBAC (Planned)',
-            desc: 'Role-based access templates for teams with scoped permissions.',
+            title: 'Write Lock',
+            desc: '기본 활성화된 쓰기 잠금. unlock 명령어로 명시적 해제가 필요합니다.',
           },
           {
-            title: 'Audit Logs (Planned)',
-            desc: 'Track user and workflow actions for governance and review.',
+            title: 'Command Filtering',
+            desc: 'exec 명령어에서 rm, sudo 등 위험한 키워드를 자동 감지하고 차단합니다.',
           },
           {
-            title: 'Data Policy (Planned)',
-            desc: 'Regional handling and retention policy placeholders for compliance posture.',
+            title: 'Policy Engine',
+            desc: 'policy.rs 기반 보안 정책 엔진이 모든 실행 명령을 사전 검증합니다.',
           },
           {
-            title: 'SLA & Support (Planned)',
-            desc: 'Tiered support model and reliability commitments by contract.',
+            title: 'Self-Healing',
+            desc: 'steer-guardian.sh supervisor가 코어 프로세스 크래시 시 자동 재시작합니다.',
           },
         ].map((item) => (
           <div class="bg-[#14161b] rounded-lg p-6 border border-white/10">
@@ -151,13 +151,13 @@ import Card from '../components/ui/Card.astro';
   <Section background="dark" id="contact-sales">
     <Container>
       <div class="text-center animate-on-scroll">
-        <h2 class="text-h2 text-white mb-4">Ready for a tailored rollout?</h2>
+        <h2 class="text-h2 text-white mb-4">지금 시작하세요</h2>
         <p class="text-body-lg text-neutral-400 max-w-xl mx-auto mb-10">
-          Share your use case and team size. We will map a pilot-to-production path.
+          5분 안에 설치하고, 첫 번째 자동화를 실행해보세요.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button variant="primary" size="lg" href="/contact">Request Demo</Button>
-          <Button variant="ghost" size="lg" href="/pricing">View Pricing</Button>
+          <Button variant="primary" size="lg" href="/docs/getting-started">Getting Started</Button>
+          <Button variant="ghost" size="lg" href="/pricing">Pricing 보기</Button>
         </div>
       </div>
     </Container>
@@ -165,5 +165,3 @@ import Card from '../components/ui/Card.astro';
 
   <Footer slot="footer" />
 </BaseLayout>
-
-

@@ -11,39 +11,39 @@ import InstallTabsShowcase from '../components/InstallTabsShowcase.astro';
 
 const faqItems = [
   {
-    question: 'Can NOVA be used by both individuals and enterprise teams?',
+    question: '어떤 운영체제를 지원하나요?',
     answer:
-      'Yes. The structure supports solo workflows for B2C and controlled deployment models for B2B, including role-based governance placeholders.',
+      '현재 macOS 12+(Monterey) 이상을 기본 지원하며, Windows 서비스 실행(run_core.ps1)도 제공합니다. Rust 네이티브 빌드이므로 Linux에서도 빌드 가능합니다.',
   },
   {
-    question: 'How long does initial setup usually take?',
+    question: 'OpenAI API Key가 반드시 필요한가요?',
     answer:
-      'A basic setup can be completed in under 30 minutes with starter templates. Team rollouts typically include an additional onboarding checklist.',
+      '네. LLM 기반 행동 패턴 분석(analyzer.rs)과 자연어 워크플로우 생성(build_workflow)에 OpenAI API를 사용합니다. .env 파일에 OPENAI_API_KEY를 설정해야 합니다.',
   },
   {
-    question: 'Does it integrate with existing tools?',
+    question: 'n8n 없이도 사용할 수 있나요?',
     answer:
-      'Placeholder integrations include API, webhooks, and common workspace apps. Custom connectors can be staged as part of an enterprise rollout.',
+      '네. n8n은 선택적 워크플로우 오케스트레이션 레이어입니다. 코어 에이전트(routine, recommend, exec, control)는 n8n 없이 독립적으로 동작합니다.',
   },
   {
-    question: 'What about security and compliance?',
+    question: '보안은 어떻게 처리되나요?',
     answer:
-      'Security and compliance claims are placeholder-only in v1. You can present planned controls such as RBAC, audit logs, and data policy options.',
+      'exec 명령어는 rm, sudo 등 위험한 키워드를 자동 차단합니다. 기본적으로 Write Lock이 활성화되어 있어 unlock 명령어로 명시적 해제가 필요합니다. 보안 정책은 policy.rs에서 관리됩니다.',
   },
   {
-    question: 'Is there a free plan?',
+    question: '데이터 수집은 어떻게 동작하나요?',
     answer:
-      'Yes. The pricing structure includes a starter-level individual plan with placeholder limits and a clear upgrade path.',
+      'Rust Collector가 OS센서 데이터를 수집하여 SQLite(steer.db)에 저장합니다. 5분 단위 집약(minute_aggregates), 일일 요약(daily_summaries), retention cleanup을 자동 실행합니다.',
   },
   {
-    question: 'Can this scale across departments?',
+    question: '팀에서 함께 사용할 수 있나요?',
     answer:
-      'The IA and section model are built to scale from single users to large teams with staged rollout, procurement, and support placeholders.',
+      'Tauri 기반 데스크톱 앱으로 배포 가능하며, n8n 워크플로우를 팀 전체에 공유할 수 있습니다. Self-Healing Guardian(steer-guardian.sh)이 크래시 시 자동 재시작을 보장합니다.',
   },
 ];
 ---
 
-<BaseLayout title="NOVA - Intelligent Automation for Modern Teams" description="A dark, minimal launch page skeleton for B2C and B2B automation products.">
+<BaseLayout title="NOVA — Local Super Hyper Ultra Ultimate Super Awesome Agent" description="사용자 행동 기반 자동화 에이전트. 컴퓨터 사용 패턴을 분석하여 자동화를 추천하고 실행합니다.">
   <Header slot="header" />
 
   <Section padding="large" class="bg-[#0d0e11] text-white">
@@ -56,8 +56,8 @@ const faqItems = [
           Super Awesome Agent
         </h1>
         <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto mb-10">
-          A single operational layer for both personal productivity and enterprise automation.
-          Fewer decisions, fewer handoffs, faster outcomes.
+          사용자 행동 기반 자동화 에이전트 — 컴퓨터 사용 패턴을 분석하여 자동화를 추천하고 실행합니다.
+          Rust 네이티브, macOS/Windows 지원, LLM 기반 분석.
         </p>
 
         <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto_auto] gap-3 mb-8 text-left">
@@ -73,9 +73,9 @@ const faqItems = [
         </div>
 
         <div class="flex flex-wrap items-center justify-center gap-3 text-xs text-neutral-500">
-          <span class="rounded-md border border-white/15 px-3 py-1.5 bg-[#13151a]">No credit card</span>
-          <span class="rounded-md border border-white/15 px-3 py-1.5 bg-[#13151a]">B2C + B2B Ready</span>
-          <span class="rounded-md border border-white/15 px-3 py-1.5 bg-[#13151a]">Built for Scale</span>
+          <span class="rounded-md border border-white/15 px-3 py-1.5 bg-[#13151a]">Rust Native</span>
+          <span class="rounded-md border border-white/15 px-3 py-1.5 bg-[#13151a]">macOS + Windows</span>
+          <span class="rounded-md border border-white/15 px-3 py-1.5 bg-[#13151a]">LLM 기반 분석</span>
         </div>
       </div>
     </Container>
@@ -90,19 +90,19 @@ const faqItems = [
   <Section class="bg-[#0f1116]">
     <Container>
       <div class="animate-on-scroll">
-        <p class="text-center text-caption text-neutral-500 font-medium tracking-wide uppercase mb-10">Trusted by teams of every size</p>
+        <p class="text-center text-caption text-neutral-500 font-medium tracking-wide uppercase mb-10">핵심 CLI 명령어</p>
 
         <div class="flex flex-wrap items-center justify-center gap-8 md:gap-16 mb-16">
-          {['Company A', 'Company B', 'Company C', 'Company D', 'Company E'].map((name) => (
-            <div class="flex items-center justify-center h-8 px-4 text-neutral-600 text-sm font-semibold tracking-wider uppercase">{name}</div>
+          {['routine', 'recommend', 'control', 'build_workflow', 'exec', 'status'].map((name) => (
+            <div class="flex items-center justify-center h-8 px-4 text-neutral-400 text-sm font-mono font-semibold tracking-wider">{name}</div>
           ))}
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
           {[
-            { value: '10,000+', label: 'Active Users' },
-            { value: '5M+', label: 'Monthly Runs' },
-            { value: '99.9%', label: 'Platform Uptime (Placeholder)' },
+            { value: '6', label: 'CLI 명령어' },
+            { value: '12+', label: 'Core 모듈' },
+            { value: '10+', label: '환경변수 설정' },
           ].map((stat) => (
             <div class="text-center rounded-lg border border-white/10 bg-[#14161b] py-8">
               <p class="text-h2 text-white font-bold">{stat.value}</p>
@@ -118,12 +118,12 @@ const faqItems = [
     <Container>
       <div class="text-center mb-16 animate-on-scroll">
         <h2 class="text-h2 text-neutral-100 mb-4">How It Works</h2>
-        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">From signal to decision to delivery in three clear steps.</p>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">OS 센서 데이터 수집부터 패턴 분석, 자동 실행까지 세 단계.</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-12 animate-on-scroll">
-        <StepCard step={1} title="Input" description="Ingest events, files, and API payloads from your existing tools." />
-        <StepCard step={2} title="Process" description="Apply rules and model-driven logic to classify, route, and decide." />
-        <StepCard step={3} title="Result" description="Ship outcomes to dashboards, alerts, and downstream actions." />
+        <StepCard step={1} title="Collect" description="OS 센서가 앱 사용, 키 입력, 시스템 이벤트를 실시간 수집하여 SQLite에 저장합니다." />
+        <StepCard step={2} title="Analyze" description="LLM 기반 analyzer가 행동 패턴을 분석하고, 반복 루틴과 자동화 기회를 식별합니다." />
+        <StepCard step={3} title="Automate" description="n8n 워크플로우 생성, 앱 제어, 셸 명령 실행으로 자동화를 즉시 적용합니다." />
       </div>
     </Container>
   </Section>
@@ -132,26 +132,35 @@ const faqItems = [
     <Container>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center animate-on-scroll">
         <div>
-          <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">Decision Velocity</p>
-          <h2 class="text-h2 text-neutral-100 mb-6">From raw signal to clear action in seconds</h2>
+          <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">행동 패턴 분석</p>
+          <h2 class="text-h2 text-neutral-100 mb-6">반복 작업을 자동으로 감지하고 추천합니다</h2>
           <p class="text-body-lg text-neutral-400 mb-8">
-            Collapse fragmented context into one operational view and reduce latency across critical workflows.
+            OS 수준의 센서 데이터를 수집하고, LLM이 사용 패턴을 분석하여 자동화할 수 있는 루틴을 추천합니다.
           </p>
           <ul class="space-y-3">
             {[
-              'Unified event stream and action history',
-              'Policy-aware automation templates',
-              'Human override points for edge cases',
+              'routine — 현재 반복 패턴 분석 결과 확인',
+              'recommend — AI 기반 자동화 추천 목록',
+              'status — 시스템 상태 및 모니터링 현황',
             ].map((item) => (
               <li class="flex items-start gap-3 text-body text-neutral-300">
                 <svg class="w-5 h-5 text-accent-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
-                <span>{item}</span>
+                <span><code class="text-accent-300 text-sm">{item.split(' — ')[0]}</code> — {item.split(' — ')[1]}</span>
               </li>
             ))}
           </ul>
         </div>
-        <div class="bg-[#14161b] rounded-lg aspect-[4/3] border border-white/10 flex items-center justify-center">
-          <span class="text-neutral-400 text-sm">Image Placeholder</span>
+        <div class="bg-[#14161b] rounded-lg border border-white/10 p-6 font-mono text-sm text-neutral-400">
+          <p class="text-neutral-500 mb-3">$ ./target/release/core</p>
+          <p class="text-[#8fd5a6]">&gt; routine</p>
+          <p class="text-neutral-300 mt-2">🔍 분석된 반복 패턴:</p>
+          <p class="text-neutral-400 ml-4">1. VS Code → Terminal → git commit (매일 3회)</p>
+          <p class="text-neutral-400 ml-4">2. Slack → Chrome → Docs (매일 5회)</p>
+          <p class="text-neutral-400 ml-4">3. Finder → Terminal → npm run (매일 4회)</p>
+          <p class="text-[#8fd5a6] mt-3">&gt; recommend</p>
+          <p class="text-neutral-300 mt-2">💡 추천 자동화:</p>
+          <p class="text-neutral-400 ml-4">→ git auto-commit 워크플로우 생성</p>
+          <p class="text-neutral-400 ml-4">→ 문서 리뷰 알림 자동화</p>
         </div>
       </div>
     </Container>
@@ -160,20 +169,29 @@ const faqItems = [
   <Section>
     <Container>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center animate-on-scroll">
-        <div class="order-2 lg:order-1 bg-[#14161b] rounded-lg aspect-[4/3] border border-white/10 flex items-center justify-center">
-          <span class="text-neutral-400 text-sm">Image Placeholder</span>
+        <div class="order-2 lg:order-1 bg-[#14161b] rounded-lg border border-white/10 p-6 font-mono text-sm text-neutral-400">
+          <p class="text-neutral-500 mb-3">$ ./target/release/core</p>
+          <p class="text-[#8fd5a6]">&gt; control Safari open</p>
+          <p class="text-neutral-300 mt-1">✅ Safari 실행 완료</p>
+          <p class="text-[#8fd5a6] mt-3">&gt; exec "echo hello"</p>
+          <p class="text-neutral-300 mt-1">✅ hello</p>
+          <p class="text-[#8fd5a6] mt-3">&gt; exec "rm -rf /"</p>
+          <p class="text-red-400 mt-1">🚫 보안 정책 위반: 위험한 명령어 차단됨</p>
+          <p class="text-[#8fd5a6] mt-3">&gt; build_workflow "매일 아침 9시에 Slack 알림"</p>
+          <p class="text-neutral-300 mt-1">🔧 n8n 워크플로우 생성 중...</p>
+          <p class="text-neutral-300 mt-1">✅ workflow_2026-02-12.json 생성 완료</p>
         </div>
         <div class="order-1 lg:order-2">
-          <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">Operational Confidence</p>
-          <h2 class="text-h2 text-neutral-100 mb-6">Reduce avoidable errors before they reach users</h2>
+          <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">보안 & 제어</p>
+          <h2 class="text-h2 text-neutral-100 mb-6">위험한 명령은 차단하고, 안전한 자동화만 실행합니다</h2>
           <p class="text-body-lg text-neutral-400 mb-8">
-            Introduce structured validation, guided approvals, and consistent post-action visibility.
+            policy.rs 기반 보안 정책 엔진이 위험한 키워드를 자동 감지하고, Write Lock으로 실수를 방지합니다.
           </p>
           <ul class="space-y-3">
             {[
-              'Validation checks before execution',
-              'Audit-friendly event timelines',
-              'Repeatable workflows across teams',
+              'exec 명령어에서 rm, sudo 등 위험 키워드 자동 차단',
+              '기본 Write Lock 활성화 — unlock 명령어로 해제',
+              'control 명령어로 앱을 안전하게 제어',
             ].map((item) => (
               <li class="flex items-start gap-3 text-body text-neutral-300">
                 <svg class="w-5 h-5 text-accent-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
@@ -190,21 +208,21 @@ const faqItems = [
     <Container>
       <div class="max-w-3xl mx-auto text-center animate-on-scroll">
         <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">For Individuals</p>
-        <h2 class="text-h2 text-neutral-100 mb-6">Get your time back</h2>
-        <p class="text-body-lg text-neutral-400 mb-10">Automate recurring personal workflows and focus on work that actually compounds.</p>
+        <h2 class="text-h2 text-neutral-100 mb-6">반복을 자동화하고, 진짜 일에 집중하세요</h2>
+        <p class="text-body-lg text-neutral-400 mb-10">개인 워크플로우를 자동 분석하고, 루틴을 실행 가능한 자동화로 변환합니다.</p>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10 text-left">
           {[
-            { title: 'Inbox Triage', desc: 'Auto-sort, summarize, and route recurring requests.' },
-            { title: 'Weekly Digest', desc: 'Turn noisy activity into concise snapshots.' },
-            { title: 'Routine Ops', desc: 'Schedule recurring execution with one policy set.' },
+            { title: 'routine', desc: '반복 행동 패턴을 분석하여 자동화 기회를 발견합니다.' },
+            { title: 'control', desc: '앱 실행, 전환, 종료를 CLI 한 줄로 제어합니다.' },
+            { title: 'build_workflow', desc: '자연어 프롬프트로 n8n 워크플로우를 자동 생성합니다.' },
           ].map((item) => (
             <div class="bg-[#14161b] rounded-lg p-6 border border-white/10">
-              <h3 class="text-h4 text-neutral-100 mb-2">{item.title}</h3>
+              <h3 class="text-h4 text-neutral-100 mb-2 font-mono">{item.title}</h3>
               <p class="text-caption text-neutral-400">{item.desc}</p>
             </div>
           ))}
         </div>
-        <Button variant="primary" size="lg" href="/pricing">Start Free</Button>
+        <Button variant="primary" size="lg" href="/docs/getting-started">시작하기</Button>
       </div>
     </Container>
   </Section>
@@ -213,15 +231,15 @@ const faqItems = [
     <Container>
       <div class="max-w-3xl mx-auto text-center animate-on-scroll">
         <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">For Teams</p>
-        <h2 class="text-h2 text-neutral-100 mb-6">Scale without adding coordination drag</h2>
+        <h2 class="text-h2 text-neutral-100 mb-6">팀 전체에 자동화를 배포하고 관리하세요</h2>
         <p class="text-body-lg text-neutral-400 mb-10">
-          Align rollout, governance, and monitoring under one operating model built for B2B needs.
+          Tauri 데스크톱 앱, n8n 워크플로우 공유, Self-Healing Guardian으로 팀 규모 자동화를 운영합니다.
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10 text-left">
           {[
-            { title: 'Onboarding', desc: 'Template-led rollout with phased enablement.' },
-            { title: 'Governance', desc: 'Policy, approval points, and access placeholders.' },
-            { title: 'Security', desc: 'RBAC, logs, and SLA sections ready for expansion.' },
+            { title: 'Desktop Bundle', desc: 'Tauri 기반 .app / .exe 데스크톱 앱으로 원클릭 배포합니다.' },
+            { title: 'n8n Integration', desc: 'Docker/NPX로 n8n을 실행하고 팀 워크플로우를 중앙 관리합니다.' },
+            { title: 'Self-Healing', desc: 'steer-guardian.sh가 크래시 시 코어 프로세스를 자동 재시작합니다.' },
           ].map((item) => (
             <div class="bg-[#14161b] rounded-lg p-6 border border-white/10">
               <h3 class="text-h4 text-neutral-100 mb-2">{item.title}</h3>
@@ -229,7 +247,7 @@ const faqItems = [
             </div>
           ))}
         </div>
-        <Button variant="primary" size="lg" href="/solutions">Talk to Sales</Button>
+        <Button variant="primary" size="lg" href="/solutions">자세히 보기</Button>
       </div>
     </Container>
   </Section>
@@ -238,8 +256,8 @@ const faqItems = [
     <Container narrow>
       <div class="animate-on-scroll">
         <div class="text-center mb-12">
-          <h2 class="text-h2 text-neutral-100 mb-4">Frequently Asked Questions</h2>
-          <p class="text-body-lg text-neutral-400">Core product, rollout, and pricing questions for launch-stage visitors.</p>
+          <h2 class="text-h2 text-neutral-100 mb-4">자주 묻는 질문</h2>
+          <p class="text-body-lg text-neutral-400">설치, 보안, 데이터 수집에 대한 핵심 질문들.</p>
         </div>
         <Accordion items={faqItems} />
       </div>
@@ -249,13 +267,13 @@ const faqItems = [
   <Section background="dark">
     <Container>
       <div class="text-center animate-on-scroll">
-        <h2 class="text-h2 text-white mb-4">Ready to ship your first flow?</h2>
+        <h2 class="text-h2 text-white mb-4">지금 바로 시작하세요</h2>
         <p class="text-body-lg text-neutral-400 max-w-xl mx-auto mb-10">
-          Start with placeholders now, layer real data and proof points in your next release.
+          Clone, 빌드, 실행까지 5분이면 충분합니다. Rust 네이티브의 속도를 경험하세요.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button variant="primary" size="lg" href="/docs/getting-started">Start Now</Button>
-          <Button variant="ghost" size="lg" href="/contact">Contact Sales</Button>
+          <Button variant="primary" size="lg" href="/docs/getting-started">시작하기</Button>
+          <Button variant="ghost" size="lg" href="/contact">문의하기</Button>
         </div>
       </div>
     </Container>
@@ -263,5 +281,3 @@ const faqItems = [
 
   <Footer slot="footer" />
 </BaseLayout>
-
-
