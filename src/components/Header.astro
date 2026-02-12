@@ -1,11 +1,11 @@
 ﻿---
 const navItems = [
-  { label: 'GitHub', href: 'https://github.com/NOVA-ALLRounder/main', external: true },
   { label: 'Docs', href: '/docs' },
   { label: 'Enterprise', href: '/enterprise' },
   { label: 'Zen', href: '/zen' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'Contact', href: '/contact' },
+  { label: 'GitHub', href: 'https://github.com/NOVA-ALLRounder/main', external: true },
 ];
 
 const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
@@ -54,7 +54,7 @@ const isActive = (href: string) => {
   role="banner"
 >
   <nav
-    class="max-w-[1120px] mx-auto px-5 h-[76px] flex items-center justify-between"
+    class="max-w-container mx-auto px-6 h-[76px] relative flex items-center"
     aria-label="Main Navigation"
   >
     <a
@@ -65,7 +65,7 @@ const isActive = (href: string) => {
       <span class="font-black text-[2rem] md:text-[2.35rem] text-neutral-900">VA</span>
     </a>
 
-    <ul class="hidden lg:flex items-center gap-8" role="list">
+    <ul class="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2" role="list">
       {navItems.map((item) => (
         <li>
           <a
@@ -86,7 +86,7 @@ const isActive = (href: string) => {
       ))}
     </ul>
 
-    <div class="hidden lg:flex items-center gap-4">
+    <div class="hidden lg:flex items-center gap-4 ml-auto">
       <a
         href={withBase('/docs/getting-started')}
         class:list={[
@@ -108,7 +108,7 @@ const isActive = (href: string) => {
     <button
       id="mobile-menu-toggle"
       class:list={[
-        'lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-md transition-colors text-neutral-900 hover:bg-black/5',
+        'lg:hidden ml-auto inline-flex items-center justify-center w-10 h-10 rounded-md transition-colors text-neutral-900 hover:bg-black/5',
       ]}
       aria-expanded="false"
       aria-controls="mobile-menu"
