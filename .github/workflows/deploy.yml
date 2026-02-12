@@ -5,6 +5,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+env:
+  SITE_URL: https://nova-allrounder.github.io
+  PUBLIC_BASE_PATH: /NOVA-ALLRounder.io/
+
 permissions:
   contents: read
   pages: write
@@ -20,6 +24,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Confirm repository context
+        run: echo "Deploying from $GITHUB_REPOSITORY"
 
       - name: Setup Node
         uses: actions/setup-node@v4

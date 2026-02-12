@@ -3,3 +3,6 @@ dist/
 .astro/
 .DS_Store
 Thumbs.db
+.git copy/
+.git-copy-backup/
+git-copy-backup/
