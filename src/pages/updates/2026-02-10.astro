@@ -5,11 +5,10 @@ import Footer from '../../components/Footer.astro';
 import Section from '../../components/ui/Section.astro';
 import Container from '../../components/ui/Container.astro';
 import Badge from '../../components/ui/Badge.astro';
+
 const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
 const isUserSiteRepo = repo.endsWith('.github.io');
-const basePath = process.env.GITHUB_ACTIONS === 'true'
-  ? (isUserSiteRepo ? '/' : `/${repo}/`)
-  : '/';
+const basePath = process.env.GITHUB_ACTIONS === 'true' ? (isUserSiteRepo ? '/' : `/${repo}/`) : '/';
 const withBase = (url: string) => {
   if (!url.startsWith('/')) return url;
   const clean = url.replace(/^\/+/, '');
@@ -17,41 +16,48 @@ const withBase = (url: string) => {
 };
 ---
 
-<BaseLayout title="AI 遺꾨쪟 紐⑤뜽 v3 異쒖떆 ??NOVA Updates" description="NOVA ?낅뜲?댄듃: AI 遺꾨쪟 紐⑤뜽 v3 異쒖떆 ?덈궡 (placeholder).">
+<BaseLayout
+  title="AI Classification Model v3 Released - NOVA Updates"
+  description="Placeholder note for the v3 classification model release."
+>
   <Header slot="header" />
 
   <Section padding="large">
     <Container narrow>
       <article class="animate-on-scroll">
-        <a href={withBase('/updates')} class="inline-flex items-center text-sm text-neutral-400 hover:text-neutral-100 mb-8">??Updates濡??뚯븘媛湲?/a>
+        <a href={withBase('/updates')} class="inline-flex items-center text-sm text-neutral-400 hover:text-neutral-100 mb-8">
+          &larr; Back to updates
+        </a>
         <div class="flex items-center gap-3 mb-4">
           <time datetime="2026-02-10" class="text-sm text-neutral-400">2026.02.10</time>
-          <Badge text="?덈줈??湲곕뒫" variant="accent" />
+          <Badge text="New Feature" variant="accent" />
         </div>
-        <h1 class="text-h1 text-neutral-100 mb-6">AI 遺꾨쪟 紐⑤뜽 v3 異쒖떆 ????鍮좊Ⅴ怨? ???뺥솗?섍쾶</h1>
+        <h1 class="text-h1 text-neutral-100 mb-6">AI Classification Model v3 Released</h1>
         <p class="text-body-lg text-neutral-400 mb-12">
-          Placeholder ?낅뜲?댄듃 蹂몃Ц?낅땲?? 紐⑤뜽 ?뺥솗?? 泥섎━ ?깅뒫, ?ㅺ뎅??吏??媛쒖꽑 ?ы빆???꾨떖?섎뒗 ?뺤떇???섑뵆 ?섏씠吏?낅땲??
+          Placeholder release note. This page shows how update posts will be structured for launch communications.
         </p>
 
         <div class="space-y-8">
           <section>
-            <h2 class="text-h3 text-neutral-100 mb-3">?듭떖 蹂寃??ы빆</h2>
+            <h2 class="text-h3 text-neutral-100 mb-3">Highlights</h2>
             <ul class="list-disc pl-6 space-y-2 text-neutral-300">
-              <li>?띿뒪??遺꾨쪟 ?뺥솗??12% ?μ긽 (placeholder)</li>
-              <li>?좉퇋 ?몄뼱 5醫?異붽? 吏??(placeholder)</li>
-              <li>而ㅼ뒪? 紐⑤뜽 ?숈뒿 ?쒓컙 ?됯퇏 50% ?⑥텞 (placeholder)</li>
+              <li>Improved precision on long-form text classification (placeholder).</li>
+              <li>Faster inference path for high-volume queues (placeholder).</li>
+              <li>Better fallback handling for low-confidence edge cases (placeholder).</li>
             </ul>
           </section>
+
           <section>
-            <h2 class="text-h3 text-neutral-100 mb-3">?곹뼢 踰붿쐞</h2>
+            <h2 class="text-h3 text-neutral-100 mb-3">Impact Scope</h2>
             <p class="text-body text-neutral-300">
-              Team 諛?Enterprise ?뚮옖 ?ъ슜?먯뿉寃??곗꽑 ?쒓났?섎ŉ, Individual ?뚮옖? ?먯쭊 諛고룷 ?덉젙?낅땲?? ?ㅼ젣 ?쇱젙? 異뷀썑 怨듭??⑸땲??
+              Team and Enterprise tracks receive this first, followed by staged rollout to Individual (placeholder).
             </p>
           </section>
+
           <section>
-            <h2 class="text-h3 text-neutral-100 mb-3">?ㅼ쓬 ?④퀎</h2>
+            <h2 class="text-h3 text-neutral-100 mb-3">Next Step</h2>
             <p class="text-body text-neutral-300">
-              ?낅뜲?댄듃 ?댄썑 ?뚰겕?뚮줈??寃곌낵瑜?紐⑤땲?곕쭅?섍퀬, 遺꾨쪟 ?꾧퀎媛믪쓣 ?ъ“?뺥빐 ?깅뒫??理쒖쟻?뷀븯?몄슂.
+              Validate model behavior on your key categories and tune thresholds in workflow policies.
             </p>
           </section>
         </div>

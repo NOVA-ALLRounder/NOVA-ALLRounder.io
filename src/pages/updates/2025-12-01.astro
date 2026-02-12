@@ -5,11 +5,10 @@ import Footer from '../../components/Footer.astro';
 import Section from '../../components/ui/Section.astro';
 import Container from '../../components/ui/Container.astro';
 import Badge from '../../components/ui/Badge.astro';
+
 const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
 const isUserSiteRepo = repo.endsWith('.github.io');
-const basePath = process.env.GITHUB_ACTIONS === 'true'
-  ? (isUserSiteRepo ? '/' : `/${repo}/`)
-  : '/';
+const basePath = process.env.GITHUB_ACTIONS === 'true' ? (isUserSiteRepo ? '/' : `/${repo}/`) : '/';
 const withBase = (url: string) => {
   if (!url.startsWith('/')) return url;
   const clean = url.replace(/^\/+/, '');
@@ -17,35 +16,41 @@ const withBase = (url: string) => {
 };
 ---
 
-<BaseLayout title="RBAC & 媛먯궗 濡쒓렇 湲곕낯 吏????NOVA Updates" description="NOVA ?낅뜲?댄듃: RBAC 諛?媛먯궗 濡쒓렇 吏???덈궡 (placeholder).">
+<BaseLayout
+  title="RBAC and Audit Log Baseline Added - NOVA Updates"
+  description="Placeholder note for baseline security and governance rollout."
+>
   <Header slot="header" />
 
   <Section padding="large">
     <Container narrow>
       <article class="animate-on-scroll">
-        <a href={withBase('/updates')} class="inline-flex items-center text-sm text-neutral-400 hover:text-neutral-100 mb-8">??Updates濡??뚯븘媛湲?/a>
+        <a href={withBase('/updates')} class="inline-flex items-center text-sm text-neutral-400 hover:text-neutral-100 mb-8">
+          &larr; Back to updates
+        </a>
         <div class="flex items-center gap-3 mb-4">
           <time datetime="2025-12-01" class="text-sm text-neutral-400">2025.12.01</time>
-          <Badge text="蹂댁븞" variant="warning" />
+          <Badge text="Security" variant="warning" />
         </div>
-        <h1 class="text-h1 text-neutral-100 mb-6">RBAC & 媛먯궗 濡쒓렇 湲곕낯 吏???쒖옉</h1>
+        <h1 class="text-h1 text-neutral-100 mb-6">RBAC and Audit Log Baseline Added</h1>
         <p class="text-body-lg text-neutral-400 mb-12">
-          Placeholder ?낅뜲?댄듃 蹂몃Ц?낅땲?? 議곗쭅 蹂댁븞 ?뺤콉 媛뺥솕瑜??꾪븳 ?묎렐 沅뚰븳 ?쒖뼱? 媛먯궗 ?대젰 愿由?湲곕뒫 ?뚭컻???섑뵆 ?섏씠吏?낅땲??
+          Placeholder release note for foundational governance capabilities in team-oriented deployments.
         </p>
 
         <div class="space-y-8">
           <section>
-            <h2 class="text-h3 text-neutral-100 mb-3">異붽???蹂댁븞 湲곕뒫</h2>
+            <h2 class="text-h3 text-neutral-100 mb-3">Security Additions</h2>
             <ul class="list-disc pl-6 space-y-2 text-neutral-300">
-              <li>??븷 湲곕컲 沅뚰븳(RBAC) ?뺤콉 ?쒗뵆由??쒓났 (placeholder)</li>
-              <li>?ъ슜???쒕룞 濡쒓렇 ?먮룞 ?섏쭛/?대낫?닿린 (placeholder)</li>
-              <li>愿由ъ옄??蹂寃??대젰 異붿쟻 ?붾㈃ 異붽? (placeholder)</li>
+              <li>Role-based access control baseline structure (placeholder).</li>
+              <li>Activity log collection and export baseline (placeholder).</li>
+              <li>Administrative change trace view for governance workflows (placeholder).</li>
             </ul>
           </section>
+
           <section>
-            <h2 class="text-h3 text-neutral-100 mb-3">?꾩엯 ??怨좊젮 ?ы빆</h2>
+            <h2 class="text-h3 text-neutral-100 mb-3">Adoption Notes</h2>
             <p class="text-body text-neutral-300">
-              ?꾩옱 議곗쭅??沅뚰븳 泥닿퀎瑜?癒쇱? ?뺣━???? ?/遺???⑥쐞濡??④퀎???곸슜??沅뚯옣?⑸땲?? ?꾩슂 ??蹂댁븞 寃???몄뀡???붿껌?????덉뒿?덈떎.
+              Start with a limited-scope role model, validate access boundaries, then expand across teams.
             </p>
           </section>
         </div>

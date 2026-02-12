@@ -11,59 +11,62 @@ import Button from '../../components/ui/Button.astro';
 const updates = [
   {
     date: '2026.02.10',
-    badge: '?덈줈??湲곕뒫',
+    badge: 'New Feature',
     badgeVariant: 'accent' as const,
-    title: 'AI 遺꾨쪟 紐⑤뜽 v3 異쒖떆 ????鍮좊Ⅴ怨? ???뺥솗?섍쾶.',
-    summary: '?띿뒪??遺꾨쪟 ?뺥솗?꾧? 12% ?μ긽?섏뿀?듬땲?? ?좉퇋 ?몄뼱 5媛?異붽? 吏?먭낵 ?④퍡, 而ㅼ뒪? 紐⑤뜽 ?숈뒿 ?쒓컙???덈컲?쇰줈 ?⑥텞?덉뒿?덈떎.',
+    title: 'AI Classification Model v3 Released',
+    summary:
+      'Placeholder update: v3 improves classification precision and processing speed, with expanded language handling and better edge-case routing.',
     href: '/updates/2026-02-10',
   },
   {
     date: '2026.01.15',
-    badge: '媛쒖꽑',
+    badge: 'Improvement',
     badgeVariant: 'success' as const,
-    title: '諛곗튂 泥섎━ ?깅뒫 40% 媛쒖꽑',
-    summary: '????곗씠??泥섎━ ?뚯씠?꾨씪?몄쓣 理쒖쟻?뷀븯??諛곗튂 紐⑤뱶 泥섎━ ?띾룄媛 40% 鍮⑤씪議뚯뒿?덈떎. 10留?嫄??댁긽???곗씠?곕룄 ?덉젙?곸쑝濡?泥섎━?⑸땲??',
+    title: 'Batch Processing Throughput +40%',
+    summary:
+      'Placeholder update: pipeline and queue tuning reduced high-volume processing time while improving reliability under load.',
     href: '/updates/2026-01-15',
   },
   {
     date: '2025.12.01',
-    badge: '蹂댁븞',
+    badge: 'Security',
     badgeVariant: 'warning' as const,
-    title: 'RBAC & 媛먯궗 濡쒓렇 湲곕낯 吏???쒖옉',
-    summary: '??븷 湲곕컲 ?묎렐 ?쒖뼱(RBAC)媛 Team ?뚮옖 ?댁긽?먯꽌 湲곕낯 ?쒓났?⑸땲?? 紐⑤뱺 ?ъ슜???쒕룞 媛먯궗 濡쒓렇???④퍡 吏?먰빀?덈떎.',
+    title: 'RBAC and Audit Log Baseline Added',
+    summary:
+      'Placeholder update: initial access-control and activity-log structures are now included in the Team+ rollout track.',
     href: '/updates/2025-12-01',
   },
 ];
 ---
 
-<BaseLayout title="Updates ??NOVA" description="NOVA??理쒖떊 ?낅뜲?댄듃, ?덈줈??湲곕뒫, 媛쒖꽑 ?ы빆???뺤씤?섏꽭??">
+<BaseLayout title="Updates - NOVA" description="Latest product notes, release placeholders, and roadmap-facing updates.">
   <Header slot="header" />
 
   <Section padding="large">
     <Container>
       <div class="text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
         <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Updates</p>
-        <h1 class="text-h1 text-neutral-100 mb-6">?덈줈???뚯떇</h1>
+        <h1 class="text-h1 text-neutral-100 mb-6">What Is New</h1>
         <p class="text-body-lg text-neutral-400">
-          NOVA??理쒖떊 湲곕뒫, 媛쒖꽑 ?ы빆, 洹몃━怨??욎쑝濡쒖쓽 怨꾪쉷???꾪빐?쒕┰?덈떎.
+          Product changes, release placeholders, and rollout notes for B2C and B2B visitors.
         </p>
       </div>
 
-      <!-- Subscribe Placeholder -->
       <div class="max-w-md mx-auto mb-16 animate-on-scroll">
         <div class="flex gap-3">
           <input
             type="email"
-            placeholder="?대찓??二쇱냼"
+            placeholder="Email address"
             class="flex-1 px-4 py-3 bg-[#11192a] rounded-xl border border-white/10 text-body text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20"
-            aria-label="?낅뜲?댄듃 援щ룆 ?대찓??
+            aria-label="Subscribe email"
           />
-          <Button variant="primary" size="md">援щ룆</Button>
+          <Button variant="primary" size="md">Subscribe</Button>
         </div>
-        <p class="text-xs text-neutral-400 mt-2 text-center">???낅뜲?댄듃媛 ?덉쓣 ???뚮젮?쒕┰?덈떎. ?몄젣??援щ룆 ?댁? 媛??</p>
+        <p class="text-xs text-neutral-400 mt-2 text-center">
+          Placeholder only. Subscription flow is not connected in this release.
+        </p>
       </div>
 
-      <!-- Update Cards -->
       <div class="space-y-6 max-w-3xl mx-auto animate-on-scroll">
         {updates.map((update) => (
           <Card hoverable={true} href={update.href}>
@@ -74,7 +77,7 @@ const updates = [
               </div>
               <h2 class="text-h3 text-neutral-100 mb-3">{update.title}</h2>
               <p class="text-body text-neutral-400">{update.summary}</p>
-              <span class="inline-block mt-4 text-sm text-accent-300 font-medium">?먯꽭??蹂닿린 ??/span>
+              <span class="inline-block mt-4 text-sm text-accent-300 font-medium">Read update -></span>
             </div>
           </Card>
         ))}
@@ -84,4 +87,3 @@ const updates = [
 
   <Footer slot="footer" />
 </BaseLayout>
-

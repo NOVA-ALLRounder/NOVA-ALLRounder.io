@@ -5,11 +5,10 @@ import Footer from '../../components/Footer.astro';
 import Section from '../../components/ui/Section.astro';
 import Container from '../../components/ui/Container.astro';
 import Badge from '../../components/ui/Badge.astro';
+
 const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
 const isUserSiteRepo = repo.endsWith('.github.io');
-const basePath = process.env.GITHUB_ACTIONS === 'true'
-  ? (isUserSiteRepo ? '/' : `/${repo}/`)
-  : '/';
+const basePath = process.env.GITHUB_ACTIONS === 'true' ? (isUserSiteRepo ? '/' : `/${repo}/`) : '/';
 const withBase = (url: string) => {
   if (!url.startsWith('/')) return url;
   const clean = url.replace(/^\/+/, '');
@@ -17,35 +16,41 @@ const withBase = (url: string) => {
 };
 ---
 
-<BaseLayout title="諛곗튂 泥섎━ ?깅뒫 40% 媛쒖꽑 ??NOVA Updates" description="NOVA ?낅뜲?댄듃: 諛곗튂 泥섎━ ?깅뒫 媛쒖꽑 ?덈궡 (placeholder).">
+<BaseLayout
+  title="Batch Processing Throughput +40% - NOVA Updates"
+  description="Placeholder note for batch throughput improvements."
+>
   <Header slot="header" />
 
   <Section padding="large">
     <Container narrow>
       <article class="animate-on-scroll">
-        <a href={withBase('/updates')} class="inline-flex items-center text-sm text-neutral-400 hover:text-neutral-100 mb-8">??Updates濡??뚯븘媛湲?/a>
+        <a href={withBase('/updates')} class="inline-flex items-center text-sm text-neutral-400 hover:text-neutral-100 mb-8">
+          &larr; Back to updates
+        </a>
         <div class="flex items-center gap-3 mb-4">
           <time datetime="2026-01-15" class="text-sm text-neutral-400">2026.01.15</time>
-          <Badge text="媛쒖꽑" variant="success" />
+          <Badge text="Improvement" variant="success" />
         </div>
-        <h1 class="text-h1 text-neutral-100 mb-6">諛곗튂 泥섎━ ?깅뒫 40% 媛쒖꽑</h1>
+        <h1 class="text-h1 text-neutral-100 mb-6">Batch Processing Throughput +40%</h1>
         <p class="text-body-lg text-neutral-400 mb-12">
-          Placeholder ?낅뜲?댄듃 蹂몃Ц?낅땲?? ??⑸웾 泥섎━ ?뚯씠?꾨씪?몄쓽 援ъ“ 媛쒖꽑怨??댁쁺 ?⑥쑉 ?곸듅 ?댁슜???ㅻ챸?섎뒗 ?섑뵆 ?섏씠吏?낅땲??
+          Placeholder release note. This update summarizes performance-focused improvements for high-volume workloads.
         </p>
 
         <div class="space-y-8">
           <section>
-            <h2 class="text-h3 text-neutral-100 mb-3">臾댁뾿??媛쒖꽑?섏뿀?섏슂?</h2>
+            <h2 class="text-h3 text-neutral-100 mb-3">What Changed</h2>
             <ul class="list-disc pl-6 space-y-2 text-neutral-300">
-              <li>蹂묐젹 泥섎━ ??理쒖쟻?붾줈 泥섎━???μ긽 (placeholder)</li>
-              <li>I/O 蹂묐ぉ 援ш컙 罹먯떆 ?꾨왂 ?곸슜 (placeholder)</li>
-              <li>?ㅽ뙣 ?ъ쿂由??덉젙??媛뺥솕 (placeholder)</li>
+              <li>Queue scheduling and worker allocation tuned for parallel loads (placeholder).</li>
+              <li>I/O bottlenecks reduced on common processing paths (placeholder).</li>
+              <li>Retry logic made more stable for transient failures (placeholder).</li>
             </ul>
           </section>
+
           <section>
-            <h2 class="text-h3 text-neutral-100 mb-3">沅뚯옣 ?뺤씤 ??ぉ</h2>
+            <h2 class="text-h3 text-neutral-100 mb-3">Recommended Checks</h2>
             <p class="text-body text-neutral-300">
-              湲곗〈 諛곗튂 ?뚰겕?뚮줈?곗쓽 ?ㅽ뻾 ?쒓컙??鍮꾧탳??媛쒖꽑 ?④낵瑜?痢≪젙?섏꽭?? 泥섎━??利앷????곕씪 ?뚮┝ ?꾧퀎媛??ъ꽕?뺤쓣 沅뚯옣?⑸땲??
+              Compare pre/post run-time distributions and adjust alert thresholds for new baseline behavior.
             </p>
           </section>
         </div>
