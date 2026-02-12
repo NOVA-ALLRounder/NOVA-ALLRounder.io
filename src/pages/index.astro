@@ -8,6 +8,7 @@ import Button from '../components/ui/Button.astro';
 import StepCard from '../components/ui/StepCard.astro';
 import Accordion from '../components/ui/Accordion.astro';
 import InstallTabsShowcase from '../components/InstallTabsShowcase.astro';
+import WorkflowAnimation from '../components/WorkflowAnimation.astro';
 
 const faqItems = [
   {
@@ -125,6 +126,17 @@ const faqItems = [
         <StepCard step={2} title="Analyze" description="LLM 기반 analyzer가 행동 패턴을 분석하고, 반복 루틴과 자동화 기회를 식별합니다." />
         <StepCard step={3} title="Automate" description="n8n 워크플로우 생성, 앱 제어, 셸 명령 실행으로 자동화를 즉시 적용합니다." />
       </div>
+    </Container>
+  </Section>
+
+  <Section class="bg-[#0d0e12]">
+    <Container>
+      <div class="text-center mb-4 animate-on-scroll">
+        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Pipeline</p>
+        <h2 class="text-h2 text-neutral-100 mb-4">에이전트 워크플로우</h2>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">OS 이벤트 감지부터 자동화 실행까지, 전체 파이프라인을 시각적으로 확인하세요.</p>
+      </div>
+      <WorkflowAnimation />
     </Container>
   </Section>
 
