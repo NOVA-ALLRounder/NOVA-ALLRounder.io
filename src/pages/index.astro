@@ -61,23 +61,12 @@ const faqItems = [
           Rust 네이티브, macOS/Windows 지원, LLM 기반 분석.
         </p>
 
-        <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto_auto] gap-3 mb-8 text-left">
-          <label for="hero-email" class="sr-only">Email</label>
-          <input
-            id="hero-email"
-            type="email"
-            placeholder="Enter your email"
-            class="w-full rounded-md border border-white/15 bg-[#14161b] px-4 py-3 text-neutral-100 placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-accent-300/40"
-          />
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10">
           <Button variant="primary" size="lg" href="/docs/getting-started" class="whitespace-nowrap">Start</Button>
           <Button variant="secondary" size="lg" href="/product" class="whitespace-nowrap">View Demo</Button>
         </div>
 
-        <div class="flex flex-wrap items-center justify-center gap-3 text-xs text-neutral-500">
-          <span class="rounded-md border border-white/15 px-3 py-1.5 bg-[#13151a]">Rust Native</span>
-          <span class="rounded-md border border-white/15 px-3 py-1.5 bg-[#13151a]">macOS + Windows</span>
-          <span class="rounded-md border border-white/15 px-3 py-1.5 bg-[#13151a]">LLM 기반 분석</span>
-        </div>
+        <WorkflowAnimation />
       </div>
     </Container>
   </Section>
@@ -126,17 +115,6 @@ const faqItems = [
         <StepCard step={2} title="Analyze" description="LLM 기반 analyzer가 행동 패턴을 분석하고, 반복 루틴과 자동화 기회를 식별합니다." />
         <StepCard step={3} title="Automate" description="n8n 워크플로우 생성, 앱 제어, 셸 명령 실행으로 자동화를 즉시 적용합니다." />
       </div>
-    </Container>
-  </Section>
-
-  <Section class="bg-[#0d0e12]">
-    <Container>
-      <div class="text-center mb-4 animate-on-scroll">
-        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Pipeline</p>
-        <h2 class="text-h2 text-neutral-100 mb-4">에이전트 워크플로우</h2>
-        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">OS 이벤트 감지부터 자동화 실행까지, 전체 파이프라인을 시각적으로 확인하세요.</p>
-      </div>
-      <WorkflowAnimation />
     </Container>
   </Section>
 
