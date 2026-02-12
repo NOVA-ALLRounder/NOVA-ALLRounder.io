@@ -11,44 +11,44 @@ import Button from '../../components/ui/Button.astro';
 const updates = [
   {
     date: '2026.02.10',
-    badge: 'New Feature',
+    badge: '새 기능',
     badgeVariant: 'accent' as const,
-    title: 'AI Classification Model v3 Released',
+    title: 'AI 분류 모델 v3 출시',
     summary:
-      'Placeholder update: v3 improves classification precision and processing speed, with expanded language handling and better edge-case routing.',
+      'v3는 분류 정확도와 처리 속도를 개선하며, 확장된 언어 처리와 개선된 엣지 케이스 라우팅을 포함합니다.',
     href: '/updates/2026-02-10',
   },
   {
     date: '2026.01.15',
-    badge: 'Improvement',
+    badge: '개선',
     badgeVariant: 'success' as const,
-    title: 'Batch Processing Throughput +40%',
+    title: '배치 처리 처리량 +40%',
     summary:
-      'Placeholder update: pipeline and queue tuning reduced high-volume processing time while improving reliability under load.',
+      '파이프라인과 큐 튜닝으로 대용량 처리 시간을 단축하고 부하 상태에서의 안정성을 개선했습니다.',
     href: '/updates/2026-01-15',
   },
   {
     date: '2025.12.01',
-    badge: 'Security',
+    badge: '보안',
     badgeVariant: 'warning' as const,
-    title: 'RBAC and Audit Log Baseline Added',
+    title: 'RBAC 및 감사 로그 기반 추가',
     summary:
-      'Placeholder update: initial access-control and activity-log structures are now included in the Team+ rollout track.',
+      '초기 접근 제어 및 활동 로그 구조가 Team+ 롤아웃 트랙에 포함되었습니다.',
     href: '/updates/2025-12-01',
   },
 ];
 ---
 
-<BaseLayout title="Updates - NOVA" description="Latest product notes, release placeholders, and roadmap-facing updates.">
+<BaseLayout title="업데이트 - NOVA" description="최신 제품 노트, 릴리스 소식, 로드맵 업데이트.">
   <Header slot="header" />
 
   <Section padding="large">
     <Container>
       <div class="text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
-        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Updates</p>
-        <h1 class="text-h1 text-neutral-100 mb-6">What Is New</h1>
+        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">업데이트</p>
+        <h1 class="text-h1 text-neutral-100 mb-6">새로운 소식</h1>
         <p class="text-body-lg text-neutral-400">
-          Product changes, release placeholders, and rollout notes for B2C and B2B visitors.
+          제품 변경 사항, 릴리스 노트, 롤아웃 소식을 확인하세요.
         </p>
       </div>
 
@@ -56,14 +56,14 @@ const updates = [
         <div class="flex gap-3">
           <input
             type="email"
-            placeholder="Email address"
+            placeholder="이메일 주소"
             class="flex-1 px-4 py-3 bg-[#14161b] rounded-lg border border-white/10 text-body text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20"
-            aria-label="Subscribe email"
+            aria-label="구독 이메일"
           />
-          <Button variant="primary" size="md">Subscribe</Button>
+          <Button variant="primary" size="md">구독</Button>
         </div>
         <p class="text-xs text-neutral-400 mt-2 text-center">
-          Placeholder only. Subscription flow is not connected in this release.
+          구독 기능은 현재 준비 중입니다.
         </p>
       </div>
 
@@ -77,7 +77,7 @@ const updates = [
               </div>
               <h2 class="text-h3 text-neutral-100 mb-3">{update.title}</h2>
               <p class="text-body text-neutral-400">{update.summary}</p>
-              <span class="inline-block mt-4 text-sm text-accent-300 font-medium">Read update -></span>
+              <span class="inline-block mt-4 text-sm text-accent-300 font-medium">자세히 보기 →</span>
             </div>
           </Card>
         ))}
@@ -87,5 +87,3 @@ const updates = [
 
   <Footer slot="footer" />
 </BaseLayout>
-
-

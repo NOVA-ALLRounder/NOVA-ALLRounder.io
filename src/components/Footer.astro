@@ -23,28 +23,29 @@ const withBase = (url: string) => {
 };
 
 const footerLinks = {
-  Product: [
-    { label: 'Overview', href: '/product' },
-    { label: 'Pricing', href: '/pricing' },
-    { label: 'Updates', href: '/updates' },
+  '제품': [
+    { label: '개요', href: '/product' },
+    { label: '요금제', href: '/pricing' },
+    { label: '업데이트', href: '/updates' },
   ],
-  Resources: [
-    { label: 'Docs', href: '/docs' },
-    { label: 'Getting Started', href: '/docs/getting-started' },
-    { label: 'API Reference', href: '/docs/api' },
+  '리소스': [
+    { label: '문서', href: '/docs' },
+    { label: '시작 가이드', href: '/docs/getting-started' },
+    { label: 'API 레퍼런스', href: '/docs/api' },
     { label: 'FAQ', href: '/docs/faq' },
   ],
-  Contact: [
-    { label: 'Contact Hub', href: '/contact' },
-    { label: 'Email', href: '/contact#email' },
+  '문의': [
+    { label: '문의 허브', href: '/contact' },
+    { label: '이메일', href: '/contact#email' },
     { label: 'GitHub', href: '/contact#github' },
   ],
-  Legal: [
-    { label: 'Terms', href: '#' },
-    { label: 'Privacy', href: '#' },
-    { label: 'Licenses', href: '#' },
+  '법적 고지': [
+    { label: '이용약관', href: '#' },
+    { label: '개인정보처리방침', href: '#' },
+    { label: '라이선스', href: '#' },
   ],
 };
+
 ---
 
 <footer class="bg-[#0d0e11] border-t border-white/10" role="contentinfo">
@@ -71,7 +72,7 @@ const footerLinks = {
         <span class="inline-flex items-center justify-center w-6 h-6 bg-[#f5ee9b] text-[#111214] rounded text-[10px] font-bold">N</span>
         <span>NOVA</span>
       </div>
-      <p class="text-xs text-neutral-500">© {currentYear} NOVA. All rights reserved.</p>
+      <p class="text-xs text-neutral-500">© {currentYear} NOVA. 모든 권리 보유.</p>
       <div class="flex items-center gap-4">
         <a
           href="https://github.com"

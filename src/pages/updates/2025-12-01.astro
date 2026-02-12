@@ -17,8 +17,8 @@ const withBase = (url: string) => {
 ---
 
 <BaseLayout
-  title="RBAC and Audit Log Baseline Added - NOVA Updates"
-  description="Placeholder note for baseline security and governance rollout."
+  title="RBAC 및 감사 로그 기반 추가 - NOVA 업데이트"
+  description="기본 보안 및 거버넌스 롤아웃 릴리스 노트."
 >
   <Header slot="header" />
 
@@ -26,31 +26,31 @@ const withBase = (url: string) => {
     <Container narrow>
       <article class="animate-on-scroll">
         <a href={withBase('/updates')} class="inline-flex items-center text-sm text-neutral-400 hover:text-neutral-100 mb-8">
-          &larr; Back to updates
+          &larr; 업데이트 목록으로
         </a>
         <div class="flex items-center gap-3 mb-4">
           <time datetime="2025-12-01" class="text-sm text-neutral-400">2025.12.01</time>
-          <Badge text="Security" variant="warning" />
+          <Badge text="보안" variant="warning" />
         </div>
-        <h1 class="text-h1 text-neutral-100 mb-6">RBAC and Audit Log Baseline Added</h1>
+        <h1 class="text-h1 text-neutral-100 mb-6">RBAC 및 감사 로그 기반 추가</h1>
         <p class="text-body-lg text-neutral-400 mb-12">
-          Placeholder release note for foundational governance capabilities in team-oriented deployments.
+          팀 중심 배포에서의 기초 거버넌스 역량 릴리스 노트.
         </p>
 
         <div class="space-y-8">
           <section>
-            <h2 class="text-h3 text-neutral-100 mb-3">Security Additions</h2>
+            <h2 class="text-h3 text-neutral-100 mb-3">보안 추가 기능</h2>
             <ul class="list-disc pl-6 space-y-2 text-neutral-300">
-              <li>Role-based access control baseline structure (placeholder).</li>
-              <li>Activity log collection and export baseline (placeholder).</li>
-              <li>Administrative change trace view for governance workflows (placeholder).</li>
+              <li>역할 기반 접근 제어(RBAC) 기본 구조.</li>
+              <li>활동 로그 수집 및 내보내기 기반.</li>
+              <li>거버넌스 워크플로우를 위한 관리자 변경 추적 뷰.</li>
             </ul>
           </section>
 
           <section>
-            <h2 class="text-h3 text-neutral-100 mb-3">Adoption Notes</h2>
+            <h2 class="text-h3 text-neutral-100 mb-3">도입 가이드</h2>
             <p class="text-body text-neutral-300">
-              Start with a limited-scope role model, validate access boundaries, then expand across teams.
+              제한된 범위의 역할 모델로 시작하여 접근 경계를 검증한 후, 팀 전체로 확장하세요.
             </p>
           </section>
         </div>
@@ -60,4 +60,3 @@ const withBase = (url: string) => {
 
   <Footer slot="footer" />
 </BaseLayout>
-

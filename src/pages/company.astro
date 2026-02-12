@@ -7,16 +7,16 @@ import Container from '../components/ui/Container.astro';
 import Button from '../components/ui/Button.astro';
 ---
 
-<BaseLayout title="Company - NOVA" description="Mission, vision, team, and contact structure for launch-stage company pages.">
+<BaseLayout title="회사 소개 - NOVA" description="NOVA의 미션, 비전, 팀 구성, 핵심 가치를 소개합니다.">
   <Header slot="header" />
 
   <Section padding="large">
     <Container>
       <div class="text-center max-w-4xl mx-auto animate-on-scroll">
-        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">About NOVA</p>
-        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">Building calm systems for chaotic operations</h1>
+        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">NOVA 소개</p>
+        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">혼란스러운 운영을 위한 조용한 시스템을 만듭니다</h1>
         <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto">
-          Our mission is simple: remove repetitive friction so people can focus on work that actually creates leverage.
+          우리의 미션은 단순합니다: 반복적인 마찰을 제거하여 진짜 레버리지를 만드는 일에 집중할 수 있게 하는 것.
         </p>
       </div>
     </Container>
@@ -26,15 +26,15 @@ import Button from '../components/ui/Button.astro';
     <Container>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 animate-on-scroll">
         <div>
-          <h2 class="text-h2 text-neutral-100 mb-4">Mission</h2>
+          <h2 class="text-h2 text-neutral-100 mb-4">미션</h2>
           <p class="text-body-lg text-neutral-400">
-            Turn repetitive workflows into reliable systems that scale with clarity and measurable outcomes.
+            반복적인 워크플로우를 명확하고 측정 가능한 결과를 내는 신뢰할 수 있는 시스템으로 전환합니다.
           </p>
         </div>
         <div>
-          <h2 class="text-h2 text-neutral-100 mb-4">Vision</h2>
+          <h2 class="text-h2 text-neutral-100 mb-4">비전</h2>
           <p class="text-body-lg text-neutral-400">
-            A future where automation quietly handles routine execution while teams focus on judgment, strategy, and growth.
+            자동화가 루틴 실행을 조용히 처리하고, 팀은 판단, 전략, 성장에 집중하는 미래.
           </p>
         </div>
       </div>
@@ -44,19 +44,19 @@ import Button from '../components/ui/Button.astro';
   <Section>
     <Container>
       <div class="text-center mb-16 animate-on-scroll">
-        <h2 class="text-h2 text-neutral-100 mb-4">Team</h2>
-        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">A product, engineering, and operations group built around pragmatic execution.</p>
+        <h2 class="text-h2 text-neutral-100 mb-4">팀</h2>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">실용적 실행을 중심으로 구성된 제품, 엔지니어링, 운영 그룹.</p>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 animate-on-scroll">
         {[
-          { name: 'A. Kim', role: 'CEO & Co-founder' },
-          { name: 'J. Park', role: 'CTO & Co-founder' },
-          { name: 'M. Lee', role: 'Head of Product' },
-          { name: 'R. Choi', role: 'Head of Engineering' },
+          { name: 'A. Kim', role: 'CEO & 공동창업자' },
+          { name: 'J. Park', role: 'CTO & 공동창업자' },
+          { name: 'M. Lee', role: '제품 총괄' },
+          { name: 'R. Choi', role: '엔지니어링 총괄' },
         ].map((member) => (
           <div class="text-center">
             <div class="w-24 h-24 rounded-full bg-[#14161b] border border-white/10 mx-auto mb-4 flex items-center justify-center">
-              <span class="text-neutral-400 text-xs">Photo</span>
+              <span class="text-neutral-400 text-xs">사진</span>
             </div>
             <h3 class="text-h4 text-neutral-100">{member.name}</h3>
             <p class="text-caption text-neutral-400">{member.role}</p>
@@ -69,21 +69,21 @@ import Button from '../components/ui/Button.astro';
   <Section background="light">
     <Container>
       <div class="text-center mb-16 animate-on-scroll">
-        <h2 class="text-h2 text-neutral-100 mb-4">Values</h2>
+        <h2 class="text-h2 text-neutral-100 mb-4">핵심 가치</h2>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 animate-on-scroll">
         {[
           {
-            title: 'User-Centered',
-            desc: 'We prioritize actual workflow pain over feature novelty.',
+            title: '사용자 중심',
+            desc: '기능의 참신함보다 실제 워크플로우의 고통을 우선합니다.',
           },
           {
-            title: 'Operational Transparency',
-            desc: 'We design for traceability, clear ownership, and explicit tradeoffs.',
+            title: '운영 투명성',
+            desc: '추적 가능성, 명확한 소유권, 명시적 트레이드오프를 위해 설계합니다.',
           },
           {
-            title: 'Continuous Iteration',
-            desc: 'We ship, measure, and refine with disciplined speed.',
+            title: '지속적 반복',
+            desc: '규율 있는 속도로 출시하고, 측정하고, 개선합니다.',
           },
         ].map((value) => (
           <div class="bg-[#14161b] rounded-lg p-8 border border-white/10">
@@ -99,25 +99,25 @@ import Button from '../components/ui/Button.astro';
     <Container narrow>
       <div class="animate-on-scroll">
         <div class="text-center mb-12">
-          <h2 class="text-h2 text-neutral-100 mb-4">Contact</h2>
-          <p class="text-body-lg text-neutral-400">Product, sales, partnerships, or support. Send us a note.</p>
+          <h2 class="text-h2 text-neutral-100 mb-4">문의하기</h2>
+          <p class="text-body-lg text-neutral-400">제품, 영업, 파트너십, 지원 관련 문의를 보내주세요.</p>
         </div>
 
         <div class="bg-[#14161b] rounded-lg p-8 border border-white/10">
           <form class="space-y-6" action="mailto:hello@nova-platform.io" method="get">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label for="name" class="block text-sm font-medium text-neutral-200 mb-2">Name</label>
+                <label for="name" class="block text-sm font-medium text-neutral-200 mb-2">이름</label>
                 <input
                   type="text"
                   id="name"
                   name="name"
-                  placeholder="Your name"
+                  placeholder="성함을 입력하세요"
                   class="w-full px-4 py-3 bg-[#101217] rounded-lg border border-white/10 text-body text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20"
                 />
               </div>
               <div>
-                <label for="email" class="block text-sm font-medium text-neutral-200 mb-2">Email</label>
+                <label for="email" class="block text-sm font-medium text-neutral-200 mb-2">이메일</label>
                 <input
                   type="email"
                   id="email"
@@ -128,35 +128,35 @@ import Button from '../components/ui/Button.astro';
               </div>
             </div>
             <div>
-              <label for="subject" class="block text-sm font-medium text-neutral-200 mb-2">Topic</label>
+              <label for="subject" class="block text-sm font-medium text-neutral-200 mb-2">주제</label>
               <select
                 id="subject"
                 name="subject"
                 class="w-full px-4 py-3 bg-[#101217] rounded-lg border border-white/10 text-body text-neutral-100 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20"
               >
-                <option value="">Choose a topic</option>
-                <option value="product">Product</option>
-                <option value="sales">Sales / Procurement</option>
-                <option value="partnership">Partnership</option>
-                <option value="support">Support</option>
+                <option value="">주제를 선택하세요</option>
+                <option value="product">제품</option>
+                <option value="sales">영업 / 조달</option>
+                <option value="partnership">파트너십</option>
+                <option value="support">지원</option>
               </select>
             </div>
             <div>
-              <label for="message" class="block text-sm font-medium text-neutral-200 mb-2">Message</label>
+              <label for="message" class="block text-sm font-medium text-neutral-200 mb-2">메시지</label>
               <textarea
                 id="message"
                 name="body"
                 rows="5"
-                placeholder="Tell us about your use case"
+                placeholder="사용 사례에 대해 알려주세요"
                 class="w-full px-4 py-3 bg-[#101217] rounded-lg border border-white/10 text-body text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 resize-none"
               ></textarea>
             </div>
             <div class="text-center">
-              <Button variant="primary" size="lg" type="submit">Send Message</Button>
+              <Button variant="primary" size="lg" type="submit">메시지 보내기</Button>
             </div>
           </form>
           <p class="text-xs text-neutral-400 text-center mt-4">
-            Prefer direct email? <a href="mailto:hello@nova-platform.io" class="text-accent-300 hover:underline">hello@nova-platform.io</a>
+            이메일 직접 문의: <a href="mailto:hello@nova-platform.io" class="text-accent-300 hover:underline">hello@nova-platform.io</a>
           </p>
         </div>
       </div>
@@ -165,5 +165,3 @@ import Button from '../components/ui/Button.astro';
 
   <Footer slot="footer" />
 </BaseLayout>
-
-

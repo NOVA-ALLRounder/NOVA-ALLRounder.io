@@ -10,121 +10,121 @@ import Accordion from '../components/ui/Accordion.astro';
 
 const pricingFaq = [
   {
-    question: 'Is there a free plan?',
-    answer: 'Yes. Individual includes a free entry plan with placeholder usage limits and core workflow features.',
+    question: '무료 플랜이 있나요?',
+    answer: '네. Individual 플랜은 무료로 코어 기능과 기본 사용량을 제공합니다.',
   },
   {
-    question: 'Can I switch between monthly and yearly billing?',
-    answer: 'Yes. Billing cadence can be switched from the account workspace settings placeholder.',
+    question: '월간/연간 결제를 변경할 수 있나요?',
+    answer: '네. 계정 설정 → 워크스페이스에서 결제 주기를 변경할 수 있습니다.',
   },
   {
-    question: 'How are additional seats billed?',
-    answer: 'Team pricing scales per seat with placeholder volume discounts at higher tiers.',
+    question: '추가 시트는 어떻게 청구되나요?',
+    answer: 'Team 요금제는 시트당 과금되며, 상위 티어에서 볼륨 할인이 적용됩니다.',
   },
   {
-    question: 'How do we start Enterprise?',
-    answer: 'Use the sales contact path to scope procurement, security review, and rollout milestones.',
+    question: 'Enterprise는 어떻게 시작하나요?',
+    answer: '영업 문의를 통해 조달, 보안 검토, 롤아웃 일정을 조율합니다.',
   },
   {
-    question: 'Do you offer refunds?',
-    answer: 'Refund and cancellation policy is placeholder in v1 and should be finalized before public launch.',
+    question: '환불이 가능한가요?',
+    answer: '환불 및 취소 정책은 정식 출시 전 확정될 예정입니다.',
   },
   {
-    question: 'Is PoC available for B2B buyers?',
-    answer: 'Yes. Enterprise flow includes a PoC stage before contract commitment.',
+    question: 'B2B 구매자에게 PoC가 가능한가요?',
+    answer: '네. Enterprise 플로우에는 계약 전 PoC 단계가 포함됩니다.',
   },
   {
-    question: 'Can we pay by invoice?',
-    answer: 'Enterprise billing supports invoice placeholders and custom contract terms.',
+    question: '세금계산서 발행이 가능한가요?',
+    answer: 'Enterprise 결제는 세금계산서 발행 및 맞춤 계약 조건을 지원합니다.',
   },
   {
-    question: 'Do you support regional data controls?',
-    answer: 'Regional controls are placeholder in this release and can be listed as planned capability.',
+    question: '지역별 데이터 제어를 지원하나요?',
+    answer: '지역별 데이터 제어는 현재 로드맵에 포함되어 있으며 향후 지원 예정입니다.',
   },
 ];
 
 const plans = [
   {
     name: 'Individual',
-    desc: 'For solo operators and personal automation',
-    price: '$0',
-    period: '/month',
-    cta: 'Start Free',
+    desc: '개인 사용자와 개인 자동화를 위한 플랜',
+    price: '₩0',
+    period: '/월',
+    cta: '무료 시작',
     ctaVariant: 'secondary' as const,
     features: [
-      'Up to 1,000 runs/month',
-      '5 integrations',
-      'Basic analytics',
-      'Community support',
-      '7-day history',
+      '월 1,000회 실행',
+      '5개 연동',
+      '기본 분석',
+      '커뮤니티 지원',
+      '7일 이력',
     ],
     highlighted: false,
   },
   {
     name: 'Team',
-    desc: 'For growing teams that need control and velocity',
-    price: '$49',
-    period: '/seat/month',
-    cta: 'Try 14 Days',
+    desc: '제어와 속도가 필요한 성장 팀을 위한 플랜',
+    price: '₩59,000',
+    period: '/시트/월',
+    cta: '14일 체험',
     ctaVariant: 'primary' as const,
     features: [
-      'Up to 50,000 runs/month',
-      'Unlimited integrations',
-      'Advanced analytics',
-      'Shared workflows',
-      'Email/chat support',
-      '90-day history',
-      'API access',
+      '월 50,000회 실행',
+      '무제한 연동',
+      '고급 분석',
+      '워크플로우 공유',
+      '이메일/채팅 지원',
+      '90일 이력',
+      'API 접근',
     ],
     highlighted: true,
   },
   {
     name: 'Enterprise',
-    desc: 'For organizations with advanced governance requirements',
-    price: 'Custom',
+    desc: '고급 거버넌스가 필요한 조직을 위한 플랜',
+    price: '맞춤',
     period: '',
-    cta: 'Contact Sales',
+    cta: '영업 문의',
     ctaVariant: 'secondary' as const,
     features: [
-      'Unlimited runs',
-      'All Team features',
-      'SSO and RBAC placeholders',
-      'Audit log placeholders',
-      'Dedicated support placeholders',
-      'Custom integrations',
-      'Contracted SLA placeholders',
-      'Procurement support',
+      '무제한 실행',
+      'Team 전체 기능 포함',
+      'SSO 및 RBAC',
+      '감사 로그',
+      '전담 지원',
+      '맞춤 연동',
+      'SLA 계약',
+      '조달 지원',
     ],
     highlighted: false,
   },
 ];
 
 const comparisonFeatures = [
-  { name: 'Monthly Runs', individual: '1,000', team: '50,000', enterprise: 'Unlimited' },
-  { name: 'Integrations', individual: '5', team: 'Unlimited', enterprise: 'Unlimited + Custom' },
-  { name: 'Seats', individual: '1', team: 'Unlimited', enterprise: 'Unlimited' },
-  { name: 'Analytics', individual: 'Basic', team: 'Advanced', enterprise: 'Custom' },
-  { name: 'API Access', individual: 'No', team: 'Yes', enterprise: 'Yes' },
-  { name: 'SSO', individual: 'No', team: 'No', enterprise: 'Planned' },
-  { name: 'RBAC', individual: 'No', team: 'Basic', enterprise: 'Advanced (Planned)' },
-  { name: 'Audit Logs', individual: 'No', team: 'No', enterprise: 'Planned' },
-  { name: 'History Window', individual: '7 days', team: '90 days', enterprise: 'Custom' },
-  { name: 'Support', individual: 'Community', team: 'Email/Chat', enterprise: 'Dedicated (Planned)' },
-  { name: 'Billing', individual: 'Card', team: 'Card', enterprise: 'Invoice (Planned)' },
-  { name: 'SLA', individual: 'N/A', team: '99.9% Placeholder', enterprise: '99.99% Placeholder' },
+  { name: '월간 실행 횟수', individual: '1,000', team: '50,000', enterprise: '무제한' },
+  { name: '연동', individual: '5', team: '무제한', enterprise: '무제한 + 맞춤' },
+  { name: '시트', individual: '1', team: '무제한', enterprise: '무제한' },
+  { name: '분석', individual: '기본', team: '고급', enterprise: '맞춤' },
+  { name: 'API 접근', individual: '불가', team: '가능', enterprise: '가능' },
+  { name: 'SSO', individual: '불가', team: '불가', enterprise: '지원 예정' },
+  { name: 'RBAC', individual: '불가', team: '기본', enterprise: '고급 (지원 예정)' },
+  { name: '감사 로그', individual: '불가', team: '불가', enterprise: '지원 예정' },
+  { name: '이력 보관', individual: '7일', team: '90일', enterprise: '맞춤' },
+  { name: '지원', individual: '커뮤니티', team: '이메일/채팅', enterprise: '전담 (지원 예정)' },
+  { name: '결제', individual: '카드', team: '카드', enterprise: '세금계산서 (지원 예정)' },
+  { name: 'SLA', individual: '해당 없음', team: '99.9%', enterprise: '99.99%' },
 ];
 ---
 
-<BaseLayout title="Pricing - NOVA" description="Choose between Individual, Team, and Enterprise plans with clear B2C and B2B purchase paths.">
+<BaseLayout title="요금제 - NOVA" description="Individual, Team, Enterprise 플랜 비교와 B2C/B2B 구매 경로.">
   <Header slot="header" />
 
   <Section padding="large">
     <Container>
       <div class="text-center max-w-4xl mx-auto animate-on-scroll">
-        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Pricing</p>
-        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">Pick a plan in minutes, scale with confidence later</h1>
+        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">요금제</p>
+        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">몇 분 안에 플랜을 선택하고, 안심하고 확장하세요</h1>
         <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto">
-          A simple entry for B2C users and a structured procurement path for B2B buyers.
+          개인 사용자를 위한 간편한 시작과 기업 구매자를 위한 체계적인 조달 경로를 제공합니다.
         </p>
       </div>
     </Container>
@@ -142,7 +142,7 @@ const comparisonFeatures = [
           ]}>
             {plan.highlighted && (
               <span class="absolute -top-3 left-1/2 -translate-x-1/2 inline-flex items-center px-3 py-1 rounded-full bg-[#f5ee9b] text-[#111214] text-xs font-medium">
-                Most Popular
+                가장 인기
               </span>
             )}
             <h3 class="text-h3 text-neutral-100 mb-1">{plan.name}</h3>
@@ -177,13 +177,13 @@ const comparisonFeatures = [
     <Container>
       <div class="animate-on-scroll">
         <div class="text-center mb-12">
-          <h2 class="text-h2 text-neutral-100 mb-4">Feature Comparison</h2>
-          <p class="text-body-lg text-neutral-400">Compare plan-level capabilities across B2C and B2B needs.</p>
+          <h2 class="text-h2 text-neutral-100 mb-4">기능 비교</h2>
+          <p class="text-body-lg text-neutral-400">개인 및 기업 요구에 맞는 플랜별 기능을 비교하세요.</p>
         </div>
         <Table>
           <thead>
             <tr>
-              <th>Feature</th>
+              <th>기능</th>
               <th>Individual</th>
               <th>Team</th>
               <th>Enterprise</th>
@@ -208,15 +208,15 @@ const comparisonFeatures = [
     <Container narrow>
       <div class="animate-on-scroll">
         <div class="text-center mb-12">
-          <h2 class="text-h2 text-neutral-100 mb-4">B2B Purchase Flow</h2>
-          <p class="text-body-lg text-neutral-400">Contract, billing, and PoC flow placeholders for enterprise procurement.</p>
+          <h2 class="text-h2 text-neutral-100 mb-4">B2B 구매 프로세스</h2>
+          <p class="text-body-lg text-neutral-400">엔터프라이즈 조달을 위한 계약, 결제, PoC 프로세스.</p>
         </div>
         <div class="space-y-4">
           {[
-            { step: '1', title: 'Discovery & Quote', desc: 'Align team scope, objectives, and legal/procurement constraints.' },
-            { step: '2', title: 'PoC Validation', desc: 'Run a scoped pilot to validate fit, reliability, and workflows.' },
-            { step: '3', title: 'Contract & Billing', desc: 'Finalize commercial terms and map invoice or card billing path.' },
-            { step: '4', title: 'Rollout & Support', desc: 'Enable teams and monitor adoption with staged governance checkpoints.' },
+            { step: '1', title: '범위 확인 & 견적', desc: '팀 규모, 목표, 법무/조달 요구사항을 정리합니다.' },
+            { step: '2', title: 'PoC 검증', desc: '범위를 한정하여 적합성, 안정성, 워크플로우를 검증합니다.' },
+            { step: '3', title: '계약 & 결제', desc: '상업 조건을 확정하고 세금계산서 또는 카드 결제 경로를 설정합니다.' },
+            { step: '4', title: '롤아웃 & 지원', desc: '팀을 온보딩하고 단계적 거버넌스 체크포인트로 도입을 모니터링합니다.' },
           ].map((item) => (
             <div class="flex gap-4 p-5 bg-[#14161b] rounded-lg border border-white/10">
               <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/10 text-neutral-100 text-sm font-bold flex-shrink-0">{item.step}</span>
@@ -235,8 +235,8 @@ const comparisonFeatures = [
     <Container narrow>
       <div class="animate-on-scroll">
         <div class="text-center mb-12">
-          <h2 class="text-h2 text-neutral-100 mb-4">Pricing FAQ</h2>
-          <p class="text-body-lg text-neutral-400">The most common launch-stage pricing and billing questions.</p>
+          <h2 class="text-h2 text-neutral-100 mb-4">요금제 FAQ</h2>
+          <p class="text-body-lg text-neutral-400">요금제 및 결제에 관한 자주 묻는 질문.</p>
         </div>
         <Accordion items={pricingFaq} />
       </div>
@@ -246,13 +246,13 @@ const comparisonFeatures = [
   <Section background="dark">
     <Container>
       <div class="text-center animate-on-scroll">
-        <h2 class="text-h2 text-white mb-4">Need help choosing?</h2>
+        <h2 class="text-h2 text-white mb-4">어떤 플랜이 맞을지 고민되시나요?</h2>
         <p class="text-body-lg text-neutral-400 max-w-xl mx-auto mb-10">
-          Start as an individual or speak with sales for a structured enterprise plan.
+          개인으로 바로 시작하거나, 영업팀에 문의하여 엔터프라이즈 플랜을 안내받으세요.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button variant="primary" size="lg" href="/docs/getting-started">Start Now</Button>
-          <Button variant="ghost" size="lg" href="/contact">Contact Sales</Button>
+          <Button variant="primary" size="lg" href="/docs/getting-started">지금 시작</Button>
+          <Button variant="ghost" size="lg" href="/contact">영업 문의</Button>
         </div>
       </div>
     </Container>
@@ -260,5 +260,3 @@ const comparisonFeatures = [
 
   <Footer slot="footer" />
 </BaseLayout>
-
-

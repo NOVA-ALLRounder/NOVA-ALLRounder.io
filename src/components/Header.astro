@@ -1,11 +1,11 @@
 ﻿---
 const navItems = [
   { label: 'GitHub', href: 'https://github.com/NOVA-ALLRounder/main', external: true },
-  { label: 'Docs', href: '/docs' },
-  { label: 'Enterprise', href: '/enterprise' },
-  { label: 'Product', href: '/product' },
-  { label: 'Pricing', href: '/pricing' },
-  { label: 'Contact', href: '/contact' },
+  { label: '문서', href: '/docs' },
+  { label: '엔터프라이즈', href: '/enterprise' },
+  { label: '제품', href: '/product' },
+  { label: '요금제', href: '/pricing' },
+  { label: '문의', href: '/contact' },
 ];
 
 const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
@@ -93,7 +93,7 @@ const isActive = (href: string) => {
           'inline-flex items-center text-[1.02rem] leading-none text-neutral-700 hover:text-neutral-900 transition-colors',
         ]}
       >
-        Sign in
+        로그인
       </a>
       <a
         href={withBase('/docs/getting-started')}
@@ -101,7 +101,7 @@ const isActive = (href: string) => {
           'inline-flex items-center px-4 py-2 rounded-lg bg-[#1f1d1f] text-white text-[1.05rem] leading-none hover:bg-[#2a272a] transition-colors',
         ]}
       >
-        Sign up
+        시작하기
       </a>
     </div>
 
@@ -159,7 +159,7 @@ const isActive = (href: string) => {
           'text-neutral-700 hover:text-neutral-900 hover:bg-black/5',
         ]}
       >
-        Sign in
+        로그인
       </a>
       <a
         href={withBase('/docs/getting-started')}
@@ -168,7 +168,7 @@ const isActive = (href: string) => {
           'bg-[#1f1d1f] text-white hover:bg-[#2a272a]',
         ]}
       >
-        Sign up
+        시작하기
       </a>
     </div>
   </div>

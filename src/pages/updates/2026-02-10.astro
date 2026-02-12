@@ -17,8 +17,8 @@ const withBase = (url: string) => {
 ---
 
 <BaseLayout
-  title="AI Classification Model v3 Released - NOVA Updates"
-  description="Placeholder note for the v3 classification model release."
+  title="AI 분류 모델 v3 출시 - NOVA 업데이트"
+  description="v3 분류 모델 릴리스 노트."
 >
   <Header slot="header" />
 
@@ -26,38 +26,38 @@ const withBase = (url: string) => {
     <Container narrow>
       <article class="animate-on-scroll">
         <a href={withBase('/updates')} class="inline-flex items-center text-sm text-neutral-400 hover:text-neutral-100 mb-8">
-          &larr; Back to updates
+          &larr; 업데이트 목록으로
         </a>
         <div class="flex items-center gap-3 mb-4">
           <time datetime="2026-02-10" class="text-sm text-neutral-400">2026.02.10</time>
-          <Badge text="New Feature" variant="accent" />
+          <Badge text="새 기능" variant="accent" />
         </div>
-        <h1 class="text-h1 text-neutral-100 mb-6">AI Classification Model v3 Released</h1>
+        <h1 class="text-h1 text-neutral-100 mb-6">AI 분류 모델 v3 출시</h1>
         <p class="text-body-lg text-neutral-400 mb-12">
-          Placeholder release note. This page shows how update posts will be structured for launch communications.
+          분류 정확도와 처리 속도가 개선되었으며, 확장된 언어 처리와 엣지 케이스 라우팅이 포함됩니다.
         </p>
 
         <div class="space-y-8">
           <section>
-            <h2 class="text-h3 text-neutral-100 mb-3">Highlights</h2>
+            <h2 class="text-h3 text-neutral-100 mb-3">주요 변경사항</h2>
             <ul class="list-disc pl-6 space-y-2 text-neutral-300">
-              <li>Improved precision on long-form text classification (placeholder).</li>
-              <li>Faster inference path for high-volume queues (placeholder).</li>
-              <li>Better fallback handling for low-confidence edge cases (placeholder).</li>
+              <li>장문 텍스트 분류 정확도 개선.</li>
+              <li>대용량 큐를 위한 추론 경로 최적화.</li>
+              <li>저신뢰도 엣지 케이스의 폴백 처리 개선.</li>
             </ul>
           </section>
 
           <section>
-            <h2 class="text-h3 text-neutral-100 mb-3">Impact Scope</h2>
+            <h2 class="text-h3 text-neutral-100 mb-3">영향 범위</h2>
             <p class="text-body text-neutral-300">
-              Team and Enterprise tracks receive this first, followed by staged rollout to Individual (placeholder).
+              Team 및 Enterprise 트랙에 우선 적용되며, Individual 플랜에는 단계적으로 롤아웃됩니다.
             </p>
           </section>
 
           <section>
-            <h2 class="text-h3 text-neutral-100 mb-3">Next Step</h2>
+            <h2 class="text-h3 text-neutral-100 mb-3">다음 단계</h2>
             <p class="text-body text-neutral-300">
-              Validate model behavior on your key categories and tune thresholds in workflow policies.
+              주요 카테고리에서 모델 동작을 검증하고, 워크플로우 정책에서 임계값을 조정하세요.
             </p>
           </section>
         </div>
@@ -67,4 +67,3 @@ const withBase = (url: string) => {
 
   <Footer slot="footer" />
 </BaseLayout>
-

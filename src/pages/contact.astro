@@ -9,82 +9,82 @@ import Card from '../components/ui/Card.astro';
 
 const contactChannels = [
   {
-    title: 'General Email',
+    title: '일반 이메일',
     value: 'hello@nova-platform.io',
     href: 'mailto:hello@nova-platform.io',
     id: 'email',
-    note: 'Replace with your primary contact inbox.',
+    note: '제품 문의, 피드백 등 일반적인 연락에 사용하세요.',
   },
   {
     title: 'GitHub',
-    value: 'github.com/your-org',
-    href: 'https://github.com/your-org',
+    value: 'github.com/NOVA-ALLRounder',
+    href: 'https://github.com/NOVA-ALLRounder',
     id: 'github',
-    note: 'Replace with your public repository or org URL.',
+    note: '오픈소스 저장소 및 이슈 트래커.',
   },
   {
-    title: 'Business Contact',
+    title: '영업 문의',
     value: 'sales@nova-platform.io',
     href: 'mailto:sales@nova-platform.io',
     id: 'sales',
-    note: 'Use a dedicated address for demos and partnerships.',
+    note: '데모, 파트너십, Enterprise 상담에 사용하세요.',
   },
 ];
 
 const teamOverview = [
-  { label: 'Core Team', value: '4 Members', note: 'Product, Engineering, Design, Growth' },
-  { label: 'Tracks', value: 'B2C + B2B', note: 'Shared platform, separate go-to-market motion' },
-  { label: 'Timezone', value: 'KST + Remote', note: 'Daily async + fixed sync windows' },
+  { label: '핵심 팀', value: '4명', note: '제품, 엔지니어링, 디자인, 성장' },
+  { label: '트랙', value: 'B2C + B2B', note: '공유 플랫폼, 별도 GTM 전략' },
+  { label: '시간대', value: 'KST + 원격', note: '일일 비동기 + 고정 동기 시간' },
 ];
 
 const teamProfiles = [
   {
-    name: 'Member 01',
-    role: 'Founder / Product',
-    focus: 'Vision, roadmap, customer discovery',
+    name: '멤버 01',
+    role: '창업자 / 제품',
+    focus: '비전, 로드맵, 고객 발굴',
     email: 'member01@nova-platform.io',
     github: 'github.com/member01',
-    photoAlt: 'Profile placeholder A',
+    photoAlt: '프로필 A',
   },
   {
-    name: 'Member 02',
-    role: 'Engineering Lead',
-    focus: 'Platform architecture, reliability, delivery',
+    name: '멤버 02',
+    role: '엔지니어링 리드',
+    focus: '플랫폼 아키텍처, 안정성, 딜리버리',
     email: 'member02@nova-platform.io',
     github: 'github.com/member02',
-    photoAlt: 'Profile placeholder B',
+    photoAlt: '프로필 B',
   },
   {
-    name: 'Member 03',
-    role: 'Design / Experience',
-    focus: 'UX system, visual language, content quality',
+    name: '멤버 03',
+    role: '디자인 / 경험',
+    focus: 'UX 시스템, 비주얼 언어, 콘텐츠 품질',
     email: 'member03@nova-platform.io',
     github: 'github.com/member03',
-    photoAlt: 'Profile placeholder C',
+    photoAlt: '프로필 C',
   },
   {
-    name: 'Member 04',
-    role: 'Growth / Partnerships',
-    focus: 'Demand generation, B2B pipeline, alliances',
+    name: '멤버 04',
+    role: '성장 / 파트너십',
+    focus: '수요 창출, B2B 파이프라인, 제휴',
     email: 'member04@nova-platform.io',
     github: 'github.com/member04',
-    photoAlt: 'Profile placeholder D',
+    photoAlt: '프로필 D',
   },
 ];
 ---
 
-<BaseLayout title="Contact - NOVA" description="Contact hub for email, GitHub links, and team profile placeholders.">
+<BaseLayout title="문의 - NOVA" description="이메일, GitHub, 팀 프로필 등 연락 정보 허브.">
   <Header slot="header" />
 
   <Section padding="large">
     <Container>
       <div class="text-center max-w-4xl mx-auto animate-on-scroll">
-        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Contact</p>
-        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">Everything needed to reach us, in one place</h1>
+        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">문의</p>
+        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">연락에 필요한 모든 정보를 한 곳에</h1>
         <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto mb-10">
-          Team contact channels and member profiles for B2C/B2B collaboration. Replace all placeholders with your real data.
+          팀 연락처와 멤버 프로필을 확인하세요.
         </p>
-        <Button variant="primary" size="lg" href="#contact-list">Edit Contact Info</Button>
+        <Button variant="primary" size="lg" href="#contact-list">연락처 보기</Button>
       </div>
     </Container>
   </Section>
@@ -115,8 +115,8 @@ const teamProfiles = [
   <Section>
     <Container>
       <div class="text-center mb-12 animate-on-scroll">
-        <h2 class="text-h2 text-neutral-100 mb-4">Team Overview</h2>
-        <p class="text-body-lg text-neutral-400">Quick context for who is building NOVA and how the team is structured.</p>
+        <h2 class="text-h2 text-neutral-100 mb-4">팀 개요</h2>
+        <p class="text-body-lg text-neutral-400">NOVA를 만드는 팀 구성과 운영 방식.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 animate-on-scroll">
@@ -132,8 +132,8 @@ const teamProfiles = [
       </div>
 
       <div class="text-center mb-12 animate-on-scroll">
-        <h2 class="text-h2 text-neutral-100 mb-4">Team Members</h2>
-        <p class="text-body-lg text-neutral-400">Add real names, photos, emails, and GitHub links for all 4 members.</p>
+        <h2 class="text-h2 text-neutral-100 mb-4">팀 멤버</h2>
+        <p class="text-body-lg text-neutral-400">4명의 멤버 이름, 사진, 이메일, GitHub 링크를 추가하세요.</p>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 animate-on-scroll">
@@ -141,7 +141,7 @@ const teamProfiles = [
           <Card hoverable={false}>
             <div class="p-6 text-center h-full">
               <div class="w-28 h-28 rounded-full border border-white/10 bg-[#101217] mx-auto mb-4 flex items-center justify-center">
-                <span class="text-xs text-neutral-400">Photo</span>
+                <span class="text-xs text-neutral-400">사진</span>
               </div>
               <h3 class="text-h4 text-neutral-100">{person.name}</h3>
               <p class="text-caption text-neutral-400 mt-1">{person.role}</p>
@@ -165,15 +165,14 @@ const teamProfiles = [
   <Section background="dark">
     <Container narrow>
       <div class="text-center animate-on-scroll">
-        <h2 class="text-h2 text-white mb-4">Need a quick intro call?</h2>
+        <h2 class="text-h2 text-white mb-4">간단한 소개 통화가 필요하신가요?</h2>
         <p class="text-body-lg text-neutral-400 mb-8">
-          Keep this section as a simple CTA, or replace it with your scheduling link.
+          아래 버튼으로 이메일을 보내시거나, 일정 링크를 추가해주세요.
         </p>
-        <Button variant="primary" size="lg" href="mailto:hello@nova-platform.io">Send Email</Button>
+        <Button variant="primary" size="lg" href="mailto:hello@nova-platform.io">이메일 보내기</Button>
       </div>
     </Container>
   </Section>
 
   <Footer slot="footer" />
 </BaseLayout>
-
