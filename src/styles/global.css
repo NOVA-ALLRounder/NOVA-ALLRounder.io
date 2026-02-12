@@ -10,7 +10,11 @@
   }
 
   body {
-    @apply bg-white text-neutral-900 font-sans;
+    @apply bg-[#07090f] text-neutral-100 font-sans;
+    background-image:
+      radial-gradient(1200px 620px at 50% -10%, rgba(59, 130, 246, 0.16), transparent 55%),
+      radial-gradient(900px 500px at 100% 0%, rgba(56, 189, 248, 0.08), transparent 60%),
+      linear-gradient(180deg, #07090f 0%, #06090f 50%, #05070d 100%);
   }
 
   ::selection {

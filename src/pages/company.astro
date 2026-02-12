@@ -1,4 +1,4 @@
----
+﻿---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -7,160 +7,156 @@ import Container from '../components/ui/Container.astro';
 import Button from '../components/ui/Button.astro';
 ---
 
-<BaseLayout title="Company — NOVA" description="NOVA의 미션, 비전, 팀을 소개합니다. 문의 및 협업 제안도 환영합니다.">
+<BaseLayout title="Company - NOVA" description="Mission, vision, team, and contact structure for launch-stage company pages.">
   <Header slot="header" />
 
-  <!-- About Hero -->
   <Section padding="large">
     <Container>
       <div class="text-center max-w-4xl mx-auto animate-on-scroll">
-        <p class="text-caption text-accent-600 font-medium tracking-wide uppercase mb-4">About Us</p>
-        <h1 class="text-h1 md:text-display text-neutral-900 mb-6 text-balance">
-          일하는 방식의<br class="hidden md:block" /> 미래를 만듭니다
-        </h1>
-        <p class="text-body-lg text-neutral-500 max-w-2xl mx-auto">
-          우리는 반복적인 업무에서 사람을 해방시키고, 모든 팀이 창의적인 일에 집중할 수 있는 세상을 꿈꿉니다.
+        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">About NOVA</p>
+        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">Building calm systems for chaotic operations</h1>
+        <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto">
+          Our mission is simple: remove repetitive friction so people can focus on work that actually creates leverage.
         </p>
       </div>
     </Container>
   </Section>
 
-  <!-- Mission & Vision -->
   <Section background="light">
     <Container>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 animate-on-scroll">
         <div>
-          <h2 class="text-h2 text-neutral-900 mb-4">미션</h2>
-          <p class="text-body-lg text-neutral-500">
-            모든 팀이 반복 업무에서 자유로워지고, 진짜 중요한 일에 집중할 수 있도록 지능형 자동화를 설계합니다. 기술의 복잡함이 아닌, 사용자의 문제 해결에 집중합니다.
+          <h2 class="text-h2 text-neutral-100 mb-4">Mission</h2>
+          <p class="text-body-lg text-neutral-400">
+            Turn repetitive workflows into reliable systems that scale with clarity and measurable outcomes.
           </p>
         </div>
         <div>
-          <h2 class="text-h2 text-neutral-900 mb-4">비전</h2>
-          <p class="text-body-lg text-neutral-500">
-            2030년까지, 전 세계 100만 팀이 NOVA를 통해 더 효율적으로 일하는 세상. 인간의 판단력과 기계의 처리력이 자연스럽게 어우러지는 업무 환경을 만들어 갑니다.
+          <h2 class="text-h2 text-neutral-100 mb-4">Vision</h2>
+          <p class="text-body-lg text-neutral-400">
+            A future where automation quietly handles routine execution while teams focus on judgment, strategy, and growth.
           </p>
         </div>
       </div>
     </Container>
   </Section>
 
-  <!-- Team -->
   <Section>
     <Container>
       <div class="text-center mb-16 animate-on-scroll">
-        <h2 class="text-h2 text-neutral-900 mb-4">팀</h2>
-        <p class="text-body-lg text-neutral-500 max-w-xl mx-auto">
-          다양한 배경의 전문가들이 하나의 목표를 향해 함께합니다.
-        </p>
+        <h2 class="text-h2 text-neutral-100 mb-4">Team</h2>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">A product, engineering, and operations group built around pragmatic execution.</p>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 animate-on-scroll">
         {[
-          { name: '김서연', role: 'CEO & Co-founder' },
-          { name: '박준혁', role: 'CTO & Co-founder' },
-          { name: '이하은', role: 'Head of Product' },
-          { name: '최민수', role: 'Head of Engineering' },
+          { name: 'A. Kim', role: 'CEO & Co-founder' },
+          { name: 'J. Park', role: 'CTO & Co-founder' },
+          { name: 'M. Lee', role: 'Head of Product' },
+          { name: 'R. Choi', role: 'Head of Engineering' },
         ].map((member) => (
           <div class="text-center">
-            <div class="w-24 h-24 rounded-full bg-neutral-200 mx-auto mb-4 flex items-center justify-center">
+            <div class="w-24 h-24 rounded-full bg-[#11192a] border border-white/10 mx-auto mb-4 flex items-center justify-center">
               <span class="text-neutral-400 text-xs">Photo</span>
             </div>
-            <h3 class="text-h4 text-neutral-900">{member.name}</h3>
-            <p class="text-caption text-neutral-500">{member.role}</p>
+            <h3 class="text-h4 text-neutral-100">{member.name}</h3>
+            <p class="text-caption text-neutral-400">{member.role}</p>
           </div>
         ))}
       </div>
     </Container>
   </Section>
 
-  <!-- Values -->
   <Section background="light">
     <Container>
       <div class="text-center mb-16 animate-on-scroll">
-        <h2 class="text-h2 text-neutral-900 mb-4">우리의 가치</h2>
+        <h2 class="text-h2 text-neutral-100 mb-4">Values</h2>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 animate-on-scroll">
         {[
-          { emoji: '🎯', title: '사용자 중심', desc: '기술이 아닌, 사용자의 문제에서 출발합니다. 복잡함을 줄이고 가치를 극대화합니다.' },
-          { emoji: '🔬', title: '투명한 운영', desc: '의사결정 과정과 데이터 처리 방식을 투명하게 공유합니다. 신뢰는 공개에서 시작됩니다.' },
-          { emoji: '🌱', title: '지속적 성장', desc: '빠른 실험과 학습을 반복합니다. 실패를 두려워하지 않고, 개선을 멈추지 않습니다.' },
+          {
+            title: 'User-Centered',
+            desc: 'We prioritize actual workflow pain over feature novelty.',
+          },
+          {
+            title: 'Operational Transparency',
+            desc: 'We design for traceability, clear ownership, and explicit tradeoffs.',
+          },
+          {
+            title: 'Continuous Iteration',
+            desc: 'We ship, measure, and refine with disciplined speed.',
+          },
         ].map((value) => (
-          <div class="bg-white rounded-xl p-8 border border-neutral-200">
-            <span class="text-3xl mb-4 block">{value.emoji}</span>
-            <h3 class="text-h3 text-neutral-900 mb-3">{value.title}</h3>
-            <p class="text-body text-neutral-500">{value.desc}</p>
+          <div class="bg-[#11192a] rounded-xl p-8 border border-white/10">
+            <h3 class="text-h3 text-neutral-100 mb-3">{value.title}</h3>
+            <p class="text-body text-neutral-400">{value.desc}</p>
           </div>
         ))}
       </div>
     </Container>
   </Section>
 
-  <!-- Contact -->
   <Section id="contact">
     <Container narrow>
       <div class="animate-on-scroll">
         <div class="text-center mb-12">
-          <h2 class="text-h2 text-neutral-900 mb-4">문의하기</h2>
-          <p class="text-body-lg text-neutral-500">
-            제품, 도입, 파트너십 등 무엇이든 편하게 연락해 주세요.
-          </p>
+          <h2 class="text-h2 text-neutral-100 mb-4">Contact</h2>
+          <p class="text-body-lg text-neutral-400">Product, sales, partnerships, or support. Send us a note.</p>
         </div>
 
-        <div class="bg-neutral-50 rounded-2xl p-8 border border-neutral-200">
+        <div class="bg-[#11192a] rounded-2xl p-8 border border-white/10">
           <form class="space-y-6" action="mailto:hello@nova-platform.io" method="get">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label for="name" class="block text-sm font-medium text-neutral-700 mb-2">이름</label>
+                <label for="name" class="block text-sm font-medium text-neutral-200 mb-2">Name</label>
                 <input
                   type="text"
                   id="name"
                   name="name"
-                  placeholder="홍길동"
-                  class="w-full px-4 py-3 bg-white rounded-xl border border-neutral-200 text-body text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20"
+                  placeholder="Your name"
+                  class="w-full px-4 py-3 bg-[#0f1728] rounded-xl border border-white/10 text-body text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20"
                 />
               </div>
               <div>
-                <label for="email" class="block text-sm font-medium text-neutral-700 mb-2">이메일</label>
+                <label for="email" class="block text-sm font-medium text-neutral-200 mb-2">Email</label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   placeholder="you@company.com"
-                  class="w-full px-4 py-3 bg-white rounded-xl border border-neutral-200 text-body text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20"
+                  class="w-full px-4 py-3 bg-[#0f1728] rounded-xl border border-white/10 text-body text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20"
                 />
               </div>
             </div>
             <div>
-              <label for="subject" class="block text-sm font-medium text-neutral-700 mb-2">문의 유형</label>
+              <label for="subject" class="block text-sm font-medium text-neutral-200 mb-2">Topic</label>
               <select
                 id="subject"
                 name="subject"
-                class="w-full px-4 py-3 bg-white rounded-xl border border-neutral-200 text-body text-neutral-900 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20"
+                class="w-full px-4 py-3 bg-[#0f1728] rounded-xl border border-white/10 text-body text-neutral-100 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20"
               >
-                <option value="">선택해 주세요</option>
-                <option value="product">제품 문의</option>
-                <option value="sales">도입 / 영업 상담</option>
-                <option value="partnership">파트너십</option>
-                <option value="support">기술 지원</option>
-                <option value="other">기타</option>
+                <option value="">Choose a topic</option>
+                <option value="product">Product</option>
+                <option value="sales">Sales / Procurement</option>
+                <option value="partnership">Partnership</option>
+                <option value="support">Support</option>
               </select>
             </div>
             <div>
-              <label for="message" class="block text-sm font-medium text-neutral-700 mb-2">메시지</label>
+              <label for="message" class="block text-sm font-medium text-neutral-200 mb-2">Message</label>
               <textarea
                 id="message"
                 name="body"
                 rows="5"
-                placeholder="문의 내용을 입력해 주세요..."
-                class="w-full px-4 py-3 bg-white rounded-xl border border-neutral-200 text-body text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 resize-none"
+                placeholder="Tell us about your use case"
+                class="w-full px-4 py-3 bg-[#0f1728] rounded-xl border border-white/10 text-body text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 resize-none"
               ></textarea>
             </div>
             <div class="text-center">
-              <Button variant="primary" size="lg" type="submit">보내기</Button>
+              <Button variant="primary" size="lg" type="submit">Send Message</Button>
             </div>
           </form>
           <p class="text-xs text-neutral-400 text-center mt-4">
-            또는 직접 이메일을 보내주세요: <a href="mailto:hello@nova-platform.io" class="text-accent-600 hover:underline">hello@nova-platform.io</a>
+            Prefer direct email? <a href="mailto:hello@nova-platform.io" class="text-accent-300 hover:underline">hello@nova-platform.io</a>
           </p>
         </div>
       </div>

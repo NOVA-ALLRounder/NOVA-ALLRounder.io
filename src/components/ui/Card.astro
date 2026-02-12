@@ -36,8 +36,8 @@ const Tag = href ? 'a' : 'div';
   <a
     href={resolvedHref}
     class:list={[
-      'block bg-white rounded-2xl border border-neutral-200 overflow-hidden transition-all duration-200',
-      hoverable && 'hover:border-neutral-300 hover:shadow-md hover:-translate-y-0.5',
+      'block bg-[#111827] rounded-2xl border border-white/10 overflow-hidden transition-all duration-200',
+      hoverable && 'hover:border-white/20 hover:shadow-lg hover:shadow-black/30 hover:-translate-y-0.5',
       className,
     ]}
   >
@@ -46,8 +46,8 @@ const Tag = href ? 'a' : 'div';
 ) : (
   <div
     class:list={[
-      'bg-white rounded-2xl border border-neutral-200 overflow-hidden transition-all duration-200',
-      hoverable && 'hover:border-neutral-300 hover:shadow-md hover:-translate-y-0.5',
+      'bg-[#111827] rounded-2xl border border-white/10 overflow-hidden transition-all duration-200',
+      hoverable && 'hover:border-white/20 hover:shadow-lg hover:shadow-black/30 hover:-translate-y-0.5',
       className,
     ]}
   >

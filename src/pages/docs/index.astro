@@ -1,4 +1,4 @@
----
+﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -7,28 +7,52 @@ import Container from '../../components/ui/Container.astro';
 import Card from '../../components/ui/Card.astro';
 
 const categories = [
-  { title: 'Getting Started', desc: '처음 사용하시나요? 설치부터 첫 자동화까지 안내합니다.', href: '/docs/getting-started', icon: '🚀' },
-  { title: 'Tutorials', desc: '단계별 튜토리얼로 주요 기능을 깊이 익혀보세요.', href: '/docs/tutorials', icon: '📖' },
-  { title: 'API Reference', desc: 'REST API 엔드포인트, 파라미터, 응답 형식을 확인합니다.', href: '/docs/api', icon: '⚡' },
-  { title: 'FAQ', desc: '자주 묻는 질문과 트러블슈팅 가이드.', href: '/docs/faq', icon: '❓' },
-  { title: 'Changelog', desc: '버전별 변경 사항과 릴리스 노트를 확인합니다.', href: '/docs/changelog', icon: '📋' },
+  {
+    title: 'Getting Started',
+    desc: 'From account setup to your first automation run.',
+    href: '/docs/getting-started',
+    icon: '01',
+  },
+  {
+    title: 'Tutorials',
+    desc: 'Step-by-step practical flows for common scenarios.',
+    href: '/docs/tutorials',
+    icon: '02',
+  },
+  {
+    title: 'API Reference',
+    desc: 'Endpoints, payloads, and integration patterns.',
+    href: '/docs/api',
+    icon: '03',
+  },
+  {
+    title: 'FAQ',
+    desc: 'Answers to common product and deployment questions.',
+    href: '/docs/faq',
+    icon: '04',
+  },
+  {
+    title: 'Changelog',
+    desc: 'Release notes and version-level updates.',
+    href: '/docs/changelog',
+    icon: '05',
+  },
 ];
 ---
 
-<BaseLayout title="Docs — NOVA" description="NOVA의 공식 문서. 시작 가이드, 튜토리얼, API 레퍼런스를 확인하세요.">
+<BaseLayout title="Docs - NOVA" description="Official docs landing for getting started, tutorials, API references, and release updates.">
   <Header slot="header" />
 
   <Section padding="large">
     <Container>
       <div class="text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
-        <p class="text-caption text-accent-600 font-medium tracking-wide uppercase mb-4">Documentation</p>
-        <h1 class="text-h1 text-neutral-900 mb-6">무엇이든 만들 수 있도록</h1>
-        <p class="text-body-lg text-neutral-500">
-          시작 가이드부터 고급 API까지, NOVA를 완벽하게 활용하기 위한 모든 자료가 준비되어 있습니다.
+        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Documentation</p>
+        <h1 class="text-h1 text-neutral-100 mb-6">Build with confidence, ship with clarity</h1>
+        <p class="text-body-lg text-neutral-400">
+          Structured docs for onboarding, implementation, and operational rollout.
         </p>
       </div>
 
-      <!-- Search placeholder -->
       <div class="max-w-xl mx-auto mb-16 animate-on-scroll">
         <div class="relative">
           <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -36,22 +60,21 @@ const categories = [
           </svg>
           <input
             type="search"
-            placeholder="문서 검색 (준비 중)..."
+            placeholder="Search docs (coming soon)"
             disabled
-            class="w-full pl-12 pr-4 py-3.5 bg-neutral-100 rounded-xl border border-neutral-200 text-body text-neutral-400 cursor-not-allowed"
-            aria-label="문서 검색"
+            class="w-full pl-12 pr-4 py-3.5 bg-[#11192a] rounded-xl border border-white/10 text-body text-neutral-500 cursor-not-allowed"
+            aria-label="Search docs"
           />
         </div>
       </div>
 
-      <!-- Category Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-on-scroll">
         {categories.map((cat) => (
           <Card href={cat.href}>
             <div class="p-6">
-              <span class="text-2xl mb-3 block">{cat.icon}</span>
-              <h2 class="text-h4 text-neutral-900 mb-2">{cat.title}</h2>
-              <p class="text-caption text-neutral-500">{cat.desc}</p>
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-md bg-white/10 text-neutral-200 text-xs font-semibold mb-3">{cat.icon}</span>
+              <h2 class="text-h4 text-neutral-100 mb-2">{cat.title}</h2>
+              <p class="text-caption text-neutral-400">{cat.desc}</p>
             </div>
           </Card>
         ))}
