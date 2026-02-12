@@ -1,0 +1,88 @@
+﻿---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Section from '../../components/ui/Section.astro';
+import Container from '../../components/ui/Container.astro';
+import Card from '../../components/ui/Card.astro';
+
+const categories = [
+  {
+    title: 'Getting Started',
+    desc: 'From account setup to your first automation run.',
+    href: '/docs/getting-started',
+    icon: '01',
+  },
+  {
+    title: 'Tutorials',
+    desc: 'Step-by-step practical flows for common scenarios.',
+    href: '/docs/tutorials',
+    icon: '02',
+  },
+  {
+    title: 'API Reference',
+    desc: 'Endpoints, payloads, and integration patterns.',
+    href: '/docs/api',
+    icon: '03',
+  },
+  {
+    title: 'FAQ',
+    desc: 'Answers to common product and deployment questions.',
+    href: '/docs/faq',
+    icon: '04',
+  },
+  {
+    title: 'Changelog',
+    desc: 'Release notes and version-level updates.',
+    href: '/docs/changelog',
+    icon: '05',
+  },
+];
+---
+
+<BaseLayout title="Docs - NOVA" description="Official docs landing for getting started, tutorials, API references, and release updates.">
+  <Header slot="header" />
+
+  <Section padding="large">
+    <Container>
+      <div class="text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
+        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Documentation</p>
+        <h1 class="text-h1 text-neutral-100 mb-6">Build with confidence, ship with clarity</h1>
+        <p class="text-body-lg text-neutral-400">
+          Structured docs for onboarding, implementation, and operational rollout.
+        </p>
+      </div>
+
+      <div class="max-w-xl mx-auto mb-16 animate-on-scroll">
+        <div class="relative">
+          <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <input
+            type="search"
+            placeholder="Search docs (coming soon)"
+            disabled
+            class="w-full pl-12 pr-4 py-3.5 bg-[#14161b] rounded-lg border border-white/10 text-body text-neutral-500 cursor-not-allowed"
+            aria-label="Search docs"
+          />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-on-scroll">
+        {categories.map((cat) => (
+          <Card href={cat.href}>
+            <div class="p-6">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-md bg-white/10 text-neutral-200 text-xs font-semibold mb-3">{cat.icon}</span>
+              <h2 class="text-h4 text-neutral-100 mb-2">{cat.title}</h2>
+              <p class="text-caption text-neutral-400">{cat.desc}</p>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+

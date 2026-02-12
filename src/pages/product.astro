@@ -1,0 +1,145 @@
+﻿---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/ui/Section.astro';
+import Container from '../components/ui/Container.astro';
+import Button from '../components/ui/Button.astro';
+import StepCard from '../components/ui/StepCard.astro';
+import Table from '../components/ui/Table.astro';
+---
+
+<BaseLayout title="Product - NOVA" description="See how NOVA works end-to-end with architecture placeholders, feature deep-dives, and specs preview.">
+  <Header slot="header" />
+
+  <Section padding="large">
+    <Container>
+      <div class="text-center max-w-4xl mx-auto animate-on-scroll">
+        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Product</p>
+        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">Automate complexity without hiding control</h1>
+        <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto mb-10">
+          NOVA pairs a clear interaction layer with a robust orchestration engine so teams can move faster without losing visibility.
+        </p>
+        <Button variant="primary" size="lg" href="/docs/getting-started">Get Started</Button>
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="light">
+    <Container>
+      <div class="text-center mb-16 animate-on-scroll">
+        <h2 class="text-h2 text-neutral-100 mb-4">How It Works</h2>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">A three-step model built for repeatability and speed.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 animate-on-scroll">
+        <StepCard step={1} title="Ingest" description="Capture signals from APIs, files, and operational events." />
+        <StepCard step={2} title="Decide" description="Apply business logic and model-driven routing rules." />
+        <StepCard step={3} title="Deliver" description="Push outcomes to systems, teams, and dashboards." />
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center animate-on-scroll">
+        <div>
+          <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">Feature Deep-Dive 01</p>
+          <h2 class="text-h2 text-neutral-100 mb-4">Problem: Fragmented operations</h2>
+          <div class="space-y-6 text-body text-neutral-300">
+            <div>
+              <h3 class="text-h4 text-neutral-100 mb-2">Problem</h3>
+              <p>Teams lose time reconciling data across disconnected systems and inconsistent workflows.</p>
+            </div>
+            <div>
+              <h3 class="text-h4 text-neutral-100 mb-2">Solution</h3>
+              <p>NOVA unifies event ingestion and maps actions through a single policy-aware flow engine.</p>
+            </div>
+            <div>
+              <h3 class="text-h4 text-neutral-100 mb-2">Effect</h3>
+              <p>Lower coordination overhead, faster execution, and more predictable output quality.</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-[#14161b] rounded-lg aspect-[4/3] border border-white/10 flex items-center justify-center">
+          <span class="text-neutral-400 text-sm">Image Placeholder</span>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="light">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center animate-on-scroll">
+        <div class="order-2 lg:order-1 bg-[#14161b] rounded-lg aspect-[4/3] border border-white/10 flex items-center justify-center">
+          <span class="text-neutral-400 text-sm">Image Placeholder</span>
+        </div>
+        <div class="order-1 lg:order-2">
+          <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">Feature Deep-Dive 02</p>
+          <h2 class="text-h2 text-neutral-100 mb-4">Problem: Static rules break at scale</h2>
+          <div class="space-y-6 text-body text-neutral-300">
+            <div>
+              <h3 class="text-h4 text-neutral-100 mb-2">Problem</h3>
+              <p>Rigid if-else automation degrades as process variants and exceptions grow over time.</p>
+            </div>
+            <div>
+              <h3 class="text-h4 text-neutral-100 mb-2">Solution</h3>
+              <p>Combine deterministic policy checks with adaptive model outputs for smarter routing.</p>
+            </div>
+            <div>
+              <h3 class="text-h4 text-neutral-100 mb-2">Effect</h3>
+              <p>Better precision and fewer manual retries across evolving, high-volume operations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="animate-on-scroll">
+        <div class="text-center mb-12">
+          <h2 class="text-h2 text-neutral-100 mb-4">Specs Preview</h2>
+          <p class="text-body-lg text-neutral-400">Technical placeholders for launch-stage architecture and operational policy.</p>
+        </div>
+        <Table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Placeholder Spec</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Processing Model</td><td>Event-driven async pipeline with queue-backed execution</td></tr>
+            <tr><td>Integration Surface</td><td>REST API, webhook, and connector abstraction layer</td></tr>
+            <tr><td>Identity & Access</td><td>SSO, RBAC placeholders, and policy guardrails</td></tr>
+            <tr><td>Data Handling</td><td>Encryption in transit/at rest placeholders</td></tr>
+            <tr><td>Observability</td><td>Run timeline, status logs, and dashboard widgets</td></tr>
+            <tr><td>Deployment</td><td>SaaS baseline with enterprise deployment options (planned)</td></tr>
+            <tr><td>SLA</td><td>Tier-based service placeholder: 99.9% / 99.99%</td></tr>
+            <tr><td>SDK</td><td>Node, Python, and CLI scaffolding placeholders</td></tr>
+          </tbody>
+        </Table>
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="dark">
+    <Container>
+      <div class="text-center animate-on-scroll">
+        <h2 class="text-h2 text-white mb-4">See it in motion</h2>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto mb-10">
+          Start with a guided path in docs or request a B2B walkthrough for your team.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Button variant="primary" size="lg" href="/docs/getting-started">Start Setup</Button>
+          <Button variant="ghost" size="lg" href="/solutions">Request Demo</Button>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+

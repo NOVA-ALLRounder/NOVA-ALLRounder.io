@@ -1,0 +1,264 @@
+﻿---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/ui/Section.astro';
+import Container from '../components/ui/Container.astro';
+import Button from '../components/ui/Button.astro';
+import Table from '../components/ui/Table.astro';
+import Accordion from '../components/ui/Accordion.astro';
+
+const pricingFaq = [
+  {
+    question: 'Is there a free plan?',
+    answer: 'Yes. Individual includes a free entry plan with placeholder usage limits and core workflow features.',
+  },
+  {
+    question: 'Can I switch between monthly and yearly billing?',
+    answer: 'Yes. Billing cadence can be switched from the account workspace settings placeholder.',
+  },
+  {
+    question: 'How are additional seats billed?',
+    answer: 'Team pricing scales per seat with placeholder volume discounts at higher tiers.',
+  },
+  {
+    question: 'How do we start Enterprise?',
+    answer: 'Use the sales contact path to scope procurement, security review, and rollout milestones.',
+  },
+  {
+    question: 'Do you offer refunds?',
+    answer: 'Refund and cancellation policy is placeholder in v1 and should be finalized before public launch.',
+  },
+  {
+    question: 'Is PoC available for B2B buyers?',
+    answer: 'Yes. Enterprise flow includes a PoC stage before contract commitment.',
+  },
+  {
+    question: 'Can we pay by invoice?',
+    answer: 'Enterprise billing supports invoice placeholders and custom contract terms.',
+  },
+  {
+    question: 'Do you support regional data controls?',
+    answer: 'Regional controls are placeholder in this release and can be listed as planned capability.',
+  },
+];
+
+const plans = [
+  {
+    name: 'Individual',
+    desc: 'For solo operators and personal automation',
+    price: '$0',
+    period: '/month',
+    cta: 'Start Free',
+    ctaVariant: 'secondary' as const,
+    features: [
+      'Up to 1,000 runs/month',
+      '5 integrations',
+      'Basic analytics',
+      'Community support',
+      '7-day history',
+    ],
+    highlighted: false,
+  },
+  {
+    name: 'Team',
+    desc: 'For growing teams that need control and velocity',
+    price: '$49',
+    period: '/seat/month',
+    cta: 'Try 14 Days',
+    ctaVariant: 'primary' as const,
+    features: [
+      'Up to 50,000 runs/month',
+      'Unlimited integrations',
+      'Advanced analytics',
+      'Shared workflows',
+      'Email/chat support',
+      '90-day history',
+      'API access',
+    ],
+    highlighted: true,
+  },
+  {
+    name: 'Enterprise',
+    desc: 'For organizations with advanced governance requirements',
+    price: 'Custom',
+    period: '',
+    cta: 'Contact Sales',
+    ctaVariant: 'secondary' as const,
+    features: [
+      'Unlimited runs',
+      'All Team features',
+      'SSO and RBAC placeholders',
+      'Audit log placeholders',
+      'Dedicated support placeholders',
+      'Custom integrations',
+      'Contracted SLA placeholders',
+      'Procurement support',
+    ],
+    highlighted: false,
+  },
+];
+
+const comparisonFeatures = [
+  { name: 'Monthly Runs', individual: '1,000', team: '50,000', enterprise: 'Unlimited' },
+  { name: 'Integrations', individual: '5', team: 'Unlimited', enterprise: 'Unlimited + Custom' },
+  { name: 'Seats', individual: '1', team: 'Unlimited', enterprise: 'Unlimited' },
+  { name: 'Analytics', individual: 'Basic', team: 'Advanced', enterprise: 'Custom' },
+  { name: 'API Access', individual: 'No', team: 'Yes', enterprise: 'Yes' },
+  { name: 'SSO', individual: 'No', team: 'No', enterprise: 'Planned' },
+  { name: 'RBAC', individual: 'No', team: 'Basic', enterprise: 'Advanced (Planned)' },
+  { name: 'Audit Logs', individual: 'No', team: 'No', enterprise: 'Planned' },
+  { name: 'History Window', individual: '7 days', team: '90 days', enterprise: 'Custom' },
+  { name: 'Support', individual: 'Community', team: 'Email/Chat', enterprise: 'Dedicated (Planned)' },
+  { name: 'Billing', individual: 'Card', team: 'Card', enterprise: 'Invoice (Planned)' },
+  { name: 'SLA', individual: 'N/A', team: '99.9% Placeholder', enterprise: '99.99% Placeholder' },
+];
+---
+
+<BaseLayout title="Pricing - NOVA" description="Choose between Individual, Team, and Enterprise plans with clear B2C and B2B purchase paths.">
+  <Header slot="header" />
+
+  <Section padding="large">
+    <Container>
+      <div class="text-center max-w-4xl mx-auto animate-on-scroll">
+        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Pricing</p>
+        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">Pick a plan in minutes, scale with confidence later</h1>
+        <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto">
+          A simple entry for B2C users and a structured procurement path for B2B buyers.
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <Section padding="none" class="pb-24 md:pb-32">
+    <Container>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 animate-on-scroll">
+        {plans.map((plan) => (
+          <div class:list={[
+            'rounded-lg border p-8 flex flex-col',
+            plan.highlighted
+              ? 'border-accent-300 bg-accent-300/10 shadow-lg shadow-[#00000040] relative'
+              : 'border-white/10 bg-[#14161b]',
+          ]}>
+            {plan.highlighted && (
+              <span class="absolute -top-3 left-1/2 -translate-x-1/2 inline-flex items-center px-3 py-1 rounded-full bg-[#f5ee9b] text-[#111214] text-xs font-medium">
+                Most Popular
+              </span>
+            )}
+            <h3 class="text-h3 text-neutral-100 mb-1">{plan.name}</h3>
+            <p class="text-caption text-neutral-400 mb-6">{plan.desc}</p>
+            <div class="mb-6">
+              <span class="text-h1 text-neutral-100">{plan.price}</span>
+              {plan.period && <span class="text-body text-neutral-400 ml-1">{plan.period}</span>}
+            </div>
+            <Button
+              variant={plan.ctaVariant}
+              size="md"
+              href={plan.ctaVariant === 'primary' ? '/docs/getting-started' : '/contact'}
+              class="w-full mb-8"
+            >
+              {plan.cta}
+            </Button>
+            <ul class="space-y-3 flex-1">
+              {plan.features.map((feature) => (
+                <li class="flex items-start gap-3 text-sm text-neutral-300">
+                  <svg class="w-4 h-4 text-accent-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="light">
+    <Container>
+      <div class="animate-on-scroll">
+        <div class="text-center mb-12">
+          <h2 class="text-h2 text-neutral-100 mb-4">Feature Comparison</h2>
+          <p class="text-body-lg text-neutral-400">Compare plan-level capabilities across B2C and B2B needs.</p>
+        </div>
+        <Table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Individual</th>
+              <th>Team</th>
+              <th>Enterprise</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonFeatures.map((f) => (
+              <tr>
+                <td class="font-medium text-neutral-100">{f.name}</td>
+                <td>{f.individual}</td>
+                <td>{f.team}</td>
+                <td>{f.enterprise}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container narrow>
+      <div class="animate-on-scroll">
+        <div class="text-center mb-12">
+          <h2 class="text-h2 text-neutral-100 mb-4">B2B Purchase Flow</h2>
+          <p class="text-body-lg text-neutral-400">Contract, billing, and PoC flow placeholders for enterprise procurement.</p>
+        </div>
+        <div class="space-y-4">
+          {[
+            { step: '1', title: 'Discovery & Quote', desc: 'Align team scope, objectives, and legal/procurement constraints.' },
+            { step: '2', title: 'PoC Validation', desc: 'Run a scoped pilot to validate fit, reliability, and workflows.' },
+            { step: '3', title: 'Contract & Billing', desc: 'Finalize commercial terms and map invoice or card billing path.' },
+            { step: '4', title: 'Rollout & Support', desc: 'Enable teams and monitor adoption with staged governance checkpoints.' },
+          ].map((item) => (
+            <div class="flex gap-4 p-5 bg-[#14161b] rounded-lg border border-white/10">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/10 text-neutral-100 text-sm font-bold flex-shrink-0">{item.step}</span>
+              <div>
+                <h3 class="text-h4 text-neutral-100 mb-1">{item.title}</h3>
+                <p class="text-caption text-neutral-400">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="light">
+    <Container narrow>
+      <div class="animate-on-scroll">
+        <div class="text-center mb-12">
+          <h2 class="text-h2 text-neutral-100 mb-4">Pricing FAQ</h2>
+          <p class="text-body-lg text-neutral-400">The most common launch-stage pricing and billing questions.</p>
+        </div>
+        <Accordion items={pricingFaq} />
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="dark">
+    <Container>
+      <div class="text-center animate-on-scroll">
+        <h2 class="text-h2 text-white mb-4">Need help choosing?</h2>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto mb-10">
+          Start as an individual or speak with sales for a structured enterprise plan.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Button variant="primary" size="lg" href="/docs/getting-started">Start Now</Button>
+          <Button variant="ghost" size="lg" href="/contact">Contact Sales</Button>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+

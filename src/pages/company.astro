@@ -1,0 +1,169 @@
+﻿---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/ui/Section.astro';
+import Container from '../components/ui/Container.astro';
+import Button from '../components/ui/Button.astro';
+---
+
+<BaseLayout title="Company - NOVA" description="Mission, vision, team, and contact structure for launch-stage company pages.">
+  <Header slot="header" />
+
+  <Section padding="large">
+    <Container>
+      <div class="text-center max-w-4xl mx-auto animate-on-scroll">
+        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">About NOVA</p>
+        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">Building calm systems for chaotic operations</h1>
+        <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto">
+          Our mission is simple: remove repetitive friction so people can focus on work that actually creates leverage.
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="light">
+    <Container>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 animate-on-scroll">
+        <div>
+          <h2 class="text-h2 text-neutral-100 mb-4">Mission</h2>
+          <p class="text-body-lg text-neutral-400">
+            Turn repetitive workflows into reliable systems that scale with clarity and measurable outcomes.
+          </p>
+        </div>
+        <div>
+          <h2 class="text-h2 text-neutral-100 mb-4">Vision</h2>
+          <p class="text-body-lg text-neutral-400">
+            A future where automation quietly handles routine execution while teams focus on judgment, strategy, and growth.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="text-center mb-16 animate-on-scroll">
+        <h2 class="text-h2 text-neutral-100 mb-4">Team</h2>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">A product, engineering, and operations group built around pragmatic execution.</p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 animate-on-scroll">
+        {[
+          { name: 'A. Kim', role: 'CEO & Co-founder' },
+          { name: 'J. Park', role: 'CTO & Co-founder' },
+          { name: 'M. Lee', role: 'Head of Product' },
+          { name: 'R. Choi', role: 'Head of Engineering' },
+        ].map((member) => (
+          <div class="text-center">
+            <div class="w-24 h-24 rounded-full bg-[#14161b] border border-white/10 mx-auto mb-4 flex items-center justify-center">
+              <span class="text-neutral-400 text-xs">Photo</span>
+            </div>
+            <h3 class="text-h4 text-neutral-100">{member.name}</h3>
+            <p class="text-caption text-neutral-400">{member.role}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="light">
+    <Container>
+      <div class="text-center mb-16 animate-on-scroll">
+        <h2 class="text-h2 text-neutral-100 mb-4">Values</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 animate-on-scroll">
+        {[
+          {
+            title: 'User-Centered',
+            desc: 'We prioritize actual workflow pain over feature novelty.',
+          },
+          {
+            title: 'Operational Transparency',
+            desc: 'We design for traceability, clear ownership, and explicit tradeoffs.',
+          },
+          {
+            title: 'Continuous Iteration',
+            desc: 'We ship, measure, and refine with disciplined speed.',
+          },
+        ].map((value) => (
+          <div class="bg-[#14161b] rounded-lg p-8 border border-white/10">
+            <h3 class="text-h3 text-neutral-100 mb-3">{value.title}</h3>
+            <p class="text-body text-neutral-400">{value.desc}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="contact">
+    <Container narrow>
+      <div class="animate-on-scroll">
+        <div class="text-center mb-12">
+          <h2 class="text-h2 text-neutral-100 mb-4">Contact</h2>
+          <p class="text-body-lg text-neutral-400">Product, sales, partnerships, or support. Send us a note.</p>
+        </div>
+
+        <div class="bg-[#14161b] rounded-lg p-8 border border-white/10">
+          <form class="space-y-6" action="mailto:hello@nova-platform.io" method="get">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label for="name" class="block text-sm font-medium text-neutral-200 mb-2">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Your name"
+                  class="w-full px-4 py-3 bg-[#101217] rounded-lg border border-white/10 text-body text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20"
+                />
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-neutral-200 mb-2">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="you@company.com"
+                  class="w-full px-4 py-3 bg-[#101217] rounded-lg border border-white/10 text-body text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20"
+                />
+              </div>
+            </div>
+            <div>
+              <label for="subject" class="block text-sm font-medium text-neutral-200 mb-2">Topic</label>
+              <select
+                id="subject"
+                name="subject"
+                class="w-full px-4 py-3 bg-[#101217] rounded-lg border border-white/10 text-body text-neutral-100 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20"
+              >
+                <option value="">Choose a topic</option>
+                <option value="product">Product</option>
+                <option value="sales">Sales / Procurement</option>
+                <option value="partnership">Partnership</option>
+                <option value="support">Support</option>
+              </select>
+            </div>
+            <div>
+              <label for="message" class="block text-sm font-medium text-neutral-200 mb-2">Message</label>
+              <textarea
+                id="message"
+                name="body"
+                rows="5"
+                placeholder="Tell us about your use case"
+                class="w-full px-4 py-3 bg-[#101217] rounded-lg border border-white/10 text-body text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 resize-none"
+              ></textarea>
+            </div>
+            <div class="text-center">
+              <Button variant="primary" size="lg" type="submit">Send Message</Button>
+            </div>
+          </form>
+          <p class="text-xs text-neutral-400 text-center mt-4">
+            Prefer direct email? <a href="mailto:hello@nova-platform.io" class="text-accent-300 hover:underline">hello@nova-platform.io</a>
+          </p>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+

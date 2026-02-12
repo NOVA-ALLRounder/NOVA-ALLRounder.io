@@ -1,0 +1,260 @@
+﻿---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/ui/Section.astro';
+import Container from '../components/ui/Container.astro';
+import Button from '../components/ui/Button.astro';
+import StepCard from '../components/ui/StepCard.astro';
+import Accordion from '../components/ui/Accordion.astro';
+
+const faqItems = [
+  {
+    question: 'Can NOVA be used by both individuals and enterprise teams?',
+    answer:
+      'Yes. The structure supports solo workflows for B2C and controlled deployment models for B2B, including role-based governance placeholders.',
+  },
+  {
+    question: 'How long does initial setup usually take?',
+    answer:
+      'A basic setup can be completed in under 30 minutes with starter templates. Team rollouts typically include an additional onboarding checklist.',
+  },
+  {
+    question: 'Does it integrate with existing tools?',
+    answer:
+      'Placeholder integrations include API, webhooks, and common workspace apps. Custom connectors can be staged as part of an enterprise rollout.',
+  },
+  {
+    question: 'What about security and compliance?',
+    answer:
+      'Security and compliance claims are placeholder-only in v1. You can present planned controls such as RBAC, audit logs, and data policy options.',
+  },
+  {
+    question: 'Is there a free plan?',
+    answer:
+      'Yes. The pricing structure includes a starter-level individual plan with placeholder limits and a clear upgrade path.',
+  },
+  {
+    question: 'Can this scale across departments?',
+    answer:
+      'The IA and section model are built to scale from single users to large teams with staged rollout, procurement, and support placeholders.',
+  },
+];
+---
+
+<BaseLayout title="NOVA - Intelligent Automation for Modern Teams" description="A dark, minimal launch page skeleton for B2C and B2B automation products.">
+  <Header slot="header" />
+
+  <Section padding="large" class="bg-[#0d0e11] text-white">
+    <Container>
+      <div class="max-w-4xl animate-on-scroll">
+        <p class="accent-pill mb-4">NOVA Platform</p>
+        <h1 class="text-h1 md:text-display text-white mb-6 text-balance max-w-3xl">
+          The Future of Work
+          <br class="hidden lg:block" />
+          Ships in One Flow
+        </h1>
+        <p class="text-body-lg text-neutral-400 max-w-2xl mb-10">
+          A single operational layer for both personal productivity and enterprise automation.
+          Fewer decisions, fewer handoffs, faster outcomes.
+        </p>
+
+        <div class="max-w-3xl grid grid-cols-1 md:grid-cols-[1fr_auto_auto] gap-3 mb-8">
+          <label for="hero-email" class="sr-only">Email</label>
+          <input
+            id="hero-email"
+            type="email"
+            placeholder="Enter your email"
+            class="w-full rounded-md border border-white/15 bg-[#14161b] px-4 py-3 text-neutral-100 placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-accent-300/40"
+          />
+          <Button variant="primary" size="lg" href="/docs/getting-started" class="whitespace-nowrap">Start</Button>
+          <Button variant="secondary" size="lg" href="/product" class="whitespace-nowrap">View Demo</Button>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3 text-xs text-neutral-500">
+          <span class="rounded-md border border-white/15 px-3 py-1.5 bg-[#13151a]">No credit card</span>
+          <span class="rounded-md border border-white/15 px-3 py-1.5 bg-[#13151a]">B2C + B2B Ready</span>
+          <span class="rounded-md border border-white/15 px-3 py-1.5 bg-[#13151a]">Built for Scale</span>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section class="bg-[#0f1116]">
+    <Container>
+      <div class="animate-on-scroll">
+        <p class="text-center text-caption text-neutral-500 font-medium tracking-wide uppercase mb-10">Trusted by teams of every size</p>
+
+        <div class="flex flex-wrap items-center justify-center gap-8 md:gap-16 mb-16">
+          {['Company A', 'Company B', 'Company C', 'Company D', 'Company E'].map((name) => (
+            <div class="flex items-center justify-center h-8 px-4 text-neutral-600 text-sm font-semibold tracking-wider uppercase">{name}</div>
+          ))}
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+          {[
+            { value: '10,000+', label: 'Active Users' },
+            { value: '5M+', label: 'Monthly Runs' },
+            { value: '99.9%', label: 'Platform Uptime (Placeholder)' },
+          ].map((stat) => (
+            <div class="text-center rounded-lg border border-white/10 bg-[#14161b] py-8">
+              <p class="text-h2 text-white font-bold">{stat.value}</p>
+              <p class="text-caption text-neutral-500 mt-1">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="text-center mb-16 animate-on-scroll">
+        <h2 class="text-h2 text-neutral-100 mb-4">How It Works</h2>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">From signal to decision to delivery in three clear steps.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 animate-on-scroll">
+        <StepCard step={1} title="Input" description="Ingest events, files, and API payloads from your existing tools." />
+        <StepCard step={2} title="Process" description="Apply rules and model-driven logic to classify, route, and decide." />
+        <StepCard step={3} title="Result" description="Ship outcomes to dashboards, alerts, and downstream actions." />
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="light">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center animate-on-scroll">
+        <div>
+          <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">Decision Velocity</p>
+          <h2 class="text-h2 text-neutral-100 mb-6">From raw signal to clear action in seconds</h2>
+          <p class="text-body-lg text-neutral-400 mb-8">
+            Collapse fragmented context into one operational view and reduce latency across critical workflows.
+          </p>
+          <ul class="space-y-3">
+            {[
+              'Unified event stream and action history',
+              'Policy-aware automation templates',
+              'Human override points for edge cases',
+            ].map((item) => (
+              <li class="flex items-start gap-3 text-body text-neutral-300">
+                <svg class="w-5 h-5 text-accent-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="bg-[#14161b] rounded-lg aspect-[4/3] border border-white/10 flex items-center justify-center">
+          <span class="text-neutral-400 text-sm">Image Placeholder</span>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center animate-on-scroll">
+        <div class="order-2 lg:order-1 bg-[#14161b] rounded-lg aspect-[4/3] border border-white/10 flex items-center justify-center">
+          <span class="text-neutral-400 text-sm">Image Placeholder</span>
+        </div>
+        <div class="order-1 lg:order-2">
+          <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">Operational Confidence</p>
+          <h2 class="text-h2 text-neutral-100 mb-6">Reduce avoidable errors before they reach users</h2>
+          <p class="text-body-lg text-neutral-400 mb-8">
+            Introduce structured validation, guided approvals, and consistent post-action visibility.
+          </p>
+          <ul class="space-y-3">
+            {[
+              'Validation checks before execution',
+              'Audit-friendly event timelines',
+              'Repeatable workflows across teams',
+            ].map((item) => (
+              <li class="flex items-start gap-3 text-body text-neutral-300">
+                <svg class="w-5 h-5 text-accent-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="light">
+    <Container>
+      <div class="max-w-3xl mx-auto text-center animate-on-scroll">
+        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">For Individuals</p>
+        <h2 class="text-h2 text-neutral-100 mb-6">Get your time back</h2>
+        <p class="text-body-lg text-neutral-400 mb-10">Automate recurring personal workflows and focus on work that actually compounds.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10 text-left">
+          {[
+            { title: 'Inbox Triage', desc: 'Auto-sort, summarize, and route recurring requests.' },
+            { title: 'Weekly Digest', desc: 'Turn noisy activity into concise snapshots.' },
+            { title: 'Routine Ops', desc: 'Schedule recurring execution with one policy set.' },
+          ].map((item) => (
+            <div class="bg-[#14161b] rounded-lg p-6 border border-white/10">
+              <h3 class="text-h4 text-neutral-100 mb-2">{item.title}</h3>
+              <p class="text-caption text-neutral-400">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+        <Button variant="primary" size="lg" href="/pricing">Start Free</Button>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="max-w-3xl mx-auto text-center animate-on-scroll">
+        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">For Teams</p>
+        <h2 class="text-h2 text-neutral-100 mb-6">Scale without adding coordination drag</h2>
+        <p class="text-body-lg text-neutral-400 mb-10">
+          Align rollout, governance, and monitoring under one operating model built for B2B needs.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10 text-left">
+          {[
+            { title: 'Onboarding', desc: 'Template-led rollout with phased enablement.' },
+            { title: 'Governance', desc: 'Policy, approval points, and access placeholders.' },
+            { title: 'Security', desc: 'RBAC, logs, and SLA sections ready for expansion.' },
+          ].map((item) => (
+            <div class="bg-[#14161b] rounded-lg p-6 border border-white/10">
+              <h3 class="text-h4 text-neutral-100 mb-2">{item.title}</h3>
+              <p class="text-caption text-neutral-400">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+        <Button variant="primary" size="lg" href="/solutions">Talk to Sales</Button>
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="light">
+    <Container narrow>
+      <div class="animate-on-scroll">
+        <div class="text-center mb-12">
+          <h2 class="text-h2 text-neutral-100 mb-4">Frequently Asked Questions</h2>
+          <p class="text-body-lg text-neutral-400">Core product, rollout, and pricing questions for launch-stage visitors.</p>
+        </div>
+        <Accordion items={faqItems} />
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="dark">
+    <Container>
+      <div class="text-center animate-on-scroll">
+        <h2 class="text-h2 text-white mb-4">Ready to ship your first flow?</h2>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto mb-10">
+          Start with placeholders now, layer real data and proof points in your next release.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Button variant="primary" size="lg" href="/docs/getting-started">Start Now</Button>
+          <Button variant="ghost" size="lg" href="/contact">Contact Sales</Button>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+

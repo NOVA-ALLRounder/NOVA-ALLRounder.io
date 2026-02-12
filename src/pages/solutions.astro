@@ -1,0 +1,169 @@
+﻿---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/ui/Section.astro';
+import Container from '../components/ui/Container.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+---
+
+<BaseLayout title="Solutions - NOVA" description="B2B use cases, rollout process, and trust/security placeholders for enterprise-facing buyers.">
+  <Header slot="header" />
+
+  <Section padding="large">
+    <Container>
+      <div class="text-center max-w-4xl mx-auto animate-on-scroll">
+        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Solutions for Teams</p>
+        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">Designed for operational teams that cannot fail quietly</h1>
+        <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto mb-10">
+          From pilot to production, NOVA provides a repeatable path for B2B adoption with governance-ready structure.
+        </p>
+        <Button variant="primary" size="lg" href="#contact-sales">Request Demo</Button>
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="light">
+    <Container>
+      <div class="text-center mb-16 animate-on-scroll">
+        <h2 class="text-h2 text-neutral-100 mb-4">Use Cases</h2>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">Three launch-ready scenarios for enterprise storytelling.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 animate-on-scroll">
+        {[
+          {
+            icon: '◌',
+            title: 'Financial Operations',
+            desc: 'Flag anomalies, route exceptions, and publish weekly decision snapshots with policy placeholders.',
+            metric: '78% faster triage (placeholder)',
+          },
+          {
+            icon: '◇',
+            title: 'People Operations',
+            desc: 'Standardize onboarding and recurring requests while reducing manual coordination across teams.',
+            metric: '65% admin reduction (placeholder)',
+          },
+          {
+            icon: '△',
+            title: 'Commerce Support',
+            desc: 'Classify requests, prioritize incidents, and keep customer communication flows consistent at scale.',
+            metric: '< 3m first response (placeholder)',
+          },
+        ].map((useCase) => (
+          <Card hoverable={false}>
+            <div class="p-8">
+              <span class="text-3xl mb-4 block text-neutral-300">{useCase.icon}</span>
+              <h3 class="text-h3 text-neutral-100 mb-3">{useCase.title}</h3>
+              <p class="text-body text-neutral-400 mb-4">{useCase.desc}</p>
+              <p class="text-caption text-accent-300 font-medium">{useCase.metric}</p>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="text-center mb-16 animate-on-scroll">
+        <h2 class="text-h2 text-neutral-100 mb-4">Adoption Process</h2>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">A four-step enterprise rollout flow: PoC, security review, deployment, operations.</p>
+      </div>
+
+      <div class="relative animate-on-scroll">
+        <div class="hidden md:block absolute top-8 left-0 right-0 h-0.5 bg-white/10" aria-hidden="true"></div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {[
+            {
+              step: '01',
+              title: 'PoC',
+              desc: 'Scope a focused workflow and validate value in a controlled pilot.',
+              duration: '2 weeks',
+            },
+            {
+              step: '02',
+              title: 'Security Review',
+              desc: 'Review access, logging, and data handling placeholders with internal stakeholders.',
+              duration: '1-2 weeks',
+            },
+            {
+              step: '03',
+              title: 'Deployment',
+              desc: 'Integrate with target systems and expand enablement by team.',
+              duration: '2-4 weeks',
+            },
+            {
+              step: '04',
+              title: 'Operations',
+              desc: 'Track outcomes, tune policies, and scale usage with a shared operating rhythm.',
+              duration: 'ongoing',
+            },
+          ].map((phase) => (
+            <div class="relative text-center md:text-left">
+              <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#14161b] border-2 border-white/10 text-neutral-100 font-bold text-lg mb-4 relative z-10">
+                {phase.step}
+              </div>
+              <h3 class="text-h4 text-neutral-100 mb-2">{phase.title}</h3>
+              <p class="text-caption text-neutral-400 mb-2">{phase.desc}</p>
+              <span class="inline-flex items-center px-3 py-1 rounded-full bg-white/10 text-xs font-medium text-neutral-300">{phase.duration}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="light">
+    <Container>
+      <div class="text-center mb-16 animate-on-scroll">
+        <h2 class="text-h2 text-neutral-100 mb-4">Trust & Security</h2>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">Launch-safe security and governance placeholders for B2B buyers.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 animate-on-scroll">
+        {[
+          {
+            title: 'RBAC (Planned)',
+            desc: 'Role-based access templates for teams with scoped permissions.',
+          },
+          {
+            title: 'Audit Logs (Planned)',
+            desc: 'Track user and workflow actions for governance and review.',
+          },
+          {
+            title: 'Data Policy (Planned)',
+            desc: 'Regional handling and retention policy placeholders for compliance posture.',
+          },
+          {
+            title: 'SLA & Support (Planned)',
+            desc: 'Tiered support model and reliability commitments by contract.',
+          },
+        ].map((item) => (
+          <div class="bg-[#14161b] rounded-lg p-6 border border-white/10">
+            <h3 class="text-h4 text-neutral-100 mb-2">{item.title}</h3>
+            <p class="text-caption text-neutral-400">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="dark" id="contact-sales">
+    <Container>
+      <div class="text-center animate-on-scroll">
+        <h2 class="text-h2 text-white mb-4">Ready for a tailored rollout?</h2>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto mb-10">
+          Share your use case and team size. We will map a pilot-to-production path.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Button variant="primary" size="lg" href="/contact">Request Demo</Button>
+          <Button variant="ghost" size="lg" href="/pricing">View Pricing</Button>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+

@@ -1,0 +1,91 @@
+﻿---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Section from '../../components/ui/Section.astro';
+import Container from '../../components/ui/Container.astro';
+import Card from '../../components/ui/Card.astro';
+import Badge from '../../components/ui/Badge.astro';
+import Button from '../../components/ui/Button.astro';
+
+const updates = [
+  {
+    date: '2026.02.10',
+    badge: 'New Feature',
+    badgeVariant: 'accent' as const,
+    title: 'AI Classification Model v3 Released',
+    summary:
+      'Placeholder update: v3 improves classification precision and processing speed, with expanded language handling and better edge-case routing.',
+    href: '/updates/2026-02-10',
+  },
+  {
+    date: '2026.01.15',
+    badge: 'Improvement',
+    badgeVariant: 'success' as const,
+    title: 'Batch Processing Throughput +40%',
+    summary:
+      'Placeholder update: pipeline and queue tuning reduced high-volume processing time while improving reliability under load.',
+    href: '/updates/2026-01-15',
+  },
+  {
+    date: '2025.12.01',
+    badge: 'Security',
+    badgeVariant: 'warning' as const,
+    title: 'RBAC and Audit Log Baseline Added',
+    summary:
+      'Placeholder update: initial access-control and activity-log structures are now included in the Team+ rollout track.',
+    href: '/updates/2025-12-01',
+  },
+];
+---
+
+<BaseLayout title="Updates - NOVA" description="Latest product notes, release placeholders, and roadmap-facing updates.">
+  <Header slot="header" />
+
+  <Section padding="large">
+    <Container>
+      <div class="text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
+        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Updates</p>
+        <h1 class="text-h1 text-neutral-100 mb-6">What Is New</h1>
+        <p class="text-body-lg text-neutral-400">
+          Product changes, release placeholders, and rollout notes for B2C and B2B visitors.
+        </p>
+      </div>
+
+      <div class="max-w-md mx-auto mb-16 animate-on-scroll">
+        <div class="flex gap-3">
+          <input
+            type="email"
+            placeholder="Email address"
+            class="flex-1 px-4 py-3 bg-[#14161b] rounded-lg border border-white/10 text-body text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20"
+            aria-label="Subscribe email"
+          />
+          <Button variant="primary" size="md">Subscribe</Button>
+        </div>
+        <p class="text-xs text-neutral-400 mt-2 text-center">
+          Placeholder only. Subscription flow is not connected in this release.
+        </p>
+      </div>
+
+      <div class="space-y-6 max-w-3xl mx-auto animate-on-scroll">
+        {updates.map((update) => (
+          <Card hoverable={true} href={update.href}>
+            <div class="p-8">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="text-caption text-neutral-400">{update.date}</span>
+                <Badge text={update.badge} variant={update.badgeVariant} />
+              </div>
+              <h2 class="text-h3 text-neutral-100 mb-3">{update.title}</h2>
+              <p class="text-body text-neutral-400">{update.summary}</p>
+              <span class="inline-block mt-4 text-sm text-accent-300 font-medium">Read update -></span>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+

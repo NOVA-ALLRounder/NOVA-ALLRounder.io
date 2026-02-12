@@ -1,0 +1,128 @@
+﻿---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const isUserSiteRepo = repo.endsWith('.github.io');
+const basePath = process.env.GITHUB_ACTIONS === 'true'
+  ? (isUserSiteRepo ? '/' : `/${repo}/`)
+  : '/';
+
+const withBase = (url: string) => {
+  if (
+    url.startsWith('http://') ||
+    url.startsWith('https://') ||
+    url.startsWith('mailto:') ||
+    url.startsWith('tel:') ||
+    url.startsWith('#')
+  ) {
+    return url;
+  }
+  if (!url.startsWith('/')) return url;
+
+  const clean = url.replace(/^\/+/, '');
+  return clean ? `${basePath}${clean}` : basePath;
+};
+
+const sidebarItems = [
+  { label: 'Getting Started', href: '/docs/getting-started' },
+  { label: 'Tutorials', href: '/docs/tutorials' },
+  { label: 'API Reference', href: '/docs/api' },
+  { label: 'FAQ', href: '/docs/faq' },
+  { label: 'Changelog', href: '/docs/changelog' },
+];
+
+const currentPath = Astro.url.pathname;
+const stripTrailingSlash = (path: string) => (path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path);
+const appPath = (() => {
+  if (basePath !== '/' && currentPath.startsWith(basePath)) {
+    return `/${currentPath.slice(basePath.length)}`;
+  }
+  return currentPath;
+})();
+const normalizedCurrentPath = stripTrailingSlash(appPath);
+---
+
+<BaseLayout title={`${title} - NOVA Docs`} description={description}>
+  <Header slot="header" />
+
+  <div class="max-w-container mx-auto px-6 py-10 md:py-14">
+    <div class="flex flex-col md:flex-row gap-8">
+      <aside class="md:w-64 flex-shrink-0">
+        <nav aria-label="Docs Navigation" class="panel-surface p-4 md:sticky md:top-24">
+          <a href={withBase('/docs')} class="text-xs font-medium text-accent-300 hover:text-accent-200 mb-4 block uppercase tracking-[0.08em]">← Docs Home</a>
+          <ul class="space-y-1.5" role="list">
+            {sidebarItems.map((item) => (
+              <li>
+                <a
+                  href={withBase(item.href)}
+                  class:list={[
+                    'block px-3 py-2 rounded-md text-sm transition-colors',
+                    normalizedCurrentPath === item.href || normalizedCurrentPath === item.href + '/'
+                      ? 'bg-white/10 text-neutral-100 font-medium'
+                      : 'text-neutral-400 hover:text-neutral-100 hover:bg-white/5',
+                  ]}
+                  aria-current={normalizedCurrentPath === item.href ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+
+      <article class="flex-1 min-w-0 prose prose-neutral max-w-none panel-surface p-6 md:p-8">
+        <slot />
+      </article>
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .prose :global(h1) {
+    @apply text-h1 text-neutral-100 mb-4;
+  }
+  .prose :global(h2) {
+    @apply text-h2 text-neutral-100 mt-10 mb-3;
+  }
+  .prose :global(h3) {
+    @apply text-h3 text-neutral-100 mt-7 mb-2;
+  }
+  .prose :global(p) {
+    @apply text-body text-neutral-400 mb-4 leading-relaxed;
+  }
+  .prose :global(ul) {
+    @apply list-disc pl-6 mb-4 space-y-2 text-neutral-400;
+  }
+  .prose :global(ol) {
+    @apply list-decimal pl-6 mb-4 space-y-2 text-neutral-400;
+  }
+  .prose :global(code) {
+    @apply bg-white/10 px-1.5 py-0.5 rounded text-sm text-neutral-200;
+  }
+  .prose :global(pre) {
+    @apply bg-[#0b0c10] text-neutral-100 p-5 rounded-lg overflow-x-auto mb-6 border border-white/10;
+  }
+  .prose :global(pre code) {
+    @apply bg-transparent p-0 text-inherit;
+  }
+  .prose :global(a) {
+    @apply text-accent-300 hover:text-accent-200 underline;
+  }
+  .prose :global(hr) {
+    @apply border-white/10 my-7;
+  }
+  .prose :global(blockquote) {
+    @apply border-l-2 border-white/20 pl-4 italic text-neutral-500;
+  }
+</style>

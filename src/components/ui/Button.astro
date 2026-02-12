@@ -1,0 +1,61 @@
+---
+export interface Props {
+  variant?: 'primary' | 'secondary' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  class?: string;
+  [key: string]: any;
+}
+
+const { variant = 'primary', size = 'md', href, class: className, ...rest } = Astro.props;
+const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const isUserSiteRepo = repo.endsWith('.github.io');
+const basePath = process.env.GITHUB_ACTIONS === 'true'
+  ? (isUserSiteRepo ? '/' : `/${repo}/`)
+  : '/';
+
+const withBase = (url: string) => {
+  if (
+    url.startsWith('http://') ||
+    url.startsWith('https://') ||
+    url.startsWith('mailto:') ||
+    url.startsWith('tel:') ||
+    url.startsWith('#')
+  ) {
+    return url;
+  }
+  if (!url.startsWith('/')) return url;
+
+  const clean = url.replace(/^\/+/, '');
+  return clean ? `${basePath}${clean}` : basePath;
+};
+
+const baseClasses = 'inline-flex items-center justify-center font-medium rounded-md border transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-300';
+
+const variantClasses = {
+  primary: 'bg-[#f5ee9b] border-[#f5ee9b] text-[#111214] hover:bg-[#f8f2ae] hover:border-[#f8f2ae] active:bg-accent-200',
+  secondary: 'bg-[#16181d] border-white/15 text-neutral-100 hover:bg-[#1b1d23] hover:border-white/25',
+  ghost: 'bg-transparent border-transparent text-neutral-400 hover:text-neutral-100 hover:bg-white/5',
+};
+
+const sizeClasses = {
+  sm: 'px-3 py-1.5 text-xs gap-1.5',
+  md: 'px-4 py-2 text-sm gap-2',
+  lg: 'px-5 py-2.5 text-sm gap-2',
+};
+
+const classes = [baseClasses, variantClasses[variant], sizeClasses[size], className].filter(Boolean).join(' ');
+
+const Tag = href ? 'a' : 'button';
+const resolvedHref = href ? withBase(href) : undefined;
+---
+
+{href ? (
+  <a href={resolvedHref} class={classes} {...rest}>
+    <slot />
+  </a>
+) : (
+  <button class={classes} {...rest}>
+    <slot />
+  </button>
+)}
