@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/ui/Section.astro';
+import Container from '../components/ui/Container.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+
+const modelGroups = [
+  {
+    title: 'General Coding',
+    model: 'GPT / Claude 계열',
+    desc: '일반 코드 생성, 리팩터링, 문서화 작업에 적합한 기본 모델 그룹',
+  },
+  {
+    title: 'Reasoning Heavy',
+    model: 'Deep reasoning 모델',
+    desc: '복잡한 설계 판단과 다단계 추론이 필요한 문제 해결에 적합',
+  },
+  {
+    title: 'Fast Iteration',
+    model: 'Low-latency 모델',
+    desc: '짧은 루프의 반복 작업과 빠른 응답 중심 개발 흐름에 적합',
+  },
+];
+
+const flow = [
+  {
+    step: 'Analyze',
+    desc: '요구사항과 코드베이스 상태를 분석해 실행 계획을 구성합니다.',
+  },
+  {
+    step: 'Plan',
+    desc: '작업 단위를 분해하고 필요한 모델/도구를 선택합니다.',
+  },
+  {
+    step: 'Execute',
+    desc: '코드 변경, 검증, 반복 개선까지 한 사이클로 진행합니다.',
+  },
+];
+---
+
+<BaseLayout title="Zen - NOVA" description="Zen 탭 전용 페이지: 모델 선택과 실행 플로우를 소개합니다.">
+  <Header slot="header" />
+
+  <Section padding="large">
+    <Container>
+      <div class="max-w-4xl animate-on-scroll">
+        <p class="accent-pill mb-4">Zen</p>
+        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">검증된 모델 구성으로 안정적인 코딩 플로우</h1>
+        <p class="text-body-lg text-neutral-400 max-w-3xl">
+          사용 목적에 맞는 모델 조합을 선택하고, 분석부터 실행까지 일관된 파이프라인으로
+          개발 속도와 품질을 동시에 관리할 수 있습니다.
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="light">
+    <Container>
+      <div class="text-center mb-12 animate-on-scroll">
+        <h2 class="text-h2 text-neutral-100 mb-3">Model Presets</h2>
+        <p class="text-body text-neutral-400">작업 성격에 따라 모델 그룹을 선택해 운영할 수 있습니다.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 animate-on-scroll">
+        {modelGroups.map((item) => (
+          <Card hoverable={false}>
+            <div class="p-6">
+              <p class="text-caption text-accent-300 mb-2">{item.title}</p>
+              <h3 class="text-h4 text-neutral-100 mb-2">{item.model}</h3>
+              <p class="text-body text-neutral-400">{item.desc}</p>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="text-center mb-12 animate-on-scroll">
+        <h2 class="text-h2 text-neutral-100 mb-3">Execution Flow</h2>
+        <p class="text-body text-neutral-400">Zen은 아래 3단계 흐름을 기준으로 동작합니다.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 animate-on-scroll">
+        {flow.map((item, index) => (
+          <div class="rounded-lg border border-white/10 bg-[#14161b] p-6">
+            <p class="text-caption text-accent-300 mb-2">{String(index + 1).padStart(2, '0')}</p>
+            <h3 class="text-h4 text-neutral-100 mb-2">{item.step}</h3>
+            <p class="text-body text-neutral-400">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="dark">
+    <Container>
+      <div class="text-center animate-on-scroll">
+        <h2 class="text-h2 text-neutral-100 mb-4">Zen 플로우를 바로 시작해보세요</h2>
+        <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto mb-8">
+          문서에서 설치/시작 가이드를 확인하거나, 팀 환경에 맞는 도입 경로를 상담받을 수 있습니다.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <Button variant="primary" size="lg" href="/docs/getting-started">시작 가이드</Button>
+          <Button variant="secondary" size="lg" href="/contact">문의하기</Button>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Footer slot="footer" />
+</BaseLayout>

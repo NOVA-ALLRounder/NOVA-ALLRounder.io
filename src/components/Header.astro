@@ -1,9 +1,9 @@
 ﻿---
 const navItems = [
-  { label: 'GitHub', href: 'https://github.com/NOVA-ALLRounder/main', badge: '[100K]', external: true },
+  { label: 'GitHub', href: 'https://github.com/NOVA-ALLRounder/main', external: true },
   { label: '문서', href: '/docs' },
-  { label: '엔터프라이즈', href: '/solutions' },
-  { label: 'Zen', href: '/product' },
+  { label: '엔터프라이즈', href: '/enterprise' },
+  { label: 'Zen', href: '/zen' },
 ];
 
 const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
@@ -79,7 +79,6 @@ const isActive = (href: string) => {
             aria-current={isActive(item.href) ? 'page' : undefined}
           >
             {item.label}
-            {item.badge && <span class="ml-2 text-neutral-500">{item.badge}</span>}
           </a>
         </li>
       ))}
@@ -141,7 +140,6 @@ const isActive = (href: string) => {
             rel={item.external ? 'noopener noreferrer' : undefined}
           >
             {item.label}
-            {item.badge && <span class="ml-2 text-neutral-500">{item.badge}</span>}
           </a>
         </li>
       ))}

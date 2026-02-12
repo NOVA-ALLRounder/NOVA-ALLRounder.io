@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/ui/Section.astro';
+import Container from '../components/ui/Container.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+
+const useCases = [
+  {
+    title: '운영 자동화',
+    desc: '반복 운영 작업을 자동화하여 팀이 핵심 의사결정에 집중할 수 있게 합니다.',
+  },
+  {
+    title: '보안·거버넌스',
+    desc: '권한, 로그, 정책 중심의 제어 지점을 마련해 엔터프라이즈 요구사항을 충족합니다.',
+  },
+  {
+    title: '배포 확장',
+    desc: 'PoC에서 전사 확장까지 동일한 구조로 운영 모델을 단계적으로 확장합니다.',
+  },
+];
+
+const rolloutSteps = [
+  {
+    step: '01',
+    title: 'Discovery',
+    desc: '대상 프로세스와 성공 지표를 정의하고 시범 범위를 확정합니다.',
+  },
+  {
+    step: '02',
+    title: 'Pilot',
+    desc: '작은 범위에서 효과를 검증하고 보안/운영 기준선을 확립합니다.',
+  },
+  {
+    step: '03',
+    title: 'Scale',
+    desc: '팀 단위 템플릿과 운영 가이드를 배포해 확장 속도를 높입니다.',
+  },
+  {
+    step: '04',
+    title: 'Operate',
+    desc: '지속 모니터링과 정책 튜닝으로 안정적인 운영 체계를 유지합니다.',
+  },
+];
+---
+
+<BaseLayout title="엔터프라이즈 - NOVA" description="엔터프라이즈 팀을 위한 NOVA 도입, 확장, 운영 페이지입니다.">
+  <Header slot="header" />
+
+  <Section padding="large">
+    <Container>
+      <div class="max-w-4xl animate-on-scroll">
+        <p class="accent-pill mb-4">Enterprise</p>
+        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">엔터프라이즈 운영을 위한 자동화 플랫폼</h1>
+        <p class="text-body-lg text-neutral-400 max-w-3xl">
+          팀의 실제 운영 흐름에 맞춰 자동화를 설계하고, 보안과 거버넌스를 포함한 구조로
+          안정적으로 확장할 수 있습니다.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <Button variant="primary" size="lg" href="/contact">데모 요청</Button>
+          <Button variant="secondary" size="lg" href="/docs">문서 보기</Button>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="light">
+    <Container>
+      <div class="text-center mb-12 animate-on-scroll">
+        <h2 class="text-h2 text-neutral-100 mb-3">핵심 가치</h2>
+        <p class="text-body text-neutral-400">도입 단계부터 운영 단계까지 필요한 핵심 기능을 제공합니다.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 animate-on-scroll">
+        {useCases.map((item) => (
+          <Card hoverable={false}>
+            <div class="p-6">
+              <h3 class="text-h4 text-neutral-100 mb-2">{item.title}</h3>
+              <p class="text-body text-neutral-400">{item.desc}</p>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="text-center mb-12 animate-on-scroll">
+        <h2 class="text-h2 text-neutral-100 mb-3">도입 프로세스</h2>
+        <p class="text-body text-neutral-400">현업 프로세스에 맞춘 4단계 롤아웃으로 진행합니다.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-on-scroll">
+        {rolloutSteps.map((item) => (
+          <div class="rounded-lg border border-white/10 bg-[#14161b] p-6">
+            <p class="text-caption text-accent-300 mb-2">{item.step}</p>
+            <h3 class="text-h4 text-neutral-100 mb-2">{item.title}</h3>
+            <p class="text-body text-neutral-400">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="dark">
+    <Container>
+      <div class="text-center animate-on-scroll">
+        <h2 class="text-h2 text-neutral-100 mb-4">엔터프라이즈 팀과 함께 설계합니다</h2>
+        <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto mb-8">
+          보안, 운영, 확장 요구사항을 함께 점검하고 실제 조직 구조에 맞는 도입안을 제안합니다.
+        </p>
+        <Button variant="primary" size="lg" href="/contact">상담 시작</Button>
+      </div>
+    </Container>
+  </Section>
+
+  <Footer slot="footer" />
+</BaseLayout>
