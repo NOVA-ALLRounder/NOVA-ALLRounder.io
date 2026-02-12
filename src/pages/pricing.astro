@@ -53,11 +53,11 @@ const plans = [
     ctaVariant: 'secondary' as const,
     ctaHref: '/docs/getting-started',
     features: [
-      '월 500회 실행',
+      '월 50K 토큰',
       '3개 연동',
       '기본 분석 대시보드',
       '커뮤니티 지원',
-      '7일 실행 이력',
+      '7일 사용 이력',
     ],
     highlighted: false,
   },
@@ -70,11 +70,11 @@ const plans = [
     ctaVariant: 'primary' as const,
     ctaHref: '/docs/getting-started',
     features: [
-      '월 10,000회 실행',
+      '월 1M 토큰',
       '무제한 연동',
       '고급 분석 & 리포트',
       '우선 이메일 지원',
-      '30일 실행 이력',
+      '30일 사용 이력',
       'API 접근',
       '커스텀 웹훅',
     ],
@@ -89,11 +89,11 @@ const plans = [
     ctaVariant: 'secondary' as const,
     ctaHref: '/docs/getting-started',
     features: [
-      '월 50,000회 실행',
+      '월 10M 토큰',
       'Pro 전체 기능 포함',
       '워크플로우 공유 & 협업',
       '팀 역할 관리',
-      '90일 실행 이력',
+      '90일 사용 이력',
       '팀 분석 대시보드',
       'Slack / Teams 알림',
     ],
@@ -108,7 +108,7 @@ const plans = [
     ctaVariant: 'secondary' as const,
     ctaHref: '/contact',
     features: [
-      '무제한 실행',
+      '무제한 토큰',
       'Team 전체 기능 포함',
       'SSO 및 RBAC',
       '감사 로그 & 컴플라이언스',
@@ -122,7 +122,7 @@ const plans = [
 ];
 
 const comparisonFeatures = [
-  { name: '월간 실행 횟수', free: '500', pro: '10,000', team: '50,000', enterprise: '무제한' },
+  { name: '월간 토큰', free: '50K', pro: '1M', team: '10M', enterprise: '무제한' },
   { name: '연동', free: '3개', pro: '무제한', team: '무제한', enterprise: '무제한 + 맞춤' },
   { name: '시트', free: '1', pro: '1', team: '무제한', enterprise: '무제한' },
   { name: '분석', free: '기본', pro: '고급', team: '팀 대시보드', enterprise: '맞춤' },
@@ -133,7 +133,7 @@ const comparisonFeatures = [
   { name: 'SSO', free: '—', pro: '—', team: '—', enterprise: '✓' },
   { name: 'RBAC', free: '—', pro: '—', team: '기본', enterprise: '고급' },
   { name: '감사 로그', free: '—', pro: '—', team: '—', enterprise: '✓' },
-  { name: '이력 보관', free: '7일', pro: '30일', team: '90일', enterprise: '맞춤' },
+  { name: '사용 이력 보관', free: '7일', pro: '30일', team: '90일', enterprise: '맞춤' },
   { name: '지원', free: '커뮤니티', pro: '이메일', team: '이메일/채팅', enterprise: '전담 매니저' },
   { name: 'SLA', free: '—', pro: '99.5%', team: '99.9%', enterprise: '99.99%' },
 ];
