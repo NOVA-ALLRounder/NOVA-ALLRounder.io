@@ -1,0 +1,129 @@
+﻿---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/ui/Section.astro';
+import Container from '../components/ui/Container.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+
+const contactChannels = [
+  {
+    title: 'General Email',
+    value: 'hello@nova-platform.io',
+    href: 'mailto:hello@nova-platform.io',
+    id: 'email',
+    note: 'Replace with your primary contact inbox.',
+  },
+  {
+    title: 'GitHub',
+    value: 'github.com/your-org',
+    href: 'https://github.com/your-org',
+    id: 'github',
+    note: 'Replace with your public repository or org URL.',
+  },
+  {
+    title: 'Business Contact',
+    value: 'sales@nova-platform.io',
+    href: 'mailto:sales@nova-platform.io',
+    id: 'sales',
+    note: 'Use a dedicated address for demos and partnerships.',
+  },
+];
+
+const teamProfiles = [
+  {
+    name: 'Person A',
+    role: 'Founder / Product',
+    photoAlt: 'Profile placeholder A',
+  },
+  {
+    name: 'Person B',
+    role: 'Engineering Lead',
+    photoAlt: 'Profile placeholder B',
+  },
+  {
+    name: 'Person C',
+    role: 'Business / Partnerships',
+    photoAlt: 'Profile placeholder C',
+  },
+];
+---
+
+<BaseLayout title="Contact - NOVA" description="Contact hub for email, GitHub links, and team profile placeholders.">
+  <Header slot="header" />
+
+  <Section padding="large">
+    <Container>
+      <div class="text-center max-w-4xl mx-auto animate-on-scroll">
+        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Contact</p>
+        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">Everything needed to reach us, in one place</h1>
+        <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto mb-10">
+          Replace the placeholders below with your real team contacts, GitHub links, and profile images.
+        </p>
+        <Button variant="primary" size="lg" href="#contact-list">Edit Contact Info</Button>
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="contact-list" background="light">
+    <Container>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 animate-on-scroll">
+        {contactChannels.map((item) => (
+          <Card hoverable={false}>
+            <div class="p-6" id={item.id}>
+              <p class="text-caption text-accent-300 uppercase tracking-wide mb-2">{item.title}</p>
+              <a
+                href={item.href}
+                target={item.href.startsWith('http') ? '_blank' : undefined}
+                rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                class="text-h4 text-neutral-100 break-all hover:text-accent-200 transition-colors"
+              >
+                {item.value}
+              </a>
+              <p class="text-caption text-neutral-400 mt-3">{item.note}</p>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="text-center mb-12 animate-on-scroll">
+        <h2 class="text-h2 text-neutral-100 mb-4">Team Photos</h2>
+        <p class="text-body-lg text-neutral-400">Drop your real photos and names into this section.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-on-scroll">
+        {teamProfiles.map((person) => (
+          <Card hoverable={false}>
+            <div class="p-6 text-center">
+              <div class="w-28 h-28 rounded-full border border-white/10 bg-[#0f1728] mx-auto mb-4 flex items-center justify-center">
+                <span class="text-xs text-neutral-400">Photo</span>
+              </div>
+              <h3 class="text-h4 text-neutral-100">{person.name}</h3>
+              <p class="text-caption text-neutral-400 mt-1">{person.role}</p>
+              <p class="sr-only">{person.photoAlt}</p>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="dark">
+    <Container narrow>
+      <div class="text-center animate-on-scroll">
+        <h2 class="text-h2 text-white mb-4">Need a quick intro call?</h2>
+        <p class="text-body-lg text-neutral-400 mb-8">
+          Keep this section as a simple CTA, or replace it with your scheduling link.
+        </p>
+        <Button variant="primary" size="lg" href="mailto:hello@nova-platform.io">Send Email</Button>
+      </div>
+    </Container>
+  </Section>
+
+  <Footer slot="footer" />
+</BaseLayout>
