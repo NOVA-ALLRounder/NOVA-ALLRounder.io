@@ -31,21 +31,44 @@ const contactChannels = [
   },
 ];
 
+const teamOverview = [
+  { label: 'Core Team', value: '4 Members', note: 'Product, Engineering, Design, Growth' },
+  { label: 'Tracks', value: 'B2C + B2B', note: 'Shared platform, separate go-to-market motion' },
+  { label: 'Timezone', value: 'KST + Remote', note: 'Daily async + fixed sync windows' },
+];
+
 const teamProfiles = [
   {
-    name: 'Person A',
+    name: 'Member 01',
     role: 'Founder / Product',
+    focus: 'Vision, roadmap, customer discovery',
+    email: 'member01@nova-platform.io',
+    github: 'github.com/member01',
     photoAlt: 'Profile placeholder A',
   },
   {
-    name: 'Person B',
+    name: 'Member 02',
     role: 'Engineering Lead',
+    focus: 'Platform architecture, reliability, delivery',
+    email: 'member02@nova-platform.io',
+    github: 'github.com/member02',
     photoAlt: 'Profile placeholder B',
   },
   {
-    name: 'Person C',
-    role: 'Business / Partnerships',
+    name: 'Member 03',
+    role: 'Design / Experience',
+    focus: 'UX system, visual language, content quality',
+    email: 'member03@nova-platform.io',
+    github: 'github.com/member03',
     photoAlt: 'Profile placeholder C',
+  },
+  {
+    name: 'Member 04',
+    role: 'Growth / Partnerships',
+    focus: 'Demand generation, B2B pipeline, alliances',
+    email: 'member04@nova-platform.io',
+    github: 'github.com/member04',
+    photoAlt: 'Profile placeholder D',
   },
 ];
 ---
@@ -59,7 +82,7 @@ const teamProfiles = [
         <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Contact</p>
         <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">Everything needed to reach us, in one place</h1>
         <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto mb-10">
-          Replace the placeholders below with your real team contacts, GitHub links, and profile images.
+          Team contact channels and member profiles for B2C/B2B collaboration. Replace all placeholders with your real data.
         </p>
         <Button variant="primary" size="lg" href="#contact-list">Edit Contact Info</Button>
       </div>
@@ -92,19 +115,45 @@ const teamProfiles = [
   <Section>
     <Container>
       <div class="text-center mb-12 animate-on-scroll">
-        <h2 class="text-h2 text-neutral-100 mb-4">Team Photos</h2>
-        <p class="text-body-lg text-neutral-400">Drop your real photos and names into this section.</p>
+        <h2 class="text-h2 text-neutral-100 mb-4">Team Overview</h2>
+        <p class="text-body-lg text-neutral-400">Quick context for who is building NOVA and how the team is structured.</p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-on-scroll">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 animate-on-scroll">
+        {teamOverview.map((item) => (
+          <Card hoverable={false}>
+            <div class="p-6">
+              <p class="text-caption text-accent-300 uppercase tracking-wide mb-2">{item.label}</p>
+              <p class="text-h3 text-neutral-100 mb-2">{item.value}</p>
+              <p class="text-caption text-neutral-400">{item.note}</p>
+            </div>
+          </Card>
+        ))}
+      </div>
+
+      <div class="text-center mb-12 animate-on-scroll">
+        <h2 class="text-h2 text-neutral-100 mb-4">Team Members</h2>
+        <p class="text-body-lg text-neutral-400">Add real names, photos, emails, and GitHub links for all 4 members.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 animate-on-scroll">
         {teamProfiles.map((person) => (
           <Card hoverable={false}>
-            <div class="p-6 text-center">
+            <div class="p-6 text-center h-full">
               <div class="w-28 h-28 rounded-full border border-white/10 bg-[#101217] mx-auto mb-4 flex items-center justify-center">
                 <span class="text-xs text-neutral-400">Photo</span>
               </div>
               <h3 class="text-h4 text-neutral-100">{person.name}</h3>
               <p class="text-caption text-neutral-400 mt-1">{person.role}</p>
+              <p class="text-caption text-neutral-500 mt-3">{person.focus}</p>
+              <div class="mt-5 space-y-1">
+                <a href={`mailto:${person.email}`} class="block text-xs text-accent-300 hover:text-accent-200 transition-colors break-all">
+                  {person.email}
+                </a>
+                <a href={`https://${person.github}`} target="_blank" rel="noopener noreferrer" class="block text-xs text-neutral-400 hover:text-neutral-200 transition-colors break-all">
+                  {person.github}
+                </a>
+              </div>
               <p class="sr-only">{person.photoAlt}</p>
             </div>
           </Card>

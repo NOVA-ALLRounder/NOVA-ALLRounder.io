@@ -4,6 +4,8 @@ const navItems = [
   { label: '문서', href: '/docs' },
   { label: '엔터프라이즈', href: '/enterprise' },
   { label: 'Zen', href: '/zen' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
@@ -84,17 +86,22 @@ const isActive = (href: string) => {
       ))}
     </ul>
 
-    <div class="hidden lg:flex items-center gap-3">
+    <div class="hidden lg:flex items-center gap-4">
       <a
         href={withBase('/docs/getting-started')}
         class:list={[
-          'inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1f1d1f] text-white text-[1.05rem] leading-none hover:bg-[#2a272a] transition-colors',
+          'inline-flex items-center text-[1.02rem] leading-none text-neutral-700 hover:text-neutral-900 transition-colors',
         ]}
       >
-        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v11m0 0l4-4m-4 4l-4-4M4 20h16" />
-        </svg>
-        <span>무료</span>
+        Sign in
+      </a>
+      <a
+        href={withBase('/docs/getting-started')}
+        class:list={[
+          'inline-flex items-center px-4 py-2 rounded-lg bg-[#1f1d1f] text-white text-[1.05rem] leading-none hover:bg-[#2a272a] transition-colors',
+        ]}
+      >
+        Sign up
       </a>
     </div>
 
@@ -149,10 +156,19 @@ const isActive = (href: string) => {
         href={withBase('/docs/getting-started')}
         class:list={[
           'block px-4 py-3 text-center text-base font-medium rounded-md transition-colors',
+          'text-neutral-700 hover:text-neutral-900 hover:bg-black/5',
+        ]}
+      >
+        Sign in
+      </a>
+      <a
+        href={withBase('/docs/getting-started')}
+        class:list={[
+          'block px-4 py-3 text-center text-base font-medium rounded-md transition-colors',
           'bg-[#1f1d1f] text-white hover:bg-[#2a272a]',
         ]}
       >
-        무료
+        Sign up
       </a>
     </div>
   </div>
