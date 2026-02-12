@@ -152,17 +152,17 @@
   .wf-pipeline {
     display: flex;
     align-items: center;
-    transform: scale(0.88);
+    transform: scale(0.75);
     transform-origin: center center;
   }
   @media (min-width: 1200px) {
-    .wf-pipeline { transform: scale(1); }
+    .wf-pipeline { transform: scale(0.92); }
   }
   @media (max-width: 900px) {
-    .wf-pipeline { transform: scale(0.72); }
+    .wf-pipeline { transform: scale(0.62); }
   }
   @media (max-width: 640px) {
-    .wf-pipeline { transform: scale(0.52); }
+    .wf-pipeline { transform: scale(0.48); }
   }
 
   /* ── Nodes ── */
@@ -234,7 +234,7 @@
 
   /* ── Connectors ── */
   .wf-connector {
-    width: 44px;
+    width: 32px;
     height: 2px;
     background: var(--edge);
     position: relative;
@@ -259,8 +259,8 @@
   /* ── Fork ── */
   .wf-fork {
     position: relative;
-    width: 60px;
-    height: 100px;
+    width: 48px;
+    height: 90px;
     flex-shrink: 0;
   }
   .wf-fork__svg {
