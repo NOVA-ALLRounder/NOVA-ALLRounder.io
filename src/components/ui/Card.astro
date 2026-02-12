@@ -6,12 +6,35 @@ export interface Props {
 }
 
 const { class: className, href, hoverable = true } = Astro.props;
+const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const isUserSiteRepo = repo.endsWith('.github.io');
+const basePath = process.env.GITHUB_ACTIONS === 'true'
+  ? (isUserSiteRepo ? '/' : `/${repo}/`)
+  : '/';
+
+const withBase = (url: string) => {
+  if (
+    url.startsWith('http://') ||
+    url.startsWith('https://') ||
+    url.startsWith('mailto:') ||
+    url.startsWith('tel:') ||
+    url.startsWith('#')
+  ) {
+    return url;
+  }
+  if (!url.startsWith('/')) return url;
+
+  const clean = url.replace(/^\/+/, '');
+  return clean ? `${basePath}${clean}` : basePath;
+};
+
+const resolvedHref = href ? withBase(href) : undefined;
 const Tag = href ? 'a' : 'div';
 ---
 
 {href ? (
   <a
-    href={href}
+    href={resolvedHref}
     class:list={[
       'block bg-white rounded-2xl border border-neutral-200 overflow-hidden transition-all duration-200',
       hoverable && 'hover:border-neutral-300 hover:shadow-md hover:-translate-y-0.5',

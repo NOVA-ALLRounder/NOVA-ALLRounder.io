@@ -1,5 +1,26 @@
 ---
 const currentYear = new Date().getFullYear();
+const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const isUserSiteRepo = repo.endsWith('.github.io');
+const basePath = process.env.GITHUB_ACTIONS === 'true'
+  ? (isUserSiteRepo ? '/' : `/${repo}/`)
+  : '/';
+
+const withBase = (url: string) => {
+  if (
+    url.startsWith('http://') ||
+    url.startsWith('https://') ||
+    url.startsWith('mailto:') ||
+    url.startsWith('tel:') ||
+    url.startsWith('#')
+  ) {
+    return url;
+  }
+  if (!url.startsWith('/')) return url;
+
+  const clean = url.replace(/^\/+/, '');
+  return clean ? `${basePath}${clean}` : basePath;
+};
 
 const footerLinks = {
   Product: [
@@ -36,7 +57,7 @@ const footerLinks = {
             {links.map((link) => (
               <li>
                 <a
-                  href={link.href}
+                  href={withBase(link.href)}
                   class="text-sm text-neutral-500 hover:text-neutral-900 transition-colors"
                 >
                   {link.label}

@@ -5,6 +5,16 @@ import Footer from '../../components/Footer.astro';
 import Section from '../../components/ui/Section.astro';
 import Container from '../../components/ui/Container.astro';
 import Badge from '../../components/ui/Badge.astro';
+const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const isUserSiteRepo = repo.endsWith('.github.io');
+const basePath = process.env.GITHUB_ACTIONS === 'true'
+  ? (isUserSiteRepo ? '/' : `/${repo}/`)
+  : '/';
+const withBase = (url: string) => {
+  if (!url.startsWith('/')) return url;
+  const clean = url.replace(/^\/+/, '');
+  return clean ? `${basePath}${clean}` : basePath;
+};
 ---
 
 <BaseLayout title="AI 분류 모델 v3 출시 — NOVA Updates" description="NOVA 업데이트: AI 분류 모델 v3 출시 안내 (placeholder).">
@@ -13,7 +23,7 @@ import Badge from '../../components/ui/Badge.astro';
   <Section padding="large">
     <Container narrow>
       <article class="animate-on-scroll">
-        <a href="/updates" class="inline-flex items-center text-sm text-neutral-500 hover:text-neutral-900 mb-8">← Updates로 돌아가기</a>
+        <a href={withBase('/updates')} class="inline-flex items-center text-sm text-neutral-500 hover:text-neutral-900 mb-8">← Updates로 돌아가기</a>
         <div class="flex items-center gap-3 mb-4">
           <time datetime="2026-02-10" class="text-sm text-neutral-400">2026.02.10</time>
           <Badge text="새로운 기능" variant="accent" />

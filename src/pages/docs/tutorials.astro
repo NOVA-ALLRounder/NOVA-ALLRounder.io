@@ -1,5 +1,15 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const isUserSiteRepo = repo.endsWith('.github.io');
+const basePath = process.env.GITHUB_ACTIONS === 'true'
+  ? (isUserSiteRepo ? '/' : `/${repo}/`)
+  : '/';
+const withBase = (url: string) => {
+  if (!url.startsWith('/')) return url;
+  const clean = url.replace(/^\/+/, '');
+  return clean ? `${basePath}${clean}` : basePath;
+};
 ---
 
 <DocsLayout title="Tutorials" description="NOVA의 주요 기능을 단계별 튜토리얼로 학습하세요.">
@@ -33,5 +43,5 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
   </ul>
 
   <hr />
-  <p>더 많은 튜토리얼이 계속 추가됩니다. <a href="/updates">Updates</a>에서 새 콘텐츠를 확인하세요.</p>
+  <p>더 많은 튜토리얼이 계속 추가됩니다. <a href={withBase('/updates')}>Updates</a>에서 새 콘텐츠를 확인하세요.</p>
 </DocsLayout>

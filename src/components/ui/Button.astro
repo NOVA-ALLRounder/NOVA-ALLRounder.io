@@ -8,6 +8,27 @@ export interface Props {
 }
 
 const { variant = 'primary', size = 'md', href, class: className, ...rest } = Astro.props;
+const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const isUserSiteRepo = repo.endsWith('.github.io');
+const basePath = process.env.GITHUB_ACTIONS === 'true'
+  ? (isUserSiteRepo ? '/' : `/${repo}/`)
+  : '/';
+
+const withBase = (url: string) => {
+  if (
+    url.startsWith('http://') ||
+    url.startsWith('https://') ||
+    url.startsWith('mailto:') ||
+    url.startsWith('tel:') ||
+    url.startsWith('#')
+  ) {
+    return url;
+  }
+  if (!url.startsWith('/')) return url;
+
+  const clean = url.replace(/^\/+/, '');
+  return clean ? `${basePath}${clean}` : basePath;
+};
 
 const baseClasses = 'inline-flex items-center justify-center font-medium rounded-full transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500';
 
@@ -26,10 +47,11 @@ const sizeClasses = {
 const classes = [baseClasses, variantClasses[variant], sizeClasses[size], className].filter(Boolean).join(' ');
 
 const Tag = href ? 'a' : 'button';
+const resolvedHref = href ? withBase(href) : undefined;
 ---
 
 {href ? (
-  <a href={href} class={classes} {...rest}>
+  <a href={resolvedHref} class={classes} {...rest}>
     <slot />
   </a>
 ) : (
