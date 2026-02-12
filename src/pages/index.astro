@@ -22,49 +22,69 @@ const faqItems = [
   <Header slot="header" />
 
   <!-- Hero -->
-  <Section padding="large">
+  <Section padding="large" class="relative overflow-hidden bg-[#05081a] text-white">
+    <div aria-hidden="true" class="absolute inset-0">
+      <div class="absolute -top-32 left-1/2 h-96 w-[56rem] -translate-x-1/2 rounded-full bg-indigo-500/30 blur-3xl"></div>
+      <div class="absolute bottom-0 left-1/2 h-80 w-[44rem] -translate-x-1/2 rounded-full bg-blue-400/25 blur-3xl"></div>
+    </div>
     <Container>
-      <div class="text-center max-w-4xl mx-auto animate-on-scroll">
-        <p class="text-caption text-accent-600 font-medium tracking-wide uppercase mb-4">Intelligent Automation Platform</p>
-        <h1 class="text-h1 md:text-display text-neutral-900 mb-6 text-balance">
-          일의 흐름을<br class="hidden md:block" /> 완전히 바꾸다
+      <div class="relative text-center max-w-4xl mx-auto animate-on-scroll">
+        <p class="text-caption text-blue-200/80 font-medium tracking-wide uppercase mb-4">NOVA Platform</p>
+        <h1 class="text-h1 md:text-display text-white mb-6 text-balance">
+          The Future of Work<br class="hidden md:block" /> Happens in One Flow
         </h1>
-        <p class="text-body-lg text-neutral-500 max-w-2xl mx-auto mb-10">
-          NOVA는 복잡한 업무를 지능적으로 자동화합니다. 더 빠른 의사결정, 더 적은 실수, 무한한 확장성. 당신의 팀이 진짜 중요한 일에 집중할 수 있도록.
+        <p class="text-body-lg text-white/75 max-w-2xl mx-auto mb-10">
+          B2C와 B2B 모두를 위한 지능형 자동화. 개인의 생산성부터 기업 운영 체계까지, 하나의 플랫폼에서 연결하고 실행합니다.
         </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button variant="primary" size="lg" href="/docs/getting-started">시작하기</Button>
-          <Button variant="secondary" size="lg" href="/product">제품 알아보기</Button>
+
+        <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto_auto] gap-3 mb-8">
+          <label for="hero-email" class="sr-only">이메일</label>
+          <input
+            id="hero-email"
+            type="email"
+            placeholder="Enter your email"
+            class="w-full rounded-xl border border-white/25 bg-white/95 px-4 py-3.5 text-neutral-900 placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-emerald-400/50"
+          />
+          <Button variant="primary" size="lg" href="/docs/getting-started" class="bg-emerald-500 hover:bg-emerald-400 whitespace-nowrap">
+            시작하기
+          </Button>
+          <Button variant="secondary" size="lg" href="/product" class="bg-transparent border-white/40 text-white hover:bg-white/10 whitespace-nowrap">
+            데모 보기
+          </Button>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-3 text-xs text-white/60">
+          <span class="rounded-full border border-white/20 px-3 py-1">No credit card</span>
+          <span class="rounded-full border border-white/20 px-3 py-1">B2C + B2B Ready</span>
+          <span class="rounded-full border border-white/20 px-3 py-1">Secure by Design</span>
         </div>
       </div>
     </Container>
   </Section>
 
   <!-- Social Proof -->
-  <Section background="light">
+  <Section class="bg-[#090f2b]">
     <Container>
       <div class="animate-on-scroll">
-        <p class="text-center text-caption text-neutral-400 font-medium tracking-wide uppercase mb-10">
-          이미 수천 개의 팀이 신뢰합니다
+        <p class="text-center text-caption text-white/55 font-medium tracking-wide uppercase mb-10">
+          Trusted by teams of every size
         </p>
-        <!-- Logo Strip Placeholder -->
         <div class="flex flex-wrap items-center justify-center gap-8 md:gap-16 mb-16">
           {['Company A', 'Company B', 'Company C', 'Company D', 'Company E'].map((name) => (
-            <div class="flex items-center justify-center h-8 px-4 text-neutral-300 text-sm font-semibold tracking-wider uppercase">
+            <div class="flex items-center justify-center h-8 px-4 text-white/35 text-sm font-semibold tracking-wider uppercase">
               {name}
             </div>
           ))}
         </div>
-        <!-- Stats -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
           {[
             { value: '10,000+', label: '활성 사용자' },
             { value: '5M+', label: '월간 자동화 처리 건수' },
             { value: '99.9%', label: '업타임 SLA' },
           ].map((stat) => (
-            <div class="text-center">
-              <p class="text-h2 text-neutral-900 font-bold">{stat.value}</p>
-              <p class="text-caption text-neutral-500 mt-1">{stat.label}</p>
+            <div class="text-center rounded-2xl border border-white/10 bg-white/5 py-8">
+              <p class="text-h2 text-white font-bold">{stat.value}</p>
+              <p class="text-caption text-white/65 mt-1">{stat.label}</p>
             </div>
           ))}
         </div>
