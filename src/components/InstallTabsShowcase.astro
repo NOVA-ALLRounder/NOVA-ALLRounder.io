@@ -6,9 +6,43 @@ const installOptions = [
   { id: 'brew', label: 'brew', command: 'brew install rust && git clone https://github.com/NOVA-ALLRounder/main.git && cd main/core && cargo build --release' },
   { id: 'paru', label: 'paru', command: 'paru -S rustup nodejs npm && git clone https://github.com/NOVA-ALLRounder/main.git' },
 ];
+
+const terminalLines = [
+  { text: 'Clone <span class="text-neutral-300">NOVA-ALLRounder/main</span> repository', highlight: false },
+  { text: 'Open <span class="text-neutral-300">core/.env</span> and set OPENAI_API_KEY', highlight: false },
+  { text: 'Build core binary with <span class="text-neutral-300">cargo build --release</span>', highlight: false },
+  { text: 'Run core process: <span class="hl-green">./target/release/core</span>', highlight: true },
+  { text: 'Run validation tests with <span class="text-neutral-300">cargo test</span>', highlight: false },
+  { text: 'Build desktop bundle via <span class="text-neutral-300">./scripts/build_release.sh</span>', highlight: false },
+  { text: 'Deploy web/docs module after release artifacts are ready', highlight: false },
+];
+
+const fileTreeLines = [
+  'core/src/',
+  '├── main.rs',
+  '├── analyzer.rs',
+  '├── db.rs',
+  '├── policy.rs',
+  '├── executor.rs',
+  '├── llm_gateway.rs',
+  '├── notifier.rs',
+  '├── monitor.rs',
+  '├── applescript.rs',
+  '├── n8n_api.rs',
+  '├── visual_driver.rs',
+  '└── macos/',
+];
+
+const pipelineItems = [
+  { text: 'clone repository', done: true },
+  { text: 'configure .env', done: true },
+  { text: 'build core binary', done: true },
+  { text: 'run release bundle script', done: false, active: true },
+  { text: 'publish website updates', done: false },
+];
 ---
 
-<section class="animate-on-scroll">
+<section data-showcase-root class="animate-on-scroll">
   <div class="max-w-4xl mx-auto">
     <div class="space-y-2 mb-8">
       <p class="text-body-lg text-neutral-300">
@@ -17,6 +51,7 @@ const installOptions = [
       <p class="text-body-lg text-neutral-300">clone, 환경설정, 빌드, 테스트, 릴리스까지 한 흐름으로 확인할 수 있습니다.</p>
     </div>
 
+    <!-- Install Tabs -->
     <div
       data-install-tabs
       class="install-shell rounded-lg border border-white/10 bg-[#111318] overflow-hidden"
@@ -66,52 +101,51 @@ const installOptions = [
       </div>
     </div>
 
+    <!-- Showcase Panel -->
     <div class="mt-10 rounded-lg border border-white/10 overflow-hidden bg-[#0b0c10]">
       <div class="grid lg:grid-cols-[1fr_320px]">
+        <!-- Left: Terminal + File Tree -->
         <div class="border-b lg:border-b-0 lg:border-r border-white/10">
-          <div class="p-4 md:p-5 text-[12px] md:text-[13px] leading-6 text-neutral-500 font-mono">
-            <p>Clone <span class="text-neutral-300">NOVA-ALLRounder/main</span> repository</p>
-            <p>Open <span class="text-neutral-300">core/.env</span> and set OPENAI_API_KEY</p>
-            <p>Build core binary with <span class="text-neutral-300">cargo build --release</span></p>
-            <p class="text-[#8fd5a6]">Run core process: <span class="text-[#8fd5a6]">./target/release/core</span></p>
-            <p>Run validation tests with <span class="text-neutral-300">cargo test</span></p>
-            <p>Build desktop bundle via <span class="text-neutral-300">./scripts/build_release.sh</span></p>
-            <p>Deploy web/docs module after release artifacts are ready</p>
+          <!-- Terminal Lines -->
+          <div class="p-4 md:p-5 text-[12px] md:text-[13px] leading-6 text-neutral-500 font-mono" data-terminal-lines>
+            {terminalLines.map((line, i) => (
+              <p
+                class:list={[
+                  'sc-term-line',
+                  line.highlight && 'hl-green-line',
+                ]}
+                data-line-index={i}
+                set:html={line.text}
+              />
+            ))}
+            <span class="sc-cursor" data-terminal-cursor>▌</span>
           </div>
 
+          <!-- File Tree -->
           <div class="p-4 md:p-5 border-t border-white/10">
             <div class="relative rounded-md border border-white/10 bg-[#08090c] overflow-hidden">
-              <div class="absolute inset-y-0 left-[46%] w-[22%] bg-[#55d2ff22] border-y border-x border-[#55d2ff66]"></div>
-              <div class="absolute left-0 right-0 top-[47%] h-[2px] bg-[#9b6bff33]"></div>
-              <pre class="relative m-0 p-4 text-[11px] md:text-xs leading-6 text-neutral-500 overflow-x-auto"><code>{`core/src/
-├── main.rs
-├── analyzer.rs
-├── db.rs
-├── policy.rs
-├── executor.rs
-├── llm_gateway.rs
-├── notifier.rs
-├── monitor.rs
-├── applescript.rs
-├── n8n_api.rs
-├── visual_driver.rs
-└── macos/`}</code></pre>
+              <div class="sc-scan-overlay" data-scan-overlay></div>
+              <div class="sc-scan-hline" data-scan-hline></div>
+              <pre class="relative m-0 p-4 text-[11px] md:text-xs leading-6 text-neutral-500 overflow-x-auto" data-file-tree><code>{fileTreeLines.map((line, i) => (
+                <span class="sc-tree-line" data-tree-index={i}>{line + '\n'}</span>
+              ))}</code></pre>
             </div>
           </div>
         </div>
 
-        <aside class="p-4 md:p-5 bg-[#0f1116]">
-          <h3 class="text-neutral-100 text-sm md:text-base font-semibold mb-4">
+        <!-- Right: Sidebar -->
+        <aside class="p-4 md:p-5 bg-[#0f1116]" data-sidebar>
+          <h3 class="sc-sidebar-block text-neutral-100 text-sm md:text-base font-semibold mb-4" data-sb-index="0">
             Building NOVA-ALLRounder/main
           </h3>
           <div class="space-y-4 text-xs md:text-sm">
-            <div>
+            <div class="sc-sidebar-block" data-sb-index="1">
               <p class="text-neutral-500 mb-1">Repository</p>
               <p class="text-neutral-300">NOVA-ALLRounder/main</p>
               <p class="text-neutral-400">Branch: main</p>
               <p class="text-neutral-400">Rust Native Agent</p>
             </div>
-            <div>
+            <div class="sc-sidebar-block" data-sb-index="2">
               <p class="text-neutral-500 mb-1">Modules</p>
               <ul class="space-y-1 text-neutral-300">
                 <li>• core (Rust)</li>
@@ -119,14 +153,19 @@ const installOptions = [
                 <li>• web/docs</li>
               </ul>
             </div>
-            <div>
+            <div class="sc-sidebar-block" data-sb-index="3">
               <p class="text-neutral-500 mb-1">Pipeline</p>
-              <ul class="space-y-1 text-neutral-400">
-                <li>[x] clone repository</li>
-                <li>[x] configure .env</li>
-                <li>[x] build core binary</li>
-                <li class="text-[#8fd5a6]">[ ] run release bundle script</li>
-                <li>[ ] publish website updates</li>
+              <ul class="space-y-1 text-neutral-400" data-pipeline-list>
+                {pipelineItems.map((item, i) => (
+                  <li
+                    class:list={['sc-pipeline-item', item.active && 'text-[#8fd5a6]']}
+                    data-pipe-index={i}
+                    data-pipe-done={item.done ? 'true' : 'false'}
+                    data-pipe-active={item.active ? 'true' : 'false'}
+                  >
+                    <span class="sc-pipe-check" data-pipe-check>[ ]</span> {item.text}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -137,6 +176,7 @@ const installOptions = [
 </section>
 
 <style>
+  /* ── Tab styles ── */
   .install-tab[data-active='true']::after {
     content: '';
     position: absolute;
@@ -163,14 +203,141 @@ const installOptions = [
       overflow-x: auto;
       scrollbar-width: none;
     }
-
     .install-tablist::-webkit-scrollbar {
       display: none;
     }
   }
+
+  /* ── Green highlight ── */
+  .hl-green { color: #8fd5a6; }
+  .hl-green-line { color: #8fd5a6; }
+
+  /* ── Terminal lines — hidden initially ── */
+  .sc-term-line {
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  .sc-term-line.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── Blinking cursor ── */
+  .sc-cursor {
+    display: inline-block;
+    color: #8fd5a6;
+    font-size: 13px;
+    opacity: 0;
+    animation: none;
+  }
+  .sc-cursor.is-active {
+    opacity: 1;
+    animation: cursorBlink 0.7s step-end infinite;
+  }
+  @keyframes cursorBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* ── File tree lines ── */
+  .sc-tree-line {
+    opacity: 0;
+    transition: opacity 0.3s ease, color 0.3s ease;
+  }
+  .sc-tree-line.is-visible {
+    opacity: 1;
+  }
+  .sc-tree-line.is-scanned {
+    color: #88ccee;
+  }
+
+  /* ── Scanning overlay (vertical blue band) ── */
+  .sc-scan-overlay {
+    position: absolute;
+    left: 46%;
+    width: 22%;
+    top: 0;
+    height: 40%;
+    background: rgba(85, 210, 255, 0.08);
+    border: 1px solid rgba(85, 210, 255, 0.3);
+    opacity: 0;
+    z-index: 2;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  .sc-scan-overlay.is-active {
+    opacity: 1;
+    animation: scanVertical 3.5s ease-in-out infinite;
+  }
+  @keyframes scanVertical {
+    0%   { top: 0%; }
+    50%  { top: 60%; }
+    100% { top: 0%; }
+  }
+
+  /* ── Horizontal scan line ── */
+  .sc-scan-hline {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 47%;
+    height: 2px;
+    background: rgba(155, 107, 255, 0.15);
+    opacity: 0;
+    z-index: 2;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  .sc-scan-hline.is-active {
+    opacity: 1;
+    animation: hlinePulse 2.5s ease-in-out infinite;
+  }
+  @keyframes hlinePulse {
+    0%, 100% { opacity: 0.15; }
+    50%      { opacity: 0.5; }
+  }
+
+  /* ── Sidebar blocks ── */
+  .sc-sidebar-block {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .sc-sidebar-block.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── Pipeline items ── */
+  .sc-pipeline-item {
+    transition: color 0.3s ease;
+  }
+  .sc-pipe-check {
+    display: inline-block;
+    transition: transform 0.25s ease;
+  }
+  .sc-pipe-check.is-checked {
+    animation: checkPop 0.35s ease;
+  }
+  @keyframes checkPop {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.3); }
+    100% { transform: scale(1); }
+  }
+
+  /* ── Active pipeline glow ── */
+  .sc-pipeline-item[data-pipe-active='true'] .sc-pipe-check {
+    animation: activePulse 1.8s ease-in-out infinite;
+  }
+  @keyframes activePulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.5; }
+  }
 </style>
 
 <script>
+  // ── Tab switching (unchanged) ──
   const groups = document.querySelectorAll('[data-install-tabs]');
 
   groups.forEach((group) => {
@@ -180,7 +347,7 @@ const installOptions = [
 
     if (!tabs.length || !commandEl || !copyBtn) return;
 
-    const activateTab = (tab) => {
+    const activateTab = (tab: Element) => {
       tabs.forEach((t) => {
         const active = t === tab;
         t.setAttribute('aria-selected', String(active));
@@ -199,7 +366,7 @@ const installOptions = [
         event.preventDefault();
         const offset = event.key === 'ArrowRight' ? 1 : -1;
         const nextIndex = (index + offset + tabs.length) % tabs.length;
-        tabs[nextIndex].focus();
+        tabs[nextIndex]?.focus();
         activateTab(tabs[nextIndex]);
       });
     });
@@ -212,8 +379,136 @@ const installOptions = [
         copyBtn.classList.add('text-[#f5ee9b]');
         setTimeout(() => copyBtn.classList.remove('text-[#f5ee9b]'), 900);
       } catch {
-        // Clipboard permission may be blocked by browser settings.
+        // Clipboard permission may be blocked
       }
     });
   });
+
+  // ── Showcase animations ──
+  const root = document.querySelector('[data-showcase-root]');
+  if (root) {
+    const termLines = root.querySelectorAll('.sc-term-line');
+    const cursor = root.querySelector('[data-terminal-cursor]');
+    const treeLines = root.querySelectorAll('.sc-tree-line');
+    const scanOverlay = root.querySelector('[data-scan-overlay]');
+    const scanHline = root.querySelector('[data-scan-hline]');
+    const sidebarBlocks = root.querySelectorAll('.sc-sidebar-block');
+    const pipeChecks = root.querySelectorAll('.sc-pipe-check');
+    const pipeItems = root.querySelectorAll('.sc-pipeline-item');
+
+    let animationTimers: number[] = [];
+    let hasAnimated = false;
+
+    function resetAnimations() {
+      animationTimers.forEach((t) => clearTimeout(t));
+      animationTimers = [];
+      hasAnimated = false;
+
+      termLines.forEach((el) => el.classList.remove('is-visible'));
+      cursor?.classList.remove('is-active');
+      treeLines.forEach((el) => {
+        el.classList.remove('is-visible');
+        el.classList.remove('is-scanned');
+      });
+      scanOverlay?.classList.remove('is-active');
+      scanHline?.classList.remove('is-active');
+      sidebarBlocks.forEach((el) => el.classList.remove('is-visible'));
+      pipeChecks.forEach((el) => {
+        el.classList.remove('is-checked');
+        el.textContent = '[ ]';
+      });
+    }
+
+    function schedule(fn: () => void, delay: number) {
+      const id = window.setTimeout(fn, delay);
+      animationTimers.push(id);
+      return id;
+    }
+
+    function runAnimations() {
+      if (hasAnimated) return;
+      hasAnimated = true;
+
+      // 1. Terminal typing — lines appear one by one
+      const lineDelay = 280;
+      cursor?.classList.add('is-active');
+
+      termLines.forEach((line, i) => {
+        schedule(() => {
+          line.classList.add('is-visible');
+        }, i * lineDelay);
+      });
+
+      const termEndTime = termLines.length * lineDelay;
+
+      // Hide cursor after terminal done
+      schedule(() => {
+        cursor?.classList.remove('is-active');
+      }, termEndTime + 200);
+
+      // 2. File tree reveal — starts after terminal
+      const treeStartTime = termEndTime + 300;
+      const treeDelay = 120;
+
+      treeLines.forEach((line, i) => {
+        schedule(() => {
+          line.classList.add('is-visible');
+        }, treeStartTime + i * treeDelay);
+      });
+
+      const treeEndTime = treeStartTime + treeLines.length * treeDelay;
+
+      // 3. Scan overlay activates after tree is fully revealed
+      schedule(() => {
+        scanOverlay?.classList.add('is-active');
+        scanHline?.classList.add('is-active');
+      }, treeEndTime + 200);
+
+      // 4. Sidebar fade-in — staggered, starts alongside the tree
+      const sbStartTime = treeStartTime + 100;
+      const sbDelay = 250;
+
+      sidebarBlocks.forEach((block, i) => {
+        schedule(() => {
+          block.classList.add('is-visible');
+        }, sbStartTime + i * sbDelay);
+      });
+
+      // 5. Pipeline checkmarks — after sidebar is visible
+      const pipeStartTime = sbStartTime + sidebarBlocks.length * sbDelay + 300;
+      const pipeDelay = 400;
+
+      pipeItems.forEach((item, i) => {
+        const check = item.querySelector('.sc-pipe-check');
+        const isDone = item.getAttribute('data-pipe-done') === 'true';
+        const isActive = item.getAttribute('data-pipe-active') === 'true';
+
+        schedule(() => {
+          if (isDone && check) {
+            check.textContent = '[x]';
+            check.classList.add('is-checked');
+          } else if (isActive && check) {
+            check.textContent = '[ ]';
+            // Active item pulses via CSS
+          }
+        }, pipeStartTime + i * pipeDelay);
+      });
+    }
+
+    // IntersectionObserver — trigger on scroll into view
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            runAnimations();
+          } else {
+            resetAnimations();
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(root);
+  }
 </script>
