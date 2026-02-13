@@ -7,104 +7,133 @@ import Container from '../components/ui/Container.astro';
 import Button from '../components/ui/Button.astro';
 import StepCard from '../components/ui/StepCard.astro';
 import Table from '../components/ui/Table.astro';
+
+const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const isUserSiteRepo = repo.endsWith('.github.io');
+const basePath = process.env.GITHUB_ACTIONS === 'true'
+  ? (isUserSiteRepo ? '/' : `/${repo}/`)
+  : '/';
+const withBase = (url: string) => {
+  if (!url.startsWith('/')) return url;
+  const clean = url.replace(/^\/+/, '');
+  return clean ? `${basePath}${clean}` : basePath;
+};
 ---
 
-<BaseLayout title="Product — NOVA Local OS Agent" description="Rust 네이티브 행동 분석 에이전트의 아키텍처, 핵심 기능, 기술 스펙을 확인하세요.">
+<BaseLayout title="Product — NOVA" description="Rust 네이티브 행동 분석 에이전트. 아키텍처, 핵심 기능, 보안 모델, 기술 사양을 확인하세요.">
   <Header slot="header" />
 
+  <!-- Hero -->
   <Section padding="large">
     <Container>
       <div class="text-center max-w-4xl mx-auto animate-on-scroll">
         <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Product</p>
-        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">사용자 행동 기반 자동화 에이전트</h1>
+        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">행동 기반 자동화를<br class="hidden sm:block" />운영 환경에 적용하세요</h1>
         <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto mb-10">
-          컴퓨터 사용 패턴을 분석하여 자동화를 추천하고 실행합니다.
-          Rust 네이티브 코어, LLM 분석 엔진, n8n 워크플로우 오케스트레이션.
+          NOVA는 OS 수준의 사용 패턴을 분석하여 반복 업무를 자동으로 식별하고, 실행 가능한 워크플로우로 전환합니다. Rust 네이티브 코어, LLM 분석 엔진, 엔터프라이즈 보안 정책을 통합한 자동화 플랫폼입니다.
         </p>
-        <Button variant="primary" size="lg" href="/docs/getting-started">시작하기</Button>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <Button variant="primary" size="lg" href={withBase('/docs/getting-started')}>시작하기</Button>
+          <Button variant="ghost" size="lg" href={withBase('/pricing')}>플랜 비교</Button>
+        </div>
       </div>
     </Container>
   </Section>
 
+  <!-- How It Works -->
   <Section background="light">
     <Container>
       <div class="text-center mb-16 animate-on-scroll">
-        <h2 class="text-h2 text-neutral-100 mb-4">How It Works</h2>
-        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">OS 센서 → 패턴 분석 → 자동 실행의 세 단계로 동작합니다.</p>
+        <h2 class="text-h2 text-neutral-100 mb-4">작동 방식</h2>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">수집 → 분석 → 실행의 세 단계로 동작하며, 전 과정이 로컬에서 처리됩니다.</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-12 animate-on-scroll">
-        <StepCard step={1} title="Monitor" description="OS 센서(src/sensors/)가 앱 전환, 키 입력, 시스템 이벤트를 실시간으로 수집합니다." />
-        <StepCard step={2} title="Analyze" description="analyzer.rs + LLM이 행동 패턴을 분석하여 routine과 recommend 결과를 생성합니다." />
-        <StepCard step={3} title="Execute" description="control, exec, build_workflow 명령어로 앱 제어, 셸 실행, 워크플로우 생성을 자동화합니다." />
+        <StepCard step={1} title="Monitor" description="OS 센서가 애플리케이션 전환, 입력 패턴, 시스템 이벤트를 실시간으로 수집합니다. 모든 데이터는 로컬 SQLite에 저장됩니다." />
+        <StepCard step={2} title="Analyze" description="LLM 기반 분석 엔진이 행동 패턴을 식별하고, 자동화 가능한 반복 루틴을 추천합니다." />
+        <StepCard step={3} title="Execute" description="승인된 자동화를 즉시 실행합니다. 앱 제어, 셸 명령, n8n 워크플로우 생성을 지원합니다." />
       </div>
     </Container>
   </Section>
 
+  <!-- Feature 01: Pattern Detection -->
   <Section>
     <Container>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center animate-on-scroll">
         <div>
-          <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">Core Feature 01</p>
-          <h2 class="text-h2 text-neutral-100 mb-4">반복 작업 자동 감지</h2>
+          <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">Intelligent Detection</p>
+          <h2 class="text-h2 text-neutral-100 mb-4">반복 작업을 자동으로 감지합니다</h2>
           <div class="space-y-6 text-body text-neutral-300">
             <div>
-              <h3 class="text-h4 text-neutral-100 mb-2">Problem</h3>
-              <p>매일 반복하는 앱 전환, 명령어 실행, 파일 정리를 수동으로 처리하느라 시간을 낭비합니다.</p>
+              <h3 class="text-h4 text-neutral-100 mb-2">문제</h3>
+              <p>매일 동일한 앱 전환, 명령어 실행, 파일 관리를 수동으로 반복하는 것은 누적 생산성 손실로 이어집니다.</p>
             </div>
             <div>
-              <h3 class="text-h4 text-neutral-100 mb-2">Solution</h3>
-              <p><code class="text-accent-300">routine</code> 명령어가 OS 센서 데이터를 분석하여 반복 패턴을 식별하고, <code class="text-accent-300">recommend</code>가 자동화를 추천합니다.</p>
+              <h3 class="text-h4 text-neutral-100 mb-2">해결</h3>
+              <p><code class="text-accent-300">routine</code> 명령어가 OS 센서 데이터를 기반으로 반복 패턴을 식별하고, <code class="text-accent-300">recommend</code>가 최적의 자동화를 추천합니다.</p>
             </div>
             <div>
-              <h3 class="text-h4 text-neutral-100 mb-2">Effect</h3>
-              <p>사용자가 인식하지 못한 반복 패턴을 자동 발견하여, 수작업 시간을 대폭 줄입니다.</p>
+              <h3 class="text-h4 text-neutral-100 mb-2">효과</h3>
+              <p>사용자가 인식하지 못한 반복 패턴까지 자동 발견하여 수작업 시간을 대폭 절감합니다.</p>
             </div>
           </div>
         </div>
         <div class="bg-[#14161b] rounded-lg border border-white/10 p-6 font-mono text-sm text-neutral-400">
+          <div class="flex items-center gap-2 mb-4 pb-3 border-b border-white/5">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f57]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#febc2e]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#28c840]"></span>
+            <span class="ml-2 text-xs text-neutral-600">nova-agent</span>
+          </div>
           <p class="text-neutral-500 mb-2">$ core routine</p>
-          <p class="text-neutral-300">🔍 분석된 반복 패턴 (최근 7일):</p>
+          <p class="text-neutral-300">분석된 반복 패턴 (최근 7일):</p>
           <p class="ml-4">1. VS Code → Terminal → git commit (3회/일)</p>
           <p class="ml-4">2. Slack → Chrome → Google Docs (5회/일)</p>
           <p class="ml-4">3. Finder → Terminal → npm run dev (4회/일)</p>
           <p class="text-neutral-500 mt-4 mb-2">$ core recommend</p>
-          <p class="text-[#8fd5a6]">💡 추천 자동화 3건:</p>
+          <p class="text-[#8fd5a6]">추천 자동화 3건:</p>
           <p class="text-neutral-300 ml-4">→ git auto-commit 워크플로우</p>
-          <p class="text-neutral-300 ml-4">→ 문서 리뷰 알림</p>
+          <p class="text-neutral-300 ml-4">→ 문서 리뷰 알림 자동화</p>
           <p class="text-neutral-300 ml-4">→ dev server 원클릭 실행</p>
         </div>
       </div>
     </Container>
   </Section>
 
+  <!-- Feature 02: App Control + Security -->
   <Section background="light">
     <Container>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center animate-on-scroll">
         <div class="order-2 lg:order-1 bg-[#14161b] rounded-lg border border-white/10 p-6 font-mono text-sm text-neutral-400">
+          <div class="flex items-center gap-2 mb-4 pb-3 border-b border-white/5">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f57]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#febc2e]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#28c840]"></span>
+            <span class="ml-2 text-xs text-neutral-600">nova-agent</span>
+          </div>
           <p class="text-neutral-500 mb-2">$ core control Safari open</p>
-          <p class="text-neutral-300">✅ Safari 실행 완료 (applescript.rs)</p>
+          <p class="text-neutral-300">[OK] Safari 실행 완료 (applescript.rs)</p>
           <p class="text-neutral-500 mt-3 mb-2">$ core build_workflow "매일 9시 슬랙 알림"</p>
-          <p class="text-neutral-300">🔧 LLM 분석 중... (llm_gateway.rs)</p>
-          <p class="text-neutral-300">📦 n8n 워크플로우 생성 (n8n_api.rs)</p>
-          <p class="text-[#8fd5a6]">✅ workflow_2026-02-12.json 저장</p>
+          <p class="text-neutral-300">LLM 분석 중... (llm_gateway.rs)</p>
+          <p class="text-neutral-300">n8n 워크플로우 생성 (n8n_api.rs)</p>
+          <p class="text-[#8fd5a6]">[OK] workflow_2026-02-12.json 저장</p>
           <p class="text-neutral-500 mt-3 mb-2">$ core exec "rm -rf /"</p>
-          <p class="text-red-400">🚫 policy.rs: 위험 명령어 차단</p>
+          <p class="text-red-400">[BLOCKED] policy.rs: 위험 명령어 차단</p>
         </div>
         <div class="order-1 lg:order-2">
-          <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">Core Feature 02</p>
-          <h2 class="text-h2 text-neutral-100 mb-4">앱 제어 + 보안 정책</h2>
+          <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">Security & Control</p>
+          <h2 class="text-h2 text-neutral-100 mb-4">보안 정책이 내장된 자동화</h2>
           <div class="space-y-6 text-body text-neutral-300">
             <div>
-              <h3 class="text-h4 text-neutral-100 mb-2">Problem</h3>
-              <p>앱 전환, 명령어 실행을 수동으로 하며, 위험한 자동화가 실수로 실행될 수 있습니다.</p>
+              <h3 class="text-h4 text-neutral-100 mb-2">문제</h3>
+              <p>무제한적인 자동화 실행은 데이터 손실, 시스템 오류, 보안 사고로 이어질 수 있습니다.</p>
             </div>
             <div>
-              <h3 class="text-h4 text-neutral-100 mb-2">Solution</h3>
-              <p><code class="text-accent-300">control &lt;app&gt; &lt;cmd&gt;</code>로 앱을 제어하고, <code class="text-accent-300">build_workflow</code>로 자연어 워크플로우를 생성합니다. policy.rs가 위험한 명령을 차단합니다.</p>
+              <h3 class="text-h4 text-neutral-100 mb-2">해결</h3>
+              <p><code class="text-accent-300">policy.rs</code> 기반 정책 엔진이 위험 명령어를 자동 차단하고, Write Lock이 파일 시스템 변경을 통제합니다. <code class="text-accent-300">control</code> 명령어는 허가된 범위 내에서만 앱을 제어합니다.</p>
             </div>
             <div>
-              <h3 class="text-h4 text-neutral-100 mb-2">Effect</h3>
-              <p>안전하게 자동화를 실행하고, 보안 정책으로 실수를 사전에 방지합니다.</p>
+              <h3 class="text-h4 text-neutral-100 mb-2">효과</h3>
+              <p>자동화 실행 중 발생할 수 있는 위험을 사전에 차단하여, 운영 환경에서의 안정성을 보장합니다.</p>
             </div>
           </div>
         </div>
@@ -112,47 +141,146 @@ import Table from '../components/ui/Table.astro';
     </Container>
   </Section>
 
+  <!-- Feature 03: Workflow Generation -->
+  <Section>
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center animate-on-scroll">
+        <div>
+          <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">Workflow Generation</p>
+          <h2 class="text-h2 text-neutral-100 mb-4">자연어 한 줄로 워크플로우를 생성합니다</h2>
+          <div class="space-y-6 text-body text-neutral-300">
+            <div>
+              <h3 class="text-h4 text-neutral-100 mb-2">문제</h3>
+              <p>복잡한 워크플로우를 설계하고 노드를 하나씩 연결하는 과정에는 상당한 시간과 기술 지식이 요구됩니다.</p>
+            </div>
+            <div>
+              <h3 class="text-h4 text-neutral-100 mb-2">해결</h3>
+              <p><code class="text-accent-300">build_workflow</code> 명령어에 자연어 프롬프트를 입력하면, LLM이 의도를 분석하여 n8n 호환 워크플로우를 자동 생성합니다.</p>
+            </div>
+            <div>
+              <h3 class="text-h4 text-neutral-100 mb-2">효과</h3>
+              <p>워크플로우 설계에 필요한 시간을 수십 분에서 수초로 단축하고, 기술 배경 없이도 복잡한 자동화를 구현할 수 있습니다.</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-[#14161b] rounded-lg border border-white/10 p-6 font-mono text-sm text-neutral-400">
+          <div class="flex items-center gap-2 mb-4 pb-3 border-b border-white/5">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f57]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#febc2e]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#28c840]"></span>
+            <span class="ml-2 text-xs text-neutral-600">nova-agent</span>
+          </div>
+          <p class="text-neutral-500 mb-2">$ core build_workflow "매주 월요일 9시에 KPI 리포트를 Slack에 전송"</p>
+          <p class="text-neutral-300 mt-2">LLM 분석 중...</p>
+          <p class="text-neutral-300">n8n 워크플로우 생성:</p>
+          <p class="text-neutral-400 ml-4">├─ Trigger: Schedule (월요일 09:00 KST)</p>
+          <p class="text-neutral-400 ml-4">├─ Action: Google Sheets → Read KPI</p>
+          <p class="text-neutral-400 ml-4">├─ Action: Format → Markdown Report</p>
+          <p class="text-neutral-400 ml-4">└─ Action: Slack → #team-weekly</p>
+          <p class="text-[#8fd5a6] mt-3">[OK] workflow_weekly_kpi.json 생성 완료</p>
+          <p class="text-neutral-500 mt-3">n8n Dashboard: http://localhost:5678</p>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- B2C / B2B Split -->
+  <Section background="light">
+    <Container>
+      <div class="text-center mb-16 animate-on-scroll">
+        <h2 class="text-h2 text-neutral-100 mb-4">개인부터 팀까지</h2>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">규모에 맞는 자동화 전략을 제공합니다.</p>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 animate-on-scroll">
+        <!-- B2C -->
+        <div class="product-segment-card">
+          <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">For Individuals</p>
+          <h3 class="text-h3 text-neutral-100 mb-3">반복을 자동화하고, 핵심 업무에 집중하세요</h3>
+          <p class="text-body text-neutral-400 mb-6">개인 워크플로우를 분석하여 자동화 기회를 발견하고, CLI 한 줄로 실행합니다.</p>
+          <ul class="space-y-3 mb-8">
+            {[
+              { cmd: 'routine', desc: '반복 행동 패턴 분석 및 자동화 기회 식별' },
+              { cmd: 'recommend', desc: 'AI 기반 맞춤형 자동화 추천' },
+              { cmd: 'control', desc: '애플리케이션 실행, 전환, 종료를 CLI로 제어' },
+              { cmd: 'build_workflow', desc: '자연어 프롬프트로 n8n 워크플로우 자동 생성' },
+            ].map((item) => (
+              <li class="flex items-start gap-3 text-body text-neutral-300">
+                <svg class="w-5 h-5 text-accent-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                <span><code class="text-accent-300 text-sm">{item.cmd}</code> — {item.desc}</span>
+              </li>
+            ))}
+          </ul>
+          <Button variant="primary" href={withBase('/docs/getting-started')}>무료로 시작하기</Button>
+        </div>
+
+        <!-- B2B -->
+        <div class="product-segment-card">
+          <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">For Teams & Enterprise</p>
+          <h3 class="text-h3 text-neutral-100 mb-3">팀 전체에 자동화를 배포하고 통합 관리하세요</h3>
+          <p class="text-body text-neutral-400 mb-6">데스크톱 앱 배포, 워크플로우 중앙 관리, 역할 기반 접근 제어를 지원합니다.</p>
+          <ul class="space-y-3 mb-8">
+            {[
+              'Tauri 기반 데스크톱 앱(.app / .exe)으로 팀원에게 원클릭 배포',
+              'n8n 워크플로우 공유 및 버전 관리를 통한 팀 자동화 표준화',
+              'RBAC 기반 역할 관리 — 관리자, 편집자, 뷰어 권한 분리',
+              'Self-Healing Guardian이 에이전트 프로세스 가동률 보장',
+            ].map((item) => (
+              <li class="flex items-start gap-3 text-body text-neutral-300">
+                <svg class="w-5 h-5 text-accent-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <Button variant="primary" href={withBase('/solutions')}>솔루션 살펴보기</Button>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Technical Spec -->
   <Section>
     <Container>
       <div class="animate-on-scroll">
         <div class="text-center mb-12">
-          <h2 class="text-h2 text-neutral-100 mb-4">기술 스펙</h2>
-          <p class="text-body-lg text-neutral-400">Rust 네이티브 에이전트의 실제 아키텍처 구성요소.</p>
+          <h2 class="text-h2 text-neutral-100 mb-4">기술 사양</h2>
+          <p class="text-body-lg text-neutral-400">NOVA 에이전트의 아키텍처 구성 요소와 기술 스택입니다.</p>
         </div>
         <Table>
           <thead>
             <tr>
-              <th>구분</th>
-              <th>스펙</th>
+              <th>구성 요소</th>
+              <th>기술 스택</th>
+              <th>상세</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>Core Runtime</td><td>Rust native binary (<code>cargo build --release</code>)</td></tr>
-            <tr><td>LLM Engine</td><td>OpenAI API (llm_gateway.rs) — 행동 패턴 분석 및 워크플로우 생성</td></tr>
-            <tr><td>Storage</td><td>SQLite (steer.db) — 이벤트, 집약, 일일 요약 저장</td></tr>
-            <tr><td>Workflow</td><td>n8n (Docker/NPX) — REST API 기반 워크플로우 오케스트레이션</td></tr>
-            <tr><td>Desktop</td><td>Tauri — macOS .app / Windows .exe 번들 생성</td></tr>
-            <tr><td>Security</td><td>policy.rs — 위험 키워드 차단, Write Lock, RBAC 정책 엔진</td></tr>
-            <tr><td>Monitoring</td><td>Rust Collector — 5분 집약, 일일 요약, retention cleanup</td></tr>
-            <tr><td>Self-Healing</td><td>steer-guardian.sh — 크래시 시 자동 재시작 supervisor</td></tr>
-            <tr><td>OS Support</td><td>macOS 12+ (primary), Windows (run_core.ps1)</td></tr>
-            <tr><td>Requirements</td><td>Rust 1.70+, OpenAI API Key, Accessibility 권한 (macOS)</td></tr>
+            <tr><td>Core Runtime</td><td>Rust native binary</td><td><code>cargo build --release</code>로 컴파일, 단일 바이너리 배포</td></tr>
+            <tr><td>LLM Engine</td><td>OpenAI API</td><td>GPT-4 / GPT-3.5 기반 행동 패턴 분석, 워크플로우 생성</td></tr>
+            <tr><td>Storage</td><td>SQLite (steer.db)</td><td>이벤트 로그, 5분 집약, 일일 요약, 감사 로그 저장</td></tr>
+            <tr><td>Orchestration</td><td>n8n (Docker / NPX)</td><td>REST API 기반 워크플로우 오케스트레이션, 시각적 편집기</td></tr>
+            <tr><td>Desktop Bundle</td><td>Tauri</td><td>macOS .app / Windows .exe 네이티브 데스크톱 앱 생성</td></tr>
+            <tr><td>Security</td><td>policy.rs</td><td>위험 키워드 차단, Write Lock, RBAC 정책 엔진</td></tr>
+            <tr><td>Data Pipeline</td><td>Rust Collector</td><td>5분 집약, 일일 요약, retention cleanup 자동 실행</td></tr>
+            <tr><td>Reliability</td><td>Self-Healing Guardian</td><td>프로세스 크래시 시 자동 재시작, 헬스체크 모니터링</td></tr>
+            <tr><td>OS Support</td><td>macOS / Windows</td><td>macOS 12+ (primary), Windows 10+ (PowerShell)</td></tr>
+            <tr><td>Requirements</td><td>Rust 1.70+</td><td>OpenAI API Key, Accessibility 권한 (macOS)</td></tr>
           </tbody>
         </Table>
       </div>
     </Container>
   </Section>
 
+  <!-- CTA -->
   <Section background="dark">
     <Container>
       <div class="text-center animate-on-scroll">
-        <h2 class="text-h2 text-white mb-4">직접 실행해보세요</h2>
+        <h2 class="text-h2 text-white mb-4">직접 확인해 보세요</h2>
         <p class="text-body-lg text-neutral-400 max-w-xl mx-auto mb-10">
-          Getting Started 가이드를 따라 5분 안에 첫 번째 자동화를 실행하세요.
+          Getting Started 가이드에 따라 5분 이내에 첫 번째 자동화를 실행할 수 있습니다.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button variant="primary" size="lg" href="/docs/getting-started">시작하기</Button>
-          <Button variant="ghost" size="lg" href="/solutions">Solutions 보기</Button>
+          <Button variant="primary" size="lg" href={withBase('/docs/getting-started')}>시작하기</Button>
+          <Button variant="ghost" size="lg" href={withBase('/contact')}>영업팀 문의</Button>
         </div>
       </div>
     </Container>
@@ -160,3 +288,17 @@ import Table from '../components/ui/Table.astro';
 
   <Footer slot="footer" />
 </BaseLayout>
+
+<style>
+  .product-segment-card {
+    background: var(--site-bg-soft);
+    border: 1px solid var(--site-border);
+    border-radius: 0.875rem;
+    padding: 2rem;
+  }
+  @media (min-width: 768px) {
+    .product-segment-card {
+      padding: 2.5rem;
+    }
+  }
+</style>

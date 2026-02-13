@@ -33,27 +33,27 @@ import Card from '../components/ui/Card.astro';
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 animate-on-scroll">
         {[
           {
-            icon: '🔍',
             title: '패턴 기반 자동화',
             desc: 'routine/recommend 명령어로 반복 행동 패턴을 분석하고, LLM이 자동화를 추천합니다. 세션/루틴/핸드오프 배치로 데이터를 정제합니다.',
             metric: 'build_sessions → build_routines → build_handoff',
+            icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
           },
           {
-            icon: '🖥️',
             title: 'OS 수준 통합',
             desc: 'applescript.rs로 macOS 앱을 직접 제어하고, visual_driver.rs로 UI 자동화를 수행합니다. OS 센서(src/sensors/)가 시스템 이벤트를 실시간 수집합니다.',
             metric: 'control <app> <cmd> — 앱 제어 CLI',
+            icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
           },
           {
-            icon: '⚡',
             title: '워크플로우 오케스트레이션',
             desc: 'build_workflow로 자연어 기반 n8n 워크플로우를 자동 생성합니다. Docker/NPX 모드 지원, REST API 기반 실행.',
             metric: 'n8n API + LLM Gateway 연동',
+            icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
           },
         ].map((useCase) => (
           <Card hoverable={false}>
             <div class="p-8">
-              <span class="text-3xl mb-4 block">{useCase.icon}</span>
+              <span class="w-10 h-10 flex items-center justify-center rounded-lg bg-white/5 border border-white/10 text-accent-300 mb-4" set:html={useCase.icon} />
               <h3 class="text-h3 text-neutral-100 mb-3">{useCase.title}</h3>
               <p class="text-body text-neutral-400 mb-4">{useCase.desc}</p>
               <p class="text-caption text-accent-300 font-medium font-mono">{useCase.metric}</p>
