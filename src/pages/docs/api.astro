@@ -2,45 +2,289 @@
 import DocsLayout from '../../layouts/DocsLayout.astro';
 ---
 
-<DocsLayout title="API Reference" description="NOVA REST API의 엔드포인트, 파라미터, 응답 형식을 확인합니다.">
+<DocsLayout title="API Reference" description="NOVA REST API v2의 엔드포인트, 인증, 요청/응답 형식을 확인합니다.">
   <h1>API Reference</h1>
-  <p>NOVA REST API v2 문서입니다. 모든 API는 JSON 형식을 사용하며, Bearer 토큰 인증이 필요합니다.</p>
+  <p class="doc-subtitle">NOVA REST API v2 문서입니다. 모든 API 호출은 JSON 형식을 사용하며 Bearer 토큰 인증이 필요합니다.</p>
 
   <h2>인증</h2>
-  <p>모든 API 요청에는 <code>Authorization</code> 헤더가 필요합니다.</p>
-  <pre><code>Authorization: Bearer YOUR_API_KEY</code></pre>
-  <p>API 키는 대시보드 → 설정 → API 키에서 발급받을 수 있습니다.</p>
+
+  <p>모든 API 요청에는 <code>Authorization</code> 헤더가 필요합니다:</p>
+
+  <pre><code>{`Authorization: Bearer YOUR_API_KEY`}</code></pre>
+
+  <p>API 키는 <strong>대시보드 → 설정 → API 키</strong>에서 생성할 수 있습니다. 키는 생성 시 한 번만 표시되므로 안전한 곳에 보관하세요.</p>
+
+  <div class="doc-callout doc-callout-warning">
+    <strong>⚠️ 보안:</strong> API 키를 클라이언트 사이드 코드나 공개 저장소에 노출하지 마세요. 서버 사이드 호출 또는 환경변수를 사용하세요.
+  </div>
 
   <h2>Base URL</h2>
+
   <pre><code>https://api.nova-platform.io/v2</code></pre>
 
-  <h2>엔드포인트</h2>
+  <p>모든 엔드포인트는 이 Base URL을 기준으로 합니다.</p>
 
-  <h3>POST /automations</h3>
+  <h2>Rate Limits</h2>
+
+  <table>
+    <thead>
+      <tr><th>플랜</th><th>분당 호출</th><th>일일 한도</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Individual</td><td>60회</td><td>10,000회</td></tr>
+      <tr><td>Team</td><td>300회</td><td>50,000회</td></tr>
+      <tr><td>Enterprise</td><td>협의</td><td>무제한</td></tr>
+    </tbody>
+  </table>
+
+  <p>한도 초과 시 <code>429 Too Many Requests</code> 응답이 반환됩니다. <code>Retry-After</code> 헤더를 확인하세요.</p>
+
+  <h2>Automations</h2>
+
+  <h3><span class="doc-badge doc-badge-post">POST</span> /automations</h3>
+
   <p>새 자동화를 생성합니다.</p>
+
+  <h4>Request Body</h4>
+
   <pre><code>{`{
-  "name": "my-automation",
+  "name": "email-classifier",
+  "description": "수신 이메일을 자동 분류하고 Slack 알림 전송",
   "trigger": {
     "type": "webhook",
-    "config": {}
+    "config": {
+      "path": "/incoming-email",
+      "method": "POST"
+    }
   },
   "actions": [
     {
       "type": "classify",
-      "model": "default"
+      "model": "default",
+      "categories": ["중요", "일반", "광고"]
+    },
+    {
+      "type": "notify",
+      "channel": "slack",
+      "config": {
+        "webhook_url": "https://hooks.slack.com/...",
+        "template": "새 {{category}} 이메일: {{subject}}"
+      }
     }
   ]
 }`}</code></pre>
 
-  <h3>GET /automations</h3>
-  <p>워크스페이스의 모든 자동화 목록을 반환합니다.</p>
+  <h4>Response — <code>201 Created</code></h4>
 
-  <h3>GET /automations/:id/runs</h3>
-  <p>특정 자동화의 실행 이력을 반환합니다. 페이지네이션을 지원합니다.</p>
+  <pre><code>{`{
+  "id": "auto_7kX2mN9pQ4",
+  "name": "email-classifier",
+  "status": "active",
+  "created_at": "2026-02-13T06:30:00Z",
+  "trigger": { "type": "webhook", "url": "https://api.nova-platform.io/v2/hooks/auto_7kX2mN9pQ4" },
+  "runs_count": 0
+}`}</code></pre>
 
-  <h3>DELETE /automations/:id</h3>
-  <p>자동화를 삭제합니다. 삭제된 자동화의 실행 이력은 보관 기간 동안 유지됩니다.</p>
+  <h4>Error Responses</h4>
+
+  <table>
+    <thead>
+      <tr><th>코드</th><th>설명</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>400</code></td><td>잘못된 요청 — 필수 필드 누락 또는 유효하지 않은 값</td></tr>
+      <tr><td><code>401</code></td><td>인증 실패 — API 키가 유효하지 않음</td></tr>
+      <tr><td><code>422</code></td><td>처리 불가 — 제공된 구성이 유효하지 않음</td></tr>
+      <tr><td><code>429</code></td><td>Rate Limit 초과</td></tr>
+    </tbody>
+  </table>
 
   <hr />
-  <p>전체 API 스펙은 OpenAPI 형식으로도 제공됩니다. (준비 중)</p>
+
+  <h3><span class="doc-badge doc-badge-get">GET</span> /automations</h3>
+
+  <p>워크스페이스의 모든 자동화 목록을 반환합니다.</p>
+
+  <h4>Query Parameters</h4>
+
+  <table>
+    <thead>
+      <tr><th>파라미터</th><th>타입</th><th>기본값</th><th>설명</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>page</code></td><td>integer</td><td>1</td><td>페이지 번호</td></tr>
+      <tr><td><code>per_page</code></td><td>integer</td><td>20</td><td>페이지당 항목 수 (최대 100)</td></tr>
+      <tr><td><code>status</code></td><td>string</td><td>all</td><td>필터: <code>active</code>, <code>paused</code>, <code>error</code></td></tr>
+      <tr><td><code>sort</code></td><td>string</td><td>created_at</td><td>정렬 기준: <code>created_at</code>, <code>name</code>, <code>runs_count</code></td></tr>
+    </tbody>
+  </table>
+
+  <h4>Response — <code>200 OK</code></h4>
+
+  <pre><code>{`{
+  "data": [
+    {
+      "id": "auto_7kX2mN9pQ4",
+      "name": "email-classifier",
+      "status": "active",
+      "runs_count": 1247,
+      "last_run_at": "2026-02-13T06:15:00Z",
+      "created_at": "2026-01-15T09:00:00Z"
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "per_page": 20,
+    "total": 8,
+    "total_pages": 1
+  }
+}`}</code></pre>
+
+  <hr />
+
+  <h3><span class="doc-badge doc-badge-get">GET</span> /automations/:id</h3>
+
+  <p>특정 자동화의 상세 정보를 반환합니다. 트리거 설정, 액션 구성, 실행 통계를 포함합니다.</p>
+
+  <hr />
+
+  <h3><span class="doc-badge doc-badge-patch">PATCH</span> /automations/:id</h3>
+
+  <p>자동화의 설정을 부분 업데이트합니다. <code>name</code>, <code>description</code>, <code>trigger</code>, <code>actions</code>, <code>status</code> 필드를 변경할 수 있습니다.</p>
+
+  <pre><code>{`{
+  "status": "paused"
+}`}</code></pre>
+
+  <hr />
+
+  <h3><span class="doc-badge doc-badge-delete">DELETE</span> /automations/:id</h3>
+
+  <p>자동화를 삭제합니다. 삭제된 자동화의 실행 이력은 <strong>90일간</strong> 보관된 후 영구 삭제됩니다.</p>
+
+  <h4>Response — <code>204 No Content</code></h4>
+  <p>성공 시 응답 본문 없음.</p>
+
+  <hr />
+
+  <h2>Runs (실행 이력)</h2>
+
+  <h3><span class="doc-badge doc-badge-get">GET</span> /automations/:id/runs</h3>
+
+  <p>특정 자동화의 실행 이력을 반환합니다.</p>
+
+  <h4>Query Parameters</h4>
+
+  <table>
+    <thead>
+      <tr><th>파라미터</th><th>타입</th><th>기본값</th><th>설명</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>page</code></td><td>integer</td><td>1</td><td>페이지 번호</td></tr>
+      <tr><td><code>per_page</code></td><td>integer</td><td>50</td><td>페이지당 항목 수 (최대 200)</td></tr>
+      <tr><td><code>status</code></td><td>string</td><td>all</td><td>필터: <code>success</code>, <code>error</code>, <code>running</code></td></tr>
+      <tr><td><code>since</code></td><td>ISO 8601</td><td>—</td><td>시작 일시</td></tr>
+      <tr><td><code>until</code></td><td>ISO 8601</td><td>—</td><td>종료 일시</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Response — <code>200 OK</code></h4>
+
+  <pre><code>{`{
+  "data": [
+    {
+      "id": "run_aB3cD4eF5g",
+      "status": "success",
+      "started_at": "2026-02-13T06:15:00Z",
+      "finished_at": "2026-02-13T06:15:02Z",
+      "duration_ms": 2140,
+      "trigger_data": { "source": "webhook", "ip": "203.0.113.1" },
+      "result": { "classified_as": "중요", "notified": true }
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "per_page": 50,
+    "total": 1247,
+    "total_pages": 25
+  }
+}`}</code></pre>
+
+  <hr />
+
+  <h2>Classifiers (AI 분류 모델)</h2>
+
+  <h3><span class="doc-badge doc-badge-post">POST</span> /classifiers</h3>
+
+  <p>커스텀 AI 분류 모델을 생성합니다.</p>
+
+  <pre><code>{`{
+  "name": "inquiry-classifier",
+  "categories": ["기술", "결제", "일반", "긴급"],
+  "training_data": [
+    { "text": "로그인이 안 됩니다", "label": "기술" },
+    { "text": "결제 내역을 확인하고 싶습니다", "label": "결제" },
+    { "text": "서비스 이용 시간을 알고 싶습니다", "label": "일반" }
+  ]
+}`}</code></pre>
+
+  <h3><span class="doc-badge doc-badge-get">GET</span> /classifiers</h3>
+  <p>등록된 모든 분류 모델을 조회합니다.</p>
+
+  <h3><span class="doc-badge doc-badge-post">POST</span> /classifiers/:id/predict</h3>
+  <p>텍스트를 분류합니다. 분류 결과와 신뢰도 점수를 반환합니다.</p>
+
+  <pre><code>{`// Request
+{ "text": "비밀번호를 변경하고 싶습니다" }
+
+// Response
+{
+  "prediction": "기술",
+  "confidence": 0.92,
+  "alternatives": [
+    { "category": "일반", "confidence": 0.06 },
+    { "category": "결제", "confidence": 0.02 }
+  ]
+}`}</code></pre>
+
+  <hr />
+
+  <h2>Webhooks</h2>
+
+  <h3>재시도 정책</h3>
+  <p>Webhook 전송 실패 시 지수 백오프(exponential backoff) 방식으로 재시도합니다:</p>
+
+  <table>
+    <thead>
+      <tr><th>시도</th><th>대기 시간</th><th>최대 대기</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1차 재시도</td><td>1초</td><td>—</td></tr>
+      <tr><td>2차 재시도</td><td>4초</td><td>—</td></tr>
+      <tr><td>3차 재시도</td><td>16초</td><td>—</td></tr>
+      <tr><td>4차 재시도</td><td>64초</td><td>—</td></tr>
+      <tr><td>5차 재시도</td><td>256초</td><td>5분</td></tr>
+    </tbody>
+  </table>
+
+  <p>5회 재시도 후에도 실패하면 해당 실행은 <code>error</code> 상태로 기록됩니다.</p>
+
+  <hr />
+
+  <h2>SDKs & 도구</h2>
+
+  <table>
+    <thead>
+      <tr><th>언어/도구</th><th>패키지</th><th>상태</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>cURL</td><td>—</td><td>✅ 지원</td></tr>
+      <tr><td>Python</td><td><code>pip install nova-sdk</code></td><td>🚧 준비 중</td></tr>
+      <tr><td>Node.js</td><td><code>npm install @nova/sdk</code></td><td>🚧 준비 중</td></tr>
+      <tr><td>OpenAPI Spec</td><td>YAML / JSON export</td><td>🚧 준비 중</td></tr>
+    </tbody>
+  </table>
+
+  <hr />
+  <p>API에 대한 질문이 있거나 추가 엔드포인트가 필요하다면 <a href="https://github.com/NOVA-ALLRounder/main/issues">GitHub Issues</a>에서 요청하세요.</p>
 </DocsLayout>

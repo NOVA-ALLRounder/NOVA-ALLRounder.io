@@ -5,54 +5,83 @@ import Footer from '../../components/Footer.astro';
 import Section from '../../components/ui/Section.astro';
 import Container from '../../components/ui/Container.astro';
 import Card from '../../components/ui/Card.astro';
+import Button from '../../components/ui/Button.astro';
+
+const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const isUserSiteRepo = repo.endsWith('.github.io');
+const basePath = process.env.GITHUB_ACTIONS === 'true'
+  ? (isUserSiteRepo ? '/' : `/${repo}/`)
+  : '/';
+const withBase = (url: string) => {
+  if (!url.startsWith('/')) return url;
+  const clean = url.replace(/^\/+/, '');
+  return clean ? `${basePath}${clean}` : basePath;
+};
 
 const categories = [
   {
-    title: '시작 가이드',
-    desc: '설치부터 첫 자동화 실행까지.',
+    title: 'Getting Started',
+    desc: '설치부터 첫 자동화 실행까지. 5분이면 시작할 수 있습니다.',
     href: '/docs/getting-started',
-    icon: '01',
+    icon: '🚀',
+    tag: '추천',
   },
   {
-    title: '튜토리얼',
-    desc: '주요 시나리오별 단계별 실습 가이드.',
+    title: 'Tutorials',
+    desc: '이메일 자동 분류, 리포트 생성 등 실전 시나리오별 가이드.',
     href: '/docs/tutorials',
-    icon: '02',
+    icon: '📖',
+    tag: null,
   },
   {
-    title: 'API 레퍼런스',
-    desc: '엔드포인트, 파라미터, 연동 패턴.',
+    title: 'API Reference',
+    desc: '엔드포인트, 파라미터, 요청/응답 예시. OpenAPI 스펙 포함.',
     href: '/docs/api',
-    icon: '03',
+    icon: '⚡',
+    tag: null,
   },
   {
     title: 'FAQ',
-    desc: '제품 및 배포 관련 자주 묻는 질문.',
+    desc: '설치, 보안, 데이터 수집에 관한 자주 묻는 질문.',
     href: '/docs/faq',
-    icon: '04',
+    icon: '💬',
+    tag: null,
   },
   {
-    title: '변경 이력',
-    desc: '릴리스 노트 및 버전별 업데이트.',
+    title: 'Changelog',
+    desc: '릴리스 노트, 새 기능, 버그 수정 내역.',
     href: '/docs/changelog',
-    icon: '05',
+    icon: '📋',
+    tag: '최신',
   },
+];
+
+const popularDocs = [
+  { title: '5분 만에 첫 자동화 실행하기', href: '/docs/getting-started', category: 'Getting Started' },
+  { title: '이메일 자동 분류기 만들기', href: '/docs/tutorials', category: 'Tutorial' },
+  { title: 'POST /automations — 자동화 생성 API', href: '/docs/api', category: 'API' },
+  { title: 'Webhook 재시도 정책', href: '/docs/faq', category: 'FAQ' },
 ];
 ---
 
 <BaseLayout title="문서 - NOVA" description="시작 가이드, 튜토리얼, API 레퍼런스, 릴리스 업데이트를 위한 공식 문서.">
   <Header slot="header" />
 
+  <!-- Hero -->
   <Section padding="large">
     <Container>
       <div class="text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
-        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">문서</p>
-        <h1 class="text-h1 text-neutral-100 mb-6">확신을 갖고 빌드하고, 명확하게 배포하세요</h1>
-        <p class="text-body-lg text-neutral-400">
-          온보딩, 구현, 운영 롤아웃을 위한 체계적인 문서.
+        <p class="accent-pill mb-5">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:-2px;margin-right:4px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Documentation
+        </p>
+        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">필요한 모든 답을<br class="hidden sm:block" /> 한 곳에서</h1>
+        <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto">
+          설치, 구성, 자동화 구축까지 — NOVA를 완전히 활용하기 위한 공식 문서입니다.
         </p>
       </div>
 
+      <!-- Search -->
       <div class="max-w-xl mx-auto mb-16 animate-on-scroll">
         <div class="relative">
           <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -60,27 +89,181 @@ const categories = [
           </svg>
           <input
             type="search"
-            placeholder="문서 검색 (준비 중)"
+            placeholder="문서 검색..."
             disabled
-            class="w-full pl-12 pr-4 py-3.5 bg-[#14161b] rounded-lg border border-white/10 text-body text-neutral-500 cursor-not-allowed"
+            class="w-full pl-12 pr-4 py-3.5 bg-[#14161b] rounded-lg border border-white/10 text-body text-neutral-500 cursor-not-allowed focus:border-[var(--site-accent)]/40 transition-colors"
             aria-label="문서 검색"
           />
+          <span class="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-neutral-600 border border-white/10 rounded px-1.5 py-0.5 font-mono">⌘K</span>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-on-scroll">
+      <!-- Category Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 animate-on-scroll">
         {categories.map((cat) => (
-          <Card href={cat.href}>
-            <div class="p-6">
-              <span class="inline-flex items-center justify-center w-9 h-9 rounded-md bg-white/10 text-neutral-200 text-xs font-semibold mb-3">{cat.icon}</span>
-              <h2 class="text-h4 text-neutral-100 mb-2">{cat.title}</h2>
-              <p class="text-caption text-neutral-400">{cat.desc}</p>
+          <a href={withBase(cat.href)} class="docs-category-card group">
+            <div class="flex items-start justify-between mb-3">
+              <span class="docs-category-icon">{cat.icon}</span>
+              {cat.tag && <span class="docs-category-tag">{cat.tag}</span>}
             </div>
-          </Card>
+            <h2 class="text-[1.0625rem] font-semibold text-neutral-100 mb-1.5 group-hover:text-white transition-colors">{cat.title}</h2>
+            <p class="text-[0.8125rem] text-neutral-400 leading-relaxed">{cat.desc}</p>
+            <span class="docs-category-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </a>
         ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Quick Start Preview -->
+  <Section background="light">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center animate-on-scroll">
+        <div>
+          <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">퀵스타트</p>
+          <h2 class="text-h2 text-neutral-100 mb-4">3개 명령어로 시작하세요</h2>
+          <p class="text-body-lg text-neutral-400 mb-6">
+            저장소를 클론하고, 환경변수를 설정하고, 빌드하면 끝입니다. 당신의 첫 번째 자동화가 기다리고 있습니다.
+          </p>
+          <Button variant="primary" href={withBase('/docs/getting-started')}>전체 가이드 보기</Button>
+        </div>
+        <div class="bg-[#0a0b0e] rounded-lg border border-white/10 p-5 font-mono text-sm">
+          <div class="flex items-center gap-2 mb-4 pb-3 border-b border-white/5">
+            <span class="w-3 h-3 rounded-full bg-[#ff5f57]"></span>
+            <span class="w-3 h-3 rounded-full bg-[#febc2e]"></span>
+            <span class="w-3 h-3 rounded-full bg-[#28c840]"></span>
+            <span class="ml-2 text-xs text-neutral-600">Terminal</span>
+          </div>
+          <p class="text-neutral-500">
+            <span class="text-neutral-400">$</span> git clone https://github.com/NOVA-ALLRounder/main.git
+          </p>
+          <p class="text-neutral-500 mt-1">
+            <span class="text-neutral-400">$</span> cd main/core && cp .env.example .env
+          </p>
+          <p class="text-neutral-500 mt-1">
+            <span class="text-neutral-400">$</span> cargo build --release
+          </p>
+          <p class="text-[#8fd5a6] mt-3">✓ Build complete — ./target/release/core</p>
+          <p class="text-neutral-500 mt-3">
+            <span class="text-neutral-400">$</span> ./target/release/core
+          </p>
+          <p class="text-[#8fd5a6] mt-1">🚀 NOVA Agent ready. Type 'help' for commands.</p>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Popular Docs -->
+  <Section>
+    <Container>
+      <div class="animate-on-scroll">
+        <div class="text-center mb-10">
+          <h2 class="text-h2 text-neutral-100 mb-3">인기 문서</h2>
+          <p class="text-body text-neutral-400">가장 많이 조회된 문서를 확인하세요.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+          {popularDocs.map((doc) => (
+            <a href={withBase(doc.href)} class="docs-popular-item group">
+              <div>
+                <span class="text-[0.6875rem] font-semibold uppercase tracking-wider text-accent-300">{doc.category}</span>
+                <p class="text-[0.9375rem] text-neutral-200 font-medium mt-1 group-hover:text-white transition-colors">{doc.title}</p>
+              </div>
+              <svg class="w-4 h-4 text-neutral-500 group-hover:text-neutral-300 transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- CTA -->
+  <Section background="dark">
+    <Container narrow>
+      <div class="text-center animate-on-scroll">
+        <h2 class="text-h2 text-white mb-4">찾으시는 내용이 없으신가요?</h2>
+        <p class="text-body-lg text-neutral-400 mb-8">
+          GitHub에서 이슈를 등록하거나, 팀에 직접 문의할 수 있습니다.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <Button variant="primary" href="https://github.com/NOVA-ALLRounder/main/issues" external>GitHub Issues</Button>
+          <Button variant="ghost" href={withBase('/contact')}>문의하기</Button>
+        </div>
       </div>
     </Container>
   </Section>
 
   <Footer slot="footer" />
 </BaseLayout>
+
+<style>
+  .docs-category-card {
+    position: relative;
+    display: block;
+    padding: 1.5rem;
+    background: var(--site-bg-soft);
+    border: 1px solid var(--site-border);
+    border-radius: 0.75rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    overflow: hidden;
+  }
+  .docs-category-card:hover {
+    border-color: rgba(245, 238, 155, 0.2);
+    background: var(--site-bg-raised);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+  .docs-category-icon {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 0.5rem;
+  }
+  .docs-category-tag {
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.1875rem 0.5rem;
+    border-radius: 999px;
+    background: rgba(245, 238, 155, 0.1);
+    color: var(--site-accent-strong);
+    border: 1px solid rgba(245, 238, 155, 0.2);
+  }
+  .docs-category-arrow {
+    position: absolute;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    color: var(--site-text-muted);
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: all 0.2s;
+  }
+  .docs-category-card:hover .docs-category-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .docs-popular-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--site-bg-soft);
+    border: 1px solid var(--site-border);
+    border-radius: 0.625rem;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .docs-popular-item:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+    background: var(--site-bg-raised);
+  }
+</style>
