@@ -33,11 +33,24 @@ export default {
       },
       fontFamily: {
         sans: [
-          'IBM Plex Mono',
-          'IBM Plex Sans KR',
+          'Pretendard Variable',
           'Pretendard',
-          'Apple SD Gothic Neo',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'system-ui',
+          'Helvetica Neue',
           'sans-serif',
+        ],
+        display: [
+          'Space Grotesk',
+          'Pretendard Variable',
+          'sans-serif',
+        ],
+        mono: [
+          'JetBrains Mono',
+          'SF Mono',
+          'Fira Code',
+          'monospace',
         ],
       },
       fontSize: {
