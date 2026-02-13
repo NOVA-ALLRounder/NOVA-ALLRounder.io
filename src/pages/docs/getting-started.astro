@@ -12,35 +12,35 @@ const withBase = (url: string) => {
 };
 ---
 
-<DocsLayout title="Getting Started" description="NOVA 에이전트를 설치하고 첫 자동화를 실행하는 완전한 가이드입니다.">
+<DocsLayout title="Getting Started" description="NOVA 에이전트를 설치하고 첫 자동화를 실행하기 위한 기술 가이드입니다.">
   <h1>Getting Started</h1>
-  <p class="doc-subtitle">NOVA Local OS Agent를 설치하고 첫 자동화를 실행하세요. 이 가이드는 <strong>약 5분</strong>이 소요됩니다.</p>
+  <p class="doc-subtitle">NOVA Local OS Agent의 설치, 구성, 실행 전 과정을 안내합니다. 예상 소요 시간은 약 <strong>5분</strong>입니다.</p>
 
   <div class="doc-callout">
-    <strong>💡 이 가이드에서 다루는 내용:</strong> 환경 준비 → 설치 & 빌드 → 에이전트 실행 → 핵심 명령어 사용 → 워크플로우 확장
+    <strong>이 가이드에서 다루는 내용:</strong> 환경 준비 → 설치 및 빌드 → 에이전트 실행 → 핵심 명령어 사용 → 워크플로우 확장
   </div>
 
   <h2>사전 요구사항</h2>
 
-  <p>시작하기 전에 다음 항목이 준비되어 있는지 확인하세요.</p>
+  <p>시작하기 전에 다음 환경이 준비되어 있는지 확인하십시오.</p>
 
   <table>
     <thead>
       <tr><th>항목</th><th>요구사항</th><th>비고</th></tr>
     </thead>
     <tbody>
-      <tr><td><strong>운영체제</strong></td><td>macOS 12+ (Monterey) / Windows 10+</td><td>Linux 빌드도 가능</td></tr>
+      <tr><td><strong>운영체제</strong></td><td>macOS 12+ (Monterey) / Windows 10+</td><td>Linux 빌드 지원</td></tr>
       <tr><td><strong>Rust</strong></td><td>1.70 이상</td><td><a href="https://rustup.rs">rustup.rs</a>에서 설치</td></tr>
-      <tr><td><strong>OpenAI API Key</strong></td><td>GPT-4 또는 GPT-3.5</td><td>LLM 분석에 필요</td></tr>
+      <tr><td><strong>OpenAI API Key</strong></td><td>GPT-4 또는 GPT-3.5</td><td>LLM 분석 모듈에 필요</td></tr>
       <tr><td><strong>Git</strong></td><td>최신 버전</td><td>저장소 클론용</td></tr>
     </tbody>
   </table>
 
   <div class="doc-callout doc-callout-warning">
-    <strong>⚠️ macOS 사용자:</strong> 시스템 환경설정 → 개인정보 보호 및 보안 → 손쉬운 사용에서 터미널 앱에 권한을 부여해야 합니다. 이 권한이 없으면 OS 센서 데이터를 수집할 수 없습니다.
+    <strong>macOS 사용자 주의:</strong> 시스템 환경설정 → 개인정보 보호 및 보안 → 손쉬운 사용에서 터미널 앱에 권한을 부여해야 합니다. 이 권한이 없으면 OS 센서 데이터를 수집할 수 없습니다.
   </div>
 
-  <h2>Step 1 — 저장소 클론 & 환경 설정</h2>
+  <h2>Step 1 — 저장소 클론 및 환경 설정</h2>
 
   <p>GitHub에서 NOVA 저장소를 클론하고 환경변수를 구성합니다.</p>
 
@@ -51,7 +51,7 @@ cd main/core
 # 환경변수 파일 생성
 cp .env.example .env`}</code></pre>
 
-  <p><code>.env</code> 파일을 열고 다음 값을 설정하세요:</p>
+  <p><code>.env</code> 파일을 편집하여 다음 값을 설정합니다:</p>
 
   <pre><code>{`# .env
 OPENAI_API_KEY=sk-your-api-key-here
@@ -59,12 +59,12 @@ STEER_DB_PATH=./steer.db
 STEER_COLLECTOR_PORT=8080`}</code></pre>
 
   <div class="doc-callout doc-callout-info">
-    <strong>ℹ️ 팁:</strong> API Key가 없다면 <a href="https://platform.openai.com/api-keys">OpenAI 대시보드</a>에서 발급받을 수 있습니다. 첫 번째 사용에는 GPT-3.5로도 충분합니다.
+    <strong>참고:</strong> API Key가 없는 경우 <a href="https://platform.openai.com/api-keys">OpenAI 대시보드</a>에서 발급받을 수 있습니다. 초기 테스트에는 GPT-3.5 모델로 충분합니다.
   </div>
 
   <h2>Step 2 — 빌드</h2>
 
-  <p>Rust 네이티브 바이너리를 빌드합니다. Release 빌드는 약 2~3분 소요됩니다.</p>
+  <p>Rust 네이티브 바이너리를 빌드합니다. Release 빌드는 약 2~3분이 소요됩니다.</p>
 
   <pre><code>{`# Release 빌드 (최적화된 바이너리)
 cargo build --release
@@ -72,81 +72,80 @@ cargo build --release
 # 빌드 완료 후 바이너리 위치
 # → ./target/release/core`}</code></pre>
 
-  <p>빌드가 성공하면 <code>./target/release/core</code> 바이너리가 생성됩니다.</p>
+  <p>빌드가 완료되면 <code>./target/release/core</code> 경로에 실행 파일이 생성됩니다.</p>
 
   <h2>Step 3 — 에이전트 실행</h2>
 
   <h3>macOS</h3>
-  <pre><code>{`# 에이전트 실행
-./target/release/core`}</code></pre>
+  <pre><code>{`./target/release/core`}</code></pre>
 
   <h3>Windows</h3>
-  <p>Windows에서는 PowerShell 스크립트를 사용합니다:</p>
+  <p>Windows 환경에서는 PowerShell 스크립트를 사용합니다:</p>
   <pre><code>{`.\\scripts\\run_core.ps1 -CollectorImpl rust`}</code></pre>
 
-  <p>실행하면 다음과 같은 프롬프트가 표시됩니다:</p>
+  <p>정상적으로 실행되면 다음과 같은 프롬프트가 표시됩니다:</p>
 
-  <pre><code>{`🚀 NOVA Agent v2.4.0 ready
-📊 Collector: running on port 8080
-🔒 Write Lock: enabled (use 'unlock' to disable)
+  <pre><code>{`NOVA Agent v2.4.0 ready
+Collector: running on port 8080
+Write Lock: enabled (use 'unlock' to disable)
 Type 'help' for available commands.
 
 >`}</code></pre>
 
-  <h2>Step 4 — 핵심 명령어 사용하기</h2>
+  <h2>Step 4 — 핵심 명령어</h2>
 
-  <p>에이전트가 실행되면 다음 명령어를 사용할 수 있습니다.</p>
+  <p>에이전트가 실행된 상태에서 다음 명령어를 사용할 수 있습니다.</p>
 
   <table>
     <thead>
-      <tr><th>명령어</th><th>설명</th><th>예시</th></tr>
+      <tr><th>명령어</th><th>설명</th><th>사용 예시</th></tr>
     </thead>
     <tbody>
-      <tr><td><code>routine</code></td><td>반복 패턴 분석 결과 확인</td><td><code>routine</code></td></tr>
+      <tr><td><code>routine</code></td><td>반복 패턴 분석 결과 조회</td><td><code>routine</code></td></tr>
       <tr><td><code>recommend</code></td><td>AI 기반 자동화 추천</td><td><code>recommend</code></td></tr>
       <tr><td><code>status</code></td><td>시스템 상태 확인</td><td><code>status</code></td></tr>
-      <tr><td><code>control</code></td><td>앱 제어 (실행/전환/종료)</td><td><code>control Safari open</code></td></tr>
+      <tr><td><code>control</code></td><td>애플리케이션 제어</td><td><code>control Safari open</code></td></tr>
       <tr><td><code>exec</code></td><td>셸 명령 실행 (보안 정책 적용)</td><td><code>exec "echo hello"</code></td></tr>
-      <tr><td><code>build_workflow</code></td><td>자연어로 워크플로우 생성</td><td><code>build_workflow "매일 9시 Slack 알림"</code></td></tr>
+      <tr><td><code>build_workflow</code></td><td>자연어 기반 워크플로우 생성</td><td><code>build_workflow "매일 9시 Slack 알림"</code></td></tr>
     </tbody>
   </table>
 
-  <h3>첫 번째 명령어 실행</h3>
+  <h3>패턴 분석 및 자동화 추천</h3>
 
-  <p>먼저 에이전트가 현재 수집한 패턴을 확인해 보세요:</p>
+  <p><code>routine</code> 명령어로 수집된 사용 패턴을 확인하고, <code>recommend</code>로 AI 기반 자동화를 추천받을 수 있습니다:</p>
 
   <pre><code>{`> routine
 
-🔍 분석된 반복 패턴 (최근 7일):
+분석된 반복 패턴 (최근 7일):
   1. VS Code → Terminal → git commit  (매일 3회)
   2. Slack → Chrome → Google Docs     (매일 5회)
   3. Finder → Terminal → npm run dev   (매일 4회)
 
 > recommend
 
-💡 추천 자동화 3건:
+추천 자동화 3건:
   → git auto-commit 워크플로우 생성
   → 문서 리뷰 알림 자동화
   → dev server 원클릭 실행`}</code></pre>
 
   <h3>자연어 워크플로우 생성</h3>
 
-  <p><code>build_workflow</code> 명령어로 자연어 프롬프트를 n8n 워크플로우로 변환할 수 있습니다:</p>
+  <p><code>build_workflow</code> 명령어는 자연어 프롬프트를 n8n 호환 워크플로우로 변환합니다:</p>
 
   <pre><code>{`> build_workflow "매일 아침 9시에 Slack 채널에 일간 리포트 전송"
 
-🔧 LLM 분석 중...
-📦 n8n 워크플로우 생성 중...
-✅ workflow_daily_report.json 생성 완료
+LLM 분석 중...
+n8n 워크플로우 생성 중...
+workflow_daily_report.json 생성 완료
 
 워크플로우가 n8n에 등록되었습니다.
 Dashboard: http://localhost:5678`}</code></pre>
 
-  <h2>Step 5 — 워크플로우 확장 (선택)</h2>
+  <h2>Step 5 — 워크플로우 확장 (선택 사항)</h2>
 
   <h3>n8n 워크플로우 오케스트레이션</h3>
 
-  <p>n8n을 사용하면 더 복잡한 멀티스텝 워크플로우를 시각적으로 관리할 수 있습니다.</p>
+  <p>n8n을 연동하면 복잡한 멀티스텝 워크플로우를 시각적 인터페이스로 관리할 수 있습니다.</p>
 
   <pre><code>{`# Docker로 n8n 실행
 docker compose up -d n8n
@@ -159,9 +158,9 @@ docker compose up -d n8n
 # STEER_N8N_RUNTIME=npx
 # STEER_N8N_RUNTIME=manual`}</code></pre>
 
-  <h3>데이터 수집 & 패턴 분석</h3>
+  <h3>데이터 수집 및 배치 분석</h3>
 
-  <p>Rust Collector로 OS 센서 데이터를 수집하고 배치 분석을 실행할 수 있습니다:</p>
+  <p>Rust Collector로 OS 센서 데이터를 수집하고, 배치 파이프라인으로 분석합니다:</p>
 
   <pre><code>{`# Collector 단독 실행
 cargo build --manifest-path core/Cargo.toml --bin collector_rs
@@ -174,7 +173,7 @@ STEER_DB_PATH=./steer.db ./core/target/debug/collector_rs
 
   <h3>데스크톱 앱 빌드 (Tauri)</h3>
 
-  <p>팀에 배포할 데스크톱 앱(.app / .exe)을 빌드합니다:</p>
+  <p>팀 배포용 데스크톱 애플리케이션(.app / .exe)을 빌드할 수 있습니다:</p>
 
   <pre><code>{`# Production 빌드
 ./scripts/build_release.sh
@@ -187,14 +186,14 @@ STEER_DB_PATH=./steer.db ./core/target/debug/collector_rs
 
   <h2>다음 단계</h2>
 
-  <p>축하합니다! 🎉 첫 번째 NOVA 자동화를 성공적으로 실행했습니다. 이제 다음을 시도해 보세요:</p>
+  <p>첫 번째 자동화 실행을 완료했습니다. 다음 문서를 통해 서비스를 심층적으로 활용할 수 있습니다:</p>
 
   <ul>
-    <li><a href={withBase('/docs/tutorials')}>Tutorials</a> — 이메일 자동 분류, 주간 리포트 생성 등 실전 가이드</li>
-    <li><a href={withBase('/docs/api')}>API Reference</a> — REST API를 활용한 프로그래밍 방식 자동화</li>
+    <li><a href={withBase('/docs/tutorials')}>Tutorials</a> — 이메일 자동 분류, 주간 리포트 생성 등 실전 시나리오 가이드</li>
+    <li><a href={withBase('/docs/api')}>API Reference</a> — REST API를 활용한 프로그래밍 방식의 자동화 관리</li>
     <li><a href={withBase('/docs/faq')}>FAQ</a> — 자주 묻는 질문과 트러블슈팅</li>
   </ul>
 
   <hr />
-  <p>문제가 발생했나요? <a href="https://github.com/NOVA-ALLRounder/main/issues">GitHub Issues</a>에서 도움을 받거나 <a href={withBase('/contact')}>팀에 직접 문의</a>하세요.</p>
+  <p>문제가 발생한 경우 <a href="https://github.com/NOVA-ALLRounder/main/issues">GitHub Issues</a>에서 도움을 받거나 <a href={withBase('/contact')}>기술팀에 직접 문의</a>하실 수 있습니다.</p>
 </DocsLayout>

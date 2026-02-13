@@ -12,41 +12,41 @@ const withBase = (url: string) => {
 };
 ---
 
-<DocsLayout title="Tutorials" description="NOVA의 핵심 기능을 실전 시나리오로 학습하는 단계별 튜토리얼입니다.">
+<DocsLayout title="Tutorials" description="NOVA의 핵심 기능을 실제 업무 시나리오로 학습하는 단계별 튜토리얼입니다.">
   <h1>Tutorials</h1>
-  <p class="doc-subtitle">실제 업무 시나리오를 기반으로 NOVA의 핵심 기능을 단계별로 익혀보세요. 기초부터 고급까지, 난이도별로 구성되어 있습니다.</p>
+  <p class="doc-subtitle">실제 업무 시나리오를 기반으로 NOVA의 핵심 기능을 학습합니다. 기초부터 고급까지 난이도별로 구성되어 있습니다.</p>
 
   <div class="doc-callout">
-    <strong>📋 사전 준비:</strong> 모든 튜토리얼은 <a href={withBase('/docs/getting-started')}>Getting Started</a> 가이드를 완료한 상태를 기준으로 합니다.
+    <strong>사전 준비:</strong> 모든 튜토리얼은 <a href={withBase('/docs/getting-started')}>Getting Started</a> 가이드를 완료한 상태를 기준으로 합니다.
   </div>
 
-  <h2>기초 튜토리얼</h2>
+  <h2>Basic</h2>
 
-  <h3>📧 이메일 자동 분류기 만들기</h3>
+  <h3>이메일 자동 분류기 구성</h3>
 
   <table>
     <tbody>
       <tr><td><strong>소요 시간</strong></td><td>약 15분</td></tr>
-      <tr><td><strong>난이도</strong></td><td>⭐ 초급</td></tr>
+      <tr><td><strong>난이도</strong></td><td>초급</td></tr>
       <tr><td><strong>필요 커넥터</strong></td><td>Gmail, Slack</td></tr>
       <tr><td><strong>학습 내용</strong></td><td>트리거 설정, 규칙 기반 분류, Slack 알림 연동</td></tr>
     </tbody>
   </table>
 
-  <p>수신 이메일을 규칙 기반으로 자동 분류하고, 중요 메일을 Slack으로 알림 보내는 워크플로우를 구성합니다.</p>
+  <p>수신 이메일을 규칙 기반으로 자동 분류하고, 중요 메일을 Slack으로 알림 전송하는 워크플로우를 구성합니다.</p>
 
   <h4>Step 1 — 이메일 트리거 설정</h4>
   <p><code>build_workflow</code> 명령어로 이메일 분류 워크플로우의 기본 구조를 생성합니다:</p>
   <pre><code>{`> build_workflow "Gmail 수신 이메일을 카테고리별로 분류하고 중요 이메일은 Slack으로 알림"
 
-🔧 LLM 분석 중...
-📦 n8n 워크플로우 생성:
+LLM 분석 중...
+n8n 워크플로우 생성:
   ├─ Trigger: Gmail — New Email
   ├─ Action: AI Classify (카테고리: 중요/일반/광고)
   ├─ Condition: 카테고리 == "중요"
   └─ Action: Slack — Send Message (#important)
 
-✅ workflow_email_classifier.json 생성 완료`}</code></pre>
+workflow_email_classifier.json 생성 완료`}</code></pre>
 
   <h4>Step 2 — 분류 규칙 커스터마이징</h4>
   <p>n8n 대시보드(<code>http://localhost:5678</code>)에서 생성된 워크플로우를 열고 분류 규칙을 조정합니다:</p>
@@ -61,12 +61,12 @@ const withBase = (url: string) => {
 
   <hr />
 
-  <h3>📊 주간 리포트 자동 생성</h3>
+  <h3>주간 리포트 자동 생성</h3>
 
   <table>
     <tbody>
       <tr><td><strong>소요 시간</strong></td><td>약 30분</td></tr>
-      <tr><td><strong>난이도</strong></td><td>⭐⭐ 중급</td></tr>
+      <tr><td><strong>난이도</strong></td><td>중급</td></tr>
       <tr><td><strong>필요 커넥터</strong></td><td>Google Sheets, Slack</td></tr>
       <tr><td><strong>학습 내용</strong></td><td>스케줄 트리거, 데이터 수집, 리포트 포맷팅</td></tr>
     </tbody>
@@ -77,14 +77,14 @@ const withBase = (url: string) => {
   <h4>Step 1 — 스케줄 트리거 구성</h4>
   <pre><code>{`> build_workflow "매주 월요일 오전 9시에 Google Sheets에서 KPI를 수집하여 Slack에 주간 리포트 전송"
 
-🔧 LLM 분석 중...
-📦 n8n 워크플로우 생성:
+LLM 분석 중...
+n8n 워크플로우 생성:
   ├─ Trigger: Schedule — 매주 월요일 09:00 KST
   ├─ Action: Google Sheets — Read KPI Data
   ├─ Action: Format — 마크다운 리포트 생성
   └─ Action: Slack — Post to #team-weekly
 
-✅ workflow_weekly_report.json 생성 완료`}</code></pre>
+workflow_weekly_report.json 생성 완료`}</code></pre>
 
   <h4>Step 2 — 데이터 소스 연결</h4>
   <p>n8n 대시보드에서 Google Sheets 커넥터를 설정하고 KPI 데이터가 있는 시트를 연결합니다. 여러 시트의 데이터를 하나의 리포트로 통합할 수 있습니다.</p>
@@ -94,33 +94,33 @@ const withBase = (url: string) => {
   <ul>
     <li>주간 매출 변화 (전주 대비 %)</li>
     <li>신규 사용자 수 및 이탈률</li>
-    <li>목표 대비 달성률 바 차트</li>
+    <li>목표 대비 달성률</li>
     <li>주요 이슈 및 액션 아이템</li>
   </ul>
 
   <hr />
 
-  <h2>고급 튜토리얼</h2>
+  <h2>Advanced</h2>
 
-  <h3>🤖 AI 기반 고객 문의 라우팅</h3>
+  <h3>AI 기반 고객 문의 라우팅</h3>
 
   <table>
     <tbody>
       <tr><td><strong>소요 시간</strong></td><td>약 45분</td></tr>
-      <tr><td><strong>난이도</strong></td><td>⭐⭐⭐ 고급</td></tr>
+      <tr><td><strong>난이도</strong></td><td>고급</td></tr>
       <tr><td><strong>필요 커넥터</strong></td><td>Webhook, Slack, REST API</td></tr>
       <tr><td><strong>학습 내용</strong></td><td>AI 분류 모델, Webhook 통합, 조건부 라우팅</td></tr>
     </tbody>
   </table>
 
-  <p>AI 분류 모델을 활용하여 고객 문의를 자동으로 담당 팀에 배정합니다. 커스텀 모델 학습 방법도 다룹니다.</p>
+  <p>AI 분류 모델을 활용하여 고객 문의를 자동으로 담당 팀에 배정합니다. 커스텀 분류 모델 학습 방법도 다룹니다.</p>
 
   <h4>Step 1 — Webhook 엔드포인트 설정</h4>
   <p>외부 시스템(고객센터, 웹 폼 등)에서 NOVA로 문의를 전달하기 위한 Webhook 엔드포인트를 생성합니다:</p>
   <pre><code>{`> build_workflow "Webhook으로 고객 문의를 수신하고 AI로 분류하여 담당팀 Slack에 배정"
 
-🔧 LLM 분석 중...
-📦 n8n 워크플로우 생성:
+LLM 분석 중...
+n8n 워크플로우 생성:
   ├─ Trigger: Webhook — POST /inquiries
   ├─ Action: AI Classify (기술/결제/일반/긴급)
   ├─ Router: 카테고리별 분기
@@ -130,10 +130,10 @@ const withBase = (url: string) => {
   │   └─ 일반 → #support-general
   └─ Action: Auto-Response (접수 확인 이메일)
 
-✅ workflow_inquiry_router.json 생성 완료`}</code></pre>
+workflow_inquiry_router.json 생성 완료`}</code></pre>
 
   <h4>Step 2 — AI 분류 모델 구성</h4>
-  <p>기본 제공되는 분류 모델을 사용하거나, 커스텀 카테고리와 학습 데이터를 설정합니다:</p>
+  <p>기본 제공 분류 모델을 사용하거나, 커스텀 카테고리와 학습 데이터를 등록합니다:</p>
   <pre><code>{`# API로 커스텀 분류 카테고리 등록
 curl -X POST https://api.nova-platform.io/v2/classifiers \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
@@ -149,12 +149,12 @@ curl -X POST https://api.nova-platform.io/v2/classifiers \\
 
   <hr />
 
-  <h3>🔄 반복 패턴 기반 맞춤 자동화</h3>
+  <h3>반복 패턴 기반 맞춤 자동화</h3>
 
   <table>
     <tbody>
       <tr><td><strong>소요 시간</strong></td><td>약 20분</td></tr>
-      <tr><td><strong>난이도</strong></td><td>⭐⭐ 중급</td></tr>
+      <tr><td><strong>난이도</strong></td><td>중급</td></tr>
       <tr><td><strong>필요 커넥터</strong></td><td>없음 (코어 기능)</td></tr>
       <tr><td><strong>학습 내용</strong></td><td>routine 분석, recommend 활용, 자동화 적용</td></tr>
     </tbody>
@@ -162,11 +162,11 @@ curl -X POST https://api.nova-platform.io/v2/classifiers \\
 
   <p>NOVA의 핵심 기능인 행동 패턴 분석을 활용하여 개인의 반복 작업을 자동화합니다.</p>
 
-  <h4>Step 1 — 데이터 수집 확인</h4>
+  <h4>Step 1 — 데이터 수집 상태 확인</h4>
   <p><code>status</code> 명령어로 현재 수집된 데이터량을 확인합니다:</p>
   <pre><code>{`> status
 
-📊 NOVA Agent Status:
+NOVA Agent Status:
   Collector:  running (port 8080)
   Database:   steer.db (42.3 MB)
   Events:     128,450 events (last 7 days)
@@ -175,19 +175,19 @@ curl -X POST https://api.nova-platform.io/v2/classifiers \\
   Write Lock: enabled`}</code></pre>
 
   <h4>Step 2 — 패턴 분석 및 추천 확인</h4>
-  <p><code>routine</code>으로 발견된 패턴을 확인하고, <code>recommend</code>로 자동화 추천을 받습니다. 추천된 자동화 중 원하는 것을 선택하여 바로 워크플로우를 생성할 수 있습니다.</p>
+  <p><code>routine</code>으로 발견된 패턴을 확인하고, <code>recommend</code>로 자동화 추천을 받습니다. 추천된 항목 중 원하는 것을 선택하면 바로 워크플로우가 생성됩니다.</p>
 
-  <h4>Step 3 — 워크플로우 배포 & 모니터링</h4>
+  <h4>Step 3 — 워크플로우 배포 및 모니터링</h4>
   <p>생성된 워크플로우를 n8n에 등록하고, 실행 결과를 모니터링합니다. Self-Healing Guardian이 프로세스 안정성을 보장합니다.</p>
 
   <hr />
 
   <h2>다음 단계</h2>
   <ul>
-    <li><a href={withBase('/docs/api')}>API Reference</a> — REST API로 자동화를 프로그래밍 방식으로 관리</li>
+    <li><a href={withBase('/docs/api')}>API Reference</a> — REST API를 통한 프로그래밍 방식의 자동화 관리</li>
     <li><a href={withBase('/docs/faq')}>FAQ</a> — 자주 묻는 질문과 트러블슈팅</li>
-    <li><a href={withBase('/docs/changelog')}>Changelog</a> — 최신 기능과 업데이트 확인</li>
+    <li><a href={withBase('/docs/changelog')}>Changelog</a> — 최신 기능 업데이트 확인</li>
   </ul>
 
-  <p>더 많은 튜토리얼이 지속적으로 추가됩니다. <a href={withBase('/updates')}>Updates</a>에서 새 콘텐츠를 확인하세요.</p>
+  <p>추가 튜토리얼이 지속적으로 게시됩니다. <a href={withBase('/updates')}>Updates</a>에서 새 콘텐츠를 확인하십시오.</p>
 </DocsLayout>

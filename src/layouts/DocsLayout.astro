@@ -33,23 +33,23 @@ const withBase = (url: string) => {
 
 const sidebarSections = [
   {
-    group: '시작하기',
+    group: 'Guide',
     items: [
-      { label: 'Getting Started', href: '/docs/getting-started', icon: '🚀' },
-      { label: 'Tutorials', href: '/docs/tutorials', icon: '📖' },
+      { label: 'Getting Started', href: '/docs/getting-started' },
+      { label: 'Tutorials', href: '/docs/tutorials' },
     ],
   },
   {
-    group: '레퍼런스',
+    group: 'Reference',
     items: [
-      { label: 'API Reference', href: '/docs/api', icon: '⚡' },
-      { label: 'FAQ', href: '/docs/faq', icon: '💬' },
+      { label: 'API Reference', href: '/docs/api' },
+      { label: 'FAQ', href: '/docs/faq' },
     ],
   },
   {
-    group: '업데이트',
+    group: 'Updates',
     items: [
-      { label: 'Changelog', href: '/docs/changelog', icon: '📋' },
+      { label: 'Changelog', href: '/docs/changelog' },
     ],
   },
 ];
@@ -92,7 +92,6 @@ const normalizedCurrentPath = stripTrailingSlash(appPath);
                       ]}
                       aria-current={normalizedCurrentPath === item.href ? 'page' : undefined}
                     >
-                      <span class="docs-sidebar-icon">{item.icon}</span>
                       {item.label}
                     </a>
                   </li>
@@ -103,7 +102,7 @@ const normalizedCurrentPath = stripTrailingSlash(appPath);
 
           <!-- External Links -->
           <div class="docs-sidebar-group docs-sidebar-external">
-            <p class="docs-sidebar-group-label">리소스</p>
+            <p class="docs-sidebar-group-label">Resources</p>
             <ul role="list">
               <li>
                 <a href="https://github.com/NOVA-ALLRounder/main" target="_blank" rel="noopener noreferrer" class="docs-sidebar-link">
@@ -116,8 +115,10 @@ const normalizedCurrentPath = stripTrailingSlash(appPath);
               </li>
               <li>
                 <a href={withBase('/contact')} class="docs-sidebar-link">
-                  <span class="docs-sidebar-icon">✉️</span>
-                  문의하기
+                  <span class="docs-sidebar-icon">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                  </span>
+                  Contact
                 </a>
               </li>
             </ul>

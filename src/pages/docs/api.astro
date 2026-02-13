@@ -2,27 +2,27 @@
 import DocsLayout from '../../layouts/DocsLayout.astro';
 ---
 
-<DocsLayout title="API Reference" description="NOVA REST API v2의 엔드포인트, 인증, 요청/응답 형식을 확인합니다.">
+<DocsLayout title="API Reference" description="NOVA REST API v2의 엔드포인트, 인증, 요청/응답 형식을 상세히 기술합니다.">
   <h1>API Reference</h1>
-  <p class="doc-subtitle">NOVA REST API v2 문서입니다. 모든 API 호출은 JSON 형식을 사용하며 Bearer 토큰 인증이 필요합니다.</p>
+  <p class="doc-subtitle">NOVA REST API v2의 전체 엔드포인트를 기술합니다. 모든 요청은 JSON 형식이며 Bearer Token 인증이 필요합니다.</p>
 
-  <h2>인증</h2>
+  <h2>인증 (Authentication)</h2>
 
   <p>모든 API 요청에는 <code>Authorization</code> 헤더가 필요합니다:</p>
 
   <pre><code>{`Authorization: Bearer YOUR_API_KEY`}</code></pre>
 
-  <p>API 키는 <strong>대시보드 → 설정 → API 키</strong>에서 생성할 수 있습니다. 키는 생성 시 한 번만 표시되므로 안전한 곳에 보관하세요.</p>
+  <p>API 키는 <strong>대시보드 → 설정 → API 키</strong>에서 발급할 수 있습니다. 키는 발급 시 한 번만 표시되므로 안전한 곳에 보관하십시오.</p>
 
   <div class="doc-callout doc-callout-warning">
-    <strong>⚠️ 보안:</strong> API 키를 클라이언트 사이드 코드나 공개 저장소에 노출하지 마세요. 서버 사이드 호출 또는 환경변수를 사용하세요.
+    <strong>보안 주의:</strong> API 키를 클라이언트 사이드 코드나 공개 저장소에 노출하지 마십시오. 서버 사이드 호출 또는 환경변수를 사용하여 관리하십시오.
   </div>
 
   <h2>Base URL</h2>
 
   <pre><code>https://api.nova-platform.io/v2</code></pre>
 
-  <p>모든 엔드포인트는 이 Base URL을 기준으로 합니다.</p>
+  <p>이하 모든 엔드포인트 경로는 위 Base URL을 기준으로 합니다.</p>
 
   <h2>Rate Limits</h2>
 
@@ -33,11 +33,11 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
     <tbody>
       <tr><td>Individual</td><td>60회</td><td>10,000회</td></tr>
       <tr><td>Team</td><td>300회</td><td>50,000회</td></tr>
-      <tr><td>Enterprise</td><td>협의</td><td>무제한</td></tr>
+      <tr><td>Enterprise</td><td>별도 협의</td><td>무제한</td></tr>
     </tbody>
   </table>
 
-  <p>한도 초과 시 <code>429 Too Many Requests</code> 응답이 반환됩니다. <code>Retry-After</code> 헤더를 확인하세요.</p>
+  <p>한도 초과 시 <code>429 Too Many Requests</code> 응답이 반환됩니다. <code>Retry-After</code> 헤더 값을 참조하여 재시도하십시오.</p>
 
   <h2>Automations</h2>
 
@@ -89,13 +89,13 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 
   <table>
     <thead>
-      <tr><th>코드</th><th>설명</th></tr>
+      <tr><th>Status Code</th><th>설명</th></tr>
     </thead>
     <tbody>
       <tr><td><code>400</code></td><td>잘못된 요청 — 필수 필드 누락 또는 유효하지 않은 값</td></tr>
-      <tr><td><code>401</code></td><td>인증 실패 — API 키가 유효하지 않음</td></tr>
-      <tr><td><code>422</code></td><td>처리 불가 — 제공된 구성이 유효하지 않음</td></tr>
-      <tr><td><code>429</code></td><td>Rate Limit 초과</td></tr>
+      <tr><td><code>401</code></td><td>인증 실패 — API 키가 유효하지 않거나 누락됨</td></tr>
+      <tr><td><code>422</code></td><td>처리 불가 — 요청 구성이 유효하지 않음</td></tr>
+      <tr><td><code>429</code></td><td>Rate Limit 초과 — <code>Retry-After</code> 헤더 확인</td></tr>
     </tbody>
   </table>
 
@@ -103,7 +103,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 
   <h3><span class="doc-badge doc-badge-get">GET</span> /automations</h3>
 
-  <p>워크스페이스의 모든 자동화 목록을 반환합니다.</p>
+  <p>워크스페이스에 등록된 모든 자동화 목록을 반환합니다.</p>
 
   <h4>Query Parameters</h4>
 
@@ -150,7 +150,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 
   <h3><span class="doc-badge doc-badge-patch">PATCH</span> /automations/:id</h3>
 
-  <p>자동화의 설정을 부분 업데이트합니다. <code>name</code>, <code>description</code>, <code>trigger</code>, <code>actions</code>, <code>status</code> 필드를 변경할 수 있습니다.</p>
+  <p>자동화 설정을 부분 업데이트합니다. <code>name</code>, <code>description</code>, <code>trigger</code>, <code>actions</code>, <code>status</code> 필드를 변경할 수 있습니다.</p>
 
   <pre><code>{`{
   "status": "paused"
@@ -167,7 +167,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 
   <hr />
 
-  <h2>Runs (실행 이력)</h2>
+  <h2>Runs</h2>
 
   <h3><span class="doc-badge doc-badge-get">GET</span> /automations/:id/runs</h3>
 
@@ -212,7 +212,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 
   <hr />
 
-  <h2>Classifiers (AI 분류 모델)</h2>
+  <h2>Classifiers</h2>
 
   <h3><span class="doc-badge doc-badge-post">POST</span> /classifiers</h3>
 
@@ -271,20 +271,20 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 
   <hr />
 
-  <h2>SDKs & 도구</h2>
+  <h2>SDKs</h2>
 
   <table>
     <thead>
-      <tr><th>언어/도구</th><th>패키지</th><th>상태</th></tr>
+      <tr><th>언어</th><th>패키지</th><th>상태</th></tr>
     </thead>
     <tbody>
-      <tr><td>cURL</td><td>—</td><td>✅ 지원</td></tr>
-      <tr><td>Python</td><td><code>pip install nova-sdk</code></td><td>🚧 준비 중</td></tr>
-      <tr><td>Node.js</td><td><code>npm install @nova/sdk</code></td><td>🚧 준비 중</td></tr>
-      <tr><td>OpenAPI Spec</td><td>YAML / JSON export</td><td>🚧 준비 중</td></tr>
+      <tr><td>cURL</td><td>—</td><td>Available</td></tr>
+      <tr><td>Python</td><td><code>pip install nova-sdk</code></td><td>Coming Soon</td></tr>
+      <tr><td>Node.js</td><td><code>npm install @nova/sdk</code></td><td>Coming Soon</td></tr>
+      <tr><td>OpenAPI Spec</td><td>YAML / JSON export</td><td>Coming Soon</td></tr>
     </tbody>
   </table>
 
   <hr />
-  <p>API에 대한 질문이 있거나 추가 엔드포인트가 필요하다면 <a href="https://github.com/NOVA-ALLRounder/main/issues">GitHub Issues</a>에서 요청하세요.</p>
+  <p>API 관련 질문이나 추가 엔드포인트 요청은 <a href="https://github.com/NOVA-ALLRounder/main/issues">GitHub Issues</a>를 통해 접수할 수 있습니다.</p>
 </DocsLayout>
