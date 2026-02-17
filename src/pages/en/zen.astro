@@ -67,7 +67,7 @@ const flow = [
         {modelGroups.map((item) => (
           <Card hoverable={false}>
             <div class="p-6">
-              <p class="text-caption text-accent-300 mb-2">{item.title}</p>
+              <p class="text-caption text-[#a5b4fc] mb-2">{item.title}</p>
               <h3 class="text-h4 text-neutral-100 mb-2">{item.model}</h3>
               <p class="text-body text-neutral-400">{item.desc}</p>
             </div>
@@ -86,7 +86,7 @@ const flow = [
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 animate-on-scroll">
         {flow.map((item, index) => (
           <div class="rounded-lg border border-white/10 bg-[#14161b] p-6">
-            <p class="text-caption text-accent-300 mb-2">{String(index + 1).padStart(2, '0')}</p>
+            <p class="text-caption text-[#a5b4fc] mb-2">{String(index + 1).padStart(2, '0')}</p>
             <h3 class="text-h4 text-neutral-100 mb-2">{item.step}</h3>
             <p class="text-body text-neutral-400">{item.desc}</p>
           </div>

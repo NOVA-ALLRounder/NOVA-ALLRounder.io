@@ -10,7 +10,7 @@ const { items } = Astro.props;
   {items.map((item, index) => (
     <details class="group" id={`faq-${index}`}>
       <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer list-none text-left hover:text-neutral-200 transition-colors [&::-webkit-details-marker]:hidden">
-        <span class="text-sm font-medium text-neutral-100 group-open:text-accent-300 transition-colors">
+        <span class="text-sm font-medium text-neutral-100 group-open:text-[#a5b4fc] transition-colors">
           {item.question}
         </span>
         <span class="flex-shrink-0 w-5 h-5 text-neutral-500 group-open:rotate-45 transition-transform duration-200" aria-hidden="true">

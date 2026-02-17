@@ -26,7 +26,7 @@ const withBase = (url: string) => {
   <Section padding="large">
     <Container>
       <div class="text-center max-w-4xl mx-auto animate-on-scroll">
-        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Product</p>
+        <p class="text-caption text-[#a5b4fc] font-medium tracking-wide uppercase mb-4">Product</p>
         <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">Transforming natural language commands<br class="hidden sm:block" />into actual OS actions</h1>
         <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto mb-10">
           An agent that provides a fully automated NL pipeline from intent analysis to execution, verification, and approval, along with Shadow Mode that learns user behavior in the background.
@@ -57,7 +57,7 @@ const withBase = (url: string) => {
           { step: '6', title: 'Approve', module: 'approval_gate.rs', desc: 'Security gate for dangerous actions' },
         ].map((item) => (
           <div class="bg-[#14161b] rounded-lg border border-white/10 p-5 text-center">
-            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-accent-300/10 text-accent-300 text-sm font-bold mb-3 flex-shrink-0 aspect-square">{item.step}</span>
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#a5b4fc]/10 text-[#a5b4fc] text-sm font-bold mb-3 flex-shrink-0 aspect-square">{item.step}</span>
             <h3 class="text-[0.9375rem] font-semibold text-neutral-100 mb-1">{item.title}</h3>
             <p class="text-xs text-neutral-500 font-mono mb-2 break-all overflow-hidden line-clamp-1" title={item.module}>{item.module}</p>
             <p class="text-xs text-neutral-400">{item.desc}</p>
@@ -72,20 +72,20 @@ const withBase = (url: string) => {
     <Container>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center animate-on-scroll">
         <div>
-          <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">OS-Level Control</p>
+          <p class="text-caption text-[#a5b4fc] font-medium tracking-wide uppercase mb-3">OS-Level Control</p>
           <h2 class="text-h2 text-neutral-100 mb-4">Watch the screen, click, and manipulate apps directly</h2>
           <div class="space-y-6 text-body text-neutral-300">
             <div>
               <h3 class="text-h4 text-neutral-100 mb-2">Visual Driver & Rust Collector</h3>
-              <p><code class="text-accent-300">visual_driver.rs</code> and <code class="text-accent-300">collector_rs.rs</code> work together to handle screen recognition and data collection. 5-minute aggregation and PII masking are handled at the core level.</p>
+              <p><code class="text-[#a5b4fc]">visual_driver.rs</code> and <code class="text-[#a5b4fc]">collector_rs.rs</code> work together to handle screen recognition and data collection. 5-minute aggregation and PII masking are handled at the core level.</p>
             </div>
             <div>
               <h3 class="text-h4 text-neutral-100 mb-2">Browser Automation</h3>
-              <p><code class="text-accent-300">browser_automation.rs</code> automatically performs web page navigation, form input, and data extraction.</p>
+              <p><code class="text-[#a5b4fc]">browser_automation.rs</code> automatically performs web page navigation, form input, and data extraction.</p>
             </div>
             <div>
               <h3 class="text-h4 text-neutral-100 mb-2">Shadow Mode</h3>
-              <p><code class="text-accent-300">analyzer.rs</code> analyzes events collected in the background to identify repeating routines and recommend automation opportunities.</p>
+              <p><code class="text-[#a5b4fc]">analyzer.rs</code> analyzes events collected in the background to identify repeating routines and recommend automation opportunities.</p>
             </div>
           </div>
         </div>
@@ -130,7 +130,7 @@ const withBase = (url: string) => {
           <p class="text-neutral-500">Kill Switch: Multi-press Esc → Instant Exit</p>
         </div>
         <div class="order-1 lg:order-2">
-          <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">Zero Trust Security</p>
+          <p class="text-caption text-[#a5b4fc] font-medium tracking-wide uppercase mb-3">Zero Trust Security</p>
           <h2 class="text-h2 text-neutral-100 mb-4">Control all executions with 5-layer security</h2>
           <div class="space-y-4 text-body text-neutral-300">
             <div>
@@ -179,7 +179,7 @@ const withBase = (url: string) => {
             <ul class="space-y-2">
               {item.features.map((f) => (
                 <li class="flex items-center gap-2 text-sm text-neutral-400">
-                  <svg class="w-4 h-4 text-accent-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                  <svg class="w-4 h-4 text-[#a5b4fc] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
                   {f}
                 </li>
               ))}

@@ -184,7 +184,7 @@ const pipelineItems = [
     right: 0;
     bottom: -1px;
     height: 2px;
-    background: #f5ee9b;
+    background: #a5b4fc;
   }
 
   .install-command {
@@ -193,7 +193,7 @@ const pipelineItems = [
   }
 
   .install-copy:focus-visible {
-    outline: 2px solid #f5ee9b;
+    outline: 2px solid #a5b4fc;
     outline-offset: 2px;
   }
 
@@ -376,8 +376,8 @@ const pipelineItems = [
       if (!text) return;
       try {
         await navigator.clipboard.writeText(text);
-        copyBtn.classList.add('text-[#f5ee9b]');
-        setTimeout(() => copyBtn.classList.remove('text-[#f5ee9b]'), 900);
+        copyBtn.classList.add('text-[#a5b4fc]');
+        setTimeout(() => copyBtn.classList.remove('text-[#a5b4fc]'), 900);
       } catch {
         // Clipboard permission may be blocked
       }

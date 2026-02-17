@@ -145,7 +145,7 @@ const comparisonFeatures = [
   <Section padding="large">
     <Container>
       <div class="text-center max-w-4xl mx-auto animate-on-scroll">
-        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Pricing</p>
+        <p class="text-caption text-[#a5b4fc] font-medium tracking-wide uppercase mb-4">Pricing</p>
         <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">Start for free, scale as you grow</h1>
         <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto">
           From individual trials to enterprise-wide deployments, choose the plan that suits your scale.
@@ -161,11 +161,11 @@ const comparisonFeatures = [
           <div class:list={[
             'rounded-lg border p-8 flex flex-col',
             plan.highlighted
-              ? 'border-accent-300 bg-accent-300/10 shadow-lg shadow-[#00000040] relative'
+              ? 'border-[#a5b4fc] bg-[#a5b4fc]/10 shadow-lg shadow-[#00000040] relative'
               : 'border-white/10 bg-[#14161b]',
           ]}>
             {plan.highlighted && (
-              <span class="absolute -top-3 left-1/2 -translate-x-1/2 inline-flex items-center px-3 py-1 rounded-full bg-[#f5ee9b] text-[#111214] text-xs font-medium">
+              <span class="absolute -top-3 left-1/2 -translate-x-1/2 inline-flex items-center px-3 py-1 rounded-full bg-[#a5b4fc] text-[#111214] text-xs font-medium">
                 Most Popular
               </span>
             )}
@@ -186,7 +186,7 @@ const comparisonFeatures = [
             <ul class="space-y-3 flex-1">
               {plan.features.map((feature) => (
                 <li class="flex items-start gap-3 text-sm text-neutral-300">
-                  <svg class="w-4 h-4 text-accent-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                  <svg class="w-4 h-4 text-[#a5b4fc] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
                   <span>{feature}</span>
                 </li>
               ))}

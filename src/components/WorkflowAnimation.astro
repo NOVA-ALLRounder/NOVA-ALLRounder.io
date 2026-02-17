@@ -126,7 +126,7 @@
     --node-bg: #1a1c22;
     --border: rgba(255,255,255,0.10);
     --border-h: rgba(255,255,255,0.22);
-    --accent: #f5ee9b;
+    --accent: #a5b4fc;
     --green: #4ade80;
     --orange: #fb923c;
     --blue: #60a5fa;
@@ -183,7 +183,7 @@
   }
   .wf-node:hover {
     border-color: var(--border-h);
-    box-shadow: 0 0 20px rgba(245,238,155,0.05);
+    box-shadow: 0 0 20px rgba(165,180,252,0.1);
   }
   .wf-node--sm { padding: 0.5rem 0.75rem; }
 
@@ -203,7 +203,7 @@
     border-radius: 7px;
     flex-shrink: 0;
   }
-  .wf-icon--trigger { background: rgba(245,238,155,0.15); color: var(--accent); }
+  .wf-icon--trigger { background: rgba(165,180,252,0.15); color: var(--accent); }
   .wf-icon--rust { background: rgba(251,146,60,0.15); color: var(--orange); }
   .wf-icon--ai { background: rgba(192,132,252,0.15); color: var(--purple); }
   .wf-icon--decision { background: rgba(96,165,250,0.15); color: var(--blue); }
@@ -249,7 +249,7 @@
     top: -2px;
     left: -3px;
     opacity: 0;
-    box-shadow: 0 0 8px rgba(245,238,155,0.6);
+    box-shadow: 0 0 8px rgba(165,180,252,0.6);
     animation: dotSlide 3s ease-in-out infinite;
   }
   [data-wf-edge="1"] .wf-dot { animation-delay: 0.3s; }
@@ -290,7 +290,7 @@
     background: var(--accent);
     right: -2px;
     opacity: 0;
-    box-shadow: 0 0 8px rgba(245,238,155,0.6);
+    box-shadow: 0 0 8px rgba(165,180,252,0.6);
     animation: dotFade 3s ease-in-out infinite;
     animation-delay: 1.8s;
   }
@@ -361,7 +361,7 @@
     animation: fadeUp 0.5s ease forwards, nodePulse 4s ease-in-out 1.5s infinite;
   }
   @keyframes nodePulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(245,238,155,0); }
-    50% { box-shadow: 0 0 0 5px rgba(245,238,155,0.06); }
+    0%, 100% { box-shadow: 0 0 0 0 rgba(165,180,252,0); }
+    50% { box-shadow: 0 0 0 5px rgba(165,180,252,0.06); }
   }
 </style>

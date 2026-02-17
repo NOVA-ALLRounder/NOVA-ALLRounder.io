@@ -10,9 +10,9 @@
     --site-text: #eeede8;
     --site-text-muted: #8b8e94;
     --site-border: #292c33;
-    --site-accent: #f5ee9b;
-    --site-accent-strong: #f8f2ae;
-    --site-accent-dim: #2d2b1f;
+    --site-accent: #a5b4fc;
+    --site-accent-strong: #c7d2fe;
+    --site-accent-dim: rgba(165, 180, 252, 0.1);
     --site-radius: 0.5rem;
   }
 
@@ -27,7 +27,7 @@
     @apply text-neutral-100 font-sans;
     background-color: var(--site-bg);
     background-image:
-      radial-gradient(980px 420px at 50% -20%, rgba(242, 234, 138, 0.08), transparent 60%),
+      radial-gradient(980px 420px at 50% -20%, rgba(165, 180, 252, 0.08), transparent 60%),
       linear-gradient(180deg, #0d0e11 0%, #0d0e11 45%, #0c0d10 100%);
     color: var(--site-text);
     min-height: 100vh;
@@ -98,8 +98,8 @@
   }
 
   .accent-pill {
-    border: 1px solid rgba(245, 238, 155, 0.25);
-    background: rgba(245, 238, 155, 0.08);
+    border: 1px solid rgba(165, 180, 252, 0.25);
+    background: rgba(165, 180, 252, 0.08);
     color: var(--site-accent-strong);
     border-radius: 999px;
     padding: 0.25rem 0.625rem;
@@ -131,7 +131,7 @@
   }
 
   /* Ensure text is visible on accent backgrounds */
-  .bg-site-accent, .bg-\[#f5ee9b\], .active-accent {
+  .bg-site-accent, .bg-\[#a5b4fc\], .active-accent {
     color: #111214 !important;
   }
 }
