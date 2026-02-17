@@ -36,21 +36,39 @@ const withBase = (url: string) => {
     <strong>이 가이드에서 다루는 내용:</strong> 환경 준비 → 설치 및 빌드 → 에이전트 실행 → 핵심 명령어 사용 → 워크플로우 확장
   </div>
 
-  <h2>사전 요구사항</h2>
+  <div data-os-only="macos">
+    <h2>사전 요구사항 (macOS)</h2>
+    <p>macOS에서 시작하기 전에 다음 환경이 준비되어 있는지 확인하십시오.</p>
+    <table>
+      <thead>
+        <tr><th>항목</th><th>요구사항</th><th>비고</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>운영체제</strong></td><td>macOS 12+ (Monterey) 이상</td><td>-</td></tr>
+        <tr><td><strong>Rust</strong></td><td>1.70 이상</td><td><a href="https://rustup.rs">rustup.rs</a>에서 설치</td></tr>
+        <tr><td><strong>Build Tools</strong></td><td>Xcode Command Line Tools</td><td><code>xcode-select --install</code></td></tr>
+        <tr><td><strong>OpenAI API Key</strong></td><td>GPT-4 또는 GPT-3.5</td><td>LLM 분석 모듈에 필요</td></tr>
+        <tr><td><strong>Git</strong></td><td>최신 버전</td><td>저장소 클론용</td></tr>
+      </tbody>
+    </table>
+  </div>
 
-  <p>시작하기 전에 다음 환경이 준비되어 있는지 확인하십시오.</p>
-
-  <table>
-    <thead>
-      <tr><th>항목</th><th>요구사항</th><th>비고</th></tr>
-    </thead>
-    <tbody>
-      <tr><td><strong>운영체제</strong></td><td>macOS 12+ (Monterey) / Windows 10+</td><td>Linux 빌드 지원</td></tr>
-      <tr><td><strong>Rust</strong></td><td>1.70 이상</td><td><a href="https://rustup.rs">rustup.rs</a>에서 설치</td></tr>
-      <tr><td><strong>OpenAI API Key</strong></td><td>GPT-4 또는 GPT-3.5</td><td>LLM 분석 모듈에 필요</td></tr>
-      <tr><td><strong>Git</strong></td><td>최신 버전</td><td>저장소 클론용</td></tr>
-    </tbody>
-  </table>
+  <div data-os-only="windows">
+    <h2>사전 요구사항 (Windows)</h2>
+    <p>Windows에서 시작하기 전에 다음 환경이 준비되어 있는지 확인하십시오.</p>
+    <table>
+      <thead>
+        <tr><th>항목</th><th>요구사항</th><th>비고</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>운영체제</strong></td><td>Windows 10 / 11</td><td>64비트 권장</td></tr>
+        <tr><td><strong>Rust</strong></td><td>1.70 이상 (msvc 툴체인)</td><td><a href="https://rustup.rs">rustup.rs</a>에서 설치</td></tr>
+        <tr><td><strong>Build Tools</strong></td><td>Visual Studio Build Tools</td><td>C++ 연크릿 도구 포함</td></tr>
+        <tr><td><strong>OpenAI API Key</strong></td><td>GPT-4 또는 GPT-3.5</td><td>LLM 분석 모듈에 필요</td></tr>
+        <tr><td><strong>Git</strong></td><td>최신 버전</td><td>저장소 클론용</td></tr>
+      </tbody>
+    </table>
+  </div>
 
   <div class="doc-callout doc-callout-warning" data-os-only="macos">
     <strong>macOS 사용자 주의:</strong> 시스템 환경설정 → 개인정보 보호 및 보안 → 손쉬운 사용에서 터미널 앱에 권한을 부여해야 합니다. 이 권한이 없으면 OS 센서 데이터를 수집할 수 없습니다.
@@ -64,35 +82,43 @@ const withBase = (url: string) => {
 
   <p>GitHub에서 NOVA 저장소를 클론하고 환경변수를 구성합니다.</p>
 
-  <pre><code>{`# 저장소 클론
+  <div data-os-only="macos">
+    <pre><code>{`# 저장소 클론
 git clone https://github.com/NOVA-ALLRounder/main.git
 cd main/core
 
 # 환경변수 파일 생성
 cp .env.example .env`}</code></pre>
+  </div>
 
-  <p><code>.env</code> 파일을 편집하여 다음 값을 설정합니다:</p>
+  <div data-os-only="windows">
+    <pre><code>{`# 저장소 클론
+git clone https://github.com/NOVA-ALLRounder/main.git
+cd main/core
 
-  <pre><code>{`# .env
-OPENAI_API_KEY=sk-your-api-key-here
-STEER_DB_PATH=./steer.db
-STEER_COLLECTOR_PORT=8080`}</code></pre>
+# 환경변수 파일 생성 (PowerShell)
+Copy-Item .env.example .env`}</code></pre>
+  </div>
+
+  <p><code>.env</code> 파일을 편집하여 <code>OPENAI_API_KEY</code>를 설정합니다.</p>
 
   <div class="doc-callout doc-callout-info">
-    <strong>참고:</strong> API Key가 없는 경우 <a href="https://platform.openai.com/api-keys">OpenAI 대시보드</a>에서 발급받을 수 있습니다. 초기 테스트에는 GPT-3.5 모델로 충분합니다.
+    <strong>참고:</strong> API Key는 <a href="https://platform.openai.com/api-keys">OpenAI 대시보드</a>에서 발급받을 수 있습니다.
   </div>
 
   <h2>Step 2 — 빌드</h2>
 
   <p>Rust 네이티브 바이너리를 빌드합니다. Release 빌드는 약 2~3분이 소요됩니다.</p>
 
-  <pre><code>{`# Release 빌드 (최적화된 바이너리)
-cargo build --release
+  <pre><code>{`cargo build --release`}</code></pre>
 
-# 빌드 완료 후 바이너리 위치
-# → ./target/release/core`}</code></pre>
+  <div data-os-only="macos">
+    <p>빌드 완료 후 바이너리 위치: <code>./target/release/core</code></p>
+  </div>
 
-  <p>빌드가 완료되면 <code>./target/release/core</code> 경로에 실행 파일이 생성됩니다.</p>
+  <div data-os-only="windows">
+    <p>빌드 완료 후 바이너리 위치: <code>.\target\release\core.exe</code></p>
+  </div>
 
   <h2>Step 3 — 에이전트 실행</h2>
 
@@ -197,16 +223,17 @@ STEER_DB_PATH=./steer.db ./core/target/debug/collector_rs
 
   <h3>데스크톱 앱 빌드 (Tauri)</h3>
 
-  <p>팀 배포용 데스크톱 애플리케이션(.app / .exe)을 빌드할 수 있습니다:</p>
+  <p>팀 배포용 데스크톱 애플리케이션을 빌드할 수 있습니다.</p>
 
-  <pre><code>{`# Production 빌드
-./scripts/build_release.sh
+  <pre><code>{`./scripts/build_release.sh`}</code></pre>
 
-# 빌드 과정:
-# 1. Frontend: React/Vite 에셋 컴파일
-# 2. Core: Rust sidecar (steer-core) 컴파일
-# 3. Bundle: .app (macOS) 또는 .exe 생성
-# → 결과물: desktop/src-tauri/target/release/bundle`}</code></pre>
+  <div data-os-only="macos">
+    <p>빌드 완료 후 <code>.app</code> 파일이 <code>desktop/src-tauri/target/release/bundle/macos/</code>에 생성됩니다.</p>
+  </div>
+
+  <div data-os-only="windows">
+    <p>빌드 완료 후 <code>.exe</code> 설치 파일이 <code>desktop/src-tauri/target/release/bundle/msi/</code> 또는 <code>nsis/</code>에 생성됩니다.</p>
+  </div>
 
   <h2>다음 단계</h2>
 
