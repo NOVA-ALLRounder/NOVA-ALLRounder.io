@@ -129,6 +129,11 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Ensure text is visible on accent backgrounds */
+  .bg-site-accent, .bg-\[#f5ee9b\], .active-accent {
+    color: #111214 !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

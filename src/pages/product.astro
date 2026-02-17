@@ -35,8 +35,8 @@ const withBase = (url: string) => {
           73개+ Rust 모듈로 구성된 Single Source of Truth(SSOT) 코어와 5계층 보안을 갖춘 프로덕션 레디 에이전트입니다.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <Button variant="primary" size="lg" href={withBase('/docs/getting-started?os=macos')}>Start for macOS</Button>
-          <Button variant="secondary" size="lg" href={withBase('/docs/getting-started?os=windows')}>Start for Windows</Button>
+          <Button variant="primary" size="lg" href={withBase('/docs/getting-started?os=macos')}>macOS에서 시작하기</Button>
+          <Button variant="secondary" size="lg" href={withBase('/docs/getting-started?os=windows')}>Windows에서 시작하기</Button>
         </div>
       </div>
     </Container>
@@ -59,9 +59,9 @@ const withBase = (url: string) => {
           { step: '6', title: 'Approve', module: 'approval_gate.rs', desc: '위험 행동 승인 게이트' },
         ].map((item) => (
           <div class="bg-[#14161b] rounded-lg border border-white/10 p-5 text-center">
-            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-accent-300/10 text-accent-300 text-sm font-bold mb-3">{item.step}</span>
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-accent-300/10 text-accent-300 text-sm font-bold mb-3 flex-shrink-0 aspect-square">{item.step}</span>
             <h3 class="text-[0.9375rem] font-semibold text-neutral-100 mb-1">{item.title}</h3>
-            <p class="text-xs text-neutral-500 font-mono mb-2">{item.module}</p>
+            <p class="text-xs text-neutral-500 font-mono mb-2 break-all overflow-hidden line-clamp-1" title={item.module}>{item.module}</p>
             <p class="text-xs text-neutral-400">{item.desc}</p>
           </div>
         ))}

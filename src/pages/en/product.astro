@@ -57,9 +57,9 @@ const withBase = (url: string) => {
           { step: '6', title: 'Approve', module: 'approval_gate.rs', desc: 'Security gate for dangerous actions' },
         ].map((item) => (
           <div class="bg-[#14161b] rounded-lg border border-white/10 p-5 text-center">
-            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-accent-300/10 text-accent-300 text-sm font-bold mb-3">{item.step}</span>
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-accent-300/10 text-accent-300 text-sm font-bold mb-3 flex-shrink-0 aspect-square">{item.step}</span>
             <h3 class="text-[0.9375rem] font-semibold text-neutral-100 mb-1">{item.title}</h3>
-            <p class="text-xs text-neutral-500 font-mono mb-2">{item.module}</p>
+            <p class="text-xs text-neutral-500 font-mono mb-2 break-all overflow-hidden line-clamp-1" title={item.module}>{item.module}</p>
             <p class="text-xs text-neutral-400">{item.desc}</p>
           </div>
         ))}
