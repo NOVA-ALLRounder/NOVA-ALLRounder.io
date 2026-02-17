@@ -113,29 +113,38 @@ Copy-Item .env.example .env`}</code></pre>
   <pre><code>{`cargo build --release`}</code></pre>
 
   <div data-os-only="macos">
-    <p>빌드 완료 후 바이너리 위치: <code>./target/release/core</code></p>
+    <p>빌드 완료 후 바이너리 위치: <code>./target/release/local_os_agent</code></p>
   </div>
 
   <div data-os-only="windows">
-    <p>빌드 완료 후 바이너리 위치: <code>.\target\release\core.exe</code></p>
+    <p>빌드 완료 후 바이너리 위치: <code>.\target\release\local_os_agent.exe</code></p>
   </div>
 
   <h2>Step 3 — 에이전트 실행</h2>
 
   <div data-os-only="macos">
     <h3>macOS 실행</h3>
-    <pre><code>{`./target/release/core`}</code></pre>
+    <pre><code>{`# Release 바이너리 직접 실행
+./target/release/local_os_agent
+
+# 또는 cargo run 사용
+cargo run --release --bin local_os_agent`}</code></pre>
   </div>
 
   <div data-os-only="windows">
     <h3>Windows 실행</h3>
     <p>Windows 환경에서는 PowerShell 스크립트를 사용합니다:</p>
-    <pre><code>{`.\\scripts\\run_core.ps1 -CollectorImpl rust`}</code></pre>
+    <pre><code>{`# PowerShell 스크립트 실행 (권장)
+.\scripts\run_core.ps1 -CollectorImpl rust
+
+# 또는 직접 실행
+.\target\release\local_os_agent.exe`}</code></pre>
   </div>
 
   <p>정상적으로 실행되면 다음과 같은 프롬프트가 표시됩니다:</p>
 
   <pre><code>{`NOVA Agent v2.4.0 ready
+Environment Scan: Found 349 apps
 Collector: running on port 8080
 Write Lock: enabled (use 'unlock' to disable)
 Type 'help' for available commands.
@@ -151,6 +160,7 @@ Type 'help' for available commands.
       <tr><th>명령어</th><th>설명</th><th>사용 예시</th></tr>
     </thead>
     <tbody>
+      <tr><td><code>surf</code></td><td>자연어로 OS 전체 제어 (핵심)</td><td><code>surf "Safari 열어서 날씨 검색해"</code></td></tr>
       <tr><td><code>routine</code></td><td>반복 패턴 분석 결과 조회</td><td><code>routine</code></td></tr>
       <tr><td><code>recommend</code></td><td>AI 기반 자동화 추천</td><td><code>recommend</code></td></tr>
       <tr><td><code>status</code></td><td>시스템 상태 확인</td><td><code>status</code></td></tr>

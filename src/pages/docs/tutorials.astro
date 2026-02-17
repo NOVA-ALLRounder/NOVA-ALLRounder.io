@@ -22,42 +22,49 @@ const withBase = (url: string) => {
 
   <h2>Basic</h2>
 
-  <h3>이메일 자동 분류기 구성</h3>
+  <h3>자연어 OS 제어 (surf 명령어)</h3>
 
   <table>
     <tbody>
-      <tr><td><strong>소요 시간</strong></td><td>약 15분</td></tr>
+      <tr><td><strong>소요 시간</strong></td><td>약 10분</td></tr>
       <tr><td><strong>난이도</strong></td><td>초급</td></tr>
-      <tr><td><strong>필요 커넥터</strong></td><td>Gmail, Slack</td></tr>
-      <tr><td><strong>학습 내용</strong></td><td>트리거 설정, 규칙 기반 분류, Slack 알림 연동</td></tr>
+      <tr><td><strong>필요 커넥터</strong></td><td>없음 (코어 기능)</td></tr>
+      <tr><td><strong>학습 내용</strong></td><td>surf 명령어, NL 파이프라인, 멀티앱 시나리오</td></tr>
     </tbody>
   </table>
 
-  <p>수신 이메일을 규칙 기반으로 자동 분류하고, 중요 메일을 Slack으로 알림 전송하는 워크플로우를 구성합니다.</p>
+  <p>NOVA의 핵심 기능인 <code>surf</code> 명령어를 사용하여 자연어로 OS를 직접 제어합니다.</p>
 
-  <h4>Step 1 — 이메일 트리거 설정</h4>
-  <p><code>build_workflow</code> 명령어로 이메일 분류 워크플로우의 기본 구조를 생성합니다:</p>
-  <pre><code>{`> build_workflow "Gmail 수신 이메일을 카테고리별로 분류하고 중요 이메일은 Slack으로 알림"
+  <h4>Step 1 — 기본 surf 명령어</h4>
+  <p>자연어로 앱을 제어합니다. intent_router가 의도를 분석하고 plan_builder가 실행 계획을 생성합니다:</p>
+  <pre><code>{`> surf "Safari 열어서 Google에서 날씨 검색해"
 
-LLM 분석 중...
-n8n 워크플로우 생성:
-  ├─ Trigger: Gmail — New Email
-  ├─ Action: AI Classify (카테고리: 중요/일반/광고)
-  ├─ Condition: 카테고리 == "중요"
-  └─ Action: Slack — Send Message (#important)
+Intent: web_search | Slots: {app: Safari, query: 날씨}
+Plan: Open Safari → Navigate → Search
+[OK] Safari 실행 완료 (applescript.rs)
+[OK] Google 검색 완료 (browser_automation.rs)
 
-workflow_email_classifier.json 생성 완료`}</code></pre>
+> surf "Notes 열어서 새 메모 만들고 오늘의 할 일을 입력해"
 
-  <h4>Step 2 — 분류 규칙 커스터마이징</h4>
-  <p>n8n 대시보드(<code>http://localhost:5678</code>)에서 생성된 워크플로우를 열고 분류 규칙을 조정합니다:</p>
-  <ul>
-    <li><strong>중요:</strong> CEO, CTO, 긴급 등 키워드 포함 이메일</li>
-    <li><strong>일반:</strong> 팀 동료, 일반 업무 관련</li>
-    <li><strong>광고:</strong> 뉴스레터, 프로모션 이메일</li>
-  </ul>
+Intent: note_create | Slots: {app: Notes, content: 오늘의 할 일}
+[OK] Notes.app 실행
+[OK] Shortcut: Cmd+N (새 메모 생성)
+[OK] Type: "오늘의 할 일" (keyboard.type)`}</code></pre>
 
-  <h4>Step 3 — Slack 알림 설정</h4>
-  <p>Slack Webhook URL을 설정하고 알림 포맷을 지정합니다. 중요 이메일이 수신되면 지정한 Slack 채널에 발신자, 제목, 미리보기가 포함된 알림이 전송됩니다.</p>
+  <h4>Step 2 — 멀티앱 시나리오</h4>
+  <p>여러 앱을 연결하는 복잡한 워크플로우도 한 줄로 실행할 수 있습니다:</p>
+  <pre><code>{`> surf "Safari에서 Apple 주가를 검색하고, Calculator에서 100주 가치를 계산한 뒤, Notes에 결과를 저장해"
+
+Plan: 4 steps
+  1. Open Safari → Search "Apple stock price"
+  2. Vision: Read price from screen
+  3. Open Calculator → Multiply × 100
+  4. Open Notes → Save result
+
+[OK] 4/4 steps completed`}</code></pre>
+
+  <h4>Step 3 — Reality Check</h4>
+  <p>NOVA는 실행 전 <code>reality_check.rs</code>가 설치된 앱 목록을 스캔하고, 유사한 이름도 자동 보정합니다. "Excel"이라고 입력해도 "Microsoft Excel"로 자동 매칭됩니다.</p>
 
   <hr />
 
@@ -102,50 +109,42 @@ workflow_weekly_report.json 생성 완료`}</code></pre>
 
   <h2>Advanced</h2>
 
-  <h3>AI 기반 고객 문의 라우팅</h3>
+  <h3>Telegram 원격 제어 설정</h3>
 
   <table>
     <tbody>
-      <tr><td><strong>소요 시간</strong></td><td>약 45분</td></tr>
+      <tr><td><strong>소요 시간</strong></td><td>약 30분</td></tr>
       <tr><td><strong>난이도</strong></td><td>고급</td></tr>
-      <tr><td><strong>필요 커넥터</strong></td><td>Webhook, Slack, REST API</td></tr>
-      <tr><td><strong>학습 내용</strong></td><td>AI 분류 모델, Webhook 통합, 조건부 라우팅</td></tr>
+      <tr><td><strong>필요 커넥터</strong></td><td>Telegram Bot API</td></tr>
+      <tr><td><strong>학습 내용</strong></td><td>원격 명령 실행, 보안 정책, 결과 리포트</td></tr>
     </tbody>
   </table>
 
-  <p>AI 분류 모델을 활용하여 고객 문의를 자동으로 담당 팀에 배정합니다. 커스텀 분류 모델 학습 방법도 다룹니다.</p>
+  <p>Telegram Bot을 연동하여 외출 중에도 폰에서 컴퓨터를 원격으로 제어합니다. <code>telegram.rs</code> (12KB)가 Bot API 연동을 처리합니다.</p>
 
-  <h4>Step 1 — Webhook 엔드포인트 설정</h4>
-  <p>외부 시스템(고객센터, 웹 폼 등)에서 NOVA로 문의를 전달하기 위한 Webhook 엔드포인트를 생성합니다:</p>
-  <pre><code>{`> build_workflow "Webhook으로 고객 문의를 수신하고 AI로 분류하여 담당팀 Slack에 배정"
+  <h4>Step 1 — Telegram Bot 생성</h4>
+  <p>BotFather를 통해 Telegram Bot을 생성하고 토큰을 발급받습니다:</p>
+  <pre><code>{`# .env 파일에 Telegram 설정 추가
+TELEGRAM_BOT_TOKEN=your_bot_token
+TELEGRAM_CHAT_ID=your_chat_id`}</code></pre>
 
-LLM 분석 중...
-n8n 워크플로우 생성:
-  ├─ Trigger: Webhook — POST /inquiries
-  ├─ Action: AI Classify (기술/결제/일반/긴급)
-  ├─ Router: 카테고리별 분기
-  │   ├─ 기술 → #support-tech
-  │   ├─ 결제 → #support-billing
-  │   ├─ 긴급 → #support-urgent (멘션 포함)
-  │   └─ 일반 → #support-general
-  └─ Action: Auto-Response (접수 확인 이메일)
+  <h4>Step 2 — 원격 명령 실행</h4>
+  <p>Telegram에서 메시지를 보내면 NOVA가 명령을 실행하고 결과를 리포트합니다:</p>
+  <pre><code>{`# Telegram에서 전송:
+폰: "컴퓨터에서 git status 확인해"
 
-workflow_inquiry_router.json 생성 완료`}</code></pre>
+# NOVA 처리:
+Intent: shell_exec | Security: Safe
+> git status
 
-  <h4>Step 2 — AI 분류 모델 구성</h4>
-  <p>기본 제공 분류 모델을 사용하거나, 커스텀 카테고리와 학습 데이터를 등록합니다:</p>
-  <pre><code>{`# API로 커스텀 분류 카테고리 등록
-curl -X POST https://api.nova-platform.io/v2/classifiers \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "name": "inquiry-classifier",
-    "categories": ["기술", "결제", "일반", "긴급"],
-    "training_data": "path/to/training.csv"
-  }'`}</code></pre>
+# Telegram 리포트:
+✅ 실행 완료
+On branch main
+Your branch is up to date with 'origin/main'.
+nothing to commit, working tree clean`}</code></pre>
 
-  <h4>Step 3 — 자동 응답 설정</h4>
-  <p>고객에게 접수 확인 이메일을 자동 전송하고, 예상 응답 시간을 안내합니다. 긴급 문의의 경우 담당자에게 즉시 알림이 전송됩니다.</p>
+  <h4>Step 3 — 보안 정책 확인</h4>
+  <p>원격 명령도 동일한 5계층 보안이 적용됩니다. Critical 등급 명령(rm, sudo 등)은 원격에서도 차단되며, Write Lock 해제는 로컬에서만 가능합니다.</p>
 
   <hr />
 

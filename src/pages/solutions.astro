@@ -8,47 +8,55 @@ import Button from '../components/ui/Button.astro';
 import Card from '../components/ui/Card.astro';
 ---
 
-<BaseLayout title="Solutions — NOVA Local OS Agent" description="패턴 기반 자동화, OS 통합, 워크플로우 오케스트레이션의 실제 활용 사례와 보안 정책.">
+<BaseLayout title="Solutions — NOVA Local OS Agent" description="자연어 OS 제어, 멀티앱 자동화, 원격 제어, 워크플로우 생성의 실제 활용 사례와 시나리오.">
   <Header slot="header" />
 
+  <!-- Hero -->
   <Section padding="large">
     <Container>
       <div class="text-center max-w-4xl mx-auto animate-on-scroll">
         <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Solutions</p>
-        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">행동 분석부터 자동화 실행까지, 한 흐름으로</h1>
+        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">실제 업무에 바로 적용하는<br class="hidden sm:block" />OS 자동화 시나리오</h1>
         <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto mb-10">
-          OS 수준 센서 데이터, LLM 패턴 분석, n8n 워크플로우를 결합하여 개인과 팀 모두를 위한 자동화를 제공합니다.
+          자연어 OS 제어, 멀티앱 워크플로우, 원격 관리, 외부 서비스 연동까지. 실제 코드베이스에서 검증된 자동화 시나리오를 확인하세요.
         </p>
         <Button variant="primary" size="lg" href="/docs/getting-started">시작하기</Button>
       </div>
     </Container>
   </Section>
 
+  <!-- Core Solutions -->
   <Section background="light">
     <Container>
       <div class="text-center mb-16 animate-on-scroll">
         <h2 class="text-h2 text-neutral-100 mb-4">핵심 솔루션</h2>
-        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">세 가지 핵심 영역에서 자동화를 제공합니다.</p>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">네 가지 핵심 영역에서 OS 수준 자동화를 제공합니다.</p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 animate-on-scroll">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 animate-on-scroll">
         {[
           {
-            title: '패턴 기반 자동화',
-            desc: 'routine/recommend 명령어로 반복 행동 패턴을 분석하고, LLM이 자동화를 추천합니다. 세션/루틴/핸드오프 배치로 데이터를 정제합니다.',
-            metric: 'build_sessions → build_routines → build_handoff',
-            icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
-          },
-          {
-            title: 'OS 수준 통합',
-            desc: 'applescript.rs로 macOS 앱을 직접 제어하고, visual_driver.rs로 UI 자동화를 수행합니다. OS 센서(src/sensors/)가 시스템 이벤트를 실시간 수집합니다.',
-            metric: 'control <app> <cmd> — 앱 제어 CLI',
+            title: '자연어 OS 제어',
+            desc: 'surf 명령어로 자연어를 입력하면 intent_router가 의도를 분석하고, plan_builder가 실행 계획을 수립하며, visual_driver가 화면을 직접 조작합니다. 앱 실행, 클릭, 타이핑, 키보드 단축키까지 자동화합니다.',
+            module: 'visual_driver.rs + browser_automation.rs + applescript.rs',
             icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
           },
           {
-            title: '워크플로우 오케스트레이션',
-            desc: 'build_workflow로 자연어 기반 n8n 워크플로우를 자동 생성합니다. Docker/NPX 모드 지원, REST API 기반 실행.',
-            metric: 'n8n API + LLM Gateway 연동',
+            title: '패턴 기반 자동화 추천',
+            desc: 'Rust Collector가 OS 센서 데이터를 수집하고, pattern_detector가 반복 패턴을 식별합니다. build_sessions → build_routines → build_handoff 파이프라인이 자동화 기회를 정제합니다.',
+            module: 'pattern_detector.rs + analyzer.rs + recommendation.rs',
+            icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
+          },
+          {
+            title: '워크플로우 자동 생성',
+            desc: 'build_workflow로 자연어 프롬프트를 n8n 워크플로우 JSON으로 변환합니다. Docker/NPX 모드를 지원하며, 36KB n8n_api.rs가 REST API 기반 실행을 관리합니다.',
+            module: 'n8n_api.rs + workflow_schema.rs + orchestrator.rs',
             icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+          },
+          {
+            title: '외부 서비스 연동 & 원격 제어',
+            desc: 'Gmail/Calendar/Notion과 네이티브 통합하고, Telegram Bot으로 외출 중에도 PC를 원격 제어합니다. Google OAuth 기반 인증으로 안전하게 연동됩니다.',
+            module: 'gmail.rs + calendar.rs + notion.rs + telegram.rs',
+            icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
           },
         ].map((useCase) => (
           <Card hoverable={false}>
@@ -56,7 +64,7 @@ import Card from '../components/ui/Card.astro';
               <span class="w-10 h-10 flex items-center justify-center rounded-lg bg-white/5 border border-white/10 text-accent-300 mb-4" set:html={useCase.icon} />
               <h3 class="text-h3 text-neutral-100 mb-3">{useCase.title}</h3>
               <p class="text-body text-neutral-400 mb-4">{useCase.desc}</p>
-              <p class="text-caption text-accent-300 font-medium font-mono">{useCase.metric}</p>
+              <p class="text-caption text-accent-300 font-medium font-mono">{useCase.module}</p>
             </div>
           </Card>
         ))}
@@ -64,7 +72,74 @@ import Card from '../components/ui/Card.astro';
     </Container>
   </Section>
 
+  <!-- Real-World Scenarios -->
   <Section>
+    <Container>
+      <div class="text-center mb-16 animate-on-scroll">
+        <h2 class="text-h2 text-neutral-100 mb-4">검증된 멀티앱 시나리오</h2>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">실제 테스트를 통과한 복잡한 멀티앱 자동화 시나리오입니다.</p>
+      </div>
+      <div class="space-y-6 animate-on-scroll">
+        {[
+          {
+            title: '리서치 워크플로우',
+            apps: 'Notes → Safari → Notes → Mail',
+            command: 'surf "Notes에서 Research Topic을 작성하고, Safari에서 검색 후 결과 URL을 Notes에 붙여넣고, Mail로 공유해"',
+            steps: ['Notes에서 새 메모 → 주제 입력', 'Safari에서 Google 검색 실행', '검색 결과 URL 복사 → Notes에 붙여넣기', 'Mail에서 새 이메일 → 결과 전송'],
+            check: 'Cmd+Tab 앱 전환 + 클립보드 체인 전달 검증',
+          },
+          {
+            title: '주가 계산 & 기록',
+            apps: 'Safari → Calculator → Notes',
+            command: 'surf "Safari에서 Apple 주가를 검색하고, Calculator에서 100주 가치를 계산한 뒤, Notes에 결과를 저장해"',
+            steps: ['Safari에서 Apple stock price 검색', 'Vision으로 화면에서 주가 읽기', 'Calculator에서 주가 × 100 계산', 'Notes에 계산 결과 저장'],
+            check: 'Vision 기반 화면 읽기 + Calculator 자동 입력 검증',
+          },
+          {
+            title: '문서 작성 & 공유',
+            apps: 'TextEdit → Mail → Notes',
+            command: 'surf "TextEdit에서 회의록을 작성하고, Mail로 전달한 뒤, Notes에 보관해"',
+            steps: ['TextEdit에서 새 문서 → 회의록 타이핑', '전체 선택(Cmd+A) → 복사(Cmd+C)', 'Mail에서 새 이메일 → 본문 붙여넣기', 'Notes에 최종 보관'],
+            check: '클립보드 체인 + 3개 앱 간 데이터 전달 검증',
+          },
+          {
+            title: '파일 탐색 & 보관',
+            apps: 'Finder → Preview → Notes',
+            command: 'surf "Desktop에서 이미지 파일을 찾아 Preview로 열고, Notes에 이미지와 출처를 기록해"',
+            steps: ['Finder에서 ~/Desktop 이동', '이미지 파일 검색 → Preview로 열기', '이미지 전체 선택 → 복사', 'Notes에 이미지 + 텍스트 혼합 저장'],
+            check: 'Finder 파일 탐색 + 이미지 클립보드 복사 검증',
+          },
+        ].map((scenario) => (
+          <div class="bg-[#14161b] rounded-lg border border-white/10 p-6 md:p-8">
+            <div class="flex flex-col md:flex-row md:items-start gap-6">
+              <div class="flex-1">
+                <h3 class="text-h4 text-neutral-100 mb-2">{scenario.title}</h3>
+                <p class="text-xs text-accent-300 font-mono mb-4">{scenario.apps}</p>
+                <div class="bg-[#0d0e11] rounded-md p-3 mb-4 font-mono text-xs text-neutral-400 overflow-x-auto">
+                  <span class="text-[#8fd5a6]">&gt;</span> {scenario.command}
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {scenario.steps.map((step, i) => (
+                    <div class="flex items-start gap-2 text-sm text-neutral-400">
+                      <span class="text-accent-300 font-mono font-bold text-xs mt-0.5">{i + 1}</span>
+                      <span>{step}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div class="md:w-52 flex-shrink-0 bg-[#0d0e11] rounded-lg p-4 border border-white/5">
+                <p class="text-xs text-neutral-500 mb-1 font-medium">검증 항목</p>
+                <p class="text-xs text-neutral-400">{scenario.check}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Setup Process -->
+  <Section background="light">
     <Container>
       <div class="text-center mb-16 animate-on-scroll">
         <h2 class="text-h2 text-neutral-100 mb-4">Setup Process</h2>
@@ -114,29 +189,30 @@ import Card from '../components/ui/Card.astro';
     </Container>
   </Section>
 
-  <Section background="light">
+  <!-- Security & Reliability -->
+  <Section>
     <Container>
       <div class="text-center mb-16 animate-on-scroll">
         <h2 class="text-h2 text-neutral-100 mb-4">보안 & 안정성</h2>
-        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">policy.rs 기반 보안 정책과 Self-Healing으로 안전하고 안정적인 운영.</p>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">5계층 Zero Trust 보안과 Self-Healing으로 안전하고 안정적인 운영.</p>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 animate-on-scroll">
         {[
           {
+            title: 'Zero Trust',
+            desc: 'LLM 출력은 기본적으로 위험하다고 간주합니다. 모든 명령이 PolicyEngine을 통과해야 실행됩니다.',
+          },
+          {
             title: 'Write Lock',
-            desc: '기본 활성화된 쓰기 잠금. unlock 명령어로 명시적 해제가 필요합니다.',
+            desc: '기본 잠금 상태. unlock 후 자동 재잠금(시간 제한)으로 실수를 방지합니다.',
           },
           {
-            title: 'Command Filtering',
-            desc: 'exec 명령어에서 rm, sudo 등 위험한 키워드를 자동 감지하고 차단합니다.',
-          },
-          {
-            title: 'Policy Engine',
-            desc: 'policy.rs 기반 보안 정책 엔진이 모든 실행 명령을 사전 검증합니다.',
+            title: 'PII Masking',
+            desc: 'privacy.rs가 이메일, 카드번호, 주민번호를 DB 저장 전 자동 마스킹합니다.',
           },
           {
             title: 'Self-Healing',
-            desc: 'steer-guardian.sh supervisor가 코어 프로세스 크래시 시 자동 재시작합니다.',
+            desc: 'steer-guardian.sh가 크래시를 감지하고 코어 프로세스를 자동 재시작합니다.',
           },
         ].map((item) => (
           <div class="bg-[#14161b] rounded-lg p-6 border border-white/10">
@@ -148,12 +224,13 @@ import Card from '../components/ui/Card.astro';
     </Container>
   </Section>
 
+  <!-- CTA -->
   <Section background="dark" id="contact-sales">
     <Container>
       <div class="text-center animate-on-scroll">
         <h2 class="text-h2 text-white mb-4">지금 시작하세요</h2>
         <p class="text-body-lg text-neutral-400 max-w-xl mx-auto mb-10">
-          5분 안에 설치하고, 첫 번째 자동화를 실행해보세요.
+          5분 안에 설치하고, 첫 번째 멀티앱 자동화를 실행해보세요.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button variant="primary" size="lg" href="/docs/getting-started">Getting Started</Button>
