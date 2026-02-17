@@ -389,6 +389,11 @@ const normalizedCurrentPath = stripTrailingSlash(appPath);
   .prose :global(a:hover) {
     color: var(--site-accent);
   }
+  /* Prevent Button components from inheriting prose link styles */
+  .prose :global(a.inline-flex.items-center.justify-center) {
+    text-decoration: none !important;
+    color: inherit;
+  }
   .prose :global(hr) {
     border: none;
     border-top: 1px solid var(--site-border);
