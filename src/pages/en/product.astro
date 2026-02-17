@@ -1,12 +1,11 @@
-﻿---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import Section from '../components/ui/Section.astro';
-import Container from '../components/ui/Container.astro';
-import Button from '../components/ui/Button.astro';
-import StepCard from '../components/ui/StepCard.astro';
-import Table from '../components/ui/Table.astro';
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Section from '../../components/ui/Section.astro';
+import Container from '../../components/ui/Container.astro';
+import Button from '../../components/ui/Button.astro';
+import Table from '../../components/ui/Table.astro';
 
 const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
 const isUserSiteRepo = repo.endsWith('.github.io');
@@ -20,22 +19,22 @@ const withBase = (url: string) => {
 };
 ---
 
-<BaseLayout title="Product — NOVA" description="자연어 OS 제어 에이전트. 73개+ Rust 모듈로 구성된 아키텍처, NL 자동화 파이프라인, 5계층 보안 모델을 확인하세요." lang="ko">
-  <Header slot="header" lang="ko" />
+<BaseLayout title="Product — NOVA" description="Natural language OS control agent. Explore the architecture of 73+ Rust modules, NL automation pipeline, and 5-layer security model." lang="en">
+  <Header slot="header" lang="en" />
 
   <!-- Hero -->
   <Section padding="large">
     <Container>
       <div class="text-center max-w-4xl mx-auto animate-on-scroll">
         <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Product</p>
-        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">자연어 명령을 실제 OS 동작으로<br class="hidden sm:block" />변환하는 에이전트</h1>
+        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">Transforming natural language commands<br class="hidden sm:block" />into actual OS actions</h1>
         <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto mb-10">
-          NOVA는 의도 분석부터 실행, 검증, 승인까지 완전 자동화된 NL 파이프라인을 제공합니다.
-          73개+ Rust 모듈, 5계층 보안, 4개 외부 서비스 통합으로 구성된 프로덕션 레디 에이전트입니다.
+          An agent that provides a fully automated NL pipeline from intent analysis to execution, verification, and approval.
+          A production-ready agent consisting of 73+ Rust modules, 5-layer security, and 4 external service integrations.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <Button variant="primary" size="lg" href={withBase('/docs/getting-started?os=macos')}>Start for macOS</Button>
-          <Button variant="secondary" size="lg" href={withBase('/docs/getting-started?os=windows')}>Start for Windows</Button>
+          <Button variant="primary" size="lg" href={withBase('/en/docs/getting-started?os=macos')}>Start for macOS</Button>
+          <Button variant="secondary" size="lg" href={withBase('/en/docs/getting-started?os=windows')}>Start for Windows</Button>
         </div>
       </div>
     </Container>
@@ -46,16 +45,16 @@ const withBase = (url: string) => {
     <Container>
       <div class="text-center mb-16 animate-on-scroll">
         <h2 class="text-h2 text-neutral-100 mb-4">NL Automation Pipeline</h2>
-        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">자연어 입력 → 의도 분석 → 실행 → 검증 → 승인까지 6단계 자동 파이프라인.</p>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">A 6-stage automated pipeline from natural language input to intention analysis, execution, verification, and approval.</p>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 animate-on-scroll">
         {[
-          { step: '1', title: 'Intent', module: 'intent_router.rs', desc: '자연어 → IntentType 분류' },
-          { step: '2', title: 'Slot', module: 'slot_filler.rs', desc: '필수 파라미터 추출' },
-          { step: '3', title: 'Plan', module: 'plan_builder.rs', desc: '실행 단계 생성' },
-          { step: '4', title: 'Execute', module: 'execution_controller.rs', desc: '단계별 자동 실행' },
-          { step: '5', title: 'Verify', module: 'verification_engine.rs', desc: '결과 자동 검증' },
-          { step: '6', title: 'Approve', module: 'approval_gate.rs', desc: '위험 행동 승인 게이트' },
+          { step: '1', title: 'Intent', module: 'intent_router.rs', desc: 'Classify NL → IntentType' },
+          { step: '2', title: 'Slot', module: 'slot_filler.rs', desc: 'Extract required parameters' },
+          { step: '3', title: 'Plan', module: 'plan_builder.rs', desc: 'Generate execution steps' },
+          { step: '4', title: 'Execute', module: 'execution_controller.rs', desc: 'Automated step-by-step execution' },
+          { step: '5', title: 'Verify', module: 'verification_engine.rs', desc: 'Automated result verification' },
+          { step: '6', title: 'Approve', module: 'approval_gate.rs', desc: 'Security gate for dangerous actions' },
         ].map((item) => (
           <div class="bg-[#14161b] rounded-lg border border-white/10 p-5 text-center">
             <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-accent-300/10 text-accent-300 text-sm font-bold mb-3">{item.step}</span>
@@ -74,19 +73,19 @@ const withBase = (url: string) => {
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center animate-on-scroll">
         <div>
           <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">OS-Level Control</p>
-          <h2 class="text-h2 text-neutral-100 mb-4">화면을 보고, 클릭하고, 앱을 직접 조작합니다</h2>
+          <h2 class="text-h2 text-neutral-100 mb-4">Watch the screen, click, and manipulate apps directly</h2>
           <div class="space-y-6 text-body text-neutral-300">
             <div>
               <h3 class="text-h4 text-neutral-100 mb-2">Visual Driver</h3>
-              <p><code class="text-accent-300">visual_driver.rs</code> (39KB)가 화면 요소를 인식하고, 마우스/키보드를 자동 제어합니다. AppleScript, 브라우저 자동화, UI 탐색을 통합합니다.</p>
+              <p><code class="text-accent-300">visual_driver.rs</code> (39KB) recognizes screen elements and automatically controls mouse/keyboard. Integrates AppleScript, browser automation, and UI navigation.</p>
             </div>
             <div>
               <h3 class="text-h4 text-neutral-100 mb-2">Browser Automation</h3>
-              <p><code class="text-accent-300">browser_automation.rs</code>가 웹 페이지 탐색, 폼 입력, 데이터 추출을 자동으로 수행합니다.</p>
+              <p><code class="text-accent-300">browser_automation.rs</code> automatically performs web page navigation, form input, and data extraction.</p>
             </div>
             <div>
               <h3 class="text-h4 text-neutral-100 mb-2">Reality Check</h3>
-              <p><code class="text-accent-300">reality_check.rs</code>가 실행 전 설치된 앱을 스캔하고, 유사한 이름도 자동 보정하여 환각(Hallucination)을 방지합니다.</p>
+              <p><code class="text-accent-300">reality_check.rs</code> scans installed apps before execution and automatically corrects similar names to prevent hallucinations.</p>
             </div>
           </div>
         </div>
@@ -98,13 +97,13 @@ const withBase = (url: string) => {
             <span class="ml-2 text-xs text-neutral-600">nova-agent</span>
           </div>
           <p class="text-neutral-500 mb-2">$ cargo run --bin local_os_agent</p>
-          <p class="text-[#8fd5a6]">&gt; surf "Notes를 열어 새 메모를 만들고 Research Topic을 입력해"</p>
+          <p class="text-[#8fd5a6]">&gt; surf "Open Notes, create a new note, and type Research Topic"</p>
           <p class="text-neutral-300 mt-2">Environment Scan: Found 349 apps</p>
           <p class="text-neutral-300">Canonical: "Notes" → "Notes.app"</p>
-          <p class="text-[#8fd5a6] mt-1">[OK] Notes.app 실행 (applescript.rs)</p>
-          <p class="text-[#8fd5a6]">[OK] Shortcut: Cmd+N (새 메모 생성)</p>
+          <p class="text-[#8fd5a6] mt-1">[OK] Notes.app execution (applescript.rs)</p>
+          <p class="text-[#8fd5a6]">[OK] Shortcut: Cmd+N (Create new note)</p>
           <p class="text-[#8fd5a6]">[OK] Type: "Research Topic" (keyboard.type)</p>
-          <p class="text-neutral-300 mt-3">Verification: 메모 생성 확인 완료</p>
+          <p class="text-neutral-300 mt-3">Verification: Note creation confirmed</p>
         </div>
       </div>
     </Container>
@@ -128,31 +127,31 @@ const withBase = (url: string) => {
           <p class="text-neutral-500 mt-4">Write Lock: LOCKED (default)</p>
           <p class="text-neutral-500">Tool Policy: TOOL_ALLOWLIST / TOOL_DENYLIST</p>
           <p class="text-neutral-500">PII Guard: [EMAIL], [CARD], [SSN] → masked</p>
-          <p class="text-neutral-500">Kill Switch: Esc 연타 → 즉시 종료</p>
+          <p class="text-neutral-500">Kill Switch: Multi-press Esc → Instant Exit</p>
         </div>
         <div class="order-1 lg:order-2">
           <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">Zero Trust Security</p>
-          <h2 class="text-h2 text-neutral-100 mb-4">5계층 보안으로 모든 실행을 통제합니다</h2>
+          <h2 class="text-h2 text-neutral-100 mb-4">Control all executions with 5-layer security</h2>
           <div class="space-y-4 text-body text-neutral-300">
             <div>
               <h3 class="text-h4 text-neutral-100 mb-1">1. PolicyEngine (policy.rs)</h3>
-              <p class="text-sm">Safe / Caution / Critical 3단계로 행동을 분류합니다.</p>
+              <p class="text-sm">Classifies actions into 3 levels: Safe / Caution / Critical.</p>
             </div>
             <div>
               <h3 class="text-h4 text-neutral-100 mb-1">2. CommandClassifier (security.rs)</h3>
-              <p class="text-sm">셸 명령의 위험도를 자동 분석하여 차단합니다.</p>
+              <p class="text-sm">Automatically analyzes the risk of shell commands and blocks them.</p>
             </div>
             <div>
               <h3 class="text-h4 text-neutral-100 mb-1">3. ToolPolicy (tool_policy.rs)</h3>
-              <p class="text-sm">환경변수 기반 도구별 Allow/Denylist를 관리합니다.</p>
+              <p class="text-sm">Manages per-tool Allow/Denylists based on environment variables.</p>
             </div>
             <div>
               <h3 class="text-h4 text-neutral-100 mb-1">4. PrivacyGuard (privacy.rs)</h3>
-              <p class="text-sm">이메일, 카드번호 등 PII를 DB 저장 전 자동 마스킹합니다.</p>
+              <p class="text-sm">Automatically masks PII such as emails and card numbers before saving to the DB.</p>
             </div>
             <div>
               <h3 class="text-h4 text-neutral-100 mb-1">5. API Auth (api_server.rs)</h3>
-              <p class="text-sm">STEER_API_KEY 기반 미들웨어 인증을 적용합니다.</p>
+              <p class="text-sm">Applies middleware authentication based on STEER_API_KEY.</p>
             </div>
           </div>
         </div>
@@ -165,14 +164,14 @@ const withBase = (url: string) => {
     <Container>
       <div class="text-center mb-16 animate-on-scroll">
         <h2 class="text-h2 text-neutral-100 mb-4">External Integrations</h2>
-        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">네이티브 연동으로 일상 서비스를 자동화합니다.</p>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">Automate everyday services with native integrations.</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-on-scroll">
         {[
-          { title: 'Gmail', module: 'gmail.rs (5KB)', features: ['이메일 조회/발송', '분류 자동화', 'Gmail API 연동'] },
-          { title: 'Google Calendar', module: 'calendar.rs (5KB)', features: ['일정 조회/생성', '리마인더 관리', 'Google OAuth 연동'] },
-          { title: 'Notion', module: 'notion.rs (6KB)', features: ['페이지 읽기/쓰기', '데이터베이스 조회', 'Notion API 연동'] },
-          { title: 'Telegram', module: 'telegram.rs (12KB)', features: ['원격 명령 실행', '결과 리포트 전송', '외출 중 PC 제어'] },
+          { title: 'Gmail', module: 'gmail.rs (5KB)', features: ['Email lookup/send', 'Classification automation', 'Gmail API integration'] },
+          { title: 'Google Calendar', module: 'calendar.rs (5KB)', features: ['Schedule lookup/create', 'Reminder management', 'Google OAuth integration'] },
+          { title: 'Notion', module: 'notion.rs (6KB)', features: ['Read/write pages', 'Database query', 'Notion API integration'] },
+          { title: 'Telegram', module: 'telegram.rs (12KB)', features: ['Remote command execution', 'Result report transmission', 'PC control while away'] },
         ].map((item) => (
           <div class="bg-[#14161b] rounded-lg border border-white/10 p-6">
             <h3 class="text-h4 text-neutral-100 mb-2">{item.title}</h3>
@@ -197,29 +196,29 @@ const withBase = (url: string) => {
       <div class="animate-on-scroll">
         <div class="text-center mb-12">
           <h2 class="text-h2 text-neutral-100 mb-4">Technical Specification</h2>
-          <p class="text-body-lg text-neutral-400">NOVA 에이전트의 전체 아키텍처와 기술 스택.</p>
+          <p class="text-body-lg text-neutral-400">Full architecture and technology stack of the NOVA agent.</p>
         </div>
         <Table>
           <thead>
             <tr>
-              <th>구성 요소</th>
-              <th>기술 스택</th>
-              <th>상세</th>
+              <th>Component</th>
+              <th>Tech Stack</th>
+              <th>Detail</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>Core Engine</td><td>Rust (73+ 모듈)</td><td>main.rs (1,112줄), api_server.rs (90KB), llm_gateway.rs (72KB)</td></tr>
+            <tr><td>Core Engine</td><td>Rust (73+ modules)</td><td>main.rs (1,112 lines), api_server.rs (90KB), llm_gateway.rs (72KB)</td></tr>
             <tr><td>NL Pipeline</td><td>6-stage Automation</td><td>intent_router → slot_filler → plan_builder → execution → verification → approval</td></tr>
-            <tr><td>LLM Engine</td><td>OpenAI API</td><td>GPT-4 / GPT-3.5 기반 의도 분석, 패턴 인식, 워크플로우 생성</td></tr>
+            <tr><td>LLM Engine</td><td>OpenAI API</td><td>GPT-4 / GPT-3.5-based intent analysis, pattern recognition, workflow generation</td></tr>
             <tr><td>OS Control</td><td>AppleScript + Visual Driver</td><td>visual_driver.rs (39KB), browser_automation.rs, screen_recorder.rs</td></tr>
-            <tr><td>Storage</td><td>SQLite (steer.db)</td><td>이벤트 로그, 5분 집약, 일일 요약, 세션/루틴/핸드오프</td></tr>
-            <tr><td>Orchestration</td><td>n8n (Docker / NPX)</td><td>n8n_api.rs (36KB), REST API 연동, 워크플로우 자동 생성</td></tr>
+            <tr><td>Storage</td><td>SQLite (steer.db)</td><td>Event logs, 5-min aggregation, daily summary, session/routine/handoff</td></tr>
+            <tr><td>Orchestration</td><td>n8n (Docker / NPX)</td><td>n8n_api.rs (36KB), REST API integration, automated workflow generation</td></tr>
             <tr><td>Web UI</td><td>React/Vite + Tailwind</td><td>Dashboard, Chat, Launcher, Routines, Workflows, Settings</td></tr>
-            <tr><td>Desktop</td><td>Tauri</td><td>macOS .app / Windows .exe 네이티브 앱 생성</td></tr>
-            <tr><td>Integrations</td><td>Gmail, Calendar, Notion, Telegram</td><td>Google OAuth, Notion API, Telegram Bot API 연동</td></tr>
+            <tr><td>Desktop</td><td>Tauri</td><td>Native apps for macOS (.app) / Windows (.exe)</td></tr>
+            <tr><td>Integrations</td><td>Gmail, Calendar, Notion, Telegram</td><td>Google OAuth, Notion API, Telegram Bot API integration</td></tr>
             <tr><td>Security</td><td>5-layer Zero Trust</td><td>policy.rs, security.rs, tool_policy.rs, privacy.rs, api_server auth</td></tr>
             <tr><td>Data Pipeline</td><td>Rust Collector + Sensors</td><td>build_sessions_rs, build_routines_rs, build_handoff_rs</td></tr>
-            <tr><td>Reliability</td><td>Self-Healing Guardian</td><td>프로세스 자동 재시작, retry_logic.rs, singleton_lock.rs</td></tr>
+            <tr><td>Reliability</td><td>Self-Healing Guardian</td><td>Automatic process restarts, retry_logic.rs, singleton_lock.rs</td></tr>
           </tbody>
         </Table>
       </div>
@@ -230,31 +229,17 @@ const withBase = (url: string) => {
   <Section background="dark">
     <Container>
       <div class="text-center animate-on-scroll">
-        <h2 class="text-h2 text-white mb-4">직접 확인해 보세요</h2>
+        <h2 class="text-h2 text-white mb-4">Check it out for yourself</h2>
         <p class="text-body-lg text-neutral-400 max-w-xl mx-auto mb-10">
-          Getting Started 가이드에 따라 5분 이내에 첫 번째 자동화를 실행할 수 있습니다.
+          Following the Getting Started guide, you can run your first automation in less than 5 minutes.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button variant="primary" size="lg" href={withBase('/docs/getting-started')}>시작하기</Button>
-          <Button variant="ghost" size="lg" href={withBase('/contact')}>기술팀 문의</Button>
+          <Button variant="primary" size="lg" href={withBase('/en/docs/getting-started')}>Get Started</Button>
+          <Button variant="ghost" size="lg" href={withBase('/en/contact')}>Contact Technical Team</Button>
         </div>
       </div>
     </Container>
   </Section>
 
-  <Footer slot="footer" />
+  <Footer slot="footer" lang="en" />
 </BaseLayout>
-
-<style>
-  .product-segment-card {
-    background: var(--site-bg-soft);
-    border: 1px solid var(--site-border);
-    border-radius: 0.875rem;
-    padding: 2rem;
-  }
-  @media (min-width: 768px) {
-    .product-segment-card {
-      padding: 2.5rem;
-    }
-  }
-</style>

@@ -1,0 +1,351 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const isUserSiteRepo = repo.endsWith('.github.io');
+const basePath = process.env.GITHUB_ACTIONS === 'true'
+  ? (isUserSiteRepo ? '/' : `/${repo}/`)
+  : '/';
+const withBase = (url: string) => {
+  if (!url.startsWith('/')) return url;
+  const clean = url.replace(/^\/+/, '');
+  return clean ? `${basePath}${clean}` : basePath;
+};
+---
+
+<DocsLayout title="Getting Started" description="Technical guide for installing the NOVA agent and running your first automation." lang="en">
+  <h1>Getting Started</h1>
+  <p class="doc-subtitle">A comprehensive guide to the installation, configuration, and execution of the NOVA Local OS Agent. Estimated time is about <strong>5 minutes</strong>.</p>
+
+  <!-- OS Switcher -->
+  <div class="os-switcher-container" id="os-switcher">
+    <button class="os-tab active" data-os-target="macos">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.05,20.28c-0.96,0.95-2.05,1.72-3.11,1.72s-1.45-0.67-2.73-0.67c-1.29,0-1.87,0.67-2.9,0.67c-1.03,0-2.14-0.81-3.23-1.89 c-1.95-1.93-3.05-4.88-3.05-7.38c0-2.5,1.13-4.63,2.94-5.75c0.91-0.57,2.05-0.91,3.22-0.91c1.29,0,1.96,0.42,3.23,0.42 c1.26,0,1.87-0.42,3.23-0.42c1.07,0,2.1,0.35,3,0.91c-0.48,0.31-1.39,1.12-1.39,2.68c0,1.72,1.35,2.77,2.37,3.31 c-0.74,1.8-1.5,4.01-2.31,5.32L17.05,20.28z M14.19,3.77c0-1.95,1.4-3.56,3.31-3.77c0.23,2.16-1.5,4.2-3.37,4.2 C14.04,4.2,14.19,3.85,14.19,3.77z"/>
+      </svg>
+      macOS
+    </button>
+    <button class="os-tab" data-os-target="windows">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M0,3.449L9.75,2.1L9.75,11.55L0,11.55ZM0,12.45L9.75,12.45L9.75,21.9L0,20.55ZM10.65,1.95L24,0L24,11.55L10.65,11.55ZM10.65,12.45L24,12.45L24,24L10.65,22.05Z"/>
+      </svg>
+      Windows
+    </button>
+  </div>
+
+  <div class="doc-callout">
+    <strong>What's covered:</strong> Environment Preparation → Installation & Build → Running the Agent → Using Core Commands → Workflow Extension
+  </div>
+
+  <div data-os-only="macos">
+    <h2>Prerequisites (macOS)</h2>
+    <p>Ensure your environment is ready before starting on macOS.</p>
+    <table>
+      <thead>
+        <tr><th>Item</th><th>Requirement</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Operating System</strong></td><td>macOS 12+ (Monterey) or later</td><td>-</td></tr>
+        <tr><td><strong>Rust</strong></td><td>1.70 or later</td><td>Install via <a href="https://rustup.rs">rustup.rs</a></td></tr>
+        <tr><td><strong>Build Tools</strong></td><td>Xcode Command Line Tools</td><td><code>xcode-select --install</code></td></tr>
+        <tr><td><strong>OpenAI API Key</strong></td><td>GPT-4 or GPT-3.5</td><td>Required for LLM analysis modules</td></tr>
+        <tr><td><strong>Git</strong></td><td>Latest version</td><td>For cloning the repository</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div data-os-only="windows">
+    <h2>Prerequisites (Windows)</h2>
+    <p>Ensure your environment is ready before starting on Windows.</p>
+    <table>
+      <thead>
+        <tr><th>Item</th><th>Requirement</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Operating System</strong></td><td>Windows 10 / 11</td><td>64-bit recommended</td></tr>
+        <tr><td><strong>Rust</strong></td><td>1.70 or later (msvc toolchain)</td><td>Install via <a href="https://rustup.rs">rustup.rs</a></td></tr>
+        <tr><td><strong>Build Tools</strong></td><td>Visual Studio Build Tools</td><td>Include C++ build tools</td></tr>
+        <tr><td><strong>OpenAI API Key</strong></td><td>GPT-4 or GPT-3.5</td><td>Required for LLM analysis modules</td></tr>
+        <tr><td><strong>Git</strong></td><td>Latest version</td><td>For cloning the repository</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="doc-callout doc-callout-warning" data-os-only="macos">
+    <strong>Note for macOS users:</strong> You must grant Accessibility permissions to your terminal app in System Settings → Privacy & Security → Accessibility. Without this, OS sensor data cannot be collected.
+  </div>
+
+  <div class="doc-callout doc-callout-info" data-os-only="windows">
+    <strong>Note for Windows users:</strong> Ensure the PowerShell execution policy is set to `RemoteSigned`. Run the command `Set-ExecutionPolicy RemoteSigned` as an administrator.
+  </div>
+
+  <h2>Step 1 — Clone and Configure</h2>
+
+  <p>Clone the NOVA repository from GitHub and set up environment variables.</p>
+
+  <div data-os-only="macos">
+    <pre><code>{`# Clone repository
+git clone https://github.com/NOVA-ALLRounder/main.git
+cd main/core
+
+# Create environment variable file
+cp .env.example .env`}</code></pre>
+  </div>
+
+  <div data-os-only="windows">
+    <pre><code>{`# Clone repository
+git clone https://github.com/NOVA-ALLRounder/main.git
+cd main/core
+
+# Create environment variable file (PowerShell)
+Copy-Item .env.example .env`}</code></pre>
+  </div>
+
+  <p>Edit the <code>.env</code> file to set your <code>OPENAI_API_KEY</code>.</p>
+
+  <div class="doc-callout doc-callout-info">
+    <strong>Note:</strong> You can obtain an API key from the <a href="https://platform.openai.com/api-keys">OpenAI Dashboard</a>.
+  </div>
+
+  <h2>Step 2 — Build</h2>
+
+  <p>Build the Rust native binary. A release build takes about 2-3 minutes.</p>
+
+  <pre><code>{`cargo build --release`}</code></pre>
+
+  <div data-os-only="macos">
+    <p>Binary location after build: <code>./target/release/local_os_agent</code></p>
+  </div>
+
+  <div data-os-only="windows">
+    <p>Binary location after build: <code>.\target\release\local_os_agent.exe</code></p>
+  </div>
+
+  <h2>Step 3 — Run the Agent</h2>
+
+  <div data-os-only="macos">
+    <h3>Run on macOS</h3>
+    <pre><code>{`# Run the release binary directly
+./target/release/local_os_agent
+
+# Or use cargo run
+cargo run --release --bin local_os_agent`}</code></pre>
+  </div>
+
+  <div data-os-only="windows">
+    <h3>Run on Windows</h3>
+    <p>Use the PowerShell script for Windows environments:</p>
+    <pre><code>{`# Execute the PowerShell script (recommended)
+.\scripts\run_core.ps1 -CollectorImpl rust
+
+# Or run directly
+.\target\release\local_os_agent.exe`}</code></pre>
+  </div>
+
+  <p>When executed successfully, you'll see a prompt like this:</p>
+
+  <pre><code>{`NOVA Agent v2.4.0 ready
+Environment Scan: Found 349 apps
+Collector: running on port 8080
+Write Lock: enabled (use 'unlock' to disable)
+Type 'help' for available commands.
+
+>`}</code></pre>
+
+  <h2>Step 4 — Core Commands</h2>
+
+  <p>Available commands while the agent is running:</p>
+
+  <table>
+    <thead>
+      <tr><th>Command</th><th>Description</th><th>Example</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>surf</code></td><td>Control entire OS with natural language (Core)</td><td><code>surf "Open Safari and search for weather"</code></td></tr>
+      <tr><td><code>routine</code></td><td>View results of recurring pattern analysis</td><td><code>routine</code></td></tr>
+      <tr><td><code>recommend</code></td><td>AI-based automation recommendations</td><td><code>recommend</code></td></tr>
+      <tr><td><code>status</code></td><td>Check system status</td><td><code>status</code></td></tr>
+      <tr><td><code>control</code></td><td>Application control</td><td><code>control Safari open</code></td></tr>
+      <tr><td><code>exec</code></td><td>Execute shell commands (Security policy applied)</td><td><code>exec "echo hello"</code></td></tr>
+      <tr><td><code>build_workflow</code></td><td>Natural language-based workflow generation</td><td><code>build_workflow "Slack alert at 9 AM daily"</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Pattern Analysis & Recommendations</h3>
+
+  <p>View collected usage patterns with <code>routine</code> and get AI suggestions with <code>recommend</code>:</p>
+
+  <pre><code>{`> routine
+
+Analyzed repeating patterns (Last 7 days):
+  1. VS Code → Terminal → git commit  (3 times daily)
+  2. Slack → Chrome → Google Docs     (5 times daily)
+  3. Finder → Terminal → npm run dev   (4 times daily)
+
+> recommend
+
+3 Recommended automations:
+  → Create git auto-commit workflow
+  → Automate document review notifications
+  → One-click dev server execution`}</code></pre>
+
+  <h3>Natural Language Workflow Creation</h3>
+
+  <p>The <code>build_workflow</code> command transforms natural language prompts into n8n-compatible workflows:</p>
+
+  <pre><code>{`> build_workflow "Send daily report to Slack at 9 AM every morning"
+
+Analyzing with LLM...
+Generating n8n workflow...
+workflow_daily_report.json generation complete
+
+Workflow registered in n8n.
+Dashboard: http://localhost:5678`}</code></pre>
+
+  <h2>Step 5 — Workflow Expansion (Optional)</h2>
+
+  <h3>n8n Workflow Orchestration</h3>
+
+  <p>Integrate n8n to manage complex multi-step workflows through a visual interface.</p>
+
+  <pre><code>{`# Run n8n with Docker
+docker compose up -d n8n
+
+# Access n8n dashboard
+# → http://localhost:5678
+
+# Change runtime mode (env variable)
+# STEER_N8N_RUNTIME=docker  (Default)
+# STEER_N8N_RUNTIME=npx
+# STEER_N8N_RUNTIME=manual`}</code></pre>
+
+  <h3>Data Collection & Batch Analysis</h3>
+
+  <p>Collect OS sensor data with Rust Collector and analyze via batch pipelines:</p>
+
+  <pre><code>{`# Run Collector standalone
+cargo build --manifest-path core/Cargo.toml --bin collector_rs
+STEER_DB_PATH=./steer.db ./core/target/debug/collector_rs
+
+# Batch analysis pipeline
+./core/target/debug/build_sessions_rs --since-hours 6 --use-state
+./core/target/debug/build_routines_rs --days 3 --min-support 2
+./core/target/debug/build_handoff_rs --skip-unchanged`}</code></pre>
+
+  <h3>Build Desktop App (Tauri)</h3>
+
+  <p>Build desktop applications for team deployment.</p>
+
+  <pre><code>{`./scripts/build_release.sh`}</code></pre>
+
+  <div data-os-only="macos">
+    <p>After build, the <code>.app</code> file is created in <code>desktop/src-tauri/target/release/bundle/macos/</code>.</p>
+  </div>
+
+  <div data-os-only="windows">
+    <p>After build, the <code>.exe</code> installer is created in <code>desktop/src-tauri/target/release/bundle/msi/</code> or <code>nsis/</code>.</p>
+  </div>
+
+  <h2>Next Steps</h2>
+
+  <p>You've completed your first automation run. Deepen your usage with these resources:</p>
+
+  <ul>
+    <li><a href={withBase('/en/docs/tutorials')}>Tutorials</a> — Pragmatic scenario guides for email classification, report generation, etc.</li>
+    <li><a href={withBase('/en/docs/api')}>API Reference</a> — Programmatic automation management via REST API</li>
+    <li><a href={withBase('/en/docs/faq')}>FAQ</a> — Frequently asked questions and troubleshooting</li>
+  </ul>
+
+  <hr />
+  <p>If you encounter issues, get help on <a href="https://github.com/NOVA-ALLRounder/main/issues">GitHub Issues</a> or <a href={withBase('/en/contact')}>contact our technical team directly</a>.</p>
+
+  <style>
+    .os-switcher-container {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.25rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.5rem;
+      margin: 2rem 0;
+      width: fit-content;
+    }
+    .os-tab {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      background: transparent;
+      color: #8b8e94;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 0.375rem;
+      transition: all 0.2s;
+    }
+    .os-tab:hover {
+      color: #eeede8;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .os-tab.active {
+      color: #111214;
+      background: var(--site-accent);
+    }
+    [data-os-only] {
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .os-hidden {
+      display: none !important;
+    }
+  </style>
+
+  <script>
+    function updateOS(os) {
+      // Update tabs UI
+      document.querySelectorAll('.os-tab').forEach(tab => {
+        if (tab.dataset.osTarget === os) {
+          tab.classList.add('active');
+        } else {
+          tab.classList.remove('active');
+        }
+      });
+
+      // Update content visibility
+      document.querySelectorAll('[data-os-only]').forEach(el => {
+        if (el.dataset.osOnly === os) {
+          el.classList.remove('os-hidden');
+        } else {
+          el.classList.add('os-hidden');
+        }
+      });
+
+      // Persist
+      localStorage.setItem('nova-os-preference', os);
+    }
+
+    // Initialize
+    const urlParams = new URLSearchParams(window.location.search);
+    let preferredOS = urlParams.get('os');
+
+    if (!preferredOS) {
+      preferredOS = localStorage.getItem('nova-os-preference');
+    }
+
+    if (!preferredOS) {
+      // Auto-detect if possible
+      const platform = window.navigator.platform.toLowerCase();
+      if (platform.includes('mac')) preferredOS = 'macos';
+      else if (platform.includes('win')) preferredOS = 'windows';
+      else preferredOS = 'macos'; // Default
+    }
+
+    updateOS(preferredOS);
+
+    // Event listeners
+    document.querySelectorAll('.os-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        updateOS(tab.dataset.osTarget);
+      });
+    });
+  </script>
+</DocsLayout>

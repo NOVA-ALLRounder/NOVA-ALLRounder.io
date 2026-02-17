@@ -1,0 +1,148 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const isUserSiteRepo = repo.endsWith('.github.io');
+const basePath = process.env.GITHUB_ACTIONS === 'true'
+  ? (isUserSiteRepo ? '/' : `/${repo}/`)
+  : '/';
+const withBase = (url: string) => {
+  if (!url.startsWith('/')) return url;
+  const clean = url.replace(/^\/+/, '');
+  return clean ? `${basePath}${clean}` : basePath;
+};
+---
+
+<DocsLayout title="FAQ" description="Frequently asked questions and answers for NOVA. Installation, security, performance, and troubleshooting." lang="en">
+  <h1>FAQ</h1>
+  <p class="doc-subtitle">We've compiled frequently asked questions and solutions regarding installation, operation, security, and troubleshooting.</p>
+
+  <h2>General</h2>
+
+  <h3>What is NOVA?</h3>
+  <p>NOVA is a <strong>user-behavior-based automation agent</strong>. It analyzes computer usage patterns at the OS level to automatically detect repetitive tasks, and the AI recommends and executes optimal automations. It's implemented as a Rust native binary, providing high stability and processing performance.</p>
+
+  <h3>Which operating systems are supported?</h3>
+  <p>We officially support <strong>macOS 12+</strong> (Monterey or later) and <strong>Windows 10+</strong>. Since it is a Rust native build, it can be compiled on Linux as well, but the official support scope is macOS and Windows.</p>
+
+  <h3>Can I control my computer using natural language?</h3>
+  <p>Yes. By entering natural language instructions like "Search for weather" or "Create a note in Notes" with the <code>surf</code> command, <code>intent_router</code> analyzes intent, <code>plan_builder</code> generates an execution plan, and <code>visual_driver</code> and <code>browser_automation</code> control the OS directly. We also support complex multi-app scenarios that connect multiple apps.</p>
+
+  <h3>Can I use it offline?</h3>
+  <p>Data collection (<code>routine</code>, <code>status</code>) and application control (<code>control</code>, <code>exec</code>) work offline. However, LLM-based analysis (<code>recommend</code>) and workflow generation (<code>build_workflow</code>) require an OpenAI API connection. A complete offline mode is on our future roadmap.</p>
+
+  <h3>Is it free to use?</h3>
+  <p>The NOVA core agent is <strong>open-source</strong> and available for free. Cloud APIs (automation management, AI classification models, etc.) have different usage limits depending on the plan. Detailed pricing information can be found on the <a href={withBase('/en/pricing')}>Pricing</a> page.</p>
+
+  <hr />
+
+  <h2>Installation & Setup</h2>
+
+  <h3>Is an OpenAI API Key absolutely necessary?</h3>
+  <p>Yes. OpenAI API is used for LLM-based behavioral pattern analysis (<code>analyzer.rs</code>) and natural language workflow generation (<code>build_workflow</code>). You must set <code>OPENAI_API_KEY</code> in your <code>.env</code> file. We support both GPT-3.5 and GPT-4 models.</p>
+
+  <h3>Why is Accessibility permission needed on macOS?</h3>
+  <p>The OS sensor uses macOS's Accessibility API to collect app switching, active windows, and system events. Grant permission to your terminal app in <strong>System Settings → Privacy & Security → Accessibility</strong>.</p>
+
+  <h3>Can I use it without n8n?</h3>
+  <p>Yes. n8n is an <strong>optional workflow orchestration layer</strong>. Core features of the agent (<code>routine</code>, <code>recommend</code>, <code>exec</code>, <code>control</code>) work independently without n8n. Add n8n when you need to visually manage complex multi-step workflows.</p>
+
+  <h3>What if the build fails?</h3>
+  <p>Check the following in order:</p>
+  <ul>
+    <li>Verify Rust version is 1.70 or higher: <code>rustup update && rustc --version</code></li>
+    <li>Check if Xcode Command Line Tools are installed (macOS): <code>xcode-select --install</code></li>
+    <li>Check if Visual Studio C++ Build Tools are installed (Windows)</li>
+    <li>Check network connection — an internet connection is required to download Cargo dependencies</li>
+  </ul>
+
+  <hr />
+
+  <h2>Security & Data</h2>
+
+  <h3>How is security handled?</h3>
+  <p>NOVA applies a 5-layer security model based on <strong>Zero Trust principles</strong>:</p>
+  <ul>
+    <li><strong>PolicyEngine (policy.rs):</strong> Classifies actions into 3 levels: Safe / Caution / Critical</li>
+    <li><strong>CommandClassifier (security.rs):</strong> Automatically analyzes and blocks risky shell commands</li>
+    <li><strong>ToolPolicy (tool_policy.rs):</strong> Manages per-tool Allow/Denylists based on environment variables</li>
+    <li><strong>PrivacyGuard (privacy.rs):</strong> Automatically masks PII such as emails and card numbers before saving to the DB</li>
+    <li><strong>API Auth (api_server.rs):</strong> Applies middleware authentication based on STEER_API_KEY</li>
+    <li><strong>Write Lock:</strong> Default locked state with timed auto-relocking to prevent mistakes</li>
+    <li><strong>Kill Switch:</strong> Instant process termination when Esc is pressed multiple times</li>
+  </ul>
+
+  <h3>Where is the collected data stored?</h3>
+  <p>All data is stored in a <strong>local SQLite database</strong> (<code>steer.db</code>). No data is sent to external servers. Only summarized pattern data is sent to the OpenAI API during LLM analysis; raw event data is never transmitted.</p>
+
+  <h3>Data Retention Cycle</h3>
+  <p>The Rust Collector manages the following data lifecycle (based on <code>config.yaml</code>):</p>
+  <ul>
+    <li><strong>Raw Events:</strong> Automatically deleted after 7 days (<code>raw_events_days: 7</code>)</li>
+    <li><strong>Session Data:</strong> Kept for 30 days (<code>sessions_days: 30</code>)</li>
+    <li><strong>Routine Candidates:</strong> Kept for 90 days (<code>routine_candidates_days: 90</code>)</li>
+    <li><strong>Max DB Size:</strong> 500MB (<code>max_db_mb: 500</code>)</li>
+  </ul>
+
+  <hr />
+
+  <h2>Performance & Scalability</h2>
+
+  <h3>API Rate Limit Policy</h3>
+  <table>
+    <thead>
+      <tr><th>Plan</th><th>Requests per Minute</th><th>Daily Limit</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Individual</td><td>60</td><td>10,000</td></tr>
+      <tr><td>Team</td><td>300</td><td>50,000</td></tr>
+      <tr><td>Enterprise</td><td>Custom</td><td>Unlimited</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Does the agent impact system resources?</h3>
+  <p>As a Rust native binary, NOVA typically uses <strong>less than 1% CPU and under 50MB of memory</strong>. The Collector's data collection runs asynchronously in the background.</p>
+
+  <h3>Can it be deployed for teams?</h3>
+  <p>Yes. Team-scale deployment is possible in the following ways:</p>
+  <ul>
+    <li><strong>Tauri Desktop App:</strong> Bundle as .app / .exe and distribute to team members</li>
+    <li><strong>n8n Workflow Sharing:</strong> Entire teams can use the same automation workflows</li>
+    <li><strong>Self-Healing Guardian:</strong> <code>steer-guardian.sh</code> ensures automatic restarts upon process crashes</li>
+  </ul>
+
+  <hr />
+
+  <h2>Troubleshooting</h2>
+
+  <h3>Automation isn't running</h3>
+  <p>Check the following in order:</p>
+  <ol>
+    <li>Verify the agent is running correctly with the <code>status</code> command</li>
+    <li>Ensure trigger settings are correct (Webhook URL, schedule, etc.)</li>
+    <li>Verify connector authentication hasn't expired</li>
+    <li>Check Write Lock status — execute <code>unlock</code> if necessary</li>
+    <li>Check error messages in execution history: <code>GET /automations/:id/runs?status=error</code></li>
+  </ol>
+
+  <h3>Processing is slow</h3>
+  <p>Try the following optimizations:</p>
+  <ul>
+    <li><strong>Enable Batch Mode:</strong> Switch to batch analysis for large data processing</li>
+    <li><strong>Verify Release Build:</strong> Ensure you're using an optimized binary with <code>cargo build --release</code></li>
+    <li><strong>Database Optimization:</strong> Run a <code>VACUUM</code> query if the <code>steer.db</code> file is large</li>
+    <li><strong>Adjust Collector Interval:</strong> Change collection frequency via the <code>STEER_COLLECTOR_INTERVAL</code> environment variable</li>
+  </ul>
+
+  <h3>Webhook transmission fails</h3>
+  <p>Failed webhooks are retried up to 5 times using exponential backoff. If it still fails:</p>
+  <ul>
+    <li>Verify the target URL is accessible</li>
+    <li>Check HTTPS certificate validity</li>
+    <li>Ensure the NOVA service's IP is allowed in your firewall</li>
+    <li>Verify response time is within 30 seconds (timeout threshold)</li>
+  </ul>
+
+  <hr />
+
+  <p>If you have unresolved issues, please open an issue on <a href="https://github.com/NOVA-ALLRounder/main/issues">GitHub Issues</a> or <a href={withBase('/en/contact')}>contact our technical team directly</a>.</p>
+</DocsLayout>

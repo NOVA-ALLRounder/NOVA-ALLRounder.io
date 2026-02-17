@@ -1,0 +1,120 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout title="Changelog" description="Release notes for new features, improvements, and bug fixes in NOVA by version." lang="en">
+  <h1>Changelog</h1>
+  <p class="doc-subtitle">A chronological history of all NOVA updates. Each release includes new features, improvements, and bug fixes.</p>
+
+  <div class="doc-callout">
+    <strong>Update Notifications:</strong> To stay updated on new releases, Watch our <a href="https://github.com/NOVA-ALLRounder/main">GitHub Repository</a> or subscribe to the <a href="https://github.com/NOVA-ALLRounder/main/releases">Releases</a> page.
+  </div>
+
+  <!-- v2.4.0 -->
+  <h2>v2.4.0 <span style="font-weight:400;font-size:0.875rem;color:var(--site-text-muted);margin-left:0.5rem;">February 10, 2026</span></h2>
+
+  <h3>New Features</h3>
+  <ul>
+    <li><strong>AI Classification Model v3:</strong> The new classification engine has improved accuracy by <strong>12%</strong>. Supports GPT-4 based fine-tuning and allows registering training data for custom categories via API.</li>
+    <li><strong>Bi-directional Google Sheets Sync:</strong> Real-time detection of data changes in Google Sheets and the ability to write automation results back to the sheet.</li>
+    <li><strong>CSV Export for Execution History:</strong> Download automation execution history as CSV from the dashboard. Supports date range and status filters.</li>
+    <li><strong>Natural Language Workflow Improvements:</strong> Optimized LLM prompts for the <code>build_workflow</code> command to accurately generate more complex multi-step workflows.</li>
+  </ul>
+
+  <h3>Improvements</h3>
+  <ul>
+    <li>Adjustable Collector data collection interval via environment variable (<code>STEER_COLLECTOR_INTERVAL</code>)</li>
+    <li>30% improvement in <code>routine</code> command analysis speed (Index optimization)</li>
+    <li>Added Korean translations for error messages</li>
+  </ul>
+
+  <h3>Bug Fixes</h3>
+  <ul>
+    <li>Fixed an issue where Webhook retries wouldn't function under certain conditions</li>
+    <li>Resolved UTC/KST timezone mismatch issues when rendering charts on the dashboard</li>
+    <li>Fixed an issue where the <code>control</code> command failed to recognize some apps on Windows</li>
+  </ul>
+
+  <hr />
+
+  <!-- v2.3.0 -->
+  <h2>v2.3.0 <span style="font-weight:400;font-size:0.875rem;color:var(--site-text-muted);margin-left:0.5rem;">January 15, 2026</span></h2>
+
+  <h3>New Features</h3>
+  <ul>
+    <li><strong>Team Workflow Sharing:</strong> Share n8n workflows across the team and manage change history. Available in Team plans and above.</li>
+    <li><strong>Notion Connector:</strong> Use Notion databases as trigger sources or action targets.</li>
+    <li><strong>Windows PowerShell Script Improvements:</strong> Added automatic update check functionality to <code>run_core.ps1</code>.</li>
+  </ul>
+
+  <h3>Improvements</h3>
+  <ul>
+    <li><strong>40%</strong> improvement in large batch processing performance — optimized <code>build_sessions_rs</code> and <code>build_routines_rs</code> algorithms</li>
+    <li>Mobile dashboard UI redesign — improved touch interaction and navigation</li>
+    <li>Stabilized Self-Healing Guardian restart logic</li>
+  </ul>
+
+  <h3>Bug Fixes</h3>
+  <ul>
+    <li>Fixed missing state change detection in <code>build_handoff_rs</code></li>
+    <li>Resolved an issue where repeated Accessibility permission popups appeared on macOS Sonoma</li>
+  </ul>
+
+  <hr />
+
+  <!-- v2.2.0 -->
+  <h2>v2.2.0 <span style="font-weight:400;font-size:0.875rem;color:var(--site-text-muted);margin-left:0.5rem;">December 1, 2025</span></h2>
+
+  <h3>New Features</h3>
+  <ul>
+    <li><strong>Native RBAC Support:</strong> Configure roles (Admin/Editor/Viewer) for team members. Available in Team plans and above.</li>
+    <li><strong>Schedule Trigger Cron Expressions:</strong> Set precise schedule triggers using cron expressions like <code>0 9 * * MON</code>.</li>
+    <li><strong>Audit Log Dashboard:</strong> View all API calls and automation execution history directly on the dashboard.</li>
+  </ul>
+
+  <h3>Improvements</h3>
+  <ul>
+    <li>API response times reduced by an average of 15%</li>
+    <li>Improved concurrent read performance with SQLite WAL mode enabled by default</li>
+    <li>Comprehensive update of Korean documentation translations</li>
+  </ul>
+
+  <hr />
+
+  <!-- v2.1.0 -->
+  <h2>v2.1.0 <span style="font-weight:400;font-size:0.875rem;color:var(--site-text-muted);margin-left:0.5rem;">October 20, 2025</span></h2>
+
+  <h3>New Features</h3>
+  <ul>
+    <li><strong>Tauri Desktop App Bundles:</strong> Build macOS (.app) and Windows (.exe) desktop apps with the <code>build_release.sh</code> script.</li>
+    <li><strong>n8n Runtime Modes:</strong> Switch between Docker, NPX, and Manual runtime modes using environment variables.</li>
+  </ul>
+
+  <h3>Improvements</h3>
+  <ul>
+    <li>Simplified initial setup guide</li>
+    <li>Refactored <code>policy.rs</code> security rule engine for easier addition of custom rules</li>
+  </ul>
+
+  <hr />
+
+  <!-- v2.0.0 -->
+  <h2>v2.0.0 <span style="font-weight:400;font-size:0.875rem;color:var(--site-text-muted);margin-left:0.5rem;">September 1, 2025</span></h2>
+
+  <h3>Major Release</h3>
+  <p>NOVA v2.0 is a major update featuring a complete architectural redesign:</p>
+  <ul>
+    <li><strong>Rust Native Core:</strong> Transition from Python-based prototype to Rust native binary. 10x improvement in execution speed.</li>
+    <li><strong>Rust Collector:</strong> Rewrote OS sensor data collection in Rust. Features automated 5-min aggregation, daily summary, and retention cleanup.</li>
+    <li><strong>CLI Interface:</strong> Established a 6-command core system: <code>routine</code>, <code>recommend</code>, <code>control</code>, <code>exec</code>, <code>build_workflow</code>, and <code>status</code>.</li>
+    <li><strong>Security Policy Engine:</strong> Introduced risky command blocking via <code>policy.rs</code> and the Write Lock system.</li>
+    <li><strong>REST API v2:</strong> New API endpoints and Bearer token authentication system.</li>
+  </ul>
+
+  <div class="doc-callout doc-callout-warning">
+    <strong>Compatibility Note:</strong> Migration from v1.x to v2.0 involves changes in API endpoints and authentication methods. Refer to the <a href="https://github.com/NOVA-ALLRounder/main/wiki/Migration-Guide">Migration Guide</a>.
+  </div>
+
+  <hr />
+  <p>Full change history for older versions can be found on <a href="https://github.com/NOVA-ALLRounder/main/releases">GitHub Releases</a>.</p>
+</DocsLayout>

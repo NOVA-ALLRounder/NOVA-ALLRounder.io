@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import Section from '../../../components/ui/Section.astro';
+import Container from '../../../components/ui/Container.astro';
+import Badge from '../../../components/ui/Badge.astro';
+
+const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const isUserSiteRepo = repo.endsWith('.github.io');
+const basePath = process.env.GITHUB_ACTIONS === 'true' ? (isUserSiteRepo ? '/' : `/${repo}/`) : '/';
+const withBase = (url: string) => {
+  if (!url.startsWith('/')) return url;
+  const clean = url.replace(/^\/+/, '');
+  return clean ? `${basePath}${clean}` : basePath;
+};
+---
+
+<BaseLayout
+  title="Batch Processing Throughput +40% — NOVA Updates"
+  description="Release notes for batch processing performance improvements."
+  lang="en"
+>
+  <Header slot="header" lang="en" />
+
+  <Section padding="large">
+    <Container narrow>
+      <article class="animate-on-scroll">
+        <a href={withBase('/en/updates')} class="inline-flex items-center text-sm text-neutral-400 hover:text-neutral-100 mb-8">
+          &larr; Back to Updates
+        </a>
+        <div class="flex items-center gap-3 mb-4">
+          <time datetime="2026-01-15" class="text-sm text-neutral-400">2026.01.15</time>
+          <Badge text="Improvement" variant="success" />
+        </div>
+        <h1 class="text-h1 text-neutral-100 mb-6">Batch Processing Throughput +40%</h1>
+        <p class="text-body-lg text-neutral-400 mb-12">
+          Summary of performance-focused improvements for high-volume workloads.
+        </p>
+
+        <div class="space-y-8">
+          <section>
+            <h2 class="text-h3 text-neutral-100 mb-3">Key Changes</h2>
+            <ul class="list-disc pl-6 space-y-2 text-neutral-300">
+              <li>Queue scheduling and worker allocation tuning for parallel loads.</li>
+              <li>Elimination of I/O bottlenecks in general processing paths.</li>
+              <li>Stabilization of retry logic for transient failures.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-h3 text-neutral-100 mb-3">Recommended Actions</h2>
+            <p class="text-body text-neutral-300">
+              Compare execution time distributions before and after the update, and adjust alert thresholds to match the new baseline.
+            </p>
+          </section>
+        </div>
+      </article>
+    </Container>
+  </Section>
+
+  <Footer slot="footer" lang="en" />
+</BaseLayout>

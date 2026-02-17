@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Section from '../../components/ui/Section.astro';
+import Container from '../../components/ui/Container.astro';
+import Button from '../../components/ui/Button.astro';
+import Card from '../../components/ui/Card.astro';
+
+const modelGroups = [
+  {
+    title: 'General Coding',
+    model: 'GPT / Claude Families',
+    desc: 'Core model group suitable for general code generation, refactoring, and documentation tasks.',
+  },
+  {
+    title: 'Deep Reasoning',
+    model: 'Deep Reasoning Models',
+    desc: 'Suitable for solving complex architectural decisions and problems requiring multi-step reasoning.',
+  },
+  {
+    title: 'Fast Iteration',
+    model: 'Low-latency Models',
+    desc: 'Optimized for development flows focused on repetitive tasks with narrow loops and rapid responses.',
+  },
+];
+
+const flow = [
+  {
+    step: 'Analysis',
+    desc: 'Analyze requirements and codebase state to construct an execution plan.',
+  },
+  {
+    step: 'Planning',
+    desc: 'Decompose task units and select the necessary models and tools.',
+  },
+  {
+    step: 'Execution',
+    desc: 'Proceed through one cycle from code changes and verification to iterative improvement.',
+  },
+];
+
+---
+
+<BaseLayout title="Zen — NOVA" description="Zen tab overview: introducing model selection and execution flows." lang="en">
+  <Header slot="header" lang="en" />
+
+  <Section padding="large">
+    <Container>
+      <div class="max-w-4xl animate-on-scroll">
+        <p class="accent-pill mb-4">Zen</p>
+        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">Stable coding flow with proven model configurations</h1>
+        <p class="text-body-lg text-neutral-400 max-w-3xl">
+          Select the model combination that fits your purpose, and manage development speed and quality simultaneously with a consistent pipeline from analysis to execution.
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="light">
+    <Container>
+      <div class="text-center mb-12 animate-on-scroll">
+        <h2 class="text-h2 text-neutral-100 mb-3">Model Presets</h2>
+        <p class="text-body text-neutral-400">Operate by selecting a model group based on the nature of the task.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 animate-on-scroll">
+        {modelGroups.map((item) => (
+          <Card hoverable={false}>
+            <div class="p-6">
+              <p class="text-caption text-accent-300 mb-2">{item.title}</p>
+              <h3 class="text-h4 text-neutral-100 mb-2">{item.model}</h3>
+              <p class="text-body text-neutral-400">{item.desc}</p>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="text-center mb-12 animate-on-scroll">
+        <h2 class="text-h2 text-neutral-100 mb-3">Execution Flow</h2>
+        <p class="text-body text-neutral-400">Zen operates based on the following 3-step flow.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 animate-on-scroll">
+        {flow.map((item, index) => (
+          <div class="rounded-lg border border-white/10 bg-[#14161b] p-6">
+            <p class="text-caption text-accent-300 mb-2">{String(index + 1).padStart(2, '0')}</p>
+            <h3 class="text-h4 text-neutral-100 mb-2">{item.step}</h3>
+            <p class="text-body text-neutral-400">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="dark">
+    <Container>
+      <div class="text-center animate-on-scroll">
+        <h2 class="text-h2 text-neutral-100 mb-4">Start your Zen flow today</h2>
+        <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto mb-8">
+          Check the installation and startup guides in the documentation, or consult with us on an adoption path tailored to your team environment.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <Button variant="primary" size="lg" href="/en/docs/getting-started">Getting Started</Button>
+          <Button variant="secondary" size="lg" href="/en/contact">Contact Us</Button>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Footer slot="footer" lang="en" />
+</BaseLayout>

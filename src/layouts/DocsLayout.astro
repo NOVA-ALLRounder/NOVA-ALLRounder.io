@@ -1,4 +1,5 @@
 ﻿---
+import { t, type Locale } from '../i18n/utils';
 import BaseLayout from './BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -6,9 +7,10 @@ import Footer from '../components/Footer.astro';
 export interface Props {
   title: string;
   description?: string;
+  lang?: Locale;
 }
 
-const { title, description } = Astro.props;
+const { title, description, lang = 'ko' } = Astro.props;
 const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
 const isUserSiteRepo = repo.endsWith('.github.io');
 const basePath = process.env.GITHUB_ACTIONS === 'true'
@@ -33,28 +35,44 @@ const withBase = (url: string) => {
 
 const sidebarSections = [
   {
-    group: 'Guide',
+    group: lang === 'ko' ? '가이드' : 'Guide',
     items: [
-      { label: 'Getting Started', href: '/docs/getting-started' },
-      { label: 'Tutorials', href: '/docs/tutorials' },
+      { label: lang === 'ko' ? '시작하기' : 'Getting Started', href: '/docs/getting-started' },
+      { label: lang === 'ko' ? '튜토리얼' : 'Tutorials', href: '/docs/tutorials' },
     ],
   },
   {
-    group: 'Reference',
+    group: lang === 'ko' ? '레퍼런스' : 'Reference',
     items: [
-      { label: 'API Reference', href: '/docs/api' },
-      { label: 'FAQ', href: '/docs/faq' },
+      { label: lang === 'ko' ? 'API 레퍼런스' : 'API Reference', href: '/docs/api' },
+      { label: lang === 'ko' ? 'FAQ' : 'FAQ', href: '/docs/faq' },
     ],
   },
   {
-    group: 'Updates',
+    group: lang === 'ko' ? '업데이트' : 'Updates',
     items: [
-      { label: 'Changelog', href: '/docs/changelog' },
+      { label: lang === 'ko' ? '변경 이력' : 'Changelog', href: '/docs/changelog' },
     ],
   },
 ];
 
 const currentPath = Astro.url.pathname;
+const localizeHref = (href: string) => {
+  if (lang === 'en') {
+    return withBase(`/en${href}`);
+  }
+  return withBase(href);
+};
+
+// Adjust hrefs in sidebar for English
+const localizedSidebarSections = sidebarSections.map(section => ({
+  ...section,
+  items: section.items.map(item => ({
+    ...item,
+    href: item.href // Will be localized when used in the template
+  }))
+}));
+
 const stripTrailingSlash = (path: string) => (path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path);
 const appPath = (() => {
   if (basePath !== '/' && currentPath.startsWith(basePath)) {
@@ -65,32 +83,32 @@ const appPath = (() => {
 const normalizedCurrentPath = stripTrailingSlash(appPath);
 ---
 
-<BaseLayout title={`${title} - NOVA Docs`} description={description}>
-  <Header slot="header" />
+<BaseLayout title={`${title} - NOVA Docs`} description={description} lang={lang}>
+  <Header slot="header" lang={lang} />
 
   <div class="docs-wrapper">
     <div class="docs-container">
       <!-- Sidebar -->
       <aside class="docs-sidebar">
         <nav aria-label="Docs Navigation" class="docs-sidebar-nav">
-          <a href={withBase('/docs')} class="docs-home-link">
+          <a href={localizeHref('/docs')} class="docs-home-link">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-            Docs Home
+            {lang === 'ko' ? '문서 홈' : 'Docs Home'}
           </a>
 
-          {sidebarSections.map((section) => (
+          {localizedSidebarSections.map((section) => (
             <div class="docs-sidebar-group">
               <p class="docs-sidebar-group-label">{section.group}</p>
               <ul role="list">
                 {section.items.map((item) => (
                   <li>
                     <a
-                      href={withBase(item.href)}
+                      href={localizeHref(item.href)}
                       class:list={[
                         'docs-sidebar-link',
-                        (normalizedCurrentPath === item.href || normalizedCurrentPath === item.href + '/') && 'is-active',
+                        (normalizedCurrentPath === (lang === 'en' ? `/en${item.href}` : item.href) || normalizedCurrentPath === (lang === 'en' ? `/en${item.href}` : item.href) + '/') && 'is-active',
                       ]}
-                      aria-current={normalizedCurrentPath === item.href ? 'page' : undefined}
+                      aria-current={normalizedCurrentPath === (lang === 'en' ? `/en${item.href}` : item.href) ? 'page' : undefined}
                     >
                       {item.label}
                     </a>
@@ -102,7 +120,7 @@ const normalizedCurrentPath = stripTrailingSlash(appPath);
 
           <!-- External Links -->
           <div class="docs-sidebar-group docs-sidebar-external">
-            <p class="docs-sidebar-group-label">Resources</p>
+            <p class="docs-sidebar-group-label">{lang === 'ko' ? '리소스' : 'Resources'}</p>
             <ul role="list">
               <li>
                 <a href="https://github.com/NOVA-ALLRounder/main" target="_blank" rel="noopener noreferrer" class="docs-sidebar-link">
@@ -114,12 +132,12 @@ const normalizedCurrentPath = stripTrailingSlash(appPath);
                 </a>
               </li>
               <li>
-                <a href={withBase('/contact')} class="docs-sidebar-link">
-                  <span class="docs-sidebar-icon">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                  </span>
-                  Contact
-                </a>
+                  <a href={localizeHref('/contact')} class="docs-sidebar-link">
+                    <span class="docs-sidebar-icon">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    </span>
+                    {lang === 'ko' ? '문의' : 'Contact'}
+                  </a>
               </li>
             </ul>
           </div>
@@ -133,7 +151,7 @@ const normalizedCurrentPath = stripTrailingSlash(appPath);
     </div>
   </div>
 
-  <Footer slot="footer" />
+  <Footer slot="footer" lang={lang} />
 </BaseLayout>
 
 <style>

@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Section from '../../components/ui/Section.astro';
+import Container from '../../components/ui/Container.astro';
+import Button from '../../components/ui/Button.astro';
+import Card from '../../components/ui/Card.astro';
+
+const useCases = [
+  {
+    title: 'Operational Automation',
+    desc: 'Automate repetitive operational tasks so your team can focus on core decision-making.',
+  },
+  {
+    title: 'Security & Governance',
+    desc: 'Establish control points centered on permissions, logs, and policies to meet enterprise requirements.',
+  },
+  {
+    title: 'Scalable Deployment',
+    desc: 'Step-by-step expansion of the operational model from PoC to enterprise-wide rollout using a consistent architecture.',
+  },
+];
+
+const rolloutSteps = [
+  {
+    step: '01',
+    title: 'Discovery',
+    desc: 'Define target processes and success metrics, and confirm the scope of the pilot.',
+  },
+  {
+    step: '02',
+    title: 'Pilot',
+    desc: 'Verify effectiveness within a small scope and establish security/operational baselines.',
+  },
+  {
+    step: '03',
+    title: 'Scale',
+    desc: 'Accelerate expansion by deploying team-wide templates and operational guides.',
+  },
+  {
+    step: '04',
+    title: 'Operate',
+    desc: 'Maintain a stable operating system through continuous monitoring and policy tuning.',
+  },
+];
+---
+
+<BaseLayout title="Enterprise — NOVA" description="NOVA deployment, scaling, and operation for enterprise teams." lang="en">
+  <Header slot="header" lang="en" />
+
+  <Section padding="large">
+    <Container>
+      <div class="max-w-4xl animate-on-scroll">
+        <p class="accent-pill mb-4">Enterprise</p>
+        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">Automation platform for enterprise operations</h1>
+        <p class="text-body-lg text-neutral-400 max-w-3xl">
+          Design automation tailored to your team's real operational flow, and scale reliably with an architecture that includes security and governance.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <Button variant="primary" size="lg" href="/en/contact">Request Demo</Button>
+          <Button variant="secondary" size="lg" href="/en/docs">View Docs</Button>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="light">
+    <Container>
+      <div class="text-center mb-12 animate-on-scroll">
+        <h2 class="text-h2 text-neutral-100 mb-3">Core Values</h2>
+        <p class="text-body text-neutral-400">Delivering essential features for every stage from adoption to operation.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 animate-on-scroll">
+        {useCases.map((item) => (
+          <Card hoverable={false}>
+            <div class="p-6">
+              <h3 class="text-h4 text-neutral-100 mb-2">{item.title}</h3>
+              <p class="text-body text-neutral-400">{item.desc}</p>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="text-center mb-12 animate-on-scroll">
+        <h2 class="text-h2 text-neutral-100 mb-3">Adoption Process</h2>
+        <p class="text-body text-neutral-400">A structured 4-step rollout tailored to your business processes.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-on-scroll">
+        {rolloutSteps.map((item) => (
+          <div class="rounded-lg border border-white/10 bg-[#14161b] p-6">
+            <p class="text-caption text-accent-300 mb-2">{item.step}</p>
+            <h3 class="text-h4 text-neutral-100 mb-2">{item.title}</h3>
+            <p class="text-body text-neutral-400">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="dark">
+    <Container>
+      <div class="text-center animate-on-scroll">
+        <h2 class="text-h2 text-neutral-100 mb-4">Designing with Enterprise Teams</h2>
+        <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto mb-8">
+          We review security, operational, and scalability requirements together to propose an adoption plan that fits your organizational structure.
+        </p>
+        <Button variant="primary" size="lg" href="/en/contact">Start Consultation</Button>
+      </div>
+    </Container>
+  </Section>
+
+  <Footer slot="footer" lang="en" />
+</BaseLayout>

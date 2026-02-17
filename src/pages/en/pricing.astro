@@ -1,0 +1,290 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Section from '../../components/ui/Section.astro';
+import Container from '../../components/ui/Container.astro';
+import Button from '../../components/ui/Button.astro';
+import Table from '../../components/ui/Table.astro';
+import Accordion from '../../components/ui/Accordion.astro';
+
+const pricingFaq = [
+  {
+    question: 'What can I do with the Free plan?',
+    answer: 'The Free plan allows you to experience core features and execute basic automations. It includes usage limits and community support.',
+  },
+  {
+    question: 'What is the difference between Pro and Team?',
+    answer: 'Pro is for individual power users, while Team is for groups collaborating. Team includes workflow sharing, role management, and seat-based billing.',
+  },
+  {
+    question: 'Can I switch between monthly and annual billing?',
+    answer: 'Yes. You can change your billing cycle at any time in Account Settings → Workspace.',
+  },
+  {
+    question: 'How do I get started with Enterprise?',
+    answer: 'Contact our sales team to coordinate procurement, security reviews, PoC, and rollout schedules.',
+  },
+  {
+    question: 'Is it refundable?',
+    answer: 'Our refund and cancellation policies will be finalized before the official launch.',
+  },
+  {
+    question: 'Is a PoC available for B2B buyers?',
+    answer: 'Yes. The Enterprise flow includes a PoC stage before the final contract.',
+  },
+  {
+    question: 'Do you support tax invoices?',
+    answer: 'Enterprise billing supports tax invoices and customized contract terms.',
+  },
+  {
+    question: 'What happens to my data if I upgrade?',
+    answer: 'All data and settings are preserved. Higher plan features are activated immediately upon upgrade.',
+  },
+];
+
+const plans = [
+  {
+    name: 'Free',
+    desc: 'Start for free as an individual',
+    price: '$0',
+    period: '/mo',
+    cta: 'Start for Free',
+    ctaVariant: 'secondary' as const,
+    ctaHref: '/en/docs/getting-started',
+    features: [
+      '50K Tokens / mo',
+      '3 Integrations',
+      'Basic Analytics Dashboard',
+      'Community Support',
+      '7-day History',
+    ],
+    highlighted: false,
+  },
+  {
+    name: 'Pro',
+    desc: 'Full features for power users',
+    price: '$20',
+    period: '/mo',
+    cta: 'Start 14-day Free Trial',
+    ctaVariant: 'primary' as const,
+    ctaHref: '/en/docs/getting-started',
+    features: [
+      '1M Tokens / mo',
+      'Unlimited Integrations',
+      'Advanced Analytics & Reports',
+      'Priority Email Support',
+      '30-day History',
+      'API Access',
+      'Custom Webhooks',
+    ],
+    highlighted: true,
+  },
+  {
+    name: 'Team',
+    desc: 'For teams that need collaboration',
+    price: '$200',
+    period: '/seat/mo',
+    cta: 'Start 14-day Free Trial',
+    ctaVariant: 'secondary' as const,
+    ctaHref: '/en/docs/getting-started',
+    features: [
+      '10M Tokens / mo',
+      'Includes all Pro features',
+      'Workflow Sharing & Collab',
+      'Team Role Management',
+      '90-day History',
+      'Team Analytics Dashboard',
+      'Slack / Teams Notifications',
+    ],
+    highlighted: false,
+  },
+  {
+    name: 'Enterprise',
+    desc: 'For organizations needing governance',
+    price: 'Custom',
+    period: '',
+    cta: 'Contact Sales',
+    ctaVariant: 'secondary' as const,
+    ctaHref: '/en/contact',
+    features: [
+      'Unlimited Tokens',
+      'Includes all Team features',
+      'SSO and RBAC',
+      'Audit Logs & Compliance',
+      'Dedicated Support Manager',
+      'Custom Integration Development',
+      'SLA Agreements',
+      'On-premise Options',
+    ],
+    highlighted: false,
+  },
+];
+
+const comparisonFeatures = [
+  { name: 'Monthly Tokens', free: '50K', pro: '1M', team: '10M', enterprise: 'Unlimited' },
+  { name: 'Integrations', free: '3', pro: 'Unlimited', team: 'Unlimited', enterprise: 'Unlimited + Custom' },
+  { name: 'Seats', free: '1', pro: '1', team: 'Unlimited', enterprise: 'Unlimited' },
+  { name: 'Analytics', free: 'Basic', pro: 'Advanced', team: 'Team Dashboard', enterprise: 'Custom' },
+  { name: 'API Access', free: '—', pro: '✓', team: '✓', enterprise: '✓' },
+  { name: 'Custom Webhooks', free: '—', pro: '✓', team: '✓', enterprise: '✓' },
+  { name: 'Workflow Sharing', free: '—', pro: '—', team: '✓', enterprise: '✓' },
+  { name: 'Team Role Mgmt', free: '—', pro: '—', team: '✓', enterprise: 'Advanced' },
+  { name: 'SSO', free: '—', pro: '—', team: '—', enterprise: '✓' },
+  { name: 'RBAC', free: '—', pro: '—', team: 'Basic', enterprise: 'Advanced' },
+  { name: 'Audit Logs', free: '—', pro: '—', team: '—', enterprise: '✓' },
+  { name: 'Retention', free: '7 Days', pro: '30 Days', team: '90 Days', enterprise: 'Custom' },
+  { name: 'Support', free: 'Community', pro: 'Email', team: 'Email/Chat', enterprise: 'Dedicated Manager' },
+  { name: 'SLA', free: '—', pro: '99.5%', team: '99.9%', enterprise: '99.99%' },
+];
+---
+
+<BaseLayout title="Pricing — NOVA" description="Free, Pro, Team, Enterprise — Choose the plan that fits your scale." lang="en">
+  <Header slot="header" lang="en" />
+
+  <Section padding="large">
+    <Container>
+      <div class="text-center max-w-4xl mx-auto animate-on-scroll">
+        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Pricing</p>
+        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">Start for free, scale as you grow</h1>
+        <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto">
+          From individual trials to enterprise-wide deployments, choose the plan that suits your scale.
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <Section padding="none" class="pb-24 md:pb-32">
+    <Container>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-on-scroll">
+        {plans.map((plan) => (
+          <div class:list={[
+            'rounded-lg border p-8 flex flex-col',
+            plan.highlighted
+              ? 'border-accent-300 bg-accent-300/10 shadow-lg shadow-[#00000040] relative'
+              : 'border-white/10 bg-[#14161b]',
+          ]}>
+            {plan.highlighted && (
+              <span class="absolute -top-3 left-1/2 -translate-x-1/2 inline-flex items-center px-3 py-1 rounded-full bg-[#f5ee9b] text-[#111214] text-xs font-medium">
+                Most Popular
+              </span>
+            )}
+            <h3 class="text-h3 text-neutral-100 mb-1">{plan.name}</h3>
+            <p class="text-caption text-neutral-400 mb-6">{plan.desc}</p>
+            <div class="mb-6">
+              <span class="text-h1 text-neutral-100">{plan.price}</span>
+              {plan.period && <span class="text-body text-neutral-400 ml-1">{plan.period}</span>}
+            </div>
+            <Button
+              variant={plan.ctaVariant}
+              size="md"
+              href={plan.ctaHref}
+              class="w-full mb-8"
+            >
+              {plan.cta}
+            </Button>
+            <ul class="space-y-3 flex-1">
+              {plan.features.map((feature) => (
+                <li class="flex items-start gap-3 text-sm text-neutral-300">
+                  <svg class="w-4 h-4 text-accent-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="light">
+    <Container>
+      <div class="animate-on-scroll">
+        <div class="text-center mb-12">
+          <h2 class="text-h2 text-neutral-100 mb-4">Feature Comparison</h2>
+          <p class="text-body-lg text-neutral-400">Compare plan features at a glance.</p>
+        </div>
+        <div class="overflow-x-auto">
+          <Table>
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Free</th>
+                <th>Pro</th>
+                <th>Team</th>
+                <th>Enterprise</th>
+              </tr>
+            </thead>
+            <tbody>
+              {comparisonFeatures.map((f) => (
+                <tr>
+                  <td class="font-medium text-neutral-100">{f.name}</td>
+                  <td>{f.free}</td>
+                  <td>{f.pro}</td>
+                  <td>{f.team}</td>
+                  <td>{f.enterprise}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container narrow>
+      <div class="animate-on-scroll">
+        <div class="text-center mb-12">
+          <h2 class="text-h2 text-neutral-100 mb-4">B2B Procurement Process</h2>
+          <p class="text-body-lg text-neutral-400">Structured process for enterprise-level adoption.</p>
+        </div>
+        <div class="space-y-4">
+          {[
+            { step: '1', title: 'Scope & Quote', desc: 'Identify team size, goals, and legal/procurement requirements.' },
+            { step: '2', title: 'PoC Verification', desc: 'Validate suitability, stability, and workflows within a defined scope.' },
+            { step: '3', title: 'Contract & Payment', desc: 'Finalize commercial terms and establish tax invoice or card payment routes.' },
+            { step: '4', title: 'Rollout & Support', desc: 'Onboard teams and monitor adoption through phased governance checkpoints.' },
+          ].map((item) => (
+            <div class="flex gap-4 p-5 bg-[#14161b] rounded-lg border border-white/10">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/10 text-neutral-100 text-sm font-bold flex-shrink-0">{item.step}</span>
+              <div>
+                <h3 class="text-h4 text-neutral-100 mb-1">{item.title}</h3>
+                <p class="text-caption text-neutral-400">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="light">
+    <Container narrow>
+      <div class="animate-on-scroll">
+        <div class="text-center mb-12">
+          <h2 class="text-h2 text-neutral-100 mb-4">Pricing FAQ</h2>
+          <p class="text-body-lg text-neutral-400">Frequently asked questions about plans and billing.</p>
+        </div>
+        <Accordion items={pricingFaq} />
+      </div>
+    </Container>
+  </Section>
+
+  <Section background="dark">
+    <Container>
+      <div class="text-center animate-on-scroll">
+        <h2 class="text-h2 text-white mb-4">Not sure which plan is right for you?</h2>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto mb-10">
+          Start for free today, or contact our sales team to find the perfect plan for your needs.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Button variant="primary" size="lg" href="/en/docs/getting-started">Start for Free</Button>
+          <Button variant="ghost" size="lg" href="/en/contact">Contact Sales</Button>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Footer slot="footer" lang="en" />
+</BaseLayout>

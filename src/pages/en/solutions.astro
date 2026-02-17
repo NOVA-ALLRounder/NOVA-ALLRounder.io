@@ -1,26 +1,26 @@
-﻿---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import Section from '../components/ui/Section.astro';
-import Container from '../components/ui/Container.astro';
-import Button from '../components/ui/Button.astro';
-import Card from '../components/ui/Card.astro';
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Section from '../../components/ui/Section.astro';
+import Container from '../../components/ui/Container.astro';
+import Button from '../../components/ui/Button.astro';
+import Card from '../../components/ui/Card.astro';
 ---
 
-<BaseLayout title="Solutions — NOVA Local OS Agent" description="자연어 OS 제어, 멀티앱 자동화, 원격 제어, 워크플로우 생성의 실제 활용 사례와 시나리오." lang="ko">
-  <Header slot="header" lang="ko" />
+<BaseLayout title="Solutions — NOVA Local OS Agent" description="Real-world use cases and scenarios for natural language OS control, multi-app automation, remote control, and workflow generation." lang="en">
+  <Header slot="header" lang="en" />
 
   <!-- Hero -->
   <Section padding="large">
     <Container>
       <div class="text-center max-w-4xl mx-auto animate-on-scroll">
         <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Solutions</p>
-        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">실제 업무에 바로 적용하는<br class="hidden sm:block" />OS 자동화 시나리오</h1>
+        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">OS automation scenarios<br class="hidden sm:block" />ready for real-world tasks</h1>
         <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto mb-10">
-          자연어 OS 제어, 멀티앱 워크플로우, 원격 관리, 외부 서비스 연동까지. 실제 코드베이스에서 검증된 자동화 시나리오를 확인하세요.
+          From natural language OS control to multi-app workflows, remote management, and external service integration. Explore automation scenarios verified by actual codebases.
         </p>
-        <Button variant="primary" size="lg" href="/docs/getting-started">시작하기</Button>
+        <Button variant="primary" size="lg" href="/en/docs/getting-started">Get Started</Button>
       </div>
     </Container>
   </Section>
@@ -29,32 +29,32 @@ import Card from '../components/ui/Card.astro';
   <Section background="light">
     <Container>
       <div class="text-center mb-16 animate-on-scroll">
-        <h2 class="text-h2 text-neutral-100 mb-4">핵심 솔루션</h2>
-        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">네 가지 핵심 영역에서 OS 수준 자동화를 제공합니다.</p>
+        <h2 class="text-h2 text-neutral-100 mb-4">Core Solutions</h2>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">Providing OS-level automation in four core areas.</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 animate-on-scroll">
         {[
           {
-            title: '자연어 OS 제어',
-            desc: 'surf 명령어로 자연어를 입력하면 intent_router가 의도를 분석하고, plan_builder가 실행 계획을 수립하며, visual_driver가 화면을 직접 조작합니다. 앱 실행, 클릭, 타이핑, 키보드 단축키까지 자동화합니다.',
+            title: 'Natural Language OS Control',
+            desc: 'When you enter natural language using the surf command, intent_router analyzes intent, plan_builder establishes an execution plan, and visual_driver directly manipulates the screen. Automatically handle app launching, clicking, typing, and keyboard shortcuts.',
             module: 'visual_driver.rs + browser_automation.rs + applescript.rs',
             icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
           },
           {
-            title: '패턴 기반 자동화 추천',
-            desc: 'Rust Collector가 OS 센서 데이터를 수집하고, pattern_detector가 반복 패턴을 식별합니다. build_sessions → build_routines → build_handoff 파이프라인이 자동화 기회를 정제합니다.',
+            title: 'Pattern-Based Automation Suggestions',
+            desc: 'The Rust Collector gathers OS sensor data, and pattern_detector identifies repeating patterns. The build_sessions → build_routines → build_handoff pipeline refines automation opportunities.',
             module: 'pattern_detector.rs + analyzer.rs + recommendation.rs',
             icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
           },
           {
-            title: '워크플로우 자동 생성',
-            desc: 'build_workflow로 자연어 프롬프트를 n8n 워크플로우 JSON으로 변환합니다. Docker/NPX 모드를 지원하며, 36KB n8n_api.rs가 REST API 기반 실행을 관리합니다.',
+            title: 'Automated Workflow Generation',
+            desc: 'Convert natural language prompts into n8n workflow JSON with build_workflow. Supports Docker/NPX modes, with the 36KB n8n_api.rs managing REST API-based execution.',
             module: 'n8n_api.rs + workflow_schema.rs + orchestrator.rs',
             icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
           },
           {
-            title: '외부 서비스 연동 & 원격 제어',
-            desc: 'Gmail/Calendar/Notion과 네이티브 통합하고, Telegram Bot으로 외출 중에도 PC를 원격 제어합니다. Google OAuth 기반 인증으로 안전하게 연동됩니다.',
+            title: 'External Service Integration & Remote Control',
+            desc: 'Natively integrate with Gmail/Calendar/Notion, and remote control your PC away from home with a Telegram Bot. Securely link through Google OAuth-based authentication.',
             module: 'gmail.rs + calendar.rs + notion.rs + telegram.rs',
             icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
           },
@@ -76,38 +76,38 @@ import Card from '../components/ui/Card.astro';
   <Section>
     <Container>
       <div class="text-center mb-16 animate-on-scroll">
-        <h2 class="text-h2 text-neutral-100 mb-4">검증된 멀티앱 시나리오</h2>
-        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">실제 테스트를 통과한 복잡한 멀티앱 자동화 시나리오입니다.</p>
+        <h2 class="text-h2 text-neutral-100 mb-4">Verified Multi-App Scenarios</h2>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">Complex multi-app automation scenarios that have passed actual testing.</p>
       </div>
       <div class="space-y-6 animate-on-scroll">
         {[
           {
-            title: '리서치 워크플로우',
+            title: 'Research Workflow',
             apps: 'Notes → Safari → Notes → Mail',
-            command: 'surf "Notes에서 Research Topic을 작성하고, Safari에서 검색 후 결과 URL을 Notes에 붙여넣고, Mail로 공유해"',
-            steps: ['Notes에서 새 메모 → 주제 입력', 'Safari에서 Google 검색 실행', '검색 결과 URL 복사 → Notes에 붙여넣기', 'Mail에서 새 이메일 → 결과 전송'],
-            check: 'Cmd+Tab 앱 전환 + 클립보드 체인 전달 검증',
+            command: 'surf "Write a research topic in Notes, search in Safari, paste resulting URL in Notes, and share via Mail."',
+            steps: ['New note in Notes → Type topic', 'Launch Google search in Safari', 'Copy search result URL → Paste into Notes', 'New email in Mail → Send result'],
+            check: 'Cmd+Tab app switching + Clipboard chain delivery verification',
           },
           {
-            title: '주가 계산 & 기록',
+            title: 'Stock Calculation & Recording',
             apps: 'Safari → Calculator → Notes',
-            command: 'surf "Safari에서 Apple 주가를 검색하고, Calculator에서 100주 가치를 계산한 뒤, Notes에 결과를 저장해"',
-            steps: ['Safari에서 Apple stock price 검색', 'Vision으로 화면에서 주가 읽기', 'Calculator에서 주가 × 100 계산', 'Notes에 계산 결과 저장'],
-            check: 'Vision 기반 화면 읽기 + Calculator 자동 입력 검증',
+            command: 'surf "Search Apple stock price in Safari, calculate value of 100 shares in Calculator, then save result in Notes."',
+            steps: ['Search Apple stock price in Safari', 'Read stock price from screen with Vision', 'Calculate price × 100 in Calculator', 'Save calculation result in Notes'],
+            check: 'Vision-based screen reading + Calculator automated input verification',
           },
           {
-            title: '문서 작성 & 공유',
+            title: 'Document Writing & Sharing',
             apps: 'TextEdit → Mail → Notes',
-            command: 'surf "TextEdit에서 회의록을 작성하고, Mail로 전달한 뒤, Notes에 보관해"',
-            steps: ['TextEdit에서 새 문서 → 회의록 타이핑', '전체 선택(Cmd+A) → 복사(Cmd+C)', 'Mail에서 새 이메일 → 본문 붙여넣기', 'Notes에 최종 보관'],
-            check: '클립보드 체인 + 3개 앱 간 데이터 전달 검증',
+            command: 'surf "Write meeting minutes in TextEdit, send via Mail, and archive in Notes."',
+            steps: ['New document in TextEdit → Type minutes', 'Select All(Cmd+A) → Copy(Cmd+C)', 'New email in Mail → Paste body', 'Archive final version in Notes'],
+            check: 'Clipboard chain + Data delivery verification between 3 apps',
           },
           {
-            title: '파일 탐색 & 보관',
+            title: 'File Browsing & Archiving',
             apps: 'Finder → Preview → Notes',
-            command: 'surf "Desktop에서 이미지 파일을 찾아 Preview로 열고, Notes에 이미지와 출처를 기록해"',
-            steps: ['Finder에서 ~/Desktop 이동', '이미지 파일 검색 → Preview로 열기', '이미지 전체 선택 → 복사', 'Notes에 이미지 + 텍스트 혼합 저장'],
-            check: 'Finder 파일 탐색 + 이미지 클립보드 복사 검증',
+            command: 'surf "Find image file on Desktop, open with Preview, then record image and source in Notes."',
+            steps: ['Navigate to ~/Desktop in Finder', 'Search image file → Open with Preview', 'Select All Image → Copy', 'Save image + text mix in Notes'],
+            check: 'Finder file discovery + Image clipboard copy verification',
           },
         ].map((scenario) => (
           <div class="bg-[#14161b] rounded-lg border border-white/10 p-6 md:p-8">
@@ -128,7 +128,7 @@ import Card from '../components/ui/Card.astro';
                 </div>
               </div>
               <div class="md:w-52 flex-shrink-0 bg-[#0d0e11] rounded-lg p-4 border border-white/5">
-                <p class="text-xs text-neutral-500 mb-1 font-medium">검증 항목</p>
+                <p class="text-xs text-neutral-500 mb-1 font-medium">Verification Items</p>
                 <p class="text-xs text-neutral-400">{scenario.check}</p>
               </div>
             </div>
@@ -143,7 +143,7 @@ import Card from '../components/ui/Card.astro';
     <Container>
       <div class="text-center mb-16 animate-on-scroll">
         <h2 class="text-h2 text-neutral-100 mb-4">Setup Process</h2>
-        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">Clone부터 운영까지 네 단계 배포 과정.</p>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">Four-stage deployment process from cloning to operation.</p>
       </div>
 
       <div class="relative animate-on-scroll">
@@ -153,26 +153,26 @@ import Card from '../components/ui/Card.astro';
             {
               step: '01',
               title: 'Clone & Build',
-              desc: 'git clone → cp .env.example .env → cargo build --release로 코어 바이너리를 빌드합니다.',
-              duration: '5분',
+              desc: 'Build core binaries with git clone → cp .env.example .env → cargo build --release.',
+              duration: '5 min',
             },
             {
               step: '02',
               title: 'Configure',
-              desc: 'OPENAI_API_KEY 설정, Accessibility 권한 부여, n8n 런타임 모드(Docker/NPX) 선택.',
-              duration: '10분',
+              desc: 'Set OPENAI_API_KEY, grant Accessibility permissions, and choose n8n runtime mode (Docker/NPX).',
+              duration: '10 min',
             },
             {
               step: '03',
               title: 'Deploy',
-              desc: './scripts/build_release.sh로 Tauri 데스크톱 번들(.app/.exe)을 생성합니다.',
-              duration: '15분',
+              desc: 'Generate Tauri desktop bundles (.app/.exe) using ./scripts/build_release.sh.',
+              duration: '15 min',
             },
             {
               step: '04',
               title: 'Monitor & Scale',
-              desc: 'Rust Collector로 데이터 수집, steer-guardian.sh로 Self-Healing, 배치 파이프라인으로 패턴 분석.',
-              duration: '지속',
+              desc: 'Gather data with Rust Collector, use steer-guardian.sh for Self-Healing, and analyze patterns with batch pipeline.',
+              duration: 'Ongoing',
             },
           ].map((phase) => (
             <div class="relative text-center md:text-left">
@@ -193,26 +193,26 @@ import Card from '../components/ui/Card.astro';
   <Section>
     <Container>
       <div class="text-center mb-16 animate-on-scroll">
-        <h2 class="text-h2 text-neutral-100 mb-4">보안 & 안정성</h2>
-        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">5계층 Zero Trust 보안과 Self-Healing으로 안전하고 안정적인 운영.</p>
+        <h2 class="text-h2 text-neutral-100 mb-4">Security & Reliability</h2>
+        <p class="text-body-lg text-neutral-400 max-w-xl mx-auto">Safe and stable operation with 5-layer Zero Trust security and Self-Healing.</p>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 animate-on-scroll">
         {[
           {
             title: 'Zero Trust',
-            desc: 'LLM 출력은 기본적으로 위험하다고 간주합니다. 모든 명령이 PolicyEngine을 통과해야 실행됩니다.',
+            desc: 'LLM output is considered dangerous by default. All commands must pass through the PolicyEngine to be executed.',
           },
           {
             title: 'Write Lock',
-            desc: '기본 잠금 상태. unlock 후 자동 재잠금(시간 제한)으로 실수를 방지합니다.',
+            desc: 'Default locked state. automatic re-locking (timed) after unlock prevents mistakes.',
           },
           {
             title: 'PII Masking',
-            desc: 'privacy.rs가 이메일, 카드번호, 주민번호를 DB 저장 전 자동 마스킹합니다.',
+            desc: 'privacy.rs automatically masks emails, card numbers, and SSNs before saving to the DB.',
           },
           {
             title: 'Self-Healing',
-            desc: 'steer-guardian.sh가 크래시를 감지하고 코어 프로세스를 자동 재시작합니다.',
+            desc: 'steer-guardian.sh detects crashes and automatically restarts core processes.',
           },
         ].map((item) => (
           <div class="bg-[#14161b] rounded-lg p-6 border border-white/10">
@@ -228,17 +228,17 @@ import Card from '../components/ui/Card.astro';
   <Section background="dark" id="contact-sales">
     <Container>
       <div class="text-center animate-on-scroll">
-        <h2 class="text-h2 text-white mb-4">지금 시작하세요</h2>
+        <h2 class="text-h2 text-white mb-4">Get Started Now</h2>
         <p class="text-body-lg text-neutral-400 max-w-xl mx-auto mb-10">
-          5분 안에 설치하고, 첫 번째 멀티앱 자동화를 실행해보세요.
+          Install in 5 minutes and run your first multi-app automation.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button variant="primary" size="lg" href="/docs/getting-started">Getting Started</Button>
-          <Button variant="ghost" size="lg" href="/pricing">Pricing 보기</Button>
+          <Button variant="primary" size="lg" href="/en/docs/getting-started">Getting Started</Button>
+          <Button variant="ghost" size="lg" href="/en/pricing">View Pricing</Button>
         </div>
       </div>
     </Container>
   </Section>
 
-  <Footer slot="footer" />
+  <Footer slot="footer" lang="en" />
 </BaseLayout>

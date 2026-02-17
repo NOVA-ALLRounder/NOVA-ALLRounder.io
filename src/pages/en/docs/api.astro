@@ -1,0 +1,290 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout title="API Reference" description="Detailed documentation on endpoints, authentication, and request/response formats of the NOVA REST API v2." lang="en">
+  <h1>API Reference</h1>
+  <p class="doc-subtitle">Describes all endpoints of the NOVA REST API v2. All requests are in JSON format and require Bearer Token authentication.</p>
+
+  <h2>Authentication</h2>
+
+  <p>Every API request requires an <code>Authorization</code> header:</p>
+
+  <pre><code>{`Authorization: Bearer YOUR_API_KEY`}</code></pre>
+
+  <p>Obtain your API key from <strong>Dashboard → Settings → API Keys</strong>. Keep the key safe, as it will only be displayed once during issuance.</p>
+
+  <div class="doc-callout doc-callout-warning">
+    <strong>Security Warning:</strong> Do not expose your API key in client-side code or public repositories. Manage keys through server-side calls or environment variables.
+  </div>
+
+  <h2>Base URL</h2>
+
+  <pre><code>https://api.nova-platform.io/v2</code></pre>
+
+  <p>All endpoint paths listed below relative to this Base URL.</p>
+
+  <h2>Rate Limits</h2>
+
+  <table>
+    <thead>
+      <tr><th>Plan</th><th>Requests per Minute</th><th>Daily Limit</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Individual</td><td>60</td><td>10,000</td></tr>
+      <tr><td>Team</td><td>300</td><td>50,000</td></tr>
+      <tr><td>Enterprise</td><td>Custom</td><td>Unlimited</td></tr>
+    </tbody>
+  </table>
+
+  <p>If you exceed the limit, a <code>429 Too Many Requests</code> response is returned. Retry after the time specified in the <code>Retry-After</code> header.</p>
+
+  <h2>Automations</h2>
+
+  <h3><span class="doc-badge doc-badge-post">POST</span> /automations</h3>
+
+  <p>Creates a new automation.</p>
+
+  <h4>Request Body</h4>
+
+  <pre><code>{`{
+  "name": "email-classifier",
+  "description": "Automatically classify incoming emails and send Slack notifications",
+  "trigger": {
+    "type": "webhook",
+    "config": {
+      "path": "/incoming-email",
+      "method": "POST"
+    }
+  },
+  "actions": [
+    {
+      "type": "classify",
+      "model": "default",
+      "categories": ["Important", "General", "Spam"]
+    },
+    {
+      "type": "notify",
+      "channel": "slack",
+      "config": {
+        "webhook_url": "https://hooks.slack.com/...",
+        "template": "New {{category}} email: {{subject}}"
+      }
+    }
+  ]
+}`}</code></pre>
+
+  <h4>Response — <code>201 Created</code></h4>
+
+  <pre><code>{`{
+  "id": "auto_7kX2mN9pQ4",
+  "name": "email-classifier",
+  "status": "active",
+  "created_at": "2026-02-13T06:30:00Z",
+  "trigger": { "type": "webhook", "url": "https://api.nova-platform.io/v2/hooks/auto_7kX2mN9pQ4" },
+  "runs_count": 0
+}`}</code></pre>
+
+  <h4>Error Responses</h4>
+
+  <table>
+    <thead>
+      <tr><th>Status Code</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>400</code></td><td>Bad Request — Missing required fields or invalid values</td></tr>
+      <tr><td><code>401</code></td><td>Unauthorized — Invalid or missing API key</td></tr>
+      <tr><td><code>422</code></td><td>Unprocessable Entity — Invalid request configuration</td></tr>
+      <tr><td><code>429</code></td><td>Too Many Requests — Check the <code>Retry-After</code> header</td></tr>
+    </tbody>
+  </table>
+
+  <hr />
+
+  <h3><span class="doc-badge doc-badge-get">GET</span> /automations</h3>
+
+  <p>Returns a list of all automations registered in the workspace.</p>
+
+  <h4>Query Parameters</h4>
+
+  <table>
+    <thead>
+      <tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>page</code></td><td>integer</td><td>1</td><td>Page number</td></tr>
+      <tr><td><code>per_page</code></td><td>integer</td><td>20</td><td>Items per page (max 100)</td></tr>
+      <tr><td><code>status</code></td><td>string</td><td>all</td><td>Filter: <code>active</code>, <code>paused</code>, <code>error</code></td></tr>
+      <tr><td><code>sort</code></td><td>string</td><td>created_at</td><td>Sort by: <code>created_at</code>, <code>name</code>, <code>runs_count</code></td></tr>
+    </tbody>
+  </table>
+
+  <h4>Response — <code>200 OK</code></h4>
+
+  <pre><code>{`{
+  "data": [
+    {
+      "id": "auto_7kX2mN9pQ4",
+      "name": "email-classifier",
+      "status": "active",
+      "runs_count": 1247,
+      "last_run_at": "2026-02-13T06:15:00Z",
+      "created_at": "2026-01-15T09:00:00Z"
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "per_page": 20,
+    "total": 8,
+    "total_pages": 1
+  }
+}`}</code></pre>
+
+  <hr />
+
+  <h3><span class="doc-badge doc-badge-get">GET</span> /automations/:id</h3>
+
+  <p>Returns detailed information for a specific automation, including trigger settings, action configuration, and execution statistics.</p>
+
+  <hr />
+
+  <h3><span class="doc-badge doc-badge-patch">PATCH</span> /automations/:id</h3>
+
+  <p>Partially updates automation settings. You can change <code>name</code>, <code>description</code>, <code>trigger</code>, <code>actions</code>, and <code>status</code>.</p>
+
+  <pre><code>{`{
+  "status": "paused"
+}`}</code></pre>
+
+  <hr />
+
+  <h3><span class="doc-badge doc-badge-delete">DELETE</span> /automations/:id</h3>
+
+  <p>Deletes an automation. Execution history for deleted automations is kept for <strong>90 days</strong> before permanent deletion.</p>
+
+  <h4>Response — <code>204 No Content</code></h4>
+  <p>No response body on success.</p>
+
+  <hr />
+
+  <h2>Runs</h2>
+
+  <h3><span class="doc-badge doc-badge-get">GET</span> /automations/:id/runs</h3>
+
+  <p>Returns the execution history of a specific automation.</p>
+
+  <h4>Query Parameters</h4>
+
+  <table>
+    <thead>
+      <tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>page</code></td><td>integer</td><td>1</td><td>Page number</td></tr>
+      <tr><td><code>per_page</code></td><td>integer</td><td>50</td><td>Items per page (max 200)</td></tr>
+      <tr><td><code>status</code></td><td>string</td><td>all</td><td>Filter: <code>success</code>, <code>error</code>, <code>running</code></td></tr>
+      <tr><td><code>since</code></td><td>ISO 8601</td><td>—</td><td>Start date/time</td></tr>
+      <tr><td><code>until</code></td><td>ISO 8601</td><td>—</td><td>End date/time</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Response — <code>200 OK</code></h4>
+
+  <pre><code>{`{
+  "data": [
+    {
+      "id": "run_aB3cD4eF5g",
+      "status": "success",
+      "started_at": "2026-02-13T06:15:00Z",
+      "finished_at": "2026-02-13T06:15:02Z",
+      "duration_ms": 2140,
+      "trigger_data": { "source": "webhook", "ip": "203.0.113.1" },
+      "result": { "classified_as": "Important", "notified": true }
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "per_page": 50,
+    "total": 1247,
+    "total_pages": 25
+  }
+}`}</code></pre>
+
+  <hr />
+
+  <h2>Classifiers</h2>
+
+  <h3><span class="doc-badge doc-badge-post">POST</span> /classifiers</h3>
+
+  <p>Creates a custom AI classification model.</p>
+
+  <pre><code>{`{
+  "name": "inquiry-classifier",
+  "categories": ["Technical", "Payment", "General", "Urgent"],
+  "training_data": [
+    { "text": "I can't log in", "label": "Technical" },
+    { "text": "I want to check my payment history", "label": "Payment" },
+    { "text": "I want to know the service hours", "label": "General" }
+  ]
+}`}</code></pre>
+
+  <h3><span class="doc-badge doc-badge-get">GET</span> /classifiers</h3>
+  <p>Queries all registered classification models.</p>
+
+  <h3><span class="doc-badge doc-badge-post">POST</span> /classifiers/:id/predict</h3>
+  <p>Classifies text. Returns classification result and confidence score.</p>
+
+  <pre><code>{`// Request
+{ "text": "I want to change my password" }
+
+// Response
+{
+  "prediction": "Technical",
+  "confidence": 0.92,
+  "alternatives": [
+    { "category": "General", "confidence": 0.06 },
+    { "category": "Payment", "confidence": 0.02 }
+  ]
+}`}</code></pre>
+
+  <hr />
+
+  <h2>Webhooks</h2>
+
+  <h3>Retry Policy</h3>
+  <p>If a Webhook delivery fails, retries follow an exponential backoff strategy:</p>
+
+  <table>
+    <thead>
+      <tr><th>Attempt</th><th>Wait Time</th><th>Max Wait</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1st Retry</td><td>1s</td><td>—</td></tr>
+      <tr><td>2nd Retry</td><td>4s</td><td>—</td></tr>
+      <tr><td>3rd Retry</td><td>16s</td><td>—</td></tr>
+      <tr><td>4th Retry</td><td>64s</td><td>—</td></tr>
+      <tr><td>5th Retry</td><td>256s</td><td>5 min</td></tr>
+    </tbody>
+  </table>
+
+  <p>If it still fails after 5 retries, the run is recorded as an <code>error</code>.</p>
+
+  <hr />
+
+  <h2>SDKs</h2>
+
+  <table>
+    <thead>
+      <tr><th>Language</th><th>Package</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>cURL</td><td>—</td><td>Available</td></tr>
+      <tr><td>Python</td><td><code>pip install nova-sdk</code></td><td>Coming Soon</td></tr>
+      <tr><td>Node.js</td><td><code>npm install @nova/sdk</code></td><td>Coming Soon</td></tr>
+      <tr><td>OpenAPI Spec</td><td>YAML / JSON export</td><td>Coming Soon</td></tr>
+    </tbody>
+  </table>
+
+  <hr />
+  <p>Submit API-related questions or requests for additional endpoints via <a href="https://github.com/NOVA-ALLRounder/main/issues">GitHub Issues</a>.</p>
+</DocsLayout>

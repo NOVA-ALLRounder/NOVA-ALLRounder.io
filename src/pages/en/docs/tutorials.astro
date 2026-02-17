@@ -1,0 +1,192 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const isUserSiteRepo = repo.endsWith('.github.io');
+const basePath = process.env.GITHUB_ACTIONS === 'true'
+  ? (isUserSiteRepo ? '/' : `/${repo}/`)
+  : '/';
+const withBase = (url: string) => {
+  if (!url.startsWith('/')) return url;
+  const clean = url.replace(/^\/+/, '');
+  return clean ? `${basePath}${clean}` : basePath;
+};
+---
+
+<DocsLayout title="Tutorials" description="Step-by-step tutorials to learn the core features of NOVA through real-world business scenarios." lang="en">
+  <h1>Tutorials</h1>
+  <p class="doc-subtitle">Learn the core features of NOVA through real-world business scenarios. Organized by difficulty level, from basic to advanced.</p>
+
+  <div class="doc-callout">
+    <strong>Preparation:</strong> All tutorials assume that you have completed the <a href={withBase('/en/docs/getting-started')}>Getting Started</a> guide.
+  </div>
+
+  <h2>Basic</h2>
+
+  <h3>Natural Language OS Control (surf command)</h3>
+
+  <table>
+    <tbody>
+      <tr><td><strong>Time to Complete</strong></td><td>~10 minutes</td></tr>
+      <tr><td><strong>Difficulty</strong></td><td>Basic</td></tr>
+      <tr><td><strong>Required Connectors</strong></td><td>None (Core feature)</td></tr>
+      <tr><td><strong>Learning Objectives</strong></td><td>surf command, NL pipeline, multi-app scenarios</td></tr>
+    </tbody>
+  </table>
+
+  <p>Use the <code>surf</code> command, a core feature of NOVA, to control your OS directly with natural language.</p>
+
+  <h4>Step 1 — Basic surf Command</h4>
+  <p>Control apps with natural language. The intent_router analyzes intent, and plan_builder generates an execution plan:</p>
+  <pre><code>{`> surf "Open Safari and search for weather on Google"
+
+Intent: web_search | Slots: {app: Safari, query: weather}
+Plan: Open Safari → Navigate → Search
+[OK] Safari execution complete (applescript.rs)
+[OK] Google search complete (browser_automation.rs)
+
+> surf "Open Notes, create a new note, and type Today's To-Do List"
+
+Intent: note_create | Slots: {app: Notes, content: Today's To-Do List}
+[OK] Notes.app launched
+[OK] Shortcut: Cmd+N (New note created)
+[OK] Type: "Today's To-Do List" (keyboard.type)`}</code></pre>
+
+  <h4>Step 2 — Multi-App Scenarios</h4>
+  <p>Complex workflows connecting multiple apps can be executed with a single line:</p>
+  <pre><code>{`> surf "Search Apple stock price in Safari, calculate value of 100 shares in Calculator, then save result in Notes"
+
+Plan: 4 steps
+  1. Open Safari → Search "Apple stock price"
+  2. Vision: Read price from screen
+  3. Open Calculator → Multiply × 100
+  4. Open Notes → Save result
+
+[OK] 4/4 steps completed`}</code></pre>
+
+  <h4>Step 3 — Reality Check</h4>
+  <p>Before execution, <code>reality_check.rs</code> scans the list of installed apps and automatically corrects similar names. For example, "Excel" will be automatically matched to "Microsoft Excel".</p>
+
+  <hr />
+
+  <h3>Automated Weekly Report Generation</h3>
+
+  <table>
+    <tbody>
+      <tr><td><strong>Time to Complete</strong></td><td>~30 minutes</td></tr>
+      <tr><td><strong>Difficulty</strong></td><td>Intermediate</td></tr>
+      <tr><td><strong>Required Connectors</strong></td><td>Google Sheets, Slack</td></tr>
+      <tr><td><strong>Learning Objectives</strong></td><td>Schedule triggers, data collection, report formatting</td></tr>
+    </tbody>
+  </table>
+
+  <p>Collect KPIs from multiple data sources to automatically generate and share reports to team channels every Monday morning.</p>
+
+  <h4>Step 1 — Configure Schedule Trigger</h4>
+  <pre><code>{`> build_workflow "Collect KPIs from Google Sheets and send weekly report to Slack every Monday at 9 AM"
+
+Analyzing with LLM...
+Generating n8n workflow:
+  ├─ Trigger: Schedule — Every Monday 09:00 KST
+  ├─ Action: Google Sheets — Read KPI Data
+  ├─ Action: Format — Generate Markdown Report
+  └─ Action: Slack — Post to #team-weekly
+
+workflow_weekly_report.json generation complete`}</code></pre>
+
+  <h4>Step 2 — Connect Data Sources</h4>
+  <p>Configure the Google Sheets connector in the n8n dashboard and link the sheet containing KPI data. You can consolidate data from multiple sheets into a single report.</p>
+
+  <h4>Step 3 — Set Report Format</h4>
+  <p>Configure the data fields and visualization options to be included in the report:</p>
+  <ul>
+    <li>Weekly revenue change (% compared to previous week)</li>
+    <li>New user count and churn rate</li>
+    <li>Achievement rate relative to target</li>
+    <li>Key issues and action items</li>
+  </ul>
+
+  <hr />
+
+  <h2>Advanced</h2>
+
+  <h3>Telegram Remote Control Setup</h3>
+
+  <table>
+    <tbody>
+      <tr><td><strong>Time to Complete</strong></td><td>~30 minutes</td></tr>
+      <tr><td><strong>Difficulty</strong></td><td>Advanced</td></tr>
+      <tr><td><strong>Required Connectors</strong></td><td>Telegram Bot API</td></tr>
+      <tr><td><strong>Learning Objectives</strong></td><td>Remote command execution, security policies, result reporting</td></tr>
+    </tbody>
+  </table>
+
+  <p>Integrate a Telegram Bot to remotely control your computer from your phone while away. <code>telegram.rs</code> (12KB) handles the Bot API integration.</p>
+
+  <h4>Step 1 — Create Telegram Bot</h4>
+  <p>Create a Telegram Bot via BotFather and obtain a token:</p>
+  <pre><code>{`# Add Telegram settings to .env file
+TELEGRAM_BOT_TOKEN=your_bot_token
+TELEGRAM_CHAT_ID=your_chat_id`}</code></pre>
+
+  <h4>Step 2 — Execute Remote Commands</h4>
+  <p>When you send a message from Telegram, NOVA executes the command and reports the result:</p>
+  <pre><code>{`# Sent from Telegram:
+Phone: "Check git status on computer"
+
+# NOVA Processing:
+Intent: shell_exec | Security: Safe
+> git status
+
+# Telegram Report:
+✅ Execution Complete
+On branch main
+Your branch is up to date with 'origin/main'.
+nothing to commit, working tree clean`}</code></pre>
+
+  <h4>Step 3 — Verify Security Policies</h4>
+  <p>The same 5-layer security applies to remote commands. Critical-level commands (rm, sudo, etc.) are blocked even remotely, and Write Lock can only be released locally.</p>
+
+  <hr />
+
+  <h3>Custom Automation Based on Repeating Patterns</h3>
+
+  <table>
+    <tbody>
+      <tr><td><strong>Time to Complete</strong></td><td>~20 minutes</td></tr>
+      <tr><td><strong>Difficulty</strong></td><td>Intermediate</td></tr>
+      <tr><td><strong>Required Connectors</strong></td><td>None (Core feature)</td></tr>
+      <tr><td><strong>Learning Objectives</strong></td><td>routine analysis, recommend usage, applying automation</td></tr>
+    </tbody>
+  </table>
+
+  <p>Automate personal repetitive tasks using NOVA's core behavioral pattern analysis feature.</p>
+
+  <h4>Step 1 — Check Data Collection Status</h4>
+  <p>Check the amount of currently collected data with the <code>status</code> command:</p>
+  <pre><code>{`> status
+
+NOVA Agent Status:
+  Collector:  running (port 8080)
+  Database:   steer.db (42.3 MB)
+  Events:     128,450 events (last 7 days)
+  Sessions:   2,340 sessions built
+  Routines:   18 patterns detected
+  Write Lock: enabled`}</code></pre>
+
+  <h4>Step 2 — Verify Pattern Analysis & Recommendations</h4>
+  <p>Review detected patterns with <code>routine</code> and get AI-based automation suggestions with <code>recommend</code>. Selecting a suggested item will immediately generate a workflow.</p>
+
+  <h4>Step 3 — Deploy & Monitor Workflow</h4>
+  <p>Register the generated workflow in n8n and monitor execution results. The Self-Healing Guardian ensures process stability.</p>
+
+  <hr />
+
+  <h2>Next Steps</h2>
+  <ul>
+    <li><a href={withBase('/en/docs/api')}>API Reference</a> — Programmatic automation management via REST API</li>
+    <li><a href={withBase('/en/docs/faq')}>FAQ</a> — Frequently asked questions and troubleshooting</li>
+    <li><a href={withBase('/en/docs/changelog')}>Changelog</a> — Track latest feature updates</li>
+  </ul>
+
+  <p>New tutorials are posted continuously. Check for new content in <a href={withBase('/en/updates')}>Updates</a>.</p>
+</DocsLayout>

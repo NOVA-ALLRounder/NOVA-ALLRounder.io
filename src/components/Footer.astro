@@ -1,4 +1,11 @@
 ﻿---
+import { t, type Locale } from '../i18n/utils';
+
+interface Props {
+  lang?: Locale;
+}
+const { lang = 'ko' } = Astro.props;
+
 const currentYear = new Date().getFullYear();
 const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
 const isUserSiteRepo = repo.endsWith('.github.io');
@@ -22,29 +29,39 @@ const withBase = (url: string) => {
   return clean ? `${basePath}${clean}` : basePath;
 };
 
+const localizeHref = (href: string) => {
+  if (href.startsWith('http') || href.startsWith('#')) return href;
+  if (lang === 'en') {
+    return withBase(`/en${href}`);
+  }
+  return withBase(href);
+};
+
 const footerLinks = {
-  '제품': [
-    { label: '개요', href: '/product' },
-    { label: '요금제', href: '/pricing' },
-    { label: '업데이트', href: '/updates' },
+  [t(lang, 'footer.product')]: [
+    { label: t(lang, 'footer.product.overview'), href: '/product' },
+    { label: t(lang, 'footer.product.pricing'), href: '/pricing' },
+    { label: t(lang, 'footer.product.updates'), href: '/updates' },
   ],
-  '리소스': [
-    { label: '문서', href: '/docs' },
-    { label: '시작 가이드', href: '/docs/getting-started' },
-    { label: 'API 레퍼런스', href: '/docs/api' },
-    { label: 'FAQ', href: '/docs/faq' },
+  [t(lang, 'footer.resources')]: [
+    { label: t(lang, 'footer.resources.docs'), href: '/docs' },
+    { label: t(lang, 'footer.resources.getting-started'), href: '/docs/getting-started' },
+    { label: t(lang, 'footer.resources.api'), href: '/docs/api' },
+    { label: t(lang, 'footer.resources.faq'), href: '/docs/faq' },
   ],
-  '문의': [
-    { label: '문의 허브', href: '/contact' },
-    { label: '이메일', href: '/contact#email' },
-    { label: 'GitHub', href: '/contact#github' },
+  [t(lang, 'footer.contact')]: [
+    { label: t(lang, 'footer.contact.hub'), href: '/contact' },
+    { label: t(lang, 'footer.contact.email'), href: '/contact#email' },
+    { label: t(lang, 'footer.contact.github'), href: '/contact#github' },
   ],
-  '법적 고지': [
-    { label: '이용약관', href: '#' },
-    { label: '개인정보처리방침', href: '#' },
-    { label: '라이선스', href: '#' },
+  [t(lang, 'footer.legal')]: [
+    { label: t(lang, 'footer.legal.terms'), href: '#' },
+    { label: t(lang, 'footer.legal.privacy'), href: '#' },
+    { label: t(lang, 'footer.legal.license'), href: '#' },
   ],
 };
+
+const copyrightText = t(lang, 'footer.copyright').replace('{year}', String(currentYear));
 
 ---
 
@@ -57,7 +74,7 @@ const footerLinks = {
           <ul class="space-y-2.5" role="list">
             {links.map((link) => (
               <li>
-                <a href={withBase(link.href)} class="text-sm text-neutral-500 hover:text-neutral-100 transition-colors">
+                <a href={localizeHref(link.href)} class="text-sm text-neutral-500 hover:text-neutral-100 transition-colors">
                   {link.label}
                 </a>
               </li>
@@ -72,10 +89,10 @@ const footerLinks = {
         <span class="inline-flex items-center justify-center w-6 h-6 bg-[#f5ee9b] text-[#111214] rounded text-[10px] font-bold">N</span>
         <span>NOVA</span>
       </div>
-      <p class="text-xs text-neutral-500">© {currentYear} NOVA. 모든 권리 보유.</p>
+      <p class="text-xs text-neutral-500">{copyrightText}</p>
       <div class="flex items-center gap-4">
         <a
-          href="https://github.com"
+          href="https://github.com/NOVA-ALLRounder/main"
           target="_blank"
           rel="noopener noreferrer"
           class="text-neutral-500 hover:text-neutral-100 transition-colors"

@@ -1,12 +1,10 @@
-﻿---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import DocsLayout from '../../layouts/DocsLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import Section from '../../components/ui/Section.astro';
-import Container from '../../components/ui/Container.astro';
-import Card from '../../components/ui/Card.astro';
-import Button from '../../components/ui/Button.astro';
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import Section from '../../../components/ui/Section.astro';
+import Container from '../../../components/ui/Container.astro';
+import Button from '../../../components/ui/Button.astro';
 
 const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
 const isUserSiteRepo = repo.endsWith('.github.io');
@@ -22,46 +20,46 @@ const withBase = (url: string) => {
 const categories = [
   {
     title: 'Getting Started',
-    desc: '설치, 환경 구성, 첫 자동화 실행까지의 전체 과정을 안내합니다.',
+    desc: 'Provides a complete guide from installation and environment configuration to running your first automation.',
     href: '/docs/getting-started',
-    tag: '시작하기',
+    tag: 'Start Here',
   },
   {
     title: 'Tutorials',
-    desc: '이메일 분류, 리포트 자동화 등 실제 업무 시나리오 기반의 단계별 가이드.',
+    desc: 'Step-by-step guides based on real-world scenarios like email classification and report automation.',
     href: '/docs/tutorials',
     tag: null,
   },
   {
     title: 'API Reference',
-    desc: '인증, 엔드포인트, 요청·응답 형식, Rate Limit 정책을 상세히 기술합니다.',
+    desc: 'Detailed documentation on authentication, endpoints, request/response formats, and rate limit policies.',
     href: '/docs/api',
     tag: null,
   },
   {
     title: 'FAQ',
-    desc: '설치, 보안, 데이터 관리, 성능에 관한 자주 묻는 질문과 해결 방법.',
+    desc: 'Frequently asked questions and troubleshooting regarding installation, security, data management, and performance.',
     href: '/docs/faq',
     tag: null,
   },
   {
     title: 'Changelog',
-    desc: '버전별 신규 기능, 개선 사항, 버그 수정 내역을 확인합니다.',
+    desc: 'Track new features, improvements, and bug fixes for each version.',
     href: '/docs/changelog',
     tag: 'Latest',
   },
 ];
 
 const popularDocs = [
-  { title: '5분 만에 첫 자동화 실행하기', href: '/docs/getting-started', category: 'Getting Started' },
-  { title: '이메일 자동 분류 워크플로우 구성', href: '/docs/tutorials', category: 'Tutorial' },
-  { title: 'POST /automations — 자동화 생성', href: '/docs/api', category: 'API' },
-  { title: 'Webhook 재시도 정책 및 오류 처리', href: '/docs/faq', category: 'FAQ' },
+  { title: 'Run your first automation in 5 minutes', href: '/docs/getting-started', category: 'Getting Started' },
+  { title: 'Set up an automated email classification workflow', href: '/docs/tutorials', category: 'Tutorial' },
+  { title: 'POST /automations — Create Automation', href: '/docs/api', category: 'API' },
+  { title: 'Webhook retry policy and error handling', href: '/docs/faq', category: 'FAQ' },
 ];
 ---
 
-<DocsLayout title="Documentation Index" description="에이전트 아키텍처, 73개+ Rust 모듈, 보안 계층, 외부 연동 가이드." lang="ko">
-  <Header slot="header" />
+<BaseLayout title="Documentation — NOVA" description="Official technical documentation for installing, operating, and integrating NOVA." lang="en">
+  <Header slot="header" lang="en" />
 
   <!-- Hero -->
   <Section padding="large">
@@ -71,9 +69,9 @@ const popularDocs = [
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:-2px;margin-right:4px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           Documentation
         </p>
-        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">NOVA 기술 문서</h1>
+        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">NOVA Technical Documentation</h1>
         <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto">
-          설치부터 API 통합, 워크플로우 운영까지 — 서비스를 완전히 활용하기 위해 필요한 모든 정보를 제공합니다.
+          From installation to API integration and workflow operation — find all the information you need to fully leverage our services.
         </p>
       </div>
 
@@ -85,10 +83,10 @@ const popularDocs = [
           </svg>
           <input
             type="search"
-            placeholder="문서 검색..."
+            placeholder="Search documentation..."
             disabled
             class="w-full pl-12 pr-4 py-3.5 bg-[#14161b] rounded-lg border border-white/10 text-body text-neutral-500 cursor-not-allowed focus:border-[var(--site-accent)]/40 transition-colors"
-            aria-label="문서 검색"
+            aria-label="Search documentation"
           />
           <span class="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-neutral-600 border border-white/10 rounded px-1.5 py-0.5 font-mono">Ctrl K</span>
         </div>
@@ -97,7 +95,7 @@ const popularDocs = [
       <!-- Category Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 animate-on-scroll">
         {categories.map((cat) => (
-          <a href={withBase(cat.href)} class="docs-category-card group">
+          <a href={withBase('/en' + cat.href)} class="docs-category-card group">
             <div class="flex items-start justify-between mb-3">
               <h2 class="text-[1.0625rem] font-semibold text-neutral-100 group-hover:text-white transition-colors">{cat.title}</h2>
               {cat.tag && <span class="docs-category-tag">{cat.tag}</span>}
@@ -118,13 +116,13 @@ const popularDocs = [
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center animate-on-scroll">
         <div>
           <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">Quick Start</p>
-          <h2 class="text-h2 text-neutral-100 mb-4">3단계로 시작하세요</h2>
+          <h2 class="text-h2 text-neutral-100 mb-4">Get started in 3 steps</h2>
           <p class="text-body-lg text-neutral-400 mb-6">
-            저장소 클론, 환경변수 설정, 빌드 — 세 가지 단계만으로 NOVA 에이전트를 실행할 수 있습니다. 첫 자동화까지 5분이면 충분합니다.
+            Clone the repository, set environment variables, and build — you can run the NOVA agent in just three steps. 5 minutes is all it takes to run your first automation.
           </p>
           <div class="flex flex-col sm:flex-row gap-3">
-            <Button variant="primary" href={withBase('/docs/getting-started?os=macos')}>맥OS에서 시작하기</Button>
-            <Button variant="secondary" href={withBase('/docs/getting-started?os=windows')}>윈도우에서 시작하기</Button>
+            <Button variant="primary" href={withBase('/en/docs/getting-started?os=macos')}>Start on macOS</Button>
+            <Button variant="secondary" href={withBase('/en/docs/getting-started?os=windows')}>Start on Windows</Button>
           </div>
         </div>
         <div class="bg-[#0a0b0e] rounded-lg border border-white/10 p-5 font-mono text-sm">
@@ -143,9 +141,9 @@ const popularDocs = [
           <p class="text-neutral-500 mt-1">
             <span class="text-neutral-400">$</span> cargo build --release
           </p>
-          <p class="text-[#8fd5a6] mt-3">Build complete — ./target/release/core</p>
+          <p class="text-[#8fd5a6] mt-3">Build complete — ./target/release/local_os_agent</p>
           <p class="text-neutral-500 mt-3">
-            <span class="text-neutral-400">$</span> ./target/release/core
+            <span class="text-neutral-400">$</span> ./target/release/local_os_agent
           </p>
           <p class="text-[#8fd5a6] mt-1">NOVA Agent ready. Type 'help' for available commands.</p>
         </div>
@@ -158,12 +156,12 @@ const popularDocs = [
     <Container>
       <div class="animate-on-scroll">
         <div class="text-center mb-10">
-          <h2 class="text-h2 text-neutral-100 mb-3">자주 찾는 문서</h2>
-          <p class="text-body text-neutral-400">가장 많이 참조되는 항목을 바로 확인하세요.</p>
+          <h2 class="text-h2 text-neutral-100 mb-3">Popular Docuementation</h2>
+          <p class="text-body text-neutral-400">Quickly find our most frequently referenced items.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
           {popularDocs.map((doc) => (
-            <a href={withBase(doc.href)} class="docs-popular-item group">
+            <a href={withBase('/en' + doc.href)} class="docs-popular-item group">
               <div>
                 <span class="text-[0.6875rem] font-semibold uppercase tracking-wider text-accent-300">{doc.category}</span>
                 <p class="text-[0.9375rem] text-neutral-200 font-medium mt-1 group-hover:text-white transition-colors">{doc.title}</p>
@@ -180,20 +178,20 @@ const popularDocs = [
   <Section background="dark">
     <Container narrow>
       <div class="text-center animate-on-scroll">
-        <h2 class="text-h2 text-white mb-4">추가 지원이 필요하신가요?</h2>
+        <h2 class="text-h2 text-white mb-4">Need more help?</h2>
         <p class="text-body-lg text-neutral-400 mb-8">
-          GitHub에서 이슈를 등록하거나, 기술팀에 직접 문의할 수 있습니다.
+          You can open an issue on GitHub or contact our technical team directly.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
           <Button variant="primary" href="https://github.com/NOVA-ALLRounder/main/issues" external>GitHub Issues</Button>
-          <Button variant="ghost" href={withBase('/contact')}>Contact</Button>
+          <Button variant="ghost" href={withBase('/en/contact')}>Contact</Button>
         </div>
       </div>
     </Container>
   </Section>
 
-  <Footer slot="footer" lang="ko" />
-</DocsLayout>
+  <Footer slot="footer" lang="en" />
+</BaseLayout>
 
 <style>
   .docs-category-card {

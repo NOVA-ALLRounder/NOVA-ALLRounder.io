@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import Section from '../../../components/ui/Section.astro';
+import Container from '../../../components/ui/Container.astro';
+import Card from '../../../components/ui/Card.astro';
+import Badge from '../../../components/ui/Badge.astro';
+import Button from '../../../components/ui/Button.astro';
+
+const updates = [
+  {
+    date: '2026.02.10',
+    badge: 'New Feature',
+    badgeVariant: 'accent' as const,
+    title: 'AI Classification Model v3 Released',
+    summary:
+      'v3 improves classification accuracy and processing speed, including expanded language processing and improved edge-case routing.',
+    href: '/en/updates/2026-02-10',
+  },
+  {
+    date: '2026.01.15',
+    badge: 'Improvement',
+    badgeVariant: 'success' as const,
+    title: 'Batch Processing Throughput +40%',
+    summary:
+      'Reduced high-volume processing times and improved stability under load through pipeline and queue tuning.',
+    href: '/en/updates/2026-01-15',
+  },
+  {
+    date: '2025.12.01',
+    badge: 'Security',
+    badgeVariant: 'warning' as const,
+    title: 'RBAC and Audit Log Foundation Added',
+    summary:
+      'Initial access control and activity log structures included in the Team+ rollout track.',
+    href: '/en/updates/2025-12-01',
+  },
+];
+---
+
+<BaseLayout title="Updates — NOVA" description="Latest product notes, release news, and roadmap updates." lang="en">
+  <Header slot="header" lang="en" />
+
+  <Section padding="large">
+    <Container>
+      <div class="text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
+        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Updates</p>
+        <h1 class="text-h1 text-neutral-100 mb-6">What's New</h1>
+        <p class="text-body-lg text-neutral-400">
+          Stay informed about product changes, release notes, and rollout announcements.
+        </p>
+      </div>
+
+      <div class="max-w-md mx-auto mb-16 animate-on-scroll">
+        <div class="flex gap-3">
+          <input
+            type="email"
+            placeholder="Email address"
+            class="flex-1 px-4 py-3 bg-[#14161b] rounded-lg border border-white/10 text-body text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20"
+            aria-label="Subscription email"
+          />
+          <Button variant="primary" size="md">Subscribe</Button>
+        </div>
+        <p class="text-xs text-neutral-400 mt-2 text-center">
+          Subscription feature is currently under preparation.
+        </p>
+      </div>
+
+      <div class="space-y-6 max-w-3xl mx-auto animate-on-scroll">
+        {updates.map((update) => (
+          <Card hoverable={true} href={update.href}>
+            <div class="p-8">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="text-caption text-neutral-400">{update.date}</span>
+                <Badge text={update.badge} variant={update.badgeVariant} />
+              </div>
+              <h2 class="text-h3 text-neutral-100 mb-3">{update.title}</h2>
+              <p class="text-body text-neutral-400">{update.summary}</p>
+              <span class="inline-block mt-4 text-sm text-accent-300 font-medium">Read More →</span>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Footer slot="footer" lang="en" />
+</BaseLayout>

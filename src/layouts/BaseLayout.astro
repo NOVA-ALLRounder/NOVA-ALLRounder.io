@@ -1,17 +1,23 @@
 ---
 import '../styles/global.css';
+import { t, getHtmlLang, getOgLocale, type Locale } from '../i18n/utils';
 
 export interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  lang?: Locale;
 }
 
 const {
   title,
   description = 'NOVA - Intelligent automation that transforms how you work. Faster decisions, fewer errors, limitless scale.',
   ogImage = '/og-default.svg',
+  lang = 'ko',
 } = Astro.props;
+
+const htmlLang = getHtmlLang(lang);
+const ogLocale = getOgLocale(lang);
 const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
 const isUserSiteRepo = repo.endsWith('.github.io');
 const basePath = process.env.GITHUB_ACTIONS === 'true'
@@ -40,7 +46,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
-<html lang="ko">
+<html lang={htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -53,7 +59,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:locale" content={ogLocale} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -85,7 +91,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       href="#main-content"
       class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-neutral-900 focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white"
     >
-      본문으로 건너뛰기
+      {t(lang, 'common.skip-to-content')}
     </a>
     <slot name="header" />
     <main class="flex-1" id="main-content" tabindex="-1">

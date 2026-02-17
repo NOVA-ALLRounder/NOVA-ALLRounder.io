@@ -1,90 +1,90 @@
-﻿---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import Section from '../components/ui/Section.astro';
-import Container from '../components/ui/Container.astro';
-import Button from '../components/ui/Button.astro';
-import Card from '../components/ui/Card.astro';
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Section from '../../components/ui/Section.astro';
+import Container from '../../components/ui/Container.astro';
+import Button from '../../components/ui/Button.astro';
+import Card from '../../components/ui/Card.astro';
 
 const contactChannels = [
   {
-    title: '일반 이메일',
+    title: 'General Email',
     value: 'hello@nova-platform.io',
     href: 'mailto:hello@nova-platform.io',
     id: 'email',
-    note: '제품 문의, 피드백 등 일반적인 연락에 사용하세요.',
+    note: 'Use for general inquiries, feedback, and questions.',
   },
   {
     title: 'GitHub',
     value: 'github.com/NOVA-ALLRounder',
     href: 'https://github.com/NOVA-ALLRounder',
     id: 'github',
-    note: '오픈소스 저장소 및 이슈 트래커.',
+    note: 'Open-source repository and issue tracker.',
   },
   {
-    title: '영업 문의',
+    title: 'Sales Inquiries',
     value: 'sales@nova-platform.io',
     href: 'mailto:sales@nova-platform.io',
     id: 'sales',
-    note: '데모, 파트너십, Enterprise 상담에 사용하세요.',
+    note: 'Contact for demos, partnerships, and Enterprise consultations.',
   },
 ];
 
 const teamOverview = [
-  { label: '핵심 팀', value: '4명', note: '제품, 엔지니어링, 디자인, 성장' },
-  { label: '트랙', value: 'B2C + B2B', note: '공유 플랫폼, 별도 GTM 전략' },
-  { label: '시간대', value: 'KST + 원격', note: '일일 비동기 + 고정 동기 시간' },
+  { label: 'Core Team', value: '4 Members', note: 'Product, Engineering, Design, Growth' },
+  { label: 'Track', value: 'B2C + B2B', note: 'Shared platform, separate GTM strategies' },
+  { label: 'Timezone', value: 'KST + Remote', note: 'Daily async + fixed sync hours' },
 ];
 
 const teamProfiles = [
   {
-    name: '멤버 01',
-    role: '창업자 / 제품',
-    focus: '비전, 로드맵, 고객 발굴',
+    name: 'Member 01',
+    role: 'Founder / Product',
+    focus: 'Vision, Roadmap, Customer Discovery',
     email: 'member01@nova-platform.io',
     github: 'github.com/member01',
-    photoAlt: '프로필 A',
+    photoAlt: 'Profile A',
   },
   {
-    name: '멤버 02',
-    role: '엔지니어링 리드',
-    focus: '플랫폼 아키텍처, 안정성, 딜리버리',
+    name: 'Member 02',
+    role: 'Engineering Lead',
+    focus: 'Platform Architecture, Stability, Delivery',
     email: 'member02@nova-platform.io',
     github: 'github.com/member02',
-    photoAlt: '프로필 B',
+    photoAlt: 'Profile B',
   },
   {
-    name: '멤버 03',
-    role: '디자인 / 경험',
-    focus: 'UX 시스템, 비주얼 언어, 콘텐츠 품질',
+    name: 'Member 03',
+    role: 'Design / Experience',
+    focus: 'UX Systems, Visual Language, Content Quality',
     email: 'member03@nova-platform.io',
     github: 'github.com/member03',
-    photoAlt: '프로필 C',
+    photoAlt: 'Profile C',
   },
   {
-    name: '멤버 04',
-    role: '성장 / 파트너십',
-    focus: '수요 창출, B2B 파이프라인, 제휴',
+    name: 'Member 04',
+    role: 'Growth / Partnerships',
+    focus: 'Demand Gen, B2B Pipeline, Alliances',
     email: 'member04@nova-platform.io',
     github: 'github.com/member04',
-    photoAlt: '프로필 D',
+    photoAlt: 'Profile D',
   },
 ];
 ---
 
-<BaseLayout title="문의 - NOVA" description="이메일, GitHub, 팀 프로필 등 연락 정보 허브." lang="ko">
-  <Header slot="header" lang="ko" />
+<BaseLayout title="Contact — NOVA" description="Hub for contact information including email, GitHub, and team profiles." lang="en">
+  <Header slot="header" lang="en" />
 
   <Section padding="large">
     <Container>
       <div class="text-center max-w-4xl mx-auto animate-on-scroll">
-        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">문의</p>
-        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">연락에 필요한 모든 정보를 한 곳에</h1>
+        <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Contact</p>
+        <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">All the contact information you need, in one place</h1>
         <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto mb-10">
-          팀 연락처와 멤버 프로필을 확인하세요.
+          Check our team contacts and member profiles.
         </p>
-        <Button variant="primary" size="lg" href="#contact-list">연락처 보기</Button>
+        <Button variant="primary" size="lg" href="#contact-list">View Contacts</Button>
       </div>
     </Container>
   </Section>
@@ -115,8 +115,8 @@ const teamProfiles = [
   <Section>
     <Container>
       <div class="text-center mb-12 animate-on-scroll">
-        <h2 class="text-h2 text-neutral-100 mb-4">팀 개요</h2>
-        <p class="text-body-lg text-neutral-400">NOVA를 만드는 팀 구성과 운영 방식.</p>
+        <h2 class="text-h2 text-neutral-100 mb-4">Team Overview</h2>
+        <p class="text-body-lg text-neutral-400">Team organization and operation behind NOVA.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 animate-on-scroll">
@@ -132,8 +132,8 @@ const teamProfiles = [
       </div>
 
       <div class="text-center mb-12 animate-on-scroll">
-        <h2 class="text-h2 text-neutral-100 mb-4">팀 멤버</h2>
-        <p class="text-body-lg text-neutral-400">4명의 멤버 이름, 사진, 이메일, GitHub 링크를 추가하세요.</p>
+        <h2 class="text-h2 text-neutral-100 mb-4">Meet the Team</h2>
+        <p class="text-body-lg text-neutral-400">Our core members building the future of OS automation.</p>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 animate-on-scroll">
@@ -141,9 +141,9 @@ const teamProfiles = [
           <Card hoverable={false}>
             <div class="p-6 text-center h-full">
               <div class="w-28 h-28 rounded-full border border-white/10 bg-[#101217] mx-auto mb-4 flex items-center justify-center">
-                <span class="text-xs text-neutral-400">사진</span>
+                <span class="text-xs text-neutral-400">Photo</span>
               </div>
-              <h3 class="text-h4 text-neutral-100">{person.name}</h3>
+              <h3 class="text-h3 text-neutral-100">{person.name}</h3>
               <p class="text-caption text-neutral-400 mt-1">{person.role}</p>
               <p class="text-caption text-neutral-500 mt-3">{person.focus}</p>
               <div class="mt-5 space-y-1">
@@ -165,14 +165,14 @@ const teamProfiles = [
   <Section background="dark">
     <Container narrow>
       <div class="text-center animate-on-scroll">
-        <h2 class="text-h2 text-white mb-4">간단한 소개 통화가 필요하신가요?</h2>
+        <h2 class="text-h2 text-white mb-4">Need a Quick Intro Call?</h2>
         <p class="text-body-lg text-neutral-400 mb-8">
-          아래 버튼으로 이메일을 보내시거나, 일정 링크를 추가해주세요.
+          Send us an email or request a meeting link via the button below.
         </p>
-        <Button variant="primary" size="lg" href="mailto:hello@nova-platform.io">이메일 보내기</Button>
+        <Button variant="primary" size="lg" href="mailto:hello@nova-platform.io">Send Email</Button>
       </div>
     </Container>
   </Section>
 
-  <Footer slot="footer" />
+  <Footer slot="footer" lang="en" />
 </BaseLayout>
