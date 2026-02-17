@@ -71,8 +71,8 @@ const switchToEn = getLocalizedPath(currentPath, 'en', basePath);
 
 <header
   class:list={[
-    'fixed top-0 left-0 right-0 z-50 border-b backdrop-blur-sm',
-    'bg-[#f2f2f2]/95 border-black/10',
+    'fixed top-0 left-0 right-0 z-50 border-b backdrop-blur-md transition-all duration-300',
+    'bg-[#0d0e11]/80 border-white/10',
   ]}
   role="banner"
 >
@@ -84,8 +84,8 @@ const switchToEn = getLocalizedPath(currentPath, 'en', basePath);
       href={localizeHref('/')}
       class="flex items-center leading-none tracking-[-0.045em] transition-opacity hover:opacity-80"
     >
-      <span class="font-black text-[2rem] md:text-[2.35rem] text-neutral-500">NO</span>
-      <span class="font-black text-[2rem] md:text-[2.35rem] text-neutral-900">VA</span>
+      <span class="font-black text-[2rem] md:text-[2.35rem] text-neutral-400">NO</span>
+      <span class="font-black text-[2rem] md:text-[2.35rem] text-[#a5b4fc]">VA</span>
     </a>
 
     <ul class="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2" role="list">
@@ -98,8 +98,8 @@ const switchToEn = getLocalizedPath(currentPath, 'en', basePath);
             class:list={[
               'py-2 text-[1.05rem] leading-none transition-colors',
               isActive(item.href)
-                ? 'text-neutral-900'
-                : 'text-neutral-900 hover:text-neutral-700',
+                ? 'text-[#a5b4fc]'
+                : 'text-neutral-400 hover:text-neutral-100',
             ]}
             aria-current={isActive(item.href) ? 'page' : undefined}
           >
@@ -114,7 +114,7 @@ const switchToEn = getLocalizedPath(currentPath, 'en', basePath);
       <div class="relative" id="lang-switcher">
         <button
           id="lang-toggle"
-          class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-sm font-medium text-neutral-700 hover:text-neutral-900 hover:bg-black/5 transition-colors"
+          class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-sm font-medium text-neutral-400 hover:text-neutral-100 hover:bg-white/5 transition-colors"
           aria-expanded="false"
           aria-haspopup="true"
           aria-label="Select language"
@@ -130,7 +130,7 @@ const switchToEn = getLocalizedPath(currentPath, 'en', basePath);
         </button>
         <div
           id="lang-dropdown"
-          class="hidden absolute right-0 top-full mt-1 w-32 rounded-lg bg-white border border-black/10 shadow-lg overflow-hidden"
+          class="hidden absolute right-0 top-full mt-1 w-32 rounded-lg bg-[#171a20] border border-white/10 shadow-lg overflow-hidden"
           role="menu"
         >
           <a
@@ -139,8 +139,8 @@ const switchToEn = getLocalizedPath(currentPath, 'en', basePath);
             class:list={[
               'block px-4 py-2.5 text-sm transition-colors',
               lang === 'ko'
-                ? 'text-neutral-900 font-semibold bg-black/5'
-                : 'text-neutral-600 hover:text-neutral-900 hover:bg-black/5',
+                ? 'text-neutral-100 font-semibold bg-white/5'
+                : 'text-neutral-400 hover:text-neutral-100 hover:bg-white/5',
             ]}
           >
             한국어
@@ -151,8 +151,8 @@ const switchToEn = getLocalizedPath(currentPath, 'en', basePath);
             class:list={[
               'block px-4 py-2.5 text-sm transition-colors',
               lang === 'en'
-                ? 'text-neutral-900 font-semibold bg-black/5'
-                : 'text-neutral-600 hover:text-neutral-900 hover:bg-black/5',
+                ? 'text-neutral-100 font-semibold bg-white/5'
+                : 'text-neutral-400 hover:text-neutral-100 hover:bg-white/5',
             ]}
           >
             English
@@ -163,7 +163,7 @@ const switchToEn = getLocalizedPath(currentPath, 'en', basePath);
       <a
         href={localizeHref('/signin')}
         class:list={[
-          'inline-flex items-center text-[1.02rem] leading-none text-neutral-700 hover:text-neutral-900 transition-colors',
+          'inline-flex items-center text-[1.02rem] leading-none text-neutral-400 hover:text-neutral-100 transition-colors',
         ]}
       >
         {t(lang, 'nav.signin')}
@@ -171,7 +171,7 @@ const switchToEn = getLocalizedPath(currentPath, 'en', basePath);
       <a
         href={localizeHref('/signup')}
         class:list={[
-          'inline-flex items-center px-4 py-2 rounded-lg bg-[#1f1d1f] text-white text-[1.05rem] leading-none hover:bg-[#2a272a] transition-colors',
+          'inline-flex items-center px-4 py-2 rounded-lg bg-[#a5b4fc] text-[#111214] text-[1.05rem] font-semibold leading-none hover:bg-[#c7d2fe] transition-colors',
         ]}
       >
         {t(lang, 'nav.signup')}
@@ -181,7 +181,7 @@ const switchToEn = getLocalizedPath(currentPath, 'en', basePath);
     <button
       id="mobile-menu-toggle"
       class:list={[
-        'lg:hidden ml-auto inline-flex items-center justify-center w-10 h-10 rounded-md transition-colors text-neutral-900 hover:bg-black/5',
+        'lg:hidden ml-auto inline-flex items-center justify-center w-10 h-10 rounded-md transition-colors text-neutral-100 hover:bg-white/5',
       ]}
       aria-expanded="false"
       aria-controls="mobile-menu"
@@ -199,7 +199,7 @@ const switchToEn = getLocalizedPath(currentPath, 'en', basePath);
   <div
     id="mobile-menu"
     class:list={[
-      'lg:hidden hidden border-t backdrop-blur bg-[#f2f2f2]/98 border-black/10',
+      'lg:hidden hidden border-t backdrop-blur bg-[#0d0e11]/98 border-white/10',
     ]}
     role="navigation"
     aria-label="Mobile Navigation"
@@ -212,8 +212,8 @@ const switchToEn = getLocalizedPath(currentPath, 'en', basePath);
             class:list={[
               'block px-4 py-3 rounded-md text-base font-medium transition-colors',
               isActive(item.href)
-                ? 'text-neutral-900 bg-black/5'
-                : 'text-neutral-700 hover:text-neutral-900 hover:bg-black/5',
+                ? 'text-[#a5b4fc] bg-white/5'
+                : 'text-neutral-400 hover:text-neutral-100 hover:bg-white/5',
             ]}
             aria-current={isActive(item.href) ? 'page' : undefined}
             target={item.external ? '_blank' : undefined}
@@ -231,8 +231,8 @@ const switchToEn = getLocalizedPath(currentPath, 'en', basePath);
         class:list={[
           'flex-1 px-4 py-2.5 text-center text-sm font-medium rounded-md transition-colors',
           lang === 'ko'
-            ? 'bg-black/10 text-neutral-900'
-            : 'text-neutral-600 hover:bg-black/5',
+            ? 'bg-white/10 text-neutral-100'
+            : 'text-neutral-400 hover:bg-white/5',
         ]}
       >
         한국어
@@ -242,19 +242,19 @@ const switchToEn = getLocalizedPath(currentPath, 'en', basePath);
         class:list={[
           'flex-1 px-4 py-2.5 text-center text-sm font-medium rounded-md transition-colors',
           lang === 'en'
-            ? 'bg-black/10 text-neutral-900'
-            : 'text-neutral-600 hover:bg-black/5',
+            ? 'bg-white/10 text-neutral-100'
+            : 'text-neutral-400 hover:bg-white/5',
         ]}
       >
         English
       </a>
     </div>
-    <div class="px-6 pb-4 pt-2 border-t border-black/10 flex flex-col gap-2">
+    <div class="px-6 pb-4 pt-2 border-t border-white/10 flex flex-col gap-2">
       <a
         href={localizeHref('/signin')}
         class:list={[
           'block px-4 py-3 text-center text-base font-medium rounded-md transition-colors',
-          'text-neutral-700 hover:text-neutral-900 hover:bg-black/5',
+          'text-neutral-400 hover:text-neutral-100 hover:bg-white/5',
         ]}
       >
         {t(lang, 'nav.signin')}
@@ -263,7 +263,7 @@ const switchToEn = getLocalizedPath(currentPath, 'en', basePath);
         href={localizeHref('/signup')}
         class:list={[
           'block px-4 py-3 text-center text-base font-medium rounded-md transition-colors',
-          'bg-[#1f1d1f] text-white hover:bg-[#2a272a]',
+          'bg-[#a5b4fc] text-[#111214] hover:bg-[#c7d2fe]',
         ]}
       >
         {t(lang, 'nav.signup')}
