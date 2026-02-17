@@ -33,8 +33,8 @@ const withBase = (url: string) => {
           NOVA는 OS 수준의 사용 패턴을 분석하여 반복 업무를 자동으로 식별하고, 실행 가능한 워크플로우로 전환합니다. Rust 네이티브 코어, LLM 분석 엔진, 엔터프라이즈 보안 정책을 통합한 자동화 플랫폼입니다.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <Button variant="primary" size="lg" href={withBase('/docs/getting-started')}>시작하기</Button>
-          <Button variant="ghost" size="lg" href={withBase('/pricing')}>플랜 비교</Button>
+          <Button variant="primary" size="lg" href={withBase('/docs/getting-started?os=macos')}>Start for macOS</Button>
+          <Button variant="secondary" size="lg" href={withBase('/docs/getting-started?os=windows')}>Start for Windows</Button>
         </div>
       </div>
     </Container>

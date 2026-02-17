@@ -16,6 +16,22 @@ const withBase = (url: string) => {
   <h1>Getting Started</h1>
   <p class="doc-subtitle">NOVA Local OS Agent의 설치, 구성, 실행 전 과정을 안내합니다. 예상 소요 시간은 약 <strong>5분</strong>입니다.</p>
 
+  <!-- OS Switcher -->
+  <div class="os-switcher-container" id="os-switcher">
+    <button class="os-tab active" data-os-target="macos">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.05,20.28c-0.96,0.95-2.05,1.72-3.11,1.72s-1.45-0.67-2.73-0.67c-1.29,0-1.87,0.67-2.9,0.67c-1.03,0-2.14-0.81-3.23-1.89 c-1.95-1.93-3.05-4.88-3.05-7.38c0-2.5,1.13-4.63,2.94-5.75c0.91-0.57,2.05-0.91,3.22-0.91c1.29,0,1.96,0.42,3.23,0.42 c1.26,0,1.87-0.42,3.23-0.42c1.07,0,2.1,0.35,3,0.91c-0.48,0.31-1.39,1.12-1.39,2.68c0,1.72,1.35,2.77,2.37,3.31 c-0.74,1.8-1.5,4.01-2.31,5.32L17.05,20.28z M14.19,3.77c0-1.95,1.4-3.56,3.31-3.77c0.23,2.16-1.5,4.2-3.37,4.2 C14.04,4.2,14.19,3.85,14.19,3.77z"/>
+      </svg>
+      macOS
+    </button>
+    <button class="os-tab" data-os-target="windows">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M0,3.449L9.75,2.1L9.75,11.55L0,11.55ZM0,12.45L9.75,12.45L9.75,21.9L0,20.55ZM10.65,1.95L24,0L24,11.55L10.65,11.55ZM10.65,12.45L24,12.45L24,24L10.65,22.05Z"/>
+      </svg>
+      Windows
+    </button>
+  </div>
+
   <div class="doc-callout">
     <strong>이 가이드에서 다루는 내용:</strong> 환경 준비 → 설치 및 빌드 → 에이전트 실행 → 핵심 명령어 사용 → 워크플로우 확장
   </div>
@@ -36,8 +52,12 @@ const withBase = (url: string) => {
     </tbody>
   </table>
 
-  <div class="doc-callout doc-callout-warning">
+  <div class="doc-callout doc-callout-warning" data-os-only="macos">
     <strong>macOS 사용자 주의:</strong> 시스템 환경설정 → 개인정보 보호 및 보안 → 손쉬운 사용에서 터미널 앱에 권한을 부여해야 합니다. 이 권한이 없으면 OS 센서 데이터를 수집할 수 없습니다.
+  </div>
+
+  <div class="doc-callout doc-callout-info" data-os-only="windows">
+    <strong>Windows 사용자 주의:</strong> PowerShell 실행 정책이 `RemoteSigned`로 설정되어 있어야 합니다. 관리자 권한으로 `Set-ExecutionPolicy RemoteSigned` 명령을 실행하세요.
   </div>
 
   <h2>Step 1 — 저장소 클론 및 환경 설정</h2>
@@ -76,12 +96,16 @@ cargo build --release
 
   <h2>Step 3 — 에이전트 실행</h2>
 
-  <h3>macOS</h3>
-  <pre><code>{`./target/release/core`}</code></pre>
+  <div data-os-only="macos">
+    <h3>macOS 실행</h3>
+    <pre><code>{`./target/release/core`}</code></pre>
+  </div>
 
-  <h3>Windows</h3>
-  <p>Windows 환경에서는 PowerShell 스크립트를 사용합니다:</p>
-  <pre><code>{`.\\scripts\\run_core.ps1 -CollectorImpl rust`}</code></pre>
+  <div data-os-only="windows">
+    <h3>Windows 실행</h3>
+    <p>Windows 환경에서는 PowerShell 스크립트를 사용합니다:</p>
+    <pre><code>{`.\\scripts\\run_core.ps1 -CollectorImpl rust`}</code></pre>
+  </div>
 
   <p>정상적으로 실행되면 다음과 같은 프롬프트가 표시됩니다:</p>
 
@@ -196,4 +220,95 @@ STEER_DB_PATH=./steer.db ./core/target/debug/collector_rs
 
   <hr />
   <p>문제가 발생한 경우 <a href="https://github.com/NOVA-ALLRounder/main/issues">GitHub Issues</a>에서 도움을 받거나 <a href={withBase('/contact')}>기술팀에 직접 문의</a>하실 수 있습니다.</p>
+
+  <style>
+    .os-switcher-container {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.25rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.5rem;
+      margin: 2rem 0;
+      width: fit-content;
+    }
+    .os-tab {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      background: transparent;
+      color: #8b8e94;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 0.375rem;
+      transition: all 0.2s;
+    }
+    .os-tab:hover {
+      color: #eeede8;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .os-tab.active {
+      color: #111214;
+      background: var(--site-accent);
+    }
+    [data-os-only] {
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .os-hidden {
+      display: none !important;
+    }
+  </style>
+
+  <script>
+    function updateOS(os) {
+      // Update tabs UI
+      document.querySelectorAll('.os-tab').forEach(tab => {
+        if (tab.dataset.osTarget === os) {
+          tab.classList.add('active');
+        } else {
+          tab.classList.remove('active');
+        }
+      });
+
+      // Update content visibility
+      document.querySelectorAll('[data-os-only]').forEach(el => {
+        if (el.dataset.osOnly === os) {
+          el.classList.remove('os-hidden');
+        } else {
+          el.classList.add('os-hidden');
+        }
+      });
+
+      // Persist
+      localStorage.setItem('nova-os-preference', os);
+    }
+
+    // Initialize
+    const urlParams = new URLSearchParams(window.location.search);
+    let preferredOS = urlParams.get('os');
+
+    if (!preferredOS) {
+      preferredOS = localStorage.getItem('nova-os-preference');
+    }
+
+    if (!preferredOS) {
+      // Auto-detect if possible
+      const platform = window.navigator.platform.toLowerCase();
+      if (platform.includes('mac')) preferredOS = 'macos';
+      else if (platform.includes('win')) preferredOS = 'windows';
+      else preferredOS = 'macos'; // Default
+    }
+
+    updateOS(preferredOS);
+
+    // Event listeners
+    document.querySelectorAll('.os-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        updateOS(tab.dataset.osTarget);
+      });
+    });
+  </script>
 </DocsLayout>
