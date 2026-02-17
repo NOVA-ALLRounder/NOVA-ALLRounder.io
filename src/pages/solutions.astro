@@ -41,14 +41,14 @@ import Card from '../components/ui/Card.astro';
             icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
           },
           {
-            title: '패턴 기반 자동화 추천',
-            desc: 'Rust Collector가 OS 센서 데이터를 수집하고, pattern_detector가 반복 패턴을 식별합니다. build_sessions → build_routines → build_handoff 파이프라인이 자동화 기회를 정제합니다.',
-            module: 'pattern_detector.rs + analyzer.rs + recommendation.rs',
+            title: 'Shadow Mode (행동 분석)',
+            desc: '백그라운드에서 사용자 행동 데이터를 수집하고, pattern_detector가 반복 패턴을 식별합니다. build_sessions → build_routines 파이프라인이 자동화 기회를 정제하여 추천합니다.',
+            module: 'collector_rs.rs + analyzer.rs + recommendation.rs',
             icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
           },
           {
             title: '워크플로우 자동 생성',
-            desc: 'build_workflow로 자연어 프롬프트를 n8n 워크플로우 JSON으로 변환합니다. Docker/NPX 모드를 지원하며, 36KB n8n_api.rs가 REST API 기반 실행을 관리합니다.',
+            desc: 'build_workflow로 자연어 프롬프트를 n8n 워크플로우 JSON으로 변환합니다. Docker/NPX/Manual 모드를 지원하며, n8n_api.rs가 REST API 기반 실행을 관리합니다.',
             module: 'n8n_api.rs + workflow_schema.rs + orchestrator.rs',
             icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
           },
@@ -212,7 +212,7 @@ import Card from '../components/ui/Card.astro';
           },
           {
             title: 'Self-Healing',
-            desc: 'steer-guardian.sh가 크래시를 감지하고 코어 프로세스를 자동 재시작합니다.',
+            desc: 'steer-guardian.sh가 코어 프로세스의 상태를 모니터링하여 크래시 발생 시 자동으로 재시작하고 고가용성을 보장합니다.',
           },
         ].map((item) => (
           <div class="bg-[#14161b] rounded-lg p-6 border border-white/10">

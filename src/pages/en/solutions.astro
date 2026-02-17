@@ -41,14 +41,14 @@ import Card from '../../components/ui/Card.astro';
             icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
           },
           {
-            title: 'Pattern-Based Automation Suggestions',
-            desc: 'The Rust Collector gathers OS sensor data, and pattern_detector identifies repeating patterns. The build_sessions → build_routines → build_handoff pipeline refines automation opportunities.',
-            module: 'pattern_detector.rs + analyzer.rs + recommendation.rs',
+            title: 'Shadow Mode (Behavioral Analysis)',
+            desc: 'The Rust Collector gathers OS sensor data in the background, and pattern_detector identifies repeating patterns. The build_sessions → build_routines pipeline refines automation opportunities for recommendation.',
+            module: 'collector_rs.rs + analyzer.rs + recommendation.rs',
             icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
           },
           {
             title: 'Automated Workflow Generation',
-            desc: 'Convert natural language prompts into n8n workflow JSON with build_workflow. Supports Docker/NPX modes, with the 36KB n8n_api.rs managing REST API-based execution.',
+            desc: 'Convert natural language prompts into n8n workflow JSON with build_workflow. Supports Docker, NPX, and Manual modes, with n8n_api.rs managing REST API-based execution.',
             module: 'n8n_api.rs + workflow_schema.rs + orchestrator.rs',
             icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
           },
@@ -212,7 +212,7 @@ import Card from '../../components/ui/Card.astro';
           },
           {
             title: 'Self-Healing',
-            desc: 'steer-guardian.sh detects crashes and automatically restarts core processes.',
+            desc: 'steer-guardian.sh monitors the health of core processes and automatically restarts them in case of crashes, ensuring high availability.',
           },
         ].map((item) => (
           <div class="bg-[#14161b] rounded-lg p-6 border border-white/10">

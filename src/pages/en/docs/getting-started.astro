@@ -123,12 +123,15 @@ Copy-Item .env.example .env`}</code></pre>
   <h2>Step 3 — Run the Agent</h2>
 
   <div data-os-only="macos">
-    <h3>Run on macOS</h3>
-    <pre><code>{`# Run the release binary directly
-./target/release/local_os_agent
-
-# Or use cargo run
-cargo run --release --bin local_os_agent`}</code></pre>
+    <h3>macOS Execution</h3>
+    <pre><code>{`# Run Quick Start script (Recommended)
+    bash scripts/run_local.sh
+    
+    # Or run the release binary directly
+    ./target/release/local_os_agent
+    
+    # Or use cargo run
+    cargo run --release --bin local_os_agent`}</code></pre>
   </div>
 
   <div data-os-only="windows">
@@ -222,14 +225,15 @@ docker compose up -d n8n
 
   <p>Collect OS sensor data with Rust Collector and analyze via batch pipelines:</p>
 
-  <pre><code>{`# Run Collector standalone
+  <pre><code>{`# Integrated local execution (Recommended)
+bash scripts/run_local.sh
+
+# Run Collector independently
 cargo build --manifest-path core/Cargo.toml --bin collector_rs
 STEER_DB_PATH=./steer.db ./core/target/debug/collector_rs
 
 # Batch analysis pipeline
-./core/target/debug/build_sessions_rs --since-hours 6 --use-state
-./core/target/debug/build_routines_rs --days 3 --min-support 2
-./core/target/debug/build_handoff_rs --skip-unchanged`}</code></pre>
+bash scripts/run_pipeline_rs.sh configs/config.yaml`}</code></pre>
 
   <h3>Build Desktop App (Tauri)</h3>
 

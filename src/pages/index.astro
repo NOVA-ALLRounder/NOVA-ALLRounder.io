@@ -58,8 +58,8 @@ const faqItems = [
           컴퓨터를 제어하세요
         </h1>
         <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto mb-10">
-          NOVA는 자연어 명령을 이해하고, OS 수준에서 앱을 조작하며, 사용 패턴을 학습하여
-          자동화를 제안하는 Rust 네이티브 AI 에이전트입니다.
+          NOVA는 자연어 명령을 이해하고, OS 수준에서 앱을 조작하며, 
+          Shadow Mode를 통해 백그라운드에서 사용 패턴을 학습하여 자동화를 제안하는 Rust 네이티브 AI 에이전트입니다.
         </p>
 
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
@@ -258,10 +258,10 @@ const faqItems = [
     <Container>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center animate-on-scroll">
         <div>
-          <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">Pattern Detection & Workflow</p>
+          <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-3">Shadow Mode & Workflow</p>
           <h2 class="text-h2 text-neutral-100 mb-6">사용 패턴을 학습하고, 워크플로우를 자동 생성합니다</h2>
           <p class="text-body-lg text-neutral-400 mb-8">
-            Rust Collector가 OS 센서 데이터를 수집하고, pattern_detector가 반복 루틴을 식별합니다. n8n과 연동하여 시각적 워크플로우를 자동 구성합니다.
+            Rust-native Collector가 백그라운드에서 OS 센서 데이터를 수집하고, Shadow Mode가 반복 루틴을 식별하여 최적의 자동화 워크플로우를 제안합니다.
           </p>
           <ul class="space-y-3">
             {[

@@ -29,8 +29,8 @@ const withBase = (url: string) => {
         <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Product</p>
         <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">Transforming natural language commands<br class="hidden sm:block" />into actual OS actions</h1>
         <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto mb-10">
-          An agent that provides a fully automated NL pipeline from intent analysis to execution, verification, and approval.
-          A production-ready agent consisting of 73+ Rust modules, 5-layer security, and 4 external service integrations.
+          An agent that provides a fully automated NL pipeline from intent analysis to execution, verification, and approval, along with Shadow Mode that learns user behavior in the background.
+          A production-ready agent featuring a Single Source of Truth (SSOT) core of 73+ Rust modules and a 5-layer security model.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
           <Button variant="primary" size="lg" href={withBase('/en/docs/getting-started?os=macos')}>Start for macOS</Button>
@@ -76,16 +76,16 @@ const withBase = (url: string) => {
           <h2 class="text-h2 text-neutral-100 mb-4">Watch the screen, click, and manipulate apps directly</h2>
           <div class="space-y-6 text-body text-neutral-300">
             <div>
-              <h3 class="text-h4 text-neutral-100 mb-2">Visual Driver</h3>
-              <p><code class="text-accent-300">visual_driver.rs</code> (39KB) recognizes screen elements and automatically controls mouse/keyboard. Integrates AppleScript, browser automation, and UI navigation.</p>
+              <h3 class="text-h4 text-neutral-100 mb-2">Visual Driver & Rust Collector</h3>
+              <p><code class="text-accent-300">visual_driver.rs</code> and <code class="text-accent-300">collector_rs.rs</code> work together to handle screen recognition and data collection. 5-minute aggregation and PII masking are handled at the core level.</p>
             </div>
             <div>
               <h3 class="text-h4 text-neutral-100 mb-2">Browser Automation</h3>
               <p><code class="text-accent-300">browser_automation.rs</code> automatically performs web page navigation, form input, and data extraction.</p>
             </div>
             <div>
-              <h3 class="text-h4 text-neutral-100 mb-2">Reality Check</h3>
-              <p><code class="text-accent-300">reality_check.rs</code> scans installed apps before execution and automatically corrects similar names to prevent hallucinations.</p>
+              <h3 class="text-h4 text-neutral-100 mb-2">Shadow Mode</h3>
+              <p><code class="text-accent-300">analyzer.rs</code> analyzes events collected in the background to identify repeating routines and recommend automation opportunities.</p>
             </div>
           </div>
         </div>
@@ -207,12 +207,12 @@ const withBase = (url: string) => {
             </tr>
           </thead>
           <tbody>
-            <tr><td>Core Engine</td><td>Rust (73+ modules)</td><td>main.rs (1,112 lines), api_server.rs (90KB), llm_gateway.rs (72KB)</td></tr>
+            <tr><td>Core Engine</td><td>Rust (73+ modules)</td><td>main.rs, core::lib.rs (Single Source of Truth), api_server.rs (Axum)</td></tr>
             <tr><td>NL Pipeline</td><td>6-stage Automation</td><td>intent_router → slot_filler → plan_builder → execution → verification → approval</td></tr>
-            <tr><td>LLM Engine</td><td>OpenAI API</td><td>GPT-4 / GPT-3.5-based intent analysis, pattern recognition, workflow generation</td></tr>
+            <tr><td>Shadow Mode</td><td>Batch Pipeline</td><td>collector_rs → build_sessions → build_routines → build_handoff (Rust native)</td></tr>
             <tr><td>OS Control</td><td>AppleScript + Visual Driver</td><td>visual_driver.rs (39KB), browser_automation.rs, screen_recorder.rs</td></tr>
-            <tr><td>Storage</td><td>SQLite (steer.db)</td><td>Event logs, 5-min aggregation, daily summary, session/routine/handoff</td></tr>
-            <tr><td>Orchestration</td><td>n8n (Docker / NPX)</td><td>n8n_api.rs (36KB), REST API integration, automated workflow generation</td></tr>
+            <tr><td>Storage</td><td>SQLite (steer.db)</td><td>Event logs (v2), 5-min aggregation, daily summary, session/routine/handoff data</td></tr>
+            <tr><td>Orchestration</td><td>n8n (Docker / NPX)</td><td>n8n_api.rs, STEER_N8N_RUNTIME support (Docker/NPX/Manual)</td></tr>
             <tr><td>Web UI</td><td>React/Vite + Tailwind</td><td>Dashboard, Chat, Launcher, Routines, Workflows, Settings</td></tr>
             <tr><td>Desktop</td><td>Tauri</td><td>Native apps for macOS (.app) / Windows (.exe)</td></tr>
             <tr><td>Integrations</td><td>Gmail, Calendar, Notion, Telegram</td><td>Google OAuth, Notion API, Telegram Bot API integration</td></tr>

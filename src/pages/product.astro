@@ -30,8 +30,9 @@ const withBase = (url: string) => {
         <p class="text-caption text-accent-300 font-medium tracking-wide uppercase mb-4">Product</p>
         <h1 class="text-h1 md:text-display text-neutral-100 mb-6 text-balance">자연어 명령을 실제 OS 동작으로<br class="hidden sm:block" />변환하는 에이전트</h1>
         <p class="text-body-lg text-neutral-400 max-w-2xl mx-auto mb-10">
-          NOVA는 의도 분석부터 실행, 검증, 승인까지 완전 자동화된 NL 파이프라인을 제공합니다.
-          73개+ Rust 모듈, 5계층 보안, 4개 외부 서비스 통합으로 구성된 프로덕션 레디 에이전트입니다.
+          NOVA는 의도 분석부터 실행, 검증, 승인까지 완전 자동화된 NL 파이프라인과 
+          백그라운드에서 사용자 행동을 학습하는 Shadow Mode를 제공합니다.
+          73개+ Rust 모듈로 구성된 Single Source of Truth(SSOT) 코어와 5계층 보안을 갖춘 프로덕션 레디 에이전트입니다.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
           <Button variant="primary" size="lg" href={withBase('/docs/getting-started?os=macos')}>Start for macOS</Button>
@@ -77,16 +78,16 @@ const withBase = (url: string) => {
           <h2 class="text-h2 text-neutral-100 mb-4">화면을 보고, 클릭하고, 앱을 직접 조작합니다</h2>
           <div class="space-y-6 text-body text-neutral-300">
             <div>
-              <h3 class="text-h4 text-neutral-100 mb-2">Visual Driver</h3>
-              <p><code class="text-accent-300">visual_driver.rs</code> (39KB)가 화면 요소를 인식하고, 마우스/키보드를 자동 제어합니다. AppleScript, 브라우저 자동화, UI 탐색을 통합합니다.</p>
+              <h3 class="text-h4 text-neutral-100 mb-2">Visual Driver & Rust Collector</h3>
+              <p><code class="text-accent-300">visual_driver.rs</code>와 <code class="text-accent-300">collector_rs.rs</code>가 협업하여 화면 인식 및 데이터 수집을 수행합니다. 5분 단위 집약 및 PII 마스킹이 코어 수준에서 처리됩니다.</p>
             </div>
             <div>
               <h3 class="text-h4 text-neutral-100 mb-2">Browser Automation</h3>
               <p><code class="text-accent-300">browser_automation.rs</code>가 웹 페이지 탐색, 폼 입력, 데이터 추출을 자동으로 수행합니다.</p>
             </div>
             <div>
-              <h3 class="text-h4 text-neutral-100 mb-2">Reality Check</h3>
-              <p><code class="text-accent-300">reality_check.rs</code>가 실행 전 설치된 앱을 스캔하고, 유사한 이름도 자동 보정하여 환각(Hallucination)을 방지합니다.</p>
+              <h3 class="text-h4 text-neutral-100 mb-2">Shadow Mode</h3>
+              <p><code class="text-accent-300">analyzer.rs</code>가 백그라운드에서 수집된 이벤트를 분석하여 반복적인 루틴을 식별하고 자동화 기회를 추천합니다.</p>
             </div>
           </div>
         </div>
@@ -208,12 +209,12 @@ const withBase = (url: string) => {
             </tr>
           </thead>
           <tbody>
-            <tr><td>Core Engine</td><td>Rust (73+ 모듈)</td><td>main.rs (1,112줄), api_server.rs (90KB), llm_gateway.rs (72KB)</td></tr>
+            <tr><td>Core Engine</td><td>Rust (73+ 모듈)</td><td>main.rs, core::lib.rs (Single Source of Truth), api_server.rs (Axum)</td></tr>
             <tr><td>NL Pipeline</td><td>6-stage Automation</td><td>intent_router → slot_filler → plan_builder → execution → verification → approval</td></tr>
-            <tr><td>LLM Engine</td><td>OpenAI API</td><td>GPT-4 / GPT-3.5 기반 의도 분석, 패턴 인식, 워크플로우 생성</td></tr>
+            <tr><td>Shadow Mode</td><td>Batch Pipeline</td><td>collector_rs → build_sessions → build_routines → build_handoff (Rust native)</td></tr>
             <tr><td>OS Control</td><td>AppleScript + Visual Driver</td><td>visual_driver.rs (39KB), browser_automation.rs, screen_recorder.rs</td></tr>
-            <tr><td>Storage</td><td>SQLite (steer.db)</td><td>이벤트 로그, 5분 집약, 일일 요약, 세션/루틴/핸드오프</td></tr>
-            <tr><td>Orchestration</td><td>n8n (Docker / NPX)</td><td>n8n_api.rs (36KB), REST API 연동, 워크플로우 자동 생성</td></tr>
+            <tr><td>Storage</td><td>SQLite (steer.db)</td><td>이벤트 로그(v2), 5분 집약, 일일 요약, 세션/루틴/핸드오프 데이터</td></tr>
+            <tr><td>Orchestration</td><td>n8n (Docker / NPX)</td><td>n8n_api.rs, STEER_N8N_RUNTIME 지원 (Docker/NPX/Manual)</td></tr>
             <tr><td>Web UI</td><td>React/Vite + Tailwind</td><td>Dashboard, Chat, Launcher, Routines, Workflows, Settings</td></tr>
             <tr><td>Desktop</td><td>Tauri</td><td>macOS .app / Windows .exe 네이티브 앱 생성</td></tr>
             <tr><td>Integrations</td><td>Gmail, Calendar, Notion, Telegram</td><td>Google OAuth, Notion API, Telegram Bot API 연동</td></tr>

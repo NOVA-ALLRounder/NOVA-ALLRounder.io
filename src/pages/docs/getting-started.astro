@@ -124,11 +124,14 @@ Copy-Item .env.example .env`}</code></pre>
 
   <div data-os-only="macos">
     <h3>macOS 실행</h3>
-    <pre><code>{`# Release 바이너리 직접 실행
-./target/release/local_os_agent
-
-# 또는 cargo run 사용
-cargo run --release --bin local_os_agent`}</code></pre>
+    <pre><code>{`# 퀵 스타트 스크립트 실행 (권장)
+    bash scripts/run_local.sh
+    
+    # 또는 바이너리 직접 실행
+    ./target/release/local_os_agent
+    
+    # 또는 cargo run 사용
+    cargo run --release --bin local_os_agent`}</code></pre>
   </div>
 
   <div data-os-only="windows">
@@ -222,14 +225,15 @@ docker compose up -d n8n
 
   <p>Rust Collector로 OS 센서 데이터를 수집하고, 배치 파이프라인으로 분석합니다:</p>
 
-  <pre><code>{`# Collector 단독 실행
+  <pre><code>{`# 통합 로컬 실행 (권장)
+bash scripts/run_local.sh
+
+# Collector 단독 실행
 cargo build --manifest-path core/Cargo.toml --bin collector_rs
 STEER_DB_PATH=./steer.db ./core/target/debug/collector_rs
 
 # 배치 분석 파이프라인
-./core/target/debug/build_sessions_rs --since-hours 6 --use-state
-./core/target/debug/build_routines_rs --days 3 --min-support 2
-./core/target/debug/build_handoff_rs --skip-unchanged`}</code></pre>
+bash scripts/run_pipeline_rs.sh configs/config.yaml`}</code></pre>
 
   <h3>데스크톱 앱 빌드 (Tauri)</h3>
 
