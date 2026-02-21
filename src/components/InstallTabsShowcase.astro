@@ -1,14 +1,14 @@
 ---
 const installOptions = [
-  { id: 'curl', label: 'curl', command: 'curl -L https://github.com/NOVA-ALLRounder/main/archive/refs/heads/main.tar.gz | tar -xz' },
-  { id: 'npm', label: 'npm', command: 'git clone https://github.com/NOVA-ALLRounder/main.git && cd main/web && npm install && npm run dev' },
-  { id: 'bun', label: 'bun', command: 'git clone https://github.com/NOVA-ALLRounder/main.git && cd main/web && bun install && bun run dev' },
-  { id: 'brew', label: 'brew', command: 'brew install rust && git clone https://github.com/NOVA-ALLRounder/main.git && cd main/core && cargo build --release' },
-  { id: 'paru', label: 'paru', command: 'paru -S rustup nodejs npm && git clone https://github.com/NOVA-ALLRounder/main.git' },
+  { id: 'curl', label: 'curl', command: 'curl -L https://github.com/AllvIa-ALLRounder/main/archive/refs/heads/main.tar.gz | tar -xz' },
+  { id: 'npm', label: 'npm', command: 'git clone https://github.com/AllvIa-ALLRounder/main.git && cd main/web && npm install && npm run dev' },
+  { id: 'bun', label: 'bun', command: 'git clone https://github.com/AllvIa-ALLRounder/main.git && cd main/web && bun install && bun run dev' },
+  { id: 'brew', label: 'brew', command: 'brew install rust && git clone https://github.com/AllvIa-ALLRounder/main.git && cd main/core && cargo build --release' },
+  { id: 'paru', label: 'paru', command: 'paru -S rustup nodejs npm && git clone https://github.com/AllvIa-ALLRounder/main.git' },
 ];
 
 const terminalLines = [
-  { text: '<span class="text-neutral-300">NOVA-ALLRounder/main</span> 저장소 클론', highlight: false },
+  { text: '<span class="text-neutral-300">AllvIa-ALLRounder/main</span> 저장소 클론', highlight: false },
   { text: '<span class="text-neutral-300">core/.env</span> 파일에 OPENAI_API_KEY 설정', highlight: false },
   { text: '<span class="text-neutral-300">cargo build --release</span> 로 코어 바이너리 빌드', highlight: false },
   { text: '코어 프로세스 실행: <span class="hl-green">./target/release/core</span>', highlight: true },
@@ -46,7 +46,7 @@ const pipelineItems = [
   <div class="max-w-4xl mx-auto">
     <div class="space-y-2 mb-8">
       <p class="text-body-lg text-neutral-300">
-        지금 웹사이트로 빌드 중인 프로젝트는 NOVA-ALLRounder/main 입니다.
+        지금 웹사이트로 빌드 중인 프로젝트는 AllvIa-ALLRounder/main 입니다.
       </p>
       <p class="text-body-lg text-neutral-300">clone, 환경설정, 빌드, 테스트, 릴리스까지 한 흐름으로 확인할 수 있습니다.</p>
     </div>
@@ -136,12 +136,12 @@ const pipelineItems = [
         <!-- Right: Sidebar -->
         <aside class="p-4 md:p-5 bg-[#0f1116]" data-sidebar>
           <h3 class="sc-sidebar-block text-neutral-100 text-sm md:text-base font-semibold mb-4" data-sb-index="0">
-            Building NOVA-ALLRounder/main
+            Building AllvIa-ALLRounder/main
           </h3>
           <div class="space-y-4 text-xs md:text-sm">
             <div class="sc-sidebar-block" data-sb-index="1">
               <p class="text-neutral-500 mb-1">Repository</p>
-              <p class="text-neutral-300">NOVA-ALLRounder/main</p>
+              <p class="text-neutral-300">AllvIa-ALLRounder/main</p>
               <p class="text-neutral-400">Branch: main</p>
               <p class="text-neutral-400">Rust Native Agent</p>
             </div>

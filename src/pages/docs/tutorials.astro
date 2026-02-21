@@ -12,9 +12,9 @@ const withBase = (url: string) => {
 };
 ---
 
-<DocsLayout title="Tutorials" description="실제 비즈니스 시나리오를 통한 NOVA 핵심 기능 학습 가이드." lang="ko">
+<DocsLayout title="Tutorials" description="실제 비즈니스 시나리오를 통한 AllvIa 핵심 기능 학습 가이드." lang="ko">
   <h1>Tutorials</h1>
-  <p class="doc-subtitle">실제 업무 시나리오를 기반으로 NOVA의 핵심 기능을 학습합니다. 기초부터 고급까지 난이도별로 구성되어 있습니다.</p>
+  <p class="doc-subtitle">실제 업무 시나리오를 기반으로 AllvIa의 핵심 기능을 학습합니다. 기초부터 고급까지 난이도별로 구성되어 있습니다.</p>
 
   <div class="doc-callout">
     <strong>사전 준비:</strong> 모든 튜토리얼은 <a href={withBase('/docs/getting-started')}>Getting Started</a> 가이드를 완료한 상태를 기준으로 합니다.
@@ -33,7 +33,7 @@ const withBase = (url: string) => {
     </tbody>
   </table>
 
-  <p>NOVA의 핵심 기능인 <code>surf</code> 명령어를 사용하여 자연어로 OS를 직접 제어합니다.</p>
+  <p>AllvIa의 핵심 기능인 <code>surf</code> 명령어를 사용하여 자연어로 OS를 직접 제어합니다.</p>
 
   <h4>Step 1 — 기본 surf 명령어</h4>
   <p>자연어로 앱을 제어합니다. intent_router가 의도를 분석하고 plan_builder가 실행 계획을 생성합니다:</p>
@@ -64,7 +64,7 @@ Plan: 4 steps
 [OK] 4/4 steps completed`}</code></pre>
 
   <h4>Step 3 — Reality Check</h4>
-  <p>NOVA는 실행 전 <code>reality_check.rs</code>가 설치된 앱 목록을 스캔하고, 유사한 이름도 자동 보정합니다. "Excel"이라고 입력해도 "Microsoft Excel"로 자동 매칭됩니다.</p>
+  <p>AllvIa는 실행 전 <code>reality_check.rs</code>가 설치된 앱 목록을 스캔하고, 유사한 이름도 자동 보정합니다. "Excel"이라고 입력해도 "Microsoft Excel"로 자동 매칭됩니다.</p>
 
   <hr />
 
@@ -129,11 +129,11 @@ TELEGRAM_BOT_TOKEN=your_bot_token
 TELEGRAM_CHAT_ID=your_chat_id`}</code></pre>
 
   <h4>Step 2 — 원격 명령 실행</h4>
-  <p>Telegram에서 메시지를 보내면 NOVA가 명령을 실행하고 결과를 리포트합니다:</p>
+  <p>Telegram에서 메시지를 보내면 AllvIa가 명령을 실행하고 결과를 리포트합니다:</p>
   <pre><code>{`# Telegram에서 전송:
 폰: "컴퓨터에서 git status 확인해"
 
-# NOVA 처리:
+# AllvIa 처리:
 Intent: shell_exec | Security: Safe
 > git status
 
@@ -159,13 +159,13 @@ nothing to commit, working tree clean`}</code></pre>
     </tbody>
   </table>
 
-  <p>NOVA의 핵심 기능인 행동 패턴 분석을 활용하여 개인의 반복 작업을 자동화합니다.</p>
+  <p>AllvIa의 핵심 기능인 행동 패턴 분석을 활용하여 개인의 반복 작업을 자동화합니다.</p>
 
   <h4>Step 1 — 데이터 수집 상태 확인</h4>
   <p><code>status</code> 명령어로 현재 수집된 데이터량을 확인합니다:</p>
   <pre><code>{`> status
 
-NOVA Agent Status:
+AllvIa Agent Status:
   Collector:  running (port 8080)
   Database:   steer.db (42.3 MB)
   Events:     128,450 events (last 7 days)

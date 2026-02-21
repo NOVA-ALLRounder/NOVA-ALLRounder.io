@@ -12,14 +12,14 @@ const withBase = (url: string) => {
 };
 ---
 
-<DocsLayout title="FAQ" description="Frequently asked questions and answers for NOVA. Installation, security, performance, and troubleshooting." lang="en">
+<DocsLayout title="FAQ" description="Frequently asked questions and answers for AllvIa. Installation, security, performance, and troubleshooting." lang="en">
   <h1>FAQ</h1>
   <p class="doc-subtitle">We've compiled frequently asked questions and solutions regarding installation, operation, security, and troubleshooting.</p>
 
   <h2>General</h2>
 
-  <h3>What is NOVA?</h3>
-  <p>NOVA is a <strong>user-behavior-based automation agent</strong>. It analyzes computer usage patterns at the OS level to automatically detect repetitive tasks, and the AI recommends and executes optimal automations. It's implemented as a Rust native binary, providing high stability and processing performance.</p>
+  <h3>What is AllvIa?</h3>
+  <p>AllvIa is a <strong>user-behavior-based automation agent</strong>. It analyzes computer usage patterns at the OS level to automatically detect repetitive tasks, and the AI recommends and executes optimal automations. It's implemented as a Rust native binary, providing high stability and processing performance.</p>
 
   <h3>Which operating systems are supported?</h3>
   <p>We officially support <strong>macOS 12+</strong> (Monterey or later) and <strong>Windows 10+</strong>. Since it is a Rust native build, it can be compiled on Linux as well, but the official support scope is macOS and Windows.</p>
@@ -31,7 +31,7 @@ const withBase = (url: string) => {
   <p>Data collection (<code>routine</code>, <code>status</code>) and application control (<code>control</code>, <code>exec</code>) work offline. However, LLM-based analysis (<code>recommend</code>) and workflow generation (<code>build_workflow</code>) require an OpenAI API connection. A complete offline mode is on our future roadmap.</p>
 
   <h3>Is it free to use?</h3>
-  <p>The NOVA core agent is <strong>open-source</strong> and available for free. Cloud APIs (automation management, AI classification models, etc.) have different usage limits depending on the plan. Detailed pricing information can be found on the <a href={withBase('/en/pricing')}>Pricing</a> page.</p>
+  <p>The AllvIa core agent is <strong>open-source</strong> and available for free. Cloud APIs (automation management, AI classification models, etc.) have different usage limits depending on the plan. Detailed pricing information can be found on the <a href={withBase('/en/pricing')}>Pricing</a> page.</p>
 
   <hr />
 
@@ -60,7 +60,7 @@ const withBase = (url: string) => {
   <h2>Security & Data</h2>
 
   <h3>How is security handled?</h3>
-  <p>NOVA applies a 5-layer security model based on <strong>Zero Trust principles</strong>:</p>
+  <p>AllvIa applies a 5-layer security model based on <strong>Zero Trust principles</strong>:</p>
   <ul>
     <li><strong>PolicyEngine (policy.rs):</strong> Classifies actions into 3 levels: Safe / Caution / Critical</li>
     <li><strong>CommandClassifier (security.rs):</strong> Automatically analyzes and blocks risky shell commands</li>
@@ -100,7 +100,7 @@ const withBase = (url: string) => {
   </table>
 
   <h3>Does the agent impact system resources?</h3>
-  <p>As a Rust native binary, NOVA typically uses <strong>less than 1% CPU and under 50MB of memory</strong>. The Collector's data collection runs asynchronously in the background.</p>
+  <p>As a Rust native binary, AllvIa typically uses <strong>less than 1% CPU and under 50MB of memory</strong>. The Collector's data collection runs asynchronously in the background.</p>
 
   <h3>Can it be deployed for teams?</h3>
   <p>Yes. Team-scale deployment is possible in the following ways:</p>
@@ -138,11 +138,11 @@ const withBase = (url: string) => {
   <ul>
     <li>Verify the target URL is accessible</li>
     <li>Check HTTPS certificate validity</li>
-    <li>Ensure the NOVA service's IP is allowed in your firewall</li>
+    <li>Ensure the AllvIa service's IP is allowed in your firewall</li>
     <li>Verify response time is within 30 seconds (timeout threshold)</li>
   </ul>
 
   <hr />
 
-  <p>If you have unresolved issues, please open an issue on <a href="https://github.com/NOVA-ALLRounder/main/issues">GitHub Issues</a> or <a href={withBase('/en/contact')}>contact our technical team directly</a>.</p>
+  <p>If you have unresolved issues, please open an issue on <a href="https://github.com/AllvIa-ALLRounder/main/issues">GitHub Issues</a> or <a href={withBase('/en/contact')}>contact our technical team directly</a>.</p>
 </DocsLayout>

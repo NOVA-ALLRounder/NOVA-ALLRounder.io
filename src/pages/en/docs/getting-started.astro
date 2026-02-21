@@ -12,9 +12,9 @@ const withBase = (url: string) => {
 };
 ---
 
-<DocsLayout title="Getting Started" description="Technical guide for installing the NOVA agent and running your first automation." lang="en">
+<DocsLayout title="Getting Started" description="Technical guide for installing the AllvIa agent and running your first automation." lang="en">
   <h1>Getting Started</h1>
-  <p class="doc-subtitle">A comprehensive guide to the installation, configuration, and execution of the NOVA Local OS Agent. Estimated time is about <strong>5 minutes</strong>.</p>
+  <p class="doc-subtitle">A comprehensive guide to the installation, configuration, and execution of the AllvIa Local OS Agent. Estimated time is about <strong>5 minutes</strong>.</p>
 
   <!-- OS Switcher -->
   <div class="os-switcher-container" id="os-switcher">
@@ -80,11 +80,11 @@ const withBase = (url: string) => {
 
   <h2>Step 1 — Clone and Configure</h2>
 
-  <p>Clone the NOVA repository from GitHub and set up environment variables.</p>
+  <p>Clone the AllvIa repository from GitHub and set up environment variables.</p>
 
   <div data-os-only="macos">
     <pre><code>{`# Clone repository
-git clone https://github.com/NOVA-ALLRounder/main.git
+git clone https://github.com/AllvIa-ALLRounder/main.git
 cd main/core
 
 # Create environment variable file
@@ -93,7 +93,7 @@ cp .env.example .env`}</code></pre>
 
   <div data-os-only="windows">
     <pre><code>{`# Clone repository
-git clone https://github.com/NOVA-ALLRounder/main.git
+git clone https://github.com/AllvIa-ALLRounder/main.git
 cd main/core
 
 # Create environment variable file (PowerShell)
@@ -146,7 +146,7 @@ Copy-Item .env.example .env`}</code></pre>
 
   <p>When executed successfully, you'll see a prompt like this:</p>
 
-  <pre><code>{`NOVA Agent v2.4.0 ready
+  <pre><code>{`AllvIa Agent v2.4.0 ready
 Environment Scan: Found 349 apps
 Collector: running on port 8080
 Write Lock: enabled (use 'unlock' to disable)
@@ -260,7 +260,7 @@ bash scripts/run_pipeline_rs.sh configs/config.yaml`}</code></pre>
   </ul>
 
   <hr />
-  <p>If you encounter issues, get help on <a href="https://github.com/NOVA-ALLRounder/main/issues">GitHub Issues</a> or <a href={withBase('/en/contact')}>contact our technical team directly</a>.</p>
+  <p>If you encounter issues, get help on <a href="https://github.com/AllvIa-ALLRounder/main/issues">GitHub Issues</a> or <a href={withBase('/en/contact')}>contact our technical team directly</a>.</p>
 
   <style>
     .os-switcher-container {

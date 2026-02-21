@@ -12,14 +12,14 @@ const withBase = (url: string) => {
 };
 ---
 
-<DocsLayout title="FAQ" description="NOVA에 대한 자주 묻는 질문과 답변. 설치, 보안, 성능, 트러블슈팅." lang="ko">
+<DocsLayout title="FAQ" description="AllvIa에 대한 자주 묻는 질문과 답변. 설치, 보안, 성능, 트러블슈팅." lang="ko">
   <h1>FAQ</h1>
   <p class="doc-subtitle">설치, 운영, 보안, 트러블슈팅에 관한 자주 묻는 질문과 해결 방법을 정리했습니다.</p>
 
   <h2>일반</h2>
 
-  <h3>NOVA는 어떤 서비스인가요?</h3>
-  <p>NOVA는 <strong>사용자 행동 기반 자동화 에이전트</strong>입니다. OS 수준에서 컴퓨터 사용 패턴을 분석하여 반복 작업을 자동으로 감지하고, AI가 최적의 자동화를 추천 및 실행합니다. Rust 네이티브 바이너리로 구현되어 높은 안정성과 처리 성능을 제공합니다.</p>
+  <h3>AllvIa는 어떤 서비스인가요?</h3>
+  <p>AllvIa는 <strong>사용자 행동 기반 자동화 에이전트</strong>입니다. OS 수준에서 컴퓨터 사용 패턴을 분석하여 반복 작업을 자동으로 감지하고, AI가 최적의 자동화를 추천 및 실행합니다. Rust 네이티브 바이너리로 구현되어 높은 안정성과 처리 성능을 제공합니다.</p>
 
   <h3>지원 운영체제는 무엇인가요?</h3>
   <p><strong>macOS 12+</strong> (Monterey 이상)과 <strong>Windows 10+</strong>를 공식 지원합니다. Rust 네이티브 빌드이므로 Linux 환경에서도 빌드가 가능하나, 공식 지원 범위는 macOS와 Windows입니다.</p>
@@ -31,7 +31,7 @@ const withBase = (url: string) => {
   <p>데이터 수집(<code>routine</code>, <code>status</code>)과 애플리케이션 제어(<code>control</code>, <code>exec</code>)는 오프라인에서 동작합니다. 단, LLM 기반 분석(<code>recommend</code>)과 워크플로우 생성(<code>build_workflow</code>)에는 OpenAI API 연결이 필요합니다. 완전한 오프라인 모드는 향후 로드맵에 포함되어 있습니다.</p>
 
   <h3>무료로 사용할 수 있나요?</h3>
-  <p>NOVA 코어 에이전트는 <strong>오픈소스</strong>로 무료 이용이 가능합니다. 클라우드 API(자동화 관리, AI 분류 모델 등)는 플랜별로 이용 한도가 다릅니다. <a href={withBase('/pricing')}>Pricing</a> 페이지에서 상세 요금 정보를 확인하실 수 있습니다.</p>
+  <p>AllvIa 코어 에이전트는 <strong>오픈소스</strong>로 무료 이용이 가능합니다. 클라우드 API(자동화 관리, AI 분류 모델 등)는 플랜별로 이용 한도가 다릅니다. <a href={withBase('/pricing')}>Pricing</a> 페이지에서 상세 요금 정보를 확인하실 수 있습니다.</p>
 
   <hr />
 
@@ -60,7 +60,7 @@ const withBase = (url: string) => {
   <h2>보안 및 데이터</h2>
 
   <h3>보안은 어떻게 처리되나요?</h3>
-  <p>NOVA는 <strong>Zero Trust 원칙</strong>을 적용하는 5계층 보안 모델을 적용합니다:</p>
+  <p>AllvIa는 <strong>Zero Trust 원칙</strong>을 적용하는 5계층 보안 모델을 적용합니다:</p>
   <ul>
     <li><strong>PolicyEngine (policy.rs):</strong> Safe / Caution / Critical 3단계로 행동을 분류합니다</li>
     <li><strong>CommandClassifier (security.rs):</strong> 셸 명령의 위험도를 자동 분석하여 차단합니다</li>
@@ -100,7 +100,7 @@ const withBase = (url: string) => {
   </table>
 
   <h3>에이전트가 시스템 리소스에 영향을 주나요?</h3>
-  <p>NOVA는 Rust 네이티브 바이너리로, 일반적으로 <strong>CPU 1% 미만, 메모리 50MB 이하</strong>를 사용합니다. Collector의 데이터 수집은 비동기로 동작하며 백그라운드에서 실행됩니다.</p>
+  <p>AllvIa는 Rust 네이티브 바이너리로, 일반적으로 <strong>CPU 1% 미만, 메모리 50MB 이하</strong>를 사용합니다. Collector의 데이터 수집은 비동기로 동작하며 백그라운드에서 실행됩니다.</p>
 
   <h3>팀 단위로 배포할 수 있나요?</h3>
   <p>예. 다음 방식으로 팀 규모 배포가 가능합니다:</p>
@@ -138,11 +138,11 @@ const withBase = (url: string) => {
   <ul>
     <li>대상 URL의 접근 가능 여부 확인</li>
     <li>HTTPS 인증서 유효성 확인</li>
-    <li>방화벽에서 NOVA 서비스의 IP가 허용되어 있는지 확인</li>
+    <li>방화벽에서 AllvIa 서비스의 IP가 허용되어 있는지 확인</li>
     <li>응답 시간이 30초 이내인지 확인 (타임아웃 기준)</li>
   </ul>
 
   <hr />
 
-  <p>해결되지 않는 문제가 있으시면 <a href="https://github.com/NOVA-ALLRounder/main/issues">GitHub Issues</a>에서 이슈를 등록하거나 <a href={withBase('/contact')}>기술팀에 직접 문의</a>하실 수 있습니다.</p>
+  <p>해결되지 않는 문제가 있으시면 <a href="https://github.com/AllvIa-ALLRounder/main/issues">GitHub Issues</a>에서 이슈를 등록하거나 <a href={withBase('/contact')}>기술팀에 직접 문의</a>하실 수 있습니다.</p>
 </DocsLayout>

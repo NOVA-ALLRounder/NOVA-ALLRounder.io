@@ -12,9 +12,9 @@ const withBase = (url: string) => {
 };
 ---
 
-<DocsLayout title="Tutorials" description="Step-by-step tutorials to learn the core features of NOVA through real-world business scenarios." lang="en">
+<DocsLayout title="Tutorials" description="Step-by-step tutorials to learn the core features of AllvIa through real-world business scenarios." lang="en">
   <h1>Tutorials</h1>
-  <p class="doc-subtitle">Learn the core features of NOVA through real-world business scenarios. Organized by difficulty level, from basic to advanced.</p>
+  <p class="doc-subtitle">Learn the core features of AllvIa through real-world business scenarios. Organized by difficulty level, from basic to advanced.</p>
 
   <div class="doc-callout">
     <strong>Preparation:</strong> All tutorials assume that you have completed the <a href={withBase('/en/docs/getting-started')}>Getting Started</a> guide.
@@ -33,7 +33,7 @@ const withBase = (url: string) => {
     </tbody>
   </table>
 
-  <p>Use the <code>surf</code> command, a core feature of NOVA, to control your OS directly with natural language.</p>
+  <p>Use the <code>surf</code> command, a core feature of AllvIa, to control your OS directly with natural language.</p>
 
   <h4>Step 1 — Basic surf Command</h4>
   <p>Control apps with natural language. The intent_router analyzes intent, and plan_builder generates an execution plan:</p>
@@ -129,11 +129,11 @@ TELEGRAM_BOT_TOKEN=your_bot_token
 TELEGRAM_CHAT_ID=your_chat_id`}</code></pre>
 
   <h4>Step 2 — Execute Remote Commands</h4>
-  <p>When you send a message from Telegram, NOVA executes the command and reports the result:</p>
+  <p>When you send a message from Telegram, AllvIa executes the command and reports the result:</p>
   <pre><code>{`# Sent from Telegram:
 Phone: "Check git status on computer"
 
-# NOVA Processing:
+# AllvIa Processing:
 Intent: shell_exec | Security: Safe
 > git status
 
@@ -159,13 +159,13 @@ nothing to commit, working tree clean`}</code></pre>
     </tbody>
   </table>
 
-  <p>Automate personal repetitive tasks using NOVA's core behavioral pattern analysis feature.</p>
+  <p>Automate personal repetitive tasks using AllvIa's core behavioral pattern analysis feature.</p>
 
   <h4>Step 1 — Check Data Collection Status</h4>
   <p>Check the amount of currently collected data with the <code>status</code> command:</p>
   <pre><code>{`> status
 
-NOVA Agent Status:
+AllvIa Agent Status:
   Collector:  running (port 8080)
   Database:   steer.db (42.3 MB)
   Events:     128,450 events (last 7 days)

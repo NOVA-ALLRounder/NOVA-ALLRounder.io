@@ -34,7 +34,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     'footer.legal.terms': '이용약관',
     'footer.legal.privacy': '개인정보처리방침',
     'footer.legal.license': '라이선스',
-    'footer.copyright': '© {year} NOVA. 모든 권리 보유.',
+    'footer.copyright': '© {year} ALLRounder. 모든 권리 보유.',
 
     // Common
     'common.get-started': '시작하기',
@@ -74,7 +74,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     'footer.legal.terms': 'Terms of Service',
     'footer.legal.privacy': 'Privacy Policy',
     'footer.legal.license': 'License',
-    'footer.copyright': '© {year} NOVA. All rights reserved.',
+    'footer.copyright': '© {year} ALLRounder. All rights reserved.',
 
     // Common
     'common.get-started': 'Get Started',

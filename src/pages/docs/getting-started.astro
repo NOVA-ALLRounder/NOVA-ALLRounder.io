@@ -12,9 +12,9 @@ const withBase = (url: string) => {
 };
 ---
 
-<DocsLayout title="고객 대상 시작 가이드" description="NOVA 에이전트 설치, OpenAI API 설정, 첫 번째 surf 명령 실행 가이드." lang="ko">
+<DocsLayout title="고객 대상 시작 가이드" description="AllvIa 에이전트 설치, OpenAI API 설정, 첫 번째 surf 명령 실행 가이드." lang="ko">
   <h1>Getting Started</h1>
-  <p class="doc-subtitle">NOVA Local OS Agent의 설치, 구성, 실행 전 과정을 안내합니다. 예상 소요 시간은 약 <strong>5분</strong>입니다.</p>
+  <p class="doc-subtitle">AllvIa Local OS Agent의 설치, 구성, 실행 전 과정을 안내합니다. 예상 소요 시간은 약 <strong>5분</strong>입니다.</p>
 
   <!-- OS Switcher -->
   <div class="os-switcher-container" id="os-switcher">
@@ -80,11 +80,11 @@ const withBase = (url: string) => {
 
   <h2>Step 1 — 저장소 클론 및 환경 설정</h2>
 
-  <p>GitHub에서 NOVA 저장소를 클론하고 환경변수를 구성합니다.</p>
+  <p>GitHub에서 AllvIa 저장소를 클론하고 환경변수를 구성합니다.</p>
 
   <div data-os-only="macos">
     <pre><code>{`# 저장소 클론
-git clone https://github.com/NOVA-ALLRounder/main.git
+git clone https://github.com/AllvIa-ALLRounder/main.git
 cd main/core
 
 # 환경변수 파일 생성
@@ -93,7 +93,7 @@ cp .env.example .env`}</code></pre>
 
   <div data-os-only="windows">
     <pre><code>{`# 저장소 클론
-git clone https://github.com/NOVA-ALLRounder/main.git
+git clone https://github.com/AllvIa-ALLRounder/main.git
 cd main/core
 
 # 환경변수 파일 생성 (PowerShell)
@@ -146,7 +146,7 @@ Copy-Item .env.example .env`}</code></pre>
 
   <p>정상적으로 실행되면 다음과 같은 프롬프트가 표시됩니다:</p>
 
-  <pre><code>{`NOVA Agent v2.4.0 ready
+  <pre><code>{`AllvIa Agent v2.4.0 ready
 Environment Scan: Found 349 apps
 Collector: running on port 8080
 Write Lock: enabled (use 'unlock' to disable)
@@ -260,7 +260,7 @@ bash scripts/run_pipeline_rs.sh configs/config.yaml`}</code></pre>
   </ul>
 
   <hr />
-  <p>문제가 발생한 경우 <a href="https://github.com/NOVA-ALLRounder/main/issues">GitHub Issues</a>에서 도움을 받거나 <a href={withBase('/contact')}>기술팀에 직접 문의</a>하실 수 있습니다.</p>
+  <p>문제가 발생한 경우 <a href="https://github.com/AllvIa-ALLRounder/main/issues">GitHub Issues</a>에서 도움을 받거나 <a href={withBase('/contact')}>기술팀에 직접 문의</a>하실 수 있습니다.</p>
 
   <style>
     .os-switcher-container {
